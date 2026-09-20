@@ -1,8 +1,13 @@
 {
 	"name": "@cloudensis/design-system",
-	"private": true,
-	"type": "module",
+	"version": "0.1.1",
+	"description": "cloudensis で利用する CSS トークン・記事用スタイル・コンポーネント",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cloudensis/design-system.git"
+	},
+	"type": "module",
 	"files": [
 		"dist"
 	],
@@ -17,6 +22,9 @@
 			"types": "./dist/*.d.ts",
 			"default": "./dist/*.js"
 		}
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
@@ -35,6 +43,10 @@
 		"hono": "^4.13.8",
 		"tailwindcss": "^4.3.3"
 	},
+	"dependencies": {
+		"clsx": "^2.1.1",
+		"tailwind-merge": "^3.7.0"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.14",
 		"@cloudflare/vite-plugin": "^1.54.11",
@@ -51,9 +63,5 @@
 			"./*.tsx",
 			"./*"
 		]
-	},
-	"dependencies": {
-		"clsx": "^2.1.1",
-		"tailwind-merge": "^3.7.0"
 	}
 }

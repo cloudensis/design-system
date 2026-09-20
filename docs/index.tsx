@@ -21,13 +21,19 @@ app.get("/", (c) =>
 				</p>
 			</Section>
 			<Section title="導入">
+				<Code>{"npm install @cloudensis/design-system"}</Code>
 				<p>Tailwind CSS v4 のエントリで次の 1 行を読み込みます。</p>
-				<Code>{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}</Code>
+				<Code>
+					{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
+				</Code>
 				<p>
-					トークンの定義に加えて、コンポーネントが使用しているクラスの収集設定も
-					このファイルに含まれているため、利用側での @source の指定は不要です。
+					トークンと記事用スタイルの定義に加えて、コンポーネントが使用している
+					クラスの収集設定もこのファイルに含まれているため、利用側での @source
+					の指定は不要です。
 				</p>
-				<Code>{`import { Button } from "@cloudensis/design-system/components/ui/button";`}</Code>
+				<Code>
+					{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
+				</Code>
 			</Section>
 		</Layout>,
 	),
