@@ -53,7 +53,5 @@ type RadioProps = JSX.IntrinsicElements["input"] & {
 };
 
 function Radio({ class: className, ...props }: RadioProps) {
-	return (
-		<input data-slot="radio" type="radio" class={cn(className)} {...props} />
-	);
+	return <input data-slot="radio" type="radio" class={className} {...props} />;
 }

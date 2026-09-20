@@ -27,6 +27,7 @@ export function Button({
 }: ButtonProps) {
 	return (
 		<button
+			data-slot="button"
 			class={cn(variants.variant[variant], variants.size[size], className)}
 			{...props}
 		>
@@ -50,6 +51,7 @@ export function LinkButton({
 }: LinkButtonProps) {
 	return (
 		<a
+			data-slot="link-button"
 			class={cn(variants.variant[variant], variants.size[size], className)}
 			{...props}
 		>

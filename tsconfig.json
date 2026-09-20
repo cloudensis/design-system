@@ -11,9 +11,6 @@
 		"jsxImportSource": "hono/jsx",
 		"allowImportingTsExtensions": true,
 		"rewriteRelativeImportExtensions": true,
-		"noEmit": true,
-		"paths": {
-			"#/*": ["./*"]
-		}
+		"noEmit": true
 	}
 }
