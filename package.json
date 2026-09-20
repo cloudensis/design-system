@@ -1,0 +1,6 @@
+{
+	"name": "@cloudensis/design-system",
+	"private": true,
+	"type": "module",
+	"license": "MIT"
+}
