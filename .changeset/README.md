@@ -5,7 +5,7 @@
 変更を加えたら、その PR に changeset を1つ含めてください。
 
 ```bash
-pnpm changeset
+npm run changeset
 ```
 
 `main` にマージされると、`.github/workflows/release.yml` が
@@ -16,6 +16,6 @@ pnpm changeset
 - `release` ジョブは `npm` environment に紐づいています。
   リポジトリ設定で required reviewers を設定しておくと、publish 前に承認が挟まります
 - npm のレジストリは不変です。一度公開した名前とバージョンの組み合わせは
-  unpublish しても再利用できません。`pnpm check:pack` の出力を必ずレビューしてください
+  unpublish しても再利用できません。`npm run check:pack` の出力を必ずレビューしてください
 
 詳細は https://github.com/changesets/changesets

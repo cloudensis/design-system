@@ -7,7 +7,7 @@ Cloudensis のデザイントークン。**CSS変数のみで、JavaScript を�
 > MIT ライセンスで公開していますが、外部サポートは行いません。
 
 ```bash
-pnpm add @cloudensis/tokens
+npm install @cloudensis/tokens
 ```
 
 ```css

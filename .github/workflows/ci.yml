@@ -22,70 +22,66 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
+          cache: npm
 
-      - run: pnpm install --frozen-lockfile
+      - run: npm ci
 
       - name: Build packages
-        run: pnpm build
+        run: npm run build
 
       - name: Typecheck
-        run: pnpm typecheck
+        run: npm run typecheck
 
       # Machine-checks the acceptance criteria: (0,1,0) specificity under
       # `.prose`, no `!important`, no `@scope`, `--cds-` namespacing, nothing
       # styled outside `.prose`, no Tailwind utilities in ui.css, and the
       # prose.min.css size budget.
       - name: Check built CSS
-        run: pnpm check:css
+        run: npm run check:css
 
       # Imports the BUILT packages the way a Hono app would, which Storybook
       # does not cover: ESM-only resolution, the exports map, the peer
       # dependency, and "JavaScript never imports CSS".
       - name: Import smoke tests
-        run: pnpm test
+        run: npm test
 
       - name: publint
-        run: pnpm check:publint
+        run: npm run check:publint
 
       # The npm registry is immutable, so the file list is reviewed before a
       # publish, not after. Printed into the log on every PR.
       - name: npm pack --dry-run
-        run: pnpm check:pack
+        run: npm run check:pack
 
   secrets:
     name: secretlint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm check:secrets
+          cache: npm
+      - run: npm ci
+      - run: npm run check:secrets
 
   storybook:
     name: storybook build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          cache: npm
+      - run: npm ci
 
       # Storybook reads each package's `dist` through its `exports` map, so a
       # broken export or a bad CSS transform fails here.
-      - run: pnpm storybook:build
+      - run: npm run storybook:build
 
       - uses: actions/upload-artifact@v4
         with:

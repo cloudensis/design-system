@@ -1,5 +1,5 @@
 /*
- * Built to public/tailwind-preflight.css by `pnpm build:tailwind`.
+ * Built to public/tailwind-preflight.css by `npm run build:tailwind`.
  *
  * Mirrors what a consuming repository that uses Tailwind would write, so the
  * toolbar toggle reproduces a real setup rather than an approximation.

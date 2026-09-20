@@ -7,7 +7,7 @@
 > MIT ライセンスで公開していますが、外部サポートは行いません。
 
 ```bash
-pnpm add @cloudensis/prose
+npm install @cloudensis/prose
 ```
 
 ```css

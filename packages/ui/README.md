@@ -7,7 +7,7 @@ Cloudensis の記事のための hono/jsx コンポーネント。
 > MIT ライセンスで公開していますが、外部サポートは行いません。
 
 ```bash
-pnpm add hono @cloudensis/prose @cloudensis/ui
+npm install hono @cloudensis/prose @cloudensis/ui
 ```
 
 `hono` は自分で入れてください。`peerDependencies` なので、ui を入れただけでは入りません。
@@ -228,7 +228,7 @@ export const Button = ({ href, class: className, children }: PropsWithChildren<B
 - CSS は `src/ui.css` の `cds.ui` レイヤに入れる。`!important` は使わない
 - JS から CSS を import しない。バンドラや Workers 向けビルドで挙動が割れます
 
-`pnpm check:css` がこれらのうち機械的に検証できるものを検査します。
+`npm run check:css` がこれらのうち機械的に検証できるものを検査します。
 
 ## ライセンス
 

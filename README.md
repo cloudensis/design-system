@@ -40,21 +40,23 @@ UI コンポーネントが来ることが前提の設計になっています�
 にしているため、ui を入れただけでは入りません。
 
 ```bash
-pnpm add hono @cloudensis/tokens @cloudensis/prose @cloudensis/ui
+npm install hono @cloudensis/tokens @cloudensis/prose @cloudensis/ui
 ```
 
 3パッケージは SSR でリクエスト時に評価されるため、`devDependencies` ではなく
 **`dependencies`** に置いてください。
 
-あわせて、依存ツリー内で hono のバージョンが混ざらないよう `pnpm.overrides` で
+あわせて、依存ツリー内で hono のバージョンが混ざらないよう `overrides` で
 統一することを推奨します。hono/jsx は内部状態を持つため、バージョンが混ざると
 JSX が描画されないといった分かりにくい壊れ方をします。
 
 ```json
 {
-  "pnpm": { "overrides": { "hono": "$hono" } }
+  "overrides": { "hono": "$hono" }
 }
 ```
+
+`$hono` は「自分の dependencies に書いてある hono の範囲を使う」という意味です。
 
 ### 2. CSS
 
@@ -430,11 +432,20 @@ Tailwind 非使用リポジトリでの動作を要件として維持するた�
 ## 開発
 
 ```bash
-pnpm install
-pnpm build          # 3パッケージをビルド
-pnpm storybook      # ビルドしてから Storybook を起動
-pnpm verify         # build + typecheck + check:css + test + publint + pack
+npm install
+npm run build          # 3パッケージをビルド
+npm run dev            # 3パッケージの watch と Storybook を並走
+npm run storybook      # ビルドしてから Storybook を起動
+npm run verify         # build + typecheck + check:css + test + publint + pack
 ```
+
+パッケージマネージャは **npm workspaces** です。npm には pnpm の `workspace:`
+プロトコルが無いため、ワークスペース内部の参照は `"*"` で書いています
+（npm はこれをローカルのパッケージに解決します）。
+
+npm の `--workspaces` は依存関係のトポロジカル順では実行されないので、
+ルートの `build` は `-w` を順番に並べてビルド順を明示しています
+（`tokens` → `prose` → `ui`）。
 
 ### なぜ1リポジトリなのか
 
@@ -485,11 +496,11 @@ design-system/
 - 初期は全パッケージ `0.x`。トークン名とクラス名が固まった時点で `1.0.0`
 
 ```bash
-pnpm changeset          # 変更内容を記録
+npm run changeset          # 変更内容を記録
 ```
 
 npm のレジストリは不変で、一度公開した名前とバージョンの組み合わせは unpublish しても
-再利用できません。`pnpm check:pack` の同梱ファイル一覧を必ずレビューしてください。
+再利用できません。`npm run check:pack` の同梱ファイル一覧を必ずレビューしてください。
 
 ---
 

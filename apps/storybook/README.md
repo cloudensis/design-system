@@ -4,8 +4,8 @@
 静的ビルドは `main` への push ごとに GitHub Pages へ配信されます。
 
 ```bash
-pnpm storybook          # ルートから。build → storybook dev
-pnpm storybook:build    # 静的ビルド
+npm run storybook          # ルートから。build → storybook dev
+npm run storybook:build    # 静的ビルド
 ```
 
 ## HTML レンダラを使う理由
@@ -25,7 +25,7 @@ React レンダラへ無理に載せると shim が必要になり、検証し�
 
 各パッケージの **`dist`** を参照します（`exports` 経由）。`src` を直接見ると、
 `exports` の設定ミスやビルド時の CSS 変換の不具合を検出できません。
-`storybook dev` の前に `pnpm build` が走ります。
+`storybook dev` の前に `npm run build` が走ります。
 
 ## ツールバー
 
