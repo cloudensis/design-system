@@ -1,5 +1,10 @@
 import { Hono } from "hono";
+import { Section as LayoutSection } from "#/src/components/layout/section";
 import { Button, LinkButton } from "#/src/components/ui/button";
+import { DescriptionList } from "#/src/components/ui/description-list";
+import { Input } from "#/src/components/ui/input";
+import { Select } from "#/src/components/ui/select";
+import { Textarea } from "#/src/components/ui/textarea";
 import tokensCss from "#/src/styles/tokens.css?raw";
 import { Code, Layout, Section } from "./layout.tsx";
 
@@ -91,6 +96,68 @@ app.get("/components", (c) =>
 					<LinkButton href="/">リンクボタン</LinkButton>
 				</div>
 				<Code>{`<LinkButton href="/">リンクボタン</LinkButton>`}</Code>
+			</Section>
+			<Section title="Input">
+				<p>
+					type に checkbox / radio
+					を渡すと、それぞれに合わせたスタイルでレンダリングします。
+				</p>
+				<div class="flex flex-col gap-4 rounded border border-border p-6">
+					<Input type="text" placeholder="テキスト" />
+					<Input type="email" placeholder="メールアドレス" />
+					<div class="flex items-center gap-2">
+						<Input id="sample-checkbox" type="checkbox" />
+						<label htmlFor="sample-checkbox">チェックボックス</label>
+					</div>
+					<div class="flex items-center gap-2">
+						<Input id="sample-radio" type="radio" name="sample" />
+						<label htmlFor="sample-radio">ラジオボタン</label>
+					</div>
+				</div>
+				<Code>
+					{`<Input type="text" placeholder="テキスト" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
+				</Code>
+			</Section>
+			<Section title="Select">
+				<div class="rounded border border-border p-6">
+					<Select>
+						<option value="">選択してください</option>
+						<option value="a">選択肢 A</option>
+						<option value="b">選択肢 B</option>
+					</Select>
+				</div>
+				<Code>
+					{`<Select>\n\t<option value="">選択してください</option>\n</Select>`}
+				</Code>
+			</Section>
+			<Section title="Textarea">
+				<div class="rounded border border-border p-6">
+					<Textarea rows={4} placeholder="お問い合わせ内容" />
+				</div>
+				<Code>{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</Code>
+			</Section>
+			<Section title="DescriptionList">
+				<p>term と details の組を、2 列のグリッドとして並べます。</p>
+				<div class="rounded border border-border p-6">
+					<DescriptionList
+						items={[
+							{ term: "会社名", details: "cloudensis" },
+							{ term: "設立", details: "2026年9月17日" },
+						]}
+					/>
+				</div>
+				<Code>
+					{`<DescriptionList\n\titems={[{ term: "会社名", details: "cloudensis" }]}\n/>`}
+				</Code>
+			</Section>
+			<Section title="Section">
+				<p>見出し付きのセクションです。id を渡すとページ内リンクになります。</p>
+				<div class="rounded border border-border p-6">
+					<LayoutSection id="sample-section" title="セクションの見出し">
+						<p>セクションの本文です。</p>
+					</LayoutSection>
+				</div>
+				<Code>{`<Section id="services" title="事業内容">...</Section>`}</Code>
 			</Section>
 		</Layout>,
 	),
