@@ -41,6 +41,17 @@ app.get("/", (c) =>
 					{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
 				</Code>
 			</Section>
+			<Section title="既定のスタイル">
+				<p>
+					body には --color-bg / --color-fg
+					とライト（300）の文字の太さが既定で適用されます。 利用側で bg-* や
+					text-*、font-*
+					のユーティリティクラスを指定すればいつでも上書きできます。
+				</p>
+				<Code>
+					{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-light);\n}`}
+				</Code>
+			</Section>
 		</Layout>,
 	),
 );

@@ -1,0 +1,11 @@
+/* 既定のスタイル。利用側で class を指定しなくてもトークンの配色と文字の太さが
+   適用されます。@layer base に置いているため、ユーティリティクラス
+   （bg-*, text-*, font-* など）でいつでも上書きできます。 */
+@layer base {
+	body {
+		background-color: var(--color-bg);
+		color: var(--color-fg);
+		/* Tailwind の既定テーマの --font-weight-light（300）を参照します。 */
+		font-weight: var(--font-weight-light, 300);
+	}
+}
