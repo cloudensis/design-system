@@ -22,7 +22,21 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 @import "@cloudensis/design-system/index.css";
 ```
 
-トークンと記事用スタイルの定義に加えて、コンポーネントが使用しているクラスの収集設定（`@source`）もこのファイルに含まれているため、利用側での追加設定は不要です。
+フォント・トークン・記事用スタイルの定義に加えて、コンポーネントが使用しているクラスの収集設定（`@source`）もこのファイルに含まれているため、利用側での追加設定は不要です。
+
+## フォント
+
+欧文に [Outfit](https://fonts.google.com/specimen/Outfit)、和文に [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP) を使用します。webfont は Fontsource の可変フォントを依存に含めており、`index.css` を読み込むだけで同一オリジンから配信されます（外部 CDN への接続は発生しません）。woff2 は `unicode-range` で分割されているため、ブラウザは表示に必要なスライスだけを取得します。
+
+フォントの指定は `--font-sans` トークン 1 つにまとまっています。
+
+```css
+--font-sans: "Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui, sans-serif;
+```
+
+Tailwind CSS v4 は `--default-font-family` として `--font-sans` を参照するため、この定義だけで既定のフォントに反映されます。欧文・数字は Outfit で描画され、Outfit が字形を持たない和文は Noto Sans JP に落ちます。
+
+webfont を利用側で読み込みたい場合（`next/font` を使う、フォントを差し替えるなど）は、`index.css` の代わりに `tokens.css` と `prose.css` を個別に読み込み、`@source` を自分で指定してください。
 
 ## 使い方
 
@@ -52,6 +66,7 @@ import { Textarea } from "@cloudensis/design-system/components/ui/textarea";
 | import | 内容 |
 | --- | --- |
 | `@cloudensis/design-system/index.css` | 下記をまとめたエントリ（通常はこれを読み込む） |
+| `@cloudensis/design-system/fonts.css` | Outfit / Noto Sans JP の `@font-face` 定義 |
 | `@cloudensis/design-system/tokens.css` | `@theme` によるトークン定義 |
 | `@cloudensis/design-system/prose.css` | 記事本文用のスタイル |
 | `@cloudensis/design-system/components/ui/button` | `Button` / `LinkButton` |

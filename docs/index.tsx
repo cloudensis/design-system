@@ -9,7 +9,7 @@ import tokensCss from "#/src/styles/tokens.css?raw";
 import { Code, Layout, Section } from "./layout.tsx";
 
 const tokens = [...tokensCss.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(
-	([, name, value]) => ({ name, value: value.trim() }),
+	([, name, value]) => ({ name, value: value.trim().replace(/\s+/g, " ") }),
 );
 
 const app = new Hono();
@@ -32,7 +32,8 @@ app.get("/", (c) =>
 					{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
 				</Code>
 				<p>
-					トークンと記事用スタイルの定義に加えて、コンポーネントが使用している
+					フォント（Outfit / Noto Sans
+					JP）とトークン、記事用スタイルの定義に加えて、コンポーネントが使用している
 					クラスの収集設定もこのファイルに含まれているため、利用側での @source
 					の指定は不要です。
 				</p>
@@ -66,10 +67,16 @@ app.get("/tokens", (c) =>
 								<td class="py-2 font-mono">{token.name}</td>
 								<td class="py-2 font-mono text-fg-muted">{token.value}</td>
 								<td class="py-2">
-									<span
-										class="inline-block size-6 rounded border border-border align-middle"
-										style={`background: var(${token.name})`}
-									/>
+									{token.name.startsWith("--color-") ? (
+										<span
+											class="inline-block size-6 rounded border border-border align-middle"
+											style={`background: var(${token.name})`}
+										/>
+									) : (
+										<span style={`font-family: var(${token.name})`}>
+											Aa あア亜 0123
+										</span>
+									)}
 								</td>
 							</tr>
 						))}
