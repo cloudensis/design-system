@@ -1,0 +1,59 @@
+/*
+ * Styles for the dummy components in src/components/demo-widgets.tsx.
+ *
+ * They live in `cds.ui` and use `cds-` classes so they behave exactly like a
+ * real @cloudensis/ui component would - that is the whole point of the
+ * interference stories (7.3). They are NOT part of the published package.
+ */
+@layer cds.ui {
+  /* Pattern A: body slot stays in the prose flow. */
+  .cds-demo-callout {
+    display: flex;
+    gap: 0.75rem;
+    /* No block margin: the rhythm comes from `.prose > :where(*)` (5.4). */
+    padding: 1em 1.15em;
+    border: 1px solid var(--cds-color-border-subtle, #e4e4e7);
+    border-inline-start: 4px solid var(--cds-demo-callout-tone, var(--cds-color-info, #1d4ed8));
+    border-radius: var(--cds-radius-md, 0.5rem);
+    background-color: var(--cds-color-bg-subtle, #f4f4f5);
+  }
+
+  .cds-demo-callout--info { --cds-demo-callout-tone: var(--cds-color-info, #1d4ed8); }
+  .cds-demo-callout--warn { --cds-demo-callout-tone: var(--cds-color-warn, #b45309); }
+  .cds-demo-callout--danger { --cds-demo-callout-tone: var(--cds-color-danger, #b91c1c); }
+  .cds-demo-callout--success { --cds-demo-callout-tone: var(--cds-color-success, #15803d); }
+
+  .cds-demo-callout__icon {
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background-color: var(--cds-demo-callout-tone);
+    color: var(--cds-color-bg, #fff);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .cds-demo-callout__body { min-width: 0; flex: 1; }
+
+  /* Deliberately more specific than a utility class would be. It still loses
+     to `.text-sm`, because layer order is decided before specificity (6.4). */
+  .cds-demo-callout__body p { font-size: 0.9375em; }
+
+  /* Pattern B: isolated wholesale. */
+  .cds-demo-button {
+    display: inline-block;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border-radius: var(--cds-radius-md, 0.5rem);
+    background-color: var(--cds-color-accent, #2563eb);
+    color: var(--cds-color-bg, #fff);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .cds-demo-button:hover { background-color: var(--cds-color-accent-hover, #1d4ed8); }
+}

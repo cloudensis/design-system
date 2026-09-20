@@ -1,0 +1,476 @@
+/*
+ * @cloudensis/prose - source.
+ *
+ * Read this before editing:
+ *
+ * - Rules are authored WITHOUT the `.not-prose` exclusion clause and WITHOUT
+ *   the `@layer cds.prose { }` wrapper. build.mjs adds both (5.3 / 3.2).
+ *   Writing the clause by hand guarantees omissions.
+ * - Every selector must land on specificity (0,1,0): `.prose` supplies the 1
+ *   class, everything after it goes inside `:where()` - element selectors,
+ *   attribute selectors and pseudo-classes alike. `scripts/check-css.mjs`
+ *   fails the build otherwise. With all rules on equal footing, "the later
+ *   rule wins" is the only thing you need to know to read this file (5.2).
+ * - Therefore: ORDER IS THE API. Sections below run general -> specific.
+ * - No `!important`, ever. No `@scope` (5.2.1).
+ * - Nothing outside `.prose` may be styled (5.5).
+ * - `.prose` itself carries the only absolute font-size; everything under it
+ *   is in `em` so one modifier class rescales the whole article (5.6).
+ * - Japanese is the default, not an afterthought (5.8).
+ */
+
+/* ------------------------------------------------------------------ *
+ * 1. Root
+ * ------------------------------------------------------------------ */
+
+.prose {
+  /* Soft reference to @cloudensis/tokens: every token has a literal fallback,
+     so prose renders completely on its own with no tokens.css loaded (3.1). */
+  --cds-prose-body: var(--cds-color-fg, #3f3f46);
+  --cds-prose-heading: var(--cds-color-fg, #3f3f46);
+  --cds-prose-muted: var(--cds-color-fg-muted, #71717a);
+  --cds-prose-link: var(--cds-color-accent, #2563eb);
+  --cds-prose-link-hover: var(--cds-color-accent-hover, #1d4ed8);
+  --cds-prose-border: var(--cds-color-border, #d4d4d8);
+  --cds-prose-border-subtle: var(--cds-color-border-subtle, #e4e4e7);
+  --cds-prose-surface: var(--cds-color-bg-subtle, #f4f4f5);
+  --cds-prose-code-fg: var(--cds-color-code-fg, #3f3f46);
+  --cds-prose-code-bg: var(--cds-color-code-bg, #f4f4f5);
+  --cds-prose-mark-bg: var(--cds-color-warn, #b45309);
+  --cds-prose-mark-fg: var(--cds-color-bg, #ffffff);
+
+  --cds-prose-radius-sm: var(--cds-radius-sm, 0.25rem);
+  --cds-prose-radius-md: var(--cds-radius-md, 0.5rem);
+
+  --cds-prose-font: var(
+    --cds-font-sans,
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial,
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+    Meiryo, sans-serif
+  );
+  --cds-prose-font-mono: var(
+    --cds-font-mono,
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    "Noto Sans Mono CJK JP", monospace
+  );
+
+  /* 40em, not 65ch: a CJK glyph is one em wide, so 65ch is roughly 65 full-width
+     characters and the line becomes unreadably long. (5.8) */
+  --cds-prose-measure: 40em;
+
+  color: var(--cds-prose-body);
+  font-family: var(--cds-prose-font);
+  font-size: 1rem;
+  /* 1.8, not the ~1.6 that Latin-only typography uses: kanji/kana mixed text
+     looks cramped below this. */
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  /* Japanese line-breaking rules (kinsoku shori). */
+  line-break: strict;
+  word-break: normal;
+  text-align: start;
+  max-width: var(--cds-prose-measure);
+
+  /* Deliberately NOT set: font-feature-settings: "palt". Proportional kana
+     spacing fights `letter-spacing` and makes body copy uneven; it belongs on
+     display type, which the consuming site owns. (5.8) */
+}
+
+/* ------------------------------------------------------------------ *
+ * 2. Modifiers - multi-class, `.prose` + `.prose-lg` (5.7)
+ *
+ * Written as `.prose:where(.prose-lg)` so they stay at (0,1,0) and only take
+ * effect alongside `.prose`.
+ * ------------------------------------------------------------------ */
+
+.prose:where(.prose-sm) { font-size: 0.875rem; }
+.prose:where(.prose-base) { font-size: 1rem; }
+.prose:where(.prose-lg) { font-size: 1.125rem; }
+.prose:where(.prose-xl) { font-size: 1.25rem; }
+
+.prose:where(.prose-full) { max-width: none; }
+
+/* ------------------------------------------------------------------ *
+ * 3. Vertical rhythm for direct children (5.4)
+ *
+ * An article is JSX, so a UI component can sit directly in the flow. Giving
+ * every direct child the paragraph rhythm means the article never has to carry
+ * spacing overrides. Element-specific margins below override this.
+ *
+ * The exclusion is narrowed to descendants: a `.not-prose` element sitting
+ * directly in the flow still needs to be spaced like a paragraph.
+ * ------------------------------------------------------------------ */
+
+/* cds:not-prose=descendants */
+.prose > :where(*) { margin-block: 1.25em; }
+
+/* ------------------------------------------------------------------ *
+ * 4. Headings
+ * ------------------------------------------------------------------ */
+
+.prose :where(h1),
+.prose :where(h2),
+.prose :where(h3),
+.prose :where(h4),
+.prose :where(h5),
+.prose :where(h6) {
+  color: var(--cds-prose-heading);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.prose :where(h1) { font-size: 2.125em; line-height: 1.35; margin-block: 0 0.8em; }
+.prose :where(h2) { font-size: 1.625em; line-height: 1.45; margin-block: 2.2em 0.85em; }
+.prose :where(h3) { font-size: 1.3em;   line-height: 1.55; margin-block: 1.9em 0.7em; }
+.prose :where(h4) { font-size: 1.125em; line-height: 1.65; margin-block: 1.7em 0.6em; }
+.prose :where(h5) { font-size: 1em;     line-height: 1.7;  margin-block: 1.6em 0.6em; }
+.prose :where(h6) {
+  font-size: 0.9375em;
+  line-height: 1.7;
+  margin-block: 1.6em 0.6em;
+  color: var(--cds-prose-muted);
+}
+
+/* A heading immediately after another heading should not open a big gap. */
+.prose :where(h2) + :where(h3),
+.prose :where(h3) + :where(h4),
+.prose :where(h4) + :where(h5),
+.prose :where(h5) + :where(h6) { margin-block-start: 0.9em; }
+
+/* ------------------------------------------------------------------ *
+ * 5. Paragraphs and inline text
+ * ------------------------------------------------------------------ */
+
+.prose :where(p) {
+  margin-block: 1.25em;
+  /* A bare URL must not push the article sideways (5.8). */
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+
+.prose :where(.lead) {
+  font-size: 1.125em;
+  line-height: 1.75;
+  color: var(--cds-prose-muted);
+  margin-block: 1.1em;
+}
+
+.prose :where(strong) { color: inherit; font-weight: 700; }
+.prose :where(em) { font-style: italic; }
+.prose :where(del),
+.prose :where(s) { color: var(--cds-prose-muted); text-decoration-line: line-through; }
+.prose :where(small) { font-size: 0.875em; color: var(--cds-prose-muted); }
+
+.prose :where(mark) {
+  background-color: var(--cds-prose-mark-bg);
+  color: var(--cds-prose-mark-fg);
+  padding: 0.1em 0.2em;
+  border-radius: var(--cds-prose-radius-sm);
+}
+
+.prose :where(sub),
+.prose :where(sup) {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.prose :where(sub) { bottom: -0.25em; }
+.prose :where(sup) { top: -0.5em; }
+
+.prose :where(abbr):where([title]) {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+
+/* ------------------------------------------------------------------ *
+ * 6. Links
+ * ------------------------------------------------------------------ */
+
+.prose :where(a) {
+  color: var(--cds-prose-link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: auto;
+  overflow-wrap: anywhere;
+}
+.prose :where(a):where(:hover) { color: var(--cds-prose-link-hover); }
+.prose :where(a):where(:focus-visible) {
+  outline: 2px solid var(--cds-prose-link);
+  outline-offset: 2px;
+  border-radius: var(--cds-prose-radius-sm);
+}
+
+/* ------------------------------------------------------------------ *
+ * 7. Lists
+ *
+ * `list-style-type` is set explicitly rather than assumed: a repository
+ * without Tailwind has the UA defaults, one with Preflight has none. Both must
+ * come out the same (3.6 (1)).
+ * ------------------------------------------------------------------ */
+
+.prose :where(ul) { list-style-type: disc; padding-inline-start: 1.5em; margin-block: 1.25em; }
+.prose :where(ol) { list-style-type: decimal; padding-inline-start: 1.6em; margin-block: 1.25em; }
+
+.prose :where(li) {
+  margin-block: 0.5em;
+  padding-inline-start: 0.15em;
+  overflow-wrap: anywhere;
+}
+.prose :where(li)::marker { color: var(--cds-prose-muted); }
+.prose :where(ol) > :where(li)::marker { font-variant-numeric: tabular-nums; }
+
+/* Nested lists, three levels deep. */
+.prose :where(ul) :where(ul) { list-style-type: circle; }
+.prose :where(ul) :where(ul) :where(ul) { list-style-type: square; }
+.prose :where(ol) :where(ol) { list-style-type: lower-alpha; }
+.prose :where(ol) :where(ol) :where(ol) { list-style-type: lower-roman; }
+
+/* An explicit `type` attribute beats the nesting depth. */
+.prose :where(ol):where([type="A"]) { list-style-type: upper-alpha; }
+.prose :where(ol):where([type="a"]) { list-style-type: lower-alpha; }
+.prose :where(ol):where([type="I"]) { list-style-type: upper-roman; }
+.prose :where(ol):where([type="i"]) { list-style-type: lower-roman; }
+.prose :where(ol):where([type="1"]) { list-style-type: decimal; }
+
+.prose :where(li) > :where(ul),
+.prose :where(li) > :where(ol) { margin-block: 0.5em; }
+
+/* A single-paragraph `li` and a multi-paragraph `li` must have the same
+   leading and trailing gap. */
+.prose :where(li) > :where(p) { margin-block: 0.75em; }
+.prose :where(li) > :where(p):where(:first-child) { margin-block-start: 0; }
+.prose :where(li) > :where(p):where(:last-child) { margin-block-end: 0; }
+
+/* ------------------------------------------------------------------ *
+ * 8. Description lists
+ * ------------------------------------------------------------------ */
+
+.prose :where(dl) { margin-block: 1.25em; }
+.prose :where(dt) { font-weight: 700; margin-block-start: 1.25em; }
+.prose :where(dd) { margin-block-start: 0.5em; margin-inline-start: 1.5em; }
+.prose :where(dl) > :where(dt):where(:first-child) { margin-block-start: 0; }
+
+/* ------------------------------------------------------------------ *
+ * 9. Blockquote and rule
+ * ------------------------------------------------------------------ */
+
+.prose :where(blockquote) {
+  margin-block: 1.75em;
+  margin-inline: 0;
+  padding-inline-start: 1.15em;
+  border-inline-start: 0.25em solid var(--cds-prose-border);
+  color: var(--cds-prose-muted);
+  /* No italics and no generated quote marks: both read badly in Japanese. */
+  font-style: normal;
+}
+.prose :where(blockquote) :where(blockquote) { margin-block: 1.25em; }
+
+.prose :where(hr) {
+  border: 0;
+  border-block-start: 1px solid var(--cds-prose-border-subtle);
+  margin-block: 3em;
+}
+
+/* ------------------------------------------------------------------ *
+ * 10. Code
+ *
+ * Deliberately shallow. Nothing below `pre > code` is styled and no colour is
+ * set on descendants, so a highlighter's own output is untouched: shiki writes
+ * inline styles (which beat any stylesheet) and highlight.js ships unlayered
+ * rules (which beat every layer). See the non-goals in 1.
+ * ------------------------------------------------------------------ */
+
+.prose :where(code) {
+  font-family: var(--cds-prose-font-mono);
+  font-size: 0.875em;
+  color: var(--cds-prose-code-fg);
+  background-color: var(--cds-prose-code-bg);
+  padding: 0.15em 0.4em;
+  border-radius: var(--cds-prose-radius-sm);
+  overflow-wrap: anywhere;
+}
+
+.prose :where(pre) {
+  font-family: var(--cds-prose-font-mono);
+  font-size: 0.875em;
+  line-height: 1.7;
+  letter-spacing: normal;
+  color: var(--cds-prose-code-fg);
+  background-color: var(--cds-prose-code-bg);
+  margin-block: 1.75em;
+  padding: 1em 1.15em;
+  border-radius: var(--cds-prose-radius-md);
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+/* Undo the inline-code chrome inside a block; do not touch colour beyond
+   `inherit`, so the highlighter theme stays in charge. */
+.prose :where(pre) :where(code) {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.prose :where(kbd) {
+  font-family: var(--cds-prose-font-mono);
+  font-size: 0.8125em;
+  color: var(--cds-prose-body);
+  background-color: var(--cds-prose-surface);
+  padding: 0.15em 0.45em;
+  border: 1px solid var(--cds-prose-border);
+  border-radius: var(--cds-prose-radius-sm);
+  box-shadow: 0 1px 0 var(--cds-prose-border);
+}
+
+.prose :where(samp) { font-family: var(--cds-prose-font-mono); font-size: 0.875em; }
+.prose :where(var) { font-family: var(--cds-prose-font-mono); font-style: italic; }
+
+/* ------------------------------------------------------------------ *
+ * 11. Tables
+ *
+ * `display: block` + `width: max-content` turns the table itself into the
+ * scroll container. Without it a wide table drags the whole page sideways, and
+ * CSS alone cannot introduce a wrapper element.
+ * ------------------------------------------------------------------ */
+
+.prose :where(table) {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9375em;
+  line-height: 1.7;
+  letter-spacing: normal;
+  margin-block: 2em;
+}
+
+.prose :where(thead) { border-block-end: 2px solid var(--cds-prose-border); }
+.prose :where(tbody) > :where(tr) { border-block-end: 1px solid var(--cds-prose-border-subtle); }
+.prose :where(tbody) > :where(tr):where(:last-child) { border-block-end: 0; }
+
+.prose :where(th),
+.prose :where(td) {
+  padding: 0.6em 0.85em;
+  text-align: start;
+  vertical-align: top;
+}
+.prose :where(th) { font-weight: 700; }
+.prose :where(tfoot) { border-block-start: 2px solid var(--cds-prose-border); }
+
+.prose :where(caption) {
+  caption-side: bottom;
+  text-align: start;
+  font-size: 0.875em;
+  color: var(--cds-prose-muted);
+  padding-block-start: 0.75em;
+}
+
+/* ------------------------------------------------------------------ *
+ * 12. Media
+ * ------------------------------------------------------------------ */
+
+.prose :where(img),
+.prose :where(video),
+.prose :where(picture) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-block: 1.75em;
+  border-radius: var(--cds-prose-radius-md);
+}
+.prose :where(picture) > :where(img) { margin-block: 0; border-radius: 0; }
+
+.prose :where(figure) { margin-block: 1.75em; }
+.prose :where(figure) > :where(*) { margin-block: 0; }
+.prose :where(figcaption) {
+  margin-block-start: 0.75em;
+  font-size: 0.875em;
+  line-height: 1.7;
+  color: var(--cds-prose-muted);
+}
+
+/* ------------------------------------------------------------------ *
+ * 13. Disclosure
+ * ------------------------------------------------------------------ */
+
+.prose :where(details) {
+  margin-block: 1.5em;
+  padding: 0.75em 1em;
+  border: 1px solid var(--cds-prose-border-subtle);
+  border-radius: var(--cds-prose-radius-md);
+  background-color: var(--cds-prose-surface);
+}
+.prose :where(summary) {
+  cursor: pointer;
+  font-weight: 700;
+  /* Restores the marker that a reset such as Preflight removes (3.6 (1)). */
+  display: list-item;
+  list-style: disclosure-closed inside;
+}
+.prose :where(details):where([open]) > :where(summary) {
+  list-style-type: disclosure-open;
+  margin-block-end: 0.75em;
+}
+.prose :where(summary)::marker { color: var(--cds-prose-muted); }
+
+/* ------------------------------------------------------------------ *
+ * 14. Escape hatch
+ *
+ * The exclusion clause already stops every rule above from matching inside
+ * `.not-prose`, but inherited properties do not care about selectors. These
+ * three are the ones that visibly leak into an isolated widget.
+ * ------------------------------------------------------------------ */
+
+/* cds:not-prose=none */
+.prose :where(.not-prose) {
+  line-height: normal;
+  letter-spacing: normal;
+  line-break: auto;
+}
+
+/* ------------------------------------------------------------------ *
+ * 15. Latin-language ranges (5.8)
+ *
+ * `:lang()` matches by computed language, so `<section lang="en">` covers its
+ * paragraphs without repeating the attribute.
+ *
+ * Kept near the end so it wins over the generic text rules, but restricted to
+ * text-flow elements so it cannot flatten a heading's own line-height.
+ * ------------------------------------------------------------------ */
+
+.prose:where(:lang(en)) {
+  --cds-prose-measure: 65ch;
+  line-height: 1.7;
+  letter-spacing: normal;
+}
+
+.prose :where(p):where(:lang(en)),
+.prose :where(li):where(:lang(en)),
+.prose :where(dd):where(:lang(en)),
+.prose :where(dt):where(:lang(en)),
+.prose :where(blockquote):where(:lang(en)),
+.prose :where(figcaption):where(:lang(en)),
+.prose :where(.lead):where(:lang(en)) {
+  line-height: 1.7;
+  letter-spacing: normal;
+}
+
+/* ------------------------------------------------------------------ *
+ * 16. Flow edges - last, so they beat every margin above (5.4)
+ * ------------------------------------------------------------------ */
+
+/* cds:not-prose=descendants */
+.prose > :where(:first-child) { margin-block-start: 0; }
+/* cds:not-prose=descendants */
+.prose > :where(:last-child) { margin-block-end: 0; }

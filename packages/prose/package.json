@@ -1,0 +1,55 @@
+{
+  "name": "@cloudensis/prose",
+  "version": "0.1.0",
+  "description": "Typography CSS for Japanese-first long-form articles written as JSX. Zero runtime dependencies.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/prose.css",
+    "./prose.css": "./dist/prose.css",
+    "./prose.min.css": "./dist/prose.min.css",
+    "./class": {
+      "types": "./dist/class.d.ts",
+      "default": "./dist/class.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudensis/design-system.git",
+    "directory": "packages/prose"
+  },
+  "homepage": "https://github.com/cloudensis/design-system/tree/main/packages/prose#readme",
+  "bugs": {
+    "url": "https://github.com/cloudensis/design-system/issues"
+  },
+  "keywords": [
+    "typography",
+    "prose",
+    "css",
+    "japanese",
+    "cascade-layers"
+  ],
+  "scripts": {
+    "build": "tsdown && node build.mjs",
+    "dev": "concurrently -r \"tsdown --watch\" \"node build.mjs --watch\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserslist": "^4.28.1",
+    "concurrently": "^9.2.1",
+    "lightningcss": "^1.33.0",
+    "tsdown": "^0.23.0",
+    "typescript": "~5.9.3"
+  }
+}

@@ -1,0 +1,19 @@
+/*
+ * Built to public/tailwind-preflight.css by `pnpm build:tailwind`.
+ *
+ * Mirrors what a consuming repository that uses Tailwind would write, so the
+ * toolbar toggle reproduces a real setup rather than an approximation.
+ */
+@layer theme, base, cds.tokens, cds.prose, cds.ui, components, utilities;
+
+@import "tailwindcss";
+
+/* Tailwind does not scan node_modules, which is exactly why @cloudensis/ui
+   must not emit utility classes (3.6 (2)). Only this app's sources are
+   scanned - the same situation a consumer is in. */
+@source "../src";
+
+/* `.dark` class parity with @cloudensis/tokens. Tailwind's `dark:` variant is
+   prefers-color-scheme only by default, so a repo that uses the class strategy
+   has to declare this (README / 3.6). */
+@custom-variant dark (&:where(.dark, .dark *));

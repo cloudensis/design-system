@@ -1,0 +1,46 @@
+{
+  "name": "@cloudensis/tokens",
+  "version": "0.1.0",
+  "description": "Cloudensis design tokens as CSS custom properties. No JavaScript, no dependencies.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/tokens.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudensis/design-system.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/cloudensis/design-system/tree/main/packages/tokens#readme",
+  "bugs": {
+    "url": "https://github.com/cloudensis/design-system/issues"
+  },
+  "keywords": [
+    "design-tokens",
+    "css",
+    "css-variables",
+    "dark-mode"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs --watch",
+    "typecheck": "echo \"@cloudensis/tokens: no TypeScript sources\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserslist": "^4.28.1",
+    "lightningcss": "^1.33.0"
+  }
+}

@@ -1,0 +1,14 @@
+<!--
+  Layer order is decided by the FIRST declaration the document sees, so it has
+  to be pinned before any stylesheet loads - including the Tailwind bundle
+  below, which declares an order of its own. This is the same line the README
+  tells consuming apps to write (3.6 (3)).
+-->
+<style>@layer theme, base, cds.tokens, cds.prose, cds.ui, components, utilities;</style>
+
+<!--
+  Tailwind + Preflight, toggled from the toolbar. It is `disabled` by default:
+  the point is to prove @cloudensis/prose renders identically with and without
+  a reset (3.6 (1)).
+-->
+<link id="cds-tailwind" rel="stylesheet" href="./tailwind-preflight.css" disabled />

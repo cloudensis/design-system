@@ -1,0 +1,49 @@
+{
+  "name": "@cloudensis/ui",
+  "version": "0.1.0",
+  "description": "hono/jsx server components for Cloudensis articles. Zero runtime dependencies; hono is a peer.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": ["**/*.css"],
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "default": "./dist/utils.js"
+    },
+    "./ui.css": "./dist/ui.css",
+    "./ui.min.css": "./dist/ui.min.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": { "access": "public" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudensis/design-system.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/cloudensis/design-system/tree/main/packages/ui#readme",
+  "bugs": { "url": "https://github.com/cloudensis/design-system/issues" },
+  "keywords": ["hono", "jsx", "ssr", "components", "design-system"],
+  "scripts": {
+    "build": "tsdown && node build.css.mjs",
+    "dev": "concurrently -r \"tsdown --watch\" \"node build.css.mjs --watch\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "hono": "^4"
+  },
+  "devDependencies": {
+    "@cloudensis/prose": "workspace:^",
+    "browserslist": "^4.28.1",
+    "concurrently": "^9.2.1",
+    "hono": "^4.13.8",
+    "lightningcss": "^1.33.0",
+    "tsdown": "^0.23.0",
+    "typescript": "~5.9.3"
+  }
+}

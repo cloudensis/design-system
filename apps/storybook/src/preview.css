@@ -1,0 +1,16 @@
+/*
+ * The consumer-facing setup, verbatim (7.5).
+ *
+ * This file is intentionally identical in shape to the snippet in the README.
+ * If the two ever drift, the documentation is wrong and nothing here would
+ * catch it.
+ *
+ * The layer-order statement is repeated here for readability; the one that
+ * actually decides the order lives in .storybook/preview-head.html, because it
+ * has to precede the Tailwind bundle loaded as a <link>.
+ */
+@layer theme, base, cds.tokens, cds.prose, cds.ui, components, utilities;
+
+@import "@cloudensis/tokens/tokens.css";
+@import "@cloudensis/prose/prose.css";
+@import "@cloudensis/ui/ui.css";

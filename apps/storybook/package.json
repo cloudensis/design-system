@@ -1,0 +1,29 @@
+{
+  "name": "@cloudensis/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "Catalogue and verification harness for @cloudensis/tokens, prose and ui. Not published.",
+  "scripts": {
+    "prebuild": "pnpm run build:tailwind",
+    "build": "storybook build",
+    "predev": "pnpm run build:tailwind",
+    "dev": "storybook dev -p 6006 --no-open",
+    "build:tailwind": "tailwindcss -i ./tailwind/input.css -o ./public/tailwind-preflight.css --minify",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@cloudensis/prose": "workspace:^",
+    "@cloudensis/tokens": "workspace:^",
+    "@cloudensis/ui": "workspace:^",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/html-vite": "^10.6.0",
+    "@tailwindcss/cli": "^4.3.3",
+    "hono": "^4.13.8",
+    "storybook": "^10.6.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.0"
+  }
+}

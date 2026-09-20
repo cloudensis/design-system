@@ -1,0 +1,42 @@
+{
+  "name": "design-system",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r --filter \"./packages/*\" build",
+    "build:watch": "pnpm -r --parallel --filter \"./packages/*\" dev",
+    "dev": "pnpm build && pnpm -r --parallel --filter \"./packages/*\" --filter \"@cloudensis/storybook\" dev",
+    "typecheck": "tsc -p tsconfig.json && pnpm -r typecheck",
+    "test": "vitest run",
+    "check:css": "node scripts/check-css.mjs",
+    "check:publint": "pnpm -r --filter \"./packages/*\" exec publint --strict",
+    "check:pack": "node scripts/pack-report.mjs",
+    "check:secrets": "secretlint --secretlintrc .secretlintrc.json \"**/*\"",
+    "storybook": "pnpm --filter @cloudensis/storybook dev",
+    "storybook:build": "pnpm build && pnpm --filter @cloudensis/storybook build",
+    "verify": "pnpm build && pnpm typecheck && pnpm check:css && pnpm test && pnpm check:publint && pnpm check:pack",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "@cloudensis/prose": "workspace:^",
+    "@cloudensis/tokens": "workspace:^",
+    "@cloudensis/ui": "workspace:^",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.5",
+    "@types/node": "^22.19.1",
+    "browserslist": "^4.28.1",
+    "hono": "^4.13.8",
+    "lightningcss": "^1.33.0",
+    "publint": "^0.3.24",
+    "secretlint": "^13.0.5",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.1"
+  }
+}

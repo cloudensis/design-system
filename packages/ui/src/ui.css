@@ -1,0 +1,186 @@
+/*
+ * @cloudensis/ui - source.
+ *
+ * Rules are authored without the `@layer cds.ui { }` wrapper; build.css.mjs
+ * adds it along with the layer-order statement (3.2).
+ *
+ * House rules:
+ *
+ * - Every class is `cds-` + BEM. No Tailwind utility ever appears here, in the
+ *   CSS or in the components: Tailwind does not scan `node_modules`, so a
+ *   utility class emitted from this package would simply never be generated in
+ *   the consuming app (3.6 (2)). `scripts/check-css.mjs` enforces it.
+ * - Tokens are referenced with literal fallbacks, so a component still looks
+ *   deliberate without @cloudensis/tokens loaded.
+ * - No `!important`. Consumers override from outside the layers, or with
+ *   Tailwind utilities, which sit in a later layer (6.4).
+ */
+
+/* ------------------------------------------------------------------ *
+ * Heading
+ * ------------------------------------------------------------------ */
+
+.cds-heading {
+  position: relative;
+}
+
+.cds-heading__anchor {
+  margin-inline-start: 0.3em;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--cds-color-fg-muted, #71717a);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+
+.cds-heading:hover .cds-heading__anchor,
+.cds-heading__anchor:focus-visible {
+  opacity: 1;
+}
+
+.cds-heading__anchor:hover {
+  color: var(--cds-color-accent, #2563eb);
+}
+
+/* On touch there is no hover, so the anchor would never appear. */
+@media (hover: none) {
+  .cds-heading__anchor {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cds-heading__anchor {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * CodeBlock
+ * ------------------------------------------------------------------ */
+
+.cds-code-block {
+  --cds-code-block-bg: var(--cds-color-code-bg, #f4f4f5);
+  --cds-code-block-fg: var(--cds-color-code-fg, #3f3f46);
+
+  /* No block margin on purpose: inside `.prose` the vertical rhythm comes from
+     prose, so a CodeBlock lines up with the paragraphs around it (5.4). */
+  border: 1px solid var(--cds-color-border-subtle, #e4e4e7);
+  border-radius: var(--cds-radius-md, 0.5rem);
+  background-color: var(--cds-code-block-bg);
+  color: var(--cds-code-block-fg);
+  font-family: var(--cds-font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  overflow: hidden;
+}
+
+.cds-code-block__header {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-space-2, 0.5rem);
+  padding: var(--cds-space-2, 0.5rem) var(--cds-space-3, 0.75rem);
+  border-block-end: 1px solid var(--cds-color-border-subtle, #e4e4e7);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--cds-color-fg-muted, #71717a);
+}
+
+.cds-code-block__filename {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.cds-code-block__lang {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Pushes the copy button to the trailing edge whatever else is in the header. */
+.cds-code-block__copy {
+  margin-inline-start: auto;
+  flex: none;
+  padding: 0.2em 0.6em;
+  border: 1px solid var(--cds-color-border, #d4d4d8);
+  border-radius: var(--cds-radius-sm, 0.25rem);
+  background-color: var(--cds-color-bg, #fff);
+  color: inherit;
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.cds-code-block__copy:hover {
+  border-color: var(--cds-color-accent, #2563eb);
+  color: var(--cds-color-accent, #2563eb);
+}
+
+.cds-code-block__copy:focus-visible {
+  outline: 2px solid var(--cds-color-accent, #2563eb);
+  outline-offset: 2px;
+}
+
+.cds-code-block__pre,
+.cds-code-block__body > pre {
+  margin: 0;
+  padding: var(--cds-space-4, 1rem);
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  tab-size: 2;
+  background-color: transparent;
+}
+
+/*
+ * Nothing below `code` is styled and no colour is set on descendants, so a
+ * highlighter owns its own output: shiki writes inline styles, highlight.js
+ * ships unlayered rules, and both beat this layer.
+ */
+.cds-code-block__code {
+  font: inherit;
+  color: inherit;
+  background: none;
+}
+
+/* ------------------------------------------------------------------ *
+ * Figure
+ * ------------------------------------------------------------------ */
+
+.cds-figure {
+  /* Block margin is left to prose, as above. The inline margin is reset
+     because the UA default for `figure` is 40px, which a repository without a
+     reset would otherwise keep (3.6 (1)). */
+  margin-inline: 0;
+}
+
+.cds-figure__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--cds-radius-md, 0.5rem);
+}
+
+/*
+ * The media box is `not-prose`, so prose's own `img { max-width: 100% }` does
+ * not reach it. That containment is the point of the component, so the rule is
+ * restated here for whatever is placed inside.
+ */
+.cds-figure__media > :where(img, video, iframe, canvas, svg, picture) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* Without a reserved ratio the box must follow the image's own height. */
+.cds-figure__media:not([style*="aspect-ratio"]) > :where(img, video) {
+  height: auto;
+  object-fit: fill;
+}
+
+.cds-figure__caption {
+  margin-block-start: 0.75em;
+  font-size: 0.875em;
+  line-height: 1.7;
+  color: var(--cds-color-fg-muted, #71717a);
+}
