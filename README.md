@@ -465,9 +465,10 @@ design-system/
 ├── apps/
 │   └── storybook/       Storybook（検証・カタログ。非公開）
 ├── scripts/
-│   ├── css-lib.mjs      レイヤ順・.not-prose 除外句の共通ビルド処理
-│   ├── check-css.mjs    受け入れ条件の機械チェック
-│   └── pack-report.mjs  npm pack --dry-run の同梱ファイル一覧
+│   ├── css-lib.mjs             レイヤ順・.not-prose 除外句の共通ビルド処理
+│   ├── check-css.mjs           受け入れ条件の機械チェック
+│   ├── check-release-ready.mjs バージョン未更新のタグでの publish を拒否
+│   └── pack-report.mjs         npm pack --dry-run の同梱ファイル一覧
 └── tests/               ビルド済みパッケージの import スモークテスト
 ```
 
@@ -490,14 +491,34 @@ design-system/
 
 ### リリース
 
-- [Changesets](https://github.com/changesets/changesets) で3パッケージを独立バージョニング
-- publish は **CI からのみ**。個人端末から `npm publish` しないこと
-- npm の Trusted Publishing（GitHub Actions の OIDC 連携）+ `--provenance`
-- 初期は全パッケージ `0.x`。トークン名とクラス名が固まった時点で `1.0.0`
+[Changesets](https://github.com/changesets/changesets) で3パッケージを独立バージョニングします。
+
+**publish は `main` への push では走りません。GitHub Release を publish したときだけです。**
+リリースを切るのが日付の残る明示的な行為になり、タグが npm に出たコミットを正確に指します。
 
 ```bash
-npm run changeset          # 変更内容を記録
+# 1. パッケージを変更した PR には changeset を含める
+npm run changeset
+
+# 2. リリース時。ブランチを切ってバージョンを上げ、コミットして main にマージ
+npm run version-packages   # changeset を消費 → バージョン・CHANGELOG・lockfile を更新
 ```
+
+3. そのコミットを指すタグで **GitHub Release を publish** する → `release.yml` が動きます。
+
+`changeset publish` が、3パッケージのうちレジストリにまだ無いバージョンのものだけを
+publish します。リポジトリ単位のタグ1本で足ります。
+
+歯止め:
+
+- publish は **CI からのみ**。ルートの `.npmrc` に `provenance=true` があるため、
+  個人端末からの `npm publish` は失敗します
+- npm の Trusted Publishing（GitHub Actions の OIDC 連携）+ `--provenance`。長期トークンは置きません
+- `publish` ジョブは `npm` environment に紐づいています。required reviewers を設定すると
+  publish 前に承認が挟まります
+- `scripts/check-release-ready.mjs` が、未適用の changeset が残ったタグでの publish を拒否します
+  （バージョンを上げ忘れたタグだと `changeset publish` は「何も publish せず成功」するため）
+- 初期は全パッケージ `0.x`。トークン名とクラス名が固まった時点で `1.0.0`
 
 npm のレジストリは不変で、一度公開した名前とバージョンの組み合わせは unpublish しても
 再利用できません。`npm run check:pack` の同梱ファイル一覧を必ずレビューしてください。

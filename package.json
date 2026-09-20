@@ -30,7 +30,7 @@
     "verify": "npm run build && npm run typecheck && npm run check:css && npm test && npm run check:publint && npm run check:pack",
     "changeset": "changeset",
     "version-packages": "changeset version && npm install --package-lock-only",
-    "release": "npm run build && changeset publish"
+    "release": "npm run build && changeset publish --no-git-tag"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

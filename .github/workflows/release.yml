@@ -1,21 +1,36 @@
 name: Release
 
+# Publishing is tied to a published GitHub Release, not to a push to main.
+# Cutting a release is then an explicit, dated act by a person, and the tag
+# names exactly the commit that went to npm.
+#
+# The flow this expects:
+#
+#   1. every PR that changes a package carries a changeset (`npm run changeset`)
+#   2. when it is time to release: `npm run version-packages` on a branch,
+#      which consumes the changesets, bumps the versions, writes the
+#      changelogs and refreshes the lockfile. Merge that.
+#   3. publish a GitHub Release whose tag points at that commit. This runs.
+#
+# `changeset publish` works out which of the three packages are not yet on the
+# registry at their current version and publishes only those, so one repository
+# level tag is enough for three independently versioned packages.
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release
   cancel-in-progress: false
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
+  # npm Trusted Publishing (OIDC). No long-lived token is stored.
   id-token: write
 
 jobs:
-  release:
-    name: changesets
+  publish:
+    name: publish to npm
     runs-on: ubuntu-latest
     # Configure required reviewers on this environment in the repository
     # settings. The npm registry is immutable - a name/version pair can never
@@ -25,7 +40,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          # Build exactly what was tagged, not whatever main has drifted to.
+          ref: ${{ github.event.release.tag_name }}
 
       - uses: actions/setup-node@v5
         with:
@@ -40,24 +56,19 @@ jobs:
 
       - run: npm ci
 
+      # A release tag cut before `npm run version-packages` would carry the
+      # previous versions, and `changeset publish` would find nothing new to
+      # publish - or worse, silently publish nothing while looking successful.
+      - name: Check the release is versioned
+        run: node scripts/check-release-ready.mjs
+
       - name: Build and verify
         run: npm run verify
 
-      # Opens (or updates) the "Version Packages" PR when changesets are
-      # pending, and publishes when that PR has been merged. Publishing happens
-      # here and nowhere else - never from a personal machine.
-      #
-      # Authentication is npm Trusted Publishing (OIDC via id-token: write), so
-      # no long-lived token is stored. NODE_AUTH_TOKEN is only consulted if
-      # Trusted Publishing has not been configured for a package yet.
-      - name: Create release PR or publish
-        uses: changesets/action@v1
-        with:
-          version: npm run version-packages
-          publish: npm run release
-          commit: 'chore: version packages'
-          title: 'chore: version packages'
+      - name: Publish
+        run: npm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Only consulted when Trusted Publishing has not been configured for
+          # a package yet.
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
