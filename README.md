@@ -22,7 +22,31 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 @import "@cloudensis/design-system/index.css";
 ```
 
-フォント・トークン・記事用スタイルの定義に加えて、コンポーネントが使用しているクラスの収集設定（`@source`）もこのファイルに含まれているため、利用側での追加設定は不要です。
+フォント・トークン・既定のスタイル・記事用スタイルの定義に加えて、コンポーネントが使用しているクラスの収集設定（`@source`）もこのファイルに含まれているため、利用側での追加設定は不要です。
+
+## 既定のスタイル
+
+`body` には次のスタイルが既定で適用されます。利用側で `bg-neutral-100` や `text-neutral-600`、`font-light` のようなクラスを指定する必要はありません。
+
+```css
+body {
+	background-color: var(--color-bg); /* neutral-100 */
+	color: var(--color-fg); /* neutral-600 */
+	font-weight: var(--font-weight-light); /* 300 */
+}
+```
+
+`@layer base` で定義しているため、ユーティリティクラス（`bg-*` / `text-*` / `font-*`）を指定すればいつでも上書きできます。配色をまとめて変えたい場合は、利用側の `@theme` で `--color-bg` / `--color-fg` を上書きしてください。
+
+```css
+@import "tailwindcss";
+@import "@cloudensis/design-system/index.css";
+
+@theme {
+	--color-bg: #ffffff;
+	--color-fg: #171717;
+}
+```
 
 ## フォント
 
@@ -36,7 +60,9 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 
 Tailwind CSS v4 は `--default-font-family` として `--font-sans` を参照するため、この定義だけで既定のフォントに反映されます。欧文・数字は Outfit で描画され、Outfit が字形を持たない和文は Noto Sans JP に落ちます。
 
-webfont を利用側で読み込みたい場合（`next/font` を使う、フォントを差し替えるなど）は、`index.css` の代わりに `tokens.css` と `prose.css` を個別に読み込み、`@source` を自分で指定してください。
+本文の文字の太さはライト（300）が既定です。太さを変えたい要素には `font-normal` などのユーティリティクラスを指定してください。
+
+webfont を利用側で読み込みたい場合（`next/font` を使う、フォントを差し替えるなど）は、`index.css` の代わりに `tokens.css` と `base.css` と `prose.css` を個別に読み込み、`@source` を自分で指定してください。
 
 ## 使い方
 
@@ -68,6 +94,7 @@ import { Textarea } from "@cloudensis/design-system/components/ui/textarea";
 | `@cloudensis/design-system/index.css` | 下記をまとめたエントリ（通常はこれを読み込む） |
 | `@cloudensis/design-system/fonts.css` | Outfit / Noto Sans JP の `@font-face` 定義 |
 | `@cloudensis/design-system/tokens.css` | `@theme` によるトークン定義 |
+| `@cloudensis/design-system/base.css` | `body` の既定のスタイル（配色・文字の太さ） |
 | `@cloudensis/design-system/prose.css` | 記事本文用のスタイル |
 | `@cloudensis/design-system/components/ui/button` | `Button` / `LinkButton` |
 | `@cloudensis/design-system/components/ui/input` | `Input`（`type` に応じてチェックボックス・ラジオにも対応） |

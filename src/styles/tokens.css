@@ -1,10 +1,10 @@
 /* 色・余白・タイポグラフィなどの共通トークンを定義します。
    @theme で定義することで CSS 変数とユーティリティクラスの両方が利用できます。 */
 @theme {
-	--color-fg: #171717;
-	--color-fg-muted: #737373;
-	--color-bg: #ffffff;
-	--color-border: #e5e5e5;
+	--color-fg: #525252; /* neutral-600 */
+	--color-fg-muted: #737373; /* neutral-500 */
+	--color-bg: #f5f5f5; /* neutral-100 */
+	--color-border: #e5e5e5; /* neutral-200 */
 
 	--font-sans:
 		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,

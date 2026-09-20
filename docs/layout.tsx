@@ -22,7 +22,7 @@ export function Layout({ title, children }: LayoutProps) {
 					<title>{title} | Cloudensis Design System</title>
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
-				<body class="bg-bg text-fg">
+				<body>
 					<div class="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
 						<header class="flex flex-col gap-4 border-border border-b pb-6">
 							<a href="/" class="font-bold text-lg">
