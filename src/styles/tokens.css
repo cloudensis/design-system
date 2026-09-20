@@ -1,0 +1,8 @@
+/* 色・余白・タイポグラフィなどの共通トークンを定義します。
+   @theme で定義することで CSS 変数とユーティリティクラスの両方が利用できます。 */
+@theme {
+	--color-fg: #171717;
+	--color-fg-muted: #737373;
+	--color-bg: #ffffff;
+	--color-border: #e5e5e5;
+}

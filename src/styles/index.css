@@ -1,0 +1,12 @@
+/* 利用側はこのファイルを 1 つ読み込むだけで、トークン・記事用スタイル・
+   コンポーネントのクラス収集がまとめて有効になります。
+
+   @import "tailwindcss";
+   @import "@cloudensis/design-system/index.css"; */
+@import "./tokens.css";
+@import "./prose.css";
+
+/* コンポーネントで使用している Tailwind のクラスを収集対象に加えます。
+   パスはこのファイルからの相対で解決されるため、node_modules に配置された
+   あとも機能します。削除するとコンポーネントのスタイルが出力されません。 */
+@source "../components";
