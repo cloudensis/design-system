@@ -1,6 +1,6 @@
 {
 	"name": "@cloudensis/design-system",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "cloudensis で利用する CSS トークン・記事用スタイル・コンポーネント",
 	"license": "MIT",
 	"repository": {
@@ -16,6 +16,7 @@
 	],
 	"exports": {
 		"./index.css": "./dist/styles/index.css",
+		"./fonts.css": "./dist/styles/fonts.css",
 		"./tokens.css": "./dist/styles/tokens.css",
 		"./prose.css": "./dist/styles/prose.css",
 		"./*": {
@@ -44,6 +45,8 @@
 		"tailwindcss": "^4.3.3"
 	},
 	"dependencies": {
+		"@fontsource-variable/noto-sans-jp": "^5.3.0",
+		"@fontsource-variable/outfit": "^5.3.0",
 		"clsx": "^2.1.1",
 		"tailwind-merge": "^3.7.0"
 	},
