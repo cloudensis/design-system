@@ -48,15 +48,6 @@ export function Layout({ title, children }: LayoutProps) {
 	);
 }
 
-export function Section({ title, children }: LayoutProps) {
-	return (
-		<section class="flex flex-col gap-4">
-			<h2 class="font-bold text-xl">{title}</h2>
-			{children}
-		</section>
-	);
-}
-
 export function Code({ children }: PropsWithChildren) {
 	return (
 		<pre class="overflow-x-auto rounded border border-border bg-neutral-50 p-4 text-sm">

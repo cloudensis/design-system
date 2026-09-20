@@ -1,12 +1,12 @@
 import { Hono } from "hono";
-import { Section as LayoutSection } from "#/src/components/layout/section";
-import { Button, LinkButton } from "#/src/components/ui/button";
-import { DescriptionList } from "#/src/components/ui/description-list";
-import { Input } from "#/src/components/ui/input";
-import { Select } from "#/src/components/ui/select";
-import { Textarea } from "#/src/components/ui/textarea";
-import tokensCss from "#/src/styles/tokens.css?raw";
-import { Code, Layout, Section } from "./layout.tsx";
+import { Section } from "../src/components/layout/section.tsx";
+import { Button, LinkButton } from "../src/components/ui/button.tsx";
+import { DescriptionList } from "../src/components/ui/description-list.tsx";
+import { Input } from "../src/components/ui/input.tsx";
+import { Select } from "../src/components/ui/select.tsx";
+import { Textarea } from "../src/components/ui/textarea.tsx";
+import tokensCss from "../src/styles/tokens.css?raw";
+import { Code, Layout } from "./layout.tsx";
 
 const tokens = [...tokensCss.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(
 	([, name, value]) => ({ name, value: value.trim().replace(/\s+/g, " ") }),
@@ -160,9 +160,9 @@ app.get("/components", (c) =>
 			<Section title="Section">
 				<p>見出し付きのセクションです。id を渡すとページ内リンクになります。</p>
 				<div class="rounded border border-border p-6">
-					<LayoutSection id="sample-section" title="セクションの見出し">
+					<Section id="sample-section" title="セクションの見出し">
 						<p>セクションの本文です。</p>
-					</LayoutSection>
+					</Section>
 				</div>
 				<Code>{`<Section id="services" title="事業内容">...</Section>`}</Code>
 			</Section>

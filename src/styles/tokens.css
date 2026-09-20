@@ -6,10 +6,6 @@
 	--color-bg: #ffffff;
 	--color-border: #e5e5e5;
 
-	/* 欧文は Outfit、和文は Outfit に含まれない字形として Noto Sans JP に落ちます。
-	   webfont の実体は fonts.css で読み込みます。Tailwind v4 は --font-sans を
-	   --default-font-family として参照するため、この定義だけで既定のフォントに
-	   反映されます。 */
 	--font-sans:
 		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
 		sans-serif;

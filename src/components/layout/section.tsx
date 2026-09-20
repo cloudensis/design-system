@@ -1,5 +1,4 @@
 import type { Child } from "hono/jsx";
-import { cn } from "../../lib/utils.ts";
 
 type SectionProps = {
 	id?: string;
@@ -15,9 +14,9 @@ export function Section({
 	children,
 }: SectionProps) {
 	return (
-		<section data-slot="section" id={id} class={cn(className)}>
+		<section data-slot="section" id={id} class={className}>
 			<h2 class="mb-4 font-medium text-xl">{title}</h2>
-			<div>{children}</div>
+			{children}
 		</section>
 	);
 }
