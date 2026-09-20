@@ -28,7 +28,15 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 
 ```tsx
 import { Button, LinkButton } from "@cloudensis/design-system/components/ui/button";
+import { Input } from "@cloudensis/design-system/components/ui/input";
+import { Select } from "@cloudensis/design-system/components/ui/select";
+import { Textarea } from "@cloudensis/design-system/components/ui/textarea";
 
+<Input id="email" name="email" type="email" required />
+<Select name="type">
+	<option value="">選択してください</option>
+</Select>
+<Textarea name="message" rows={4} />
 <Button type="submit">送信</Button>
 <LinkButton href="/">リンク</LinkButton>
 ```
@@ -47,6 +55,11 @@ import { Button, LinkButton } from "@cloudensis/design-system/components/ui/butt
 | `@cloudensis/design-system/tokens.css` | `@theme` によるトークン定義 |
 | `@cloudensis/design-system/prose.css` | 記事本文用のスタイル |
 | `@cloudensis/design-system/components/ui/button` | `Button` / `LinkButton` |
+| `@cloudensis/design-system/components/ui/input` | `Input`（`type` に応じてチェックボックス・ラジオにも対応） |
+| `@cloudensis/design-system/components/ui/select` | `Select` |
+| `@cloudensis/design-system/components/ui/textarea` | `Textarea` |
+| `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
+| `@cloudensis/design-system/components/layout/section` | `Section` |
 | `@cloudensis/design-system/lib/utils` | `cn` |
 
 ## 開発
