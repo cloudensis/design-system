@@ -2,5 +2,11 @@
 	"name": "@cloudensis/design-system",
 	"private": true,
 	"type": "module",
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.14",
+		"hono": "^4.13.8",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.0"
+	}
 }
