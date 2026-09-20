@@ -46,6 +46,15 @@ Preflight 込みの Tailwind をビルドした CSS（`public/tailwind-preflight
 `disabled` の切り替えで有効・無効にします。
 prose がリセットの有無に依存しないことを、1つの Storybook 上で比較できます。
 
+この CSS は生成物なので gitignore しています。`dev` / `build` の先頭で
+`build:tailwind` を明示的に実行しており、暗黙の `pre` ライフサイクルフックには
+依存していません（npm のバージョンや起動方法、`--ignore-scripts` に左右されないため）。
+
+`public/` には `.gitkeep` を置いています。Storybook の `staticDirs` は対象ディレクトリが
+存在しないとエラーで落ちるため、生成物しか入らないこのディレクトリを git に残す必要があります。
+これが無いと、クローン直後に `storybook dev` が
+`Failed to load static files, no such directory: ./public` で起動できません。
+
 ## レイヤ順
 
 `.storybook/preview-head.html` の inline `<style>` が最初にレイヤ順を宣言します。

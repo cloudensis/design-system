@@ -1,0 +1,6 @@
+# Keeps this directory in git.
+#
+# Storybook's `staticDirs` fails hard when a listed directory is missing, and
+# the only thing that ever lands here - tailwind-preflight.css - is generated
+# and gitignored. Without a tracked file a fresh clone has no `public/` at all,
+# and `storybook dev` dies before it starts.
