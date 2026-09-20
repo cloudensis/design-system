@@ -16,11 +16,23 @@
 			}
 		}
 	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
 	"assist": {
 		"enabled": true
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["**", "!.claude", "!node_modules"]
+		"includes": [
+			"**",
+			"!.claude",
+			"!node_modules",
+			"!dist",
+			"!docs-dist",
+			"!.wrangler"
+		]
 	}
 }

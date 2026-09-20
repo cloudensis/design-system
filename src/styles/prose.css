@@ -1,0 +1,22 @@
+/* 記事本文用のスタイル。本文を囲む要素に .prose を付与して使用します */
+.prose {
+	color: var(--color-fg);
+	line-height: 1.8;
+}
+
+.prose :where(h2) {
+	margin-block: 2em 0.75em;
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.prose :where(p) {
+	margin-block: 1em;
+}
+
+.prose :where(a) {
+	color: var(--color-fg);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}

@@ -3,16 +3,47 @@
 	"private": true,
 	"type": "module",
 	"license": "MIT",
+	"files": [
+		"dist"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"exports": {
+		"./index.css": "./dist/styles/index.css",
+		"./tokens.css": "./dist/styles/tokens.css",
+		"./prose.css": "./dist/styles/prose.css",
+		"./*": {
+			"types": "./dist/*.d.ts",
+			"default": "./dist/*.js"
+		}
+	},
 	"scripts": {
+		"clean": "rm -rf dist",
+		"build": "npm run clean && npm run build:js && npm run build:css",
+		"build:js": "tsc -p tsconfig.build.json",
+		"build:css": "node scripts/copy-css.js",
+		"dev": "vite",
+		"build:docs": "vite build",
+		"preview:docs": "vite preview",
+		"deploy:docs": "npm run build:docs && wrangler deploy -c docs-dist/cloudensis_design_system_docs/wrangler.json",
 		"typecheck": "tsc --noEmit",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe"
 	},
+	"peerDependencies": {
+		"hono": "^4.13.8",
+		"tailwindcss": "^4.3.3"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.14",
+		"@cloudflare/vite-plugin": "^1.54.11",
+		"@tailwindcss/vite": "^4.3.3",
 		"hono": "^4.13.8",
+		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
-		"vite": "^8.3.0"
+		"vite": "^8.3.0",
+		"wrangler": "^4.133.0"
 	},
 	"imports": {
 		"#/*": [
@@ -20,5 +51,9 @@
 			"./*.tsx",
 			"./*"
 		]
+	},
+	"dependencies": {
+		"clsx": "^2.1.1",
+		"tailwind-merge": "^3.7.0"
 	}
 }
