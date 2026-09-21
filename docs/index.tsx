@@ -1,4 +1,6 @@
 import { Hono } from "hono";
+import { Footer } from "../src/components/layout/footer.tsx";
+import { Header } from "../src/components/layout/header.tsx";
 import { Section } from "../src/components/layout/section.tsx";
 import { Button, LinkButton } from "../src/components/ui/button.tsx";
 import { CodeBlock } from "../src/components/ui/code-block.tsx";
@@ -311,6 +313,42 @@ app.get("/components", (c) =>
 					</Section>
 				</div>
 				<CodeBlock lang="tsx">{`<Section id="services" title="事業内容">...</Section>`}</CodeBlock>
+			</Section>
+			<Section title="Header">
+				<p>
+					サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
+					を右（ナビゲーションやボタンなど）に並べます。
+				</p>
+				<div class="rounded border border-border">
+					<Header
+						homeHref="/"
+						logo={
+							<span
+								class="inline-block size-6 rounded bg-accent"
+								aria-hidden="true"
+							/>
+						}
+						brand="cloudensis"
+					/>
+				</div>
+				<CodeBlock lang="tsx">
+					{`<Header homeHref="/" logo={<img src="/logo.svg" alt="" />} brand="cloudensis">\n\t<nav>...</nav>\n</Header>`}
+				</CodeBlock>
+			</Section>
+			<Section title="Footer">
+				<p>
+					サイト共通のフッターです。コピーライト表記を左に、links （または
+					children）を右に並べます。
+				</p>
+				<div class="rounded border border-border">
+					<Footer
+						copyrightHolder="cloudensis"
+						links={[{ href: "/privacy", label: "プライバシーポリシー" }]}
+					/>
+				</div>
+				<CodeBlock lang="tsx">
+					{`<Footer\n\tcopyrightHolder={company.name}\n\tlinks={[{ href: "/privacy", label: "プライバシーポリシー" }]}\n/>`}
+				</CodeBlock>
 			</Section>
 		</Layout>,
 	),

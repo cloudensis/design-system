@@ -201,6 +201,24 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 
 コピーのためのクライアント JavaScript は読み込みません。そのため SSG で書き出した静的な HTML でもそのまま動作し、CSP でインラインスクリプトを禁止していても影響を受けません。なお `user-select: all` の性質上、コードの一部だけをドラッグで選択することはできません。
 
+## Header / Footer
+
+サイト共通のヘッダー・フッターです。ロゴや会社名、リンクなどサイトごとに異なる内容は props で渡します。
+
+```tsx
+import { Header } from "@cloudensis/design-system/components/layout/header";
+import { Footer } from "@cloudensis/design-system/components/layout/footer";
+
+<Header homeHref="/" logo={<img src="/logo.svg" alt="" />} brand="cloudensis" />
+
+<Footer
+	copyrightHolder={company.name}
+	links={[{ href: "/privacy", label: "プライバシーポリシー" }]}
+/>
+```
+
+`Header` は `children` を渡すとロゴ・ブランド名の右側に並びます（ナビゲーションやボタンなど）。`Footer` は `links` の代わりに `children` を渡すと、コピーライト表記の右側を自由な内容に差し替えられます。
+
 ## エントリ一覧
 
 | import | 内容 |
@@ -218,6 +236,8 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `@cloudensis/design-system/components/ui/tooltip` | `Tooltip` |
 | `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
 | `@cloudensis/design-system/components/layout/section` | `Section` |
+| `@cloudensis/design-system/components/layout/header` | `Header` |
+| `@cloudensis/design-system/components/layout/footer` | `Footer` |
 | `@cloudensis/design-system/components/icon/copy` | `CopyIcon` |
 | `@cloudensis/design-system/lib/highlight` | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
 | `@cloudensis/design-system/lib/utils` | `cn` |
