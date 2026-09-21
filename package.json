@@ -1,6 +1,6 @@
 {
 	"name": "@cloudensis/design-system",
-	"version": "0.7.0",
+	"version": "0.8.0",
 	"description": "cloudensis で利用する CSS トークン・記事用スタイル・コンポーネント",
 	"license": "MIT",
 	"repository": {
