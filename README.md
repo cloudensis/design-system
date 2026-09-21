@@ -106,7 +106,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 <Textarea name="message" rows={4} />
 <Button type="submit">送信</Button>
 <LinkButton href="/">リンク</LinkButton>
-<CodeBlock>{`npm install`}</CodeBlock>
+<CodeBlock lang="sh">{`npm install`}</CodeBlock>
 ```
 
 記事本文には `.prose` を付与します。
@@ -114,6 +114,32 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 ```tsx
 <article class="prose">...</article>
 ```
+
+## CodeBlock
+
+`lang` を渡すとシンタックスハイライトが付きます。省略した場合はハイライトせずそのまま表示します。
+
+```tsx
+<CodeBlock lang="tsx">{code}</CodeBlock>
+<CodeBlock>{code}</CodeBlock>
+```
+
+ハイライトには [Shiki](https://shiki.style/) を使用しています。文法とテーマをパッケージに同梱した同期版のハイライターを使うため、`await` は不要で、SSG・SSR・CSR のいずれからでも同じように呼び出せます。正規表現エンジンは WASM を必要としない JavaScript 実装を選んでいるので、Cloudflare Workers やブラウザでもそのまま動作します。
+
+同梱している文法は次のとおりです。ここにない言語を `lang` に渡すことはできません（型で弾かれます）。
+
+| `lang` に渡せる値 | 文法 |
+| --- | --- |
+| `css` | CSS |
+| `html` | HTML |
+| `javascript` / `js` | JavaScript |
+| `json` / `jsonc` | JSON |
+| `markdown` / `md` | Markdown |
+| `shellscript` / `sh` / `bash` / `shell` / `zsh` | Shell |
+| `tsx` / `ts` / `typescript` / `jsx` | TypeScript / TSX |
+| `yaml` / `yml` | YAML |
+
+右上にはコピーボタンが付きます。動作に必要なスクリプトはコンポーネントが自身で出力するため、利用側での設置は不要です。クリップボードへの書き込みには `navigator.clipboard` を使うので、ブラウザの制約により https（または localhost）でのみ動作します。スクリプトはインラインで出力されるため、CSP を設定している場合は `script-src` に `'unsafe-inline'` かハッシュの許可が必要です。
 
 ## エントリ一覧
 
@@ -131,6 +157,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `@cloudensis/design-system/components/ui/textarea` | `Textarea` |
 | `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
 | `@cloudensis/design-system/components/layout/section` | `Section` |
+| `@cloudensis/design-system/lib/highlight` | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
 | `@cloudensis/design-system/lib/utils` | `cn` |
 
 ## 開発
