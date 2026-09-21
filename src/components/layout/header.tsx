@@ -6,10 +6,8 @@ type HeaderProps = {
 	class?: string;
 	/** ロゴ／ブランド名をクリックした際の遷移先。 */
 	homeHref?: string;
-	/** ブランド名の左に置くロゴ。省略すると LogoIcon になります。 */
-	logo?: Child;
-	/** ブランド名。 */
-	brand: Child;
+	/** ロゴの右に表示するブランド名。 */
+	title: Child;
 	/** 右側に置くナビゲーションやボタンなど。 */
 	children?: Child;
 };
@@ -20,8 +18,7 @@ type HeaderProps = {
 export function Header({
 	class: className,
 	homeHref = "/",
-	logo = <LogoIcon />,
-	brand,
+	title,
 	children,
 }: HeaderProps) {
 	return (
@@ -29,9 +26,11 @@ export function Header({
 			data-slot="header"
 			class={cn("flex items-center justify-between p-4 lg:px-8", className)}
 		>
-			<a href={homeHref} class="flex items-baseline gap-3 text-accent">
-				{logo}
-				<span class="font-extralight text-3xl tracking-wider">{brand}</span>
+			<a href={homeHref} class="flex items-baseline gap-2 text-accent lg:gap-3">
+				<LogoIcon class="h-4 lg:h-6" />
+				<span class="font-extralight text-xl tracking-wider lg:text-3xl">
+					{title}
+				</span>
 			</a>
 			{children}
 		</header>

@@ -67,7 +67,7 @@ export function Layout({
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
 				<body class="flex min-h-svh flex-col">
-					<Header brand="cloudensis"></Header>
+					<Header title="cloudensis"></Header>
 
 					<main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 lg:px-8">
 						<nav class="flex flex-wrap gap-4 pb-8 text-sm">
