@@ -85,7 +85,6 @@ const app = new Hono();
 app.get("/", (c) =>
 	c.html(
 		<Layout
-			title="概要"
 			description="cloudensis のデザインシステムの導入方法と、既定で適用されるスタイル。"
 			url={c.req.url}
 		>
