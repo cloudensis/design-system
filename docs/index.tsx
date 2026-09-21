@@ -333,10 +333,10 @@ app.get("/components", (c) =>
 						LogoIcon（cloudensis のロゴマーク）になります。
 					</p>
 					<div class="rounded border border-border">
-						<Header homeHref="/" brand="cloudensis" />
+						<Header homeHref="/" title="cloudensis" />
 					</div>
 					<CodeBlock lang="tsx">
-						{`<Header homeHref="/" brand="cloudensis">\n\t<nav>...</nav>\n</Header>`}
+						{`<Header homeHref="/" title="cloudensis">\n\t<nav>...</nav>\n</Header>`}
 					</CodeBlock>
 				</Section>
 				<Section title="Footer">

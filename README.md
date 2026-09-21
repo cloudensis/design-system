@@ -28,21 +28,21 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 
 色と文字の太さはセマンティックな名前のトークンで定義しています。値はこのパッケージが所有しており、Tailwind の既定パレットは参照していません。コンポーネントも `neutral-*` のような生のパレットは使わず、すべてこのトークン経由で配色しています。
 
-| トークン | 値 | 用途 |
-| --- | --- | --- |
-| `--color-fg` | `#525252` | 本文の文字色 |
-| `--color-fg-muted` | `#737373` | 補助的な文字色 |
-| `--color-bg` | `#f5f5f5` | ページの背景 |
-| `--color-surface` | `#fafafa` | カードなど、背景の上に置く面 |
-| `--color-border` | `#e5e5e5` | 区切り線・入力欄の枠線 |
-| `--color-accent` | `#262626` | ボタンなど主要な操作の塗り |
-| `--color-accent-hover` | `#404040` | その hover |
-| `--color-accent-fg` | `#ffffff` | アクセント色の上に置く文字色 |
-| `--color-code-bg` | `#121212` | コードブロックの背景 |
-| `--color-code-fg` | `#dbd7ca` | コードブロックの文字色 |
-| `--color-code-border` | `#2c2c2c` | コードブロックの枠線 |
-| `--font-weight-base` | `300` | 本文の太さ |
-| `--font-weight-strong` | `500` | `b` / `strong` の太さ |
+| トークン               | 値        | 用途                         |
+| ---------------------- | --------- | ---------------------------- |
+| `--color-fg`           | `#525252` | 本文の文字色                 |
+| `--color-fg-muted`     | `#737373` | 補助的な文字色               |
+| `--color-bg`           | `#f5f5f5` | ページの背景                 |
+| `--color-surface`      | `#fafafa` | カードなど、背景の上に置く面 |
+| `--color-border`       | `#e5e5e5` | 区切り線・入力欄の枠線       |
+| `--color-accent`       | `#262626` | ボタンなど主要な操作の塗り   |
+| `--color-accent-hover` | `#404040` | その hover                   |
+| `--color-accent-fg`    | `#ffffff` | アクセント色の上に置く文字色 |
+| `--color-code-bg`      | `#121212` | コードブロックの背景         |
+| `--color-code-fg`      | `#dbd7ca` | コードブロックの文字色       |
+| `--color-code-border`  | `#2c2c2c` | コードブロックの枠線         |
+| `--font-weight-base`   | `300`     | 本文の太さ                   |
+| `--font-weight-strong` | `500`     | `b` / `strong` の太さ        |
 
 いずれも `bg-accent` や `text-fg-muted`、`font-strong` のようなユーティリティクラスとして利用できます。
 
@@ -52,14 +52,14 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 
 ```css
 body {
-	background-color: var(--color-bg);
-	color: var(--color-fg);
-	font-weight: var(--font-weight-base); /* 300 */
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-weight: var(--font-weight-base); /* 300 */
 }
 
 b,
 strong {
-	font-weight: var(--font-weight-strong); /* 500 */
+  font-weight: var(--font-weight-strong); /* 500 */
 }
 ```
 
@@ -72,8 +72,8 @@ strong {
 @import "@cloudensis/design-system/index.css";
 
 @theme {
-	--color-bg: #ffffff;
-	--color-fg: #171717;
+  --color-bg: #ffffff;
+  --color-fg: #171717;
 }
 ```
 
@@ -84,7 +84,9 @@ strong {
 フォントの指定は `--font-sans` トークン 1 つにまとまっています。
 
 ```css
---font-sans: "Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui, sans-serif;
+--font-sans:
+  "Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
+  sans-serif;
 ```
 
 Tailwind CSS v4 は `--default-font-family` として `--font-sans` を参照するため、この定義だけで既定のフォントに反映されます。欧文・数字は Outfit で描画され、Outfit が字形を持たない和文は Noto Sans JP に落ちます。
@@ -122,35 +124,53 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 
 `.prose` を付けた要素の中では、記事に現れる HTML タグに本文向けのスタイルが当たります。対応しているタグは次のとおりです。
 
-| 分類 | タグ |
-| --- | --- |
-| 見出し | `h1` / `h2` / `h3` / `h4` / `h5` / `h6` |
-| 段落・区切り | `p` / `br` / `hr` |
-| リスト | `ul` / `ol` / `li` |
-| 定義リスト | `dl` / `dt` / `dd` |
-| 引用 | `blockquote` / `q` / `cite` |
-| コード | `pre` / `code` / `samp` / `kbd` / `var` |
-| 表 | `table` / `caption` / `thead` / `tbody` / `tfoot` / `tr` / `th` / `td` |
-| 図版 | `figure` / `figcaption` / `img` / `picture` / `video` / `svg` |
+| 分類           | タグ                                                                                                              |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 見出し         | `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                                                                           |
+| 段落・区切り   | `p` / `br` / `hr`                                                                                                 |
+| リスト         | `ul` / `ol` / `li`                                                                                                |
+| 定義リスト     | `dl` / `dt` / `dd`                                                                                                |
+| 引用           | `blockquote` / `q` / `cite`                                                                                       |
+| コード         | `pre` / `code` / `samp` / `kbd` / `var`                                                                           |
+| 表             | `table` / `caption` / `thead` / `tbody` / `tfoot` / `tr` / `th` / `td`                                            |
+| 図版           | `figure` / `figcaption` / `img` / `picture` / `video` / `svg`                                                     |
 | テキストレベル | `a` / `strong` / `b` / `em` / `i` / `mark` / `small` / `del` / `ins` / `s` / `u` / `sub` / `sup` / `abbr` / `dfn` |
-| 開閉 | `details` / `summary` |
+| 開閉           | `details` / `summary`                                                                                             |
 
 ブロックの余白は下方向にだけ持たせています。隣接する `margin` の相殺に頼らないため、`.prose` を flex や grid の中に置いてもブロック同士の間隔は変わりません。見出しと `hr` の手前だけは例外で、直前のブロックの下余白を `:has()` で広げて距離を取ります。見出し側に上余白を持たせないので、余白が二重になりません。コンテナの先頭と末尾の余白は打ち消しているため、`.prose` を付けた要素に `padding` を与えても上下だけ広く見えることはありません。
 
 ```css
 /* ブロックの余白は下方向にだけ持たせる */
-.prose :where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, pre, blockquote, figure, table, details, hr) {
-	margin-block: 0 1.25em;
+.prose
+  :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    dl,
+    pre,
+    blockquote,
+    figure,
+    table,
+    details,
+    hr
+  ) {
+  margin-block: 0 1.25em;
 }
 
 /* 見出しは続く本文と近づける */
 .prose :where(h1, h2, h3, h4, h5, h6) {
-	margin-block-end: 0.75em;
+  margin-block-end: 0.75em;
 }
 
 /* 見出しと hr の手前は、直前のブロックの下余白を広げて距離を取る */
 .prose :where(:has(+ :is(h1, h2, h3, h4, h5, h6, hr))) {
-	margin-block-end: 2.5em;
+  margin-block-end: 2.5em;
 }
 ```
 
@@ -186,16 +206,16 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 
 同梱している文法は次のとおりです。ここにない言語を `lang` に渡すことはできません（型で弾かれます）。
 
-| `lang` に渡せる値 | 文法 |
-| --- | --- |
-| `css` | CSS |
-| `html` | HTML |
-| `javascript` / `js` | JavaScript |
-| `json` / `jsonc` | JSON |
-| `markdown` / `md` | Markdown |
-| `shellscript` / `sh` / `bash` / `shell` / `zsh` | Shell |
-| `tsx` / `ts` / `typescript` / `jsx` | TypeScript / TSX |
-| `yaml` / `yml` | YAML |
+| `lang` に渡せる値                               | 文法             |
+| ----------------------------------------------- | ---------------- |
+| `css`                                           | CSS              |
+| `html`                                          | HTML             |
+| `javascript` / `js`                             | JavaScript       |
+| `json` / `jsonc`                                | JSON             |
+| `markdown` / `md`                               | Markdown         |
+| `shellscript` / `sh` / `bash` / `shell` / `zsh` | Shell            |
+| `tsx` / `ts` / `typescript` / `jsx`             | TypeScript / TSX |
+| `yaml` / `yml`                                  | YAML             |
 
 コードには [`user-select: all`](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を指定しています。クリック 1 回でコード全体が選択されるので、あとは Ctrl / Cmd + C でコピーできます。その操作はホバー（とフォーカス）時のツールチップで案内します。
 
@@ -209,7 +229,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 import { Header } from "@cloudensis/design-system/components/layout/header";
 import { Footer } from "@cloudensis/design-system/components/layout/footer";
 
-<Header homeHref="/" brand="cloudensis" />
+<Header homeHref="/" title="cloudensis" />
 
 <Footer
 	copyrightHolder={company.name}
@@ -221,37 +241,37 @@ import { Footer } from "@cloudensis/design-system/components/layout/footer";
 
 ## エントリ一覧
 
-| import | 内容 |
-| --- | --- |
-| `@cloudensis/design-system/index.css` | 下記をまとめたエントリ（通常はこれを読み込む） |
-| `@cloudensis/design-system/fonts.css` | Outfit / Noto Sans JP の `@font-face` 定義 |
-| `@cloudensis/design-system/tokens.css` | `@theme` によるトークン定義 |
-| `@cloudensis/design-system/base.css` | `body` の既定のスタイル（配色・文字の太さ） |
-| `@cloudensis/design-system/prose.css` | 記事本文用のスタイル |
-| `@cloudensis/design-system/components/ui/button` | `Button` / `LinkButton` |
-| `@cloudensis/design-system/components/ui/code-block` | `CodeBlock` |
-| `@cloudensis/design-system/components/ui/input` | `Input`（`type` に応じてチェックボックス・ラジオにも対応） |
-| `@cloudensis/design-system/components/ui/select` | `Select` |
-| `@cloudensis/design-system/components/ui/textarea` | `Textarea` |
-| `@cloudensis/design-system/components/ui/tooltip` | `Tooltip` |
-| `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
-| `@cloudensis/design-system/components/layout/section` | `Section` |
-| `@cloudensis/design-system/components/layout/header` | `Header` |
-| `@cloudensis/design-system/components/layout/footer` | `Footer` |
-| `@cloudensis/design-system/components/icon/copy` | `CopyIcon` |
-| `@cloudensis/design-system/components/icon/logo` | `LogoIcon` |
-| `@cloudensis/design-system/lib/highlight` | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
-| `@cloudensis/design-system/lib/utils` | `cn` |
+| import                                                     | 内容                                                         |
+| ---------------------------------------------------------- | ------------------------------------------------------------ |
+| `@cloudensis/design-system/index.css`                      | 下記をまとめたエントリ（通常はこれを読み込む）               |
+| `@cloudensis/design-system/fonts.css`                      | Outfit / Noto Sans JP の `@font-face` 定義                   |
+| `@cloudensis/design-system/tokens.css`                     | `@theme` によるトークン定義                                  |
+| `@cloudensis/design-system/base.css`                       | `body` の既定のスタイル（配色・文字の太さ）                  |
+| `@cloudensis/design-system/prose.css`                      | 記事本文用のスタイル                                         |
+| `@cloudensis/design-system/components/ui/button`           | `Button` / `LinkButton`                                      |
+| `@cloudensis/design-system/components/ui/code-block`       | `CodeBlock`                                                  |
+| `@cloudensis/design-system/components/ui/input`            | `Input`（`type` に応じてチェックボックス・ラジオにも対応）   |
+| `@cloudensis/design-system/components/ui/select`           | `Select`                                                     |
+| `@cloudensis/design-system/components/ui/textarea`         | `Textarea`                                                   |
+| `@cloudensis/design-system/components/ui/tooltip`          | `Tooltip`                                                    |
+| `@cloudensis/design-system/components/ui/description-list` | `DescriptionList`                                            |
+| `@cloudensis/design-system/components/layout/section`      | `Section`                                                    |
+| `@cloudensis/design-system/components/layout/header`       | `Header`                                                     |
+| `@cloudensis/design-system/components/layout/footer`       | `Footer`                                                     |
+| `@cloudensis/design-system/components/icon/copy`           | `CopyIcon`                                                   |
+| `@cloudensis/design-system/components/icon/logo`           | `LogoIcon`                                                   |
+| `@cloudensis/design-system/lib/highlight`                  | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
+| `@cloudensis/design-system/lib/utils`                      | `cn`                                                         |
 
 ## 開発
 
-| script | 内容 |
-| --- | --- |
-| `npm run dev` | ドキュメントサイトの開発サーバー |
-| `npm run build` | 配布物を `dist/` にビルド |
-| `npm run build:docs` | ドキュメントサイトをビルド |
-| `npm run deploy:docs` | ドキュメントサイトを Cloudflare Workers にデプロイ |
-| `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック |
+| script                                                  | 内容                                               |
+| ------------------------------------------------------- | -------------------------------------------------- |
+| `npm run dev`                                           | ドキュメントサイトの開発サーバー                   |
+| `npm run build`                                         | 配布物を `dist/` にビルド                          |
+| `npm run build:docs`                                    | ドキュメントサイトをビルド                         |
+| `npm run deploy:docs`                                   | ドキュメントサイトを Cloudflare Workers にデプロイ |
+| `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                       |
 
 ## ドキュメントサイト
 
