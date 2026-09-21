@@ -32,11 +32,63 @@ const sampleCss = `@import "tailwindcss";
 	--color-fg: #171717;
 }`;
 
+const proseSpacingCss = `/* ブロックの余白は下方向にだけ持たせる */
+.prose :where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, pre, blockquote, figure, table, details, hr) {
+	margin-block: 0 1.25em;
+}
+
+/* 見出しは続く本文と近づける */
+.prose :where(h1, h2, h3, h4, h5, h6) {
+	margin-block-end: 0.75em;
+}
+
+/* 見出しと hr の手前は、直前のブロックの下余白を広げて距離を取る */
+.prose :where(:has(+ :is(h1, h2, h3, h4, h5, h6, hr))) {
+	margin-block-end: 2.5em;
+}`;
+
+const samplePreCode = `npm install @cloudensis/design-system
+npm run dev`;
+
+const sampleProseCss = `@import "tailwindcss";
+@import "@cloudensis/design-system/index.css";
+
+.prose {
+	max-width: 42rem;
+}`;
+
+/* prose.css がスタイルを当てている HTML タグ。サンプルの並び順と対応させています。 */
+const proseElements = [
+	{ name: "見出し", tags: "h1 / h2 / h3 / h4 / h5 / h6" },
+	{ name: "段落・区切り", tags: "p / br / hr" },
+	{ name: "リスト", tags: "ul / ol / li" },
+	{ name: "定義リスト", tags: "dl / dt / dd" },
+	{ name: "引用", tags: "blockquote / q / cite" },
+	{ name: "コード", tags: "pre / code / samp / kbd / var" },
+	{
+		name: "表",
+		tags: "table / caption / thead / tbody / tfoot / tr / th / td",
+	},
+	{
+		name: "図版",
+		tags: "figure / figcaption / img / picture / video / svg",
+	},
+	{
+		name: "テキストレベル",
+		tags: "a / strong / b / em / i / mark / small / del / ins / s / u / sub / sup / abbr / dfn",
+	},
+	{ name: "開閉", tags: "details / summary" },
+];
+
 const app = new Hono();
 
 app.get("/", (c) =>
 	c.html(
-		<Layout title="概要">
+		<Layout
+			title="概要"
+			description="cloudensis のデザインシステムの導入方法と、既定で適用されるスタイル。"
+			url={c.req.url}
+		>
 			<Section title="このデザインシステムについて">
 				<p>
 					cloudensis で利用する CSS
@@ -80,7 +132,11 @@ app.get("/", (c) =>
 
 app.get("/tokens", (c) =>
 	c.html(
-		<Layout title="トークン">
+		<Layout
+			title="トークン"
+			description="配色・フォント・文字の太さを定義するデザイントークンの一覧。"
+			url={c.req.url}
+		>
 			<Section title="トークン一覧">
 				<p>
 					tokens.css の @theme で定義している値です。CSS 変数としても、 Tailwind
@@ -126,7 +182,11 @@ app.get("/tokens", (c) =>
 
 app.get("/components", (c) =>
 	c.html(
-		<Layout title="コンポーネント">
+		<Layout
+			title="コンポーネント"
+			description="Hono の JSX で実装した UI コンポーネントのカタログ。"
+			url={c.req.url}
+		>
 			<Section title="Button">
 				<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
 					<Button>ボタン</Button>
@@ -258,21 +318,227 @@ app.get("/components", (c) =>
 
 app.get("/prose", (c) =>
 	c.html(
-		<Layout title="記事スタイル">
+		<Layout
+			title="記事スタイル"
+			description="記事本文用のクラス .prose が対応している HTML タグと、ブロック間の余白の考え方。"
+			url={c.req.url}
+		>
 			<Section title="prose">
 				<p>
 					記事本文を囲む要素に .prose
-					を付与すると、本文向けのスタイルが適用されます。
+					を付与すると、本文向けのスタイルが適用されます。見出し・段落・リスト・定義リスト・引用・コード・表・図版など、記事に現れる
+					HTML タグを一通りカバーしています。
 				</p>
 				<CodeBlock lang="tsx">{`<article class="prose">...</article>`}</CodeBlock>
+				<p>
+					セレクタはすべて :where() で包んで詳細度を 0 にしたうえで @layer
+					components に置いているため、本文中の要素に Tailwind
+					のユーティリティクラスを指定すればいつでも上書きできます。 配色は
+					トークンを参照しているので、@theme
+					でトークンを差し替えると本文の見た目にもそのまま反映されます。
+				</p>
+			</Section>
+			<Section title="ブロック間の余白">
+				<p>
+					ブロックの余白は下方向にだけ持たせています。隣接する margin
+					の相殺に頼らないため、.prose を flex や grid
+					の中に置いても、ブロック同士の間隔は変わりません。
+				</p>
+				<p>
+					見出しと hr の手前だけは例外で、直前のブロックの下余白を :has()
+					で広げて距離を取ります。見出し側に上余白を持たせないので、
+					余白が二重になることがありません。
+				</p>
+				<CodeBlock lang="css">{proseSpacingCss}</CodeBlock>
+				<p>
+					コンテナの先頭と末尾の余白は打ち消しているため、.prose を付けた要素に
+					padding
+					を与えても上下だけ広く見えることはありません。このページのサンプルも、枠線と
+					padding を付けた要素に .prose を付けています。
+				</p>
+			</Section>
+			<Section title="対応している要素">
+				<p>prose.css がスタイルを当てている HTML タグの一覧です。</p>
+				<table class="w-full border-collapse text-left text-sm">
+					<thead>
+						<tr class="border-border border-b">
+							<th class="py-2 font-medium">分類</th>
+							<th class="py-2 font-medium">タグ</th>
+						</tr>
+					</thead>
+					<tbody>
+						{proseElements.map((group) => (
+							<tr key={group.name} class="border-border border-b">
+								<td class="whitespace-nowrap py-2">{group.name}</td>
+								<td class="py-2 font-mono text-fg-muted">{group.tags}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</Section>
+			<Section title="サンプル">
+				<p>
+					上の表に挙げたタグを実際に並べた記事です。余白・行間・配色の確認に使えます。
+				</p>
 				<article class="prose rounded border border-border p-6">
-					<h2>見出し</h2>
+					<h1>記事スタイルのサンプル</h1>
 					<p>
-						本文のサンプルです。行間や余白は prose.css で定義しており、
-						トークンを参照しているため配色の変更が本文にも反映されます。
+						この記事は <code>.prose</code> が扱う HTML
+						タグを一通り並べたものです。本文の中では{" "}
+						<strong>strong による強い強調</strong>や<em>em による強調</em>、
+						<a href="/tokens">a によるリンク</a>、
+						<mark>mark によるハイライト</mark>、<small>small による注記</small>
+						、<del>del で消した文</del>、<ins>ins で足した文</ins>、
+						<s>s で無効になった文</s>
+						をそのまま使えます。
 					</p>
 					<p>
-						<a href="/tokens">リンクの見た目</a>もここで確認できます。
+						略語は <abbr title="Cascading Style Sheets">CSS</abbr>{" "}
+						のように書けます。化学式は H<sub>2</sub>O、指数は E = mc
+						<sup>2</sup>。 キー操作は <kbd>Ctrl</kbd> + <kbd>C</kbd>{" "}
+						のように示します。
+						<dfn>prose</dfn> は記事本文に付けるクラスの名前です。
+						<br />
+						br で改行した行です。
+					</p>
+					<h2>見出し</h2>
+					<p>
+						h1 から h6
+						まで、サイズと余白が段階的に変わります。見出しは直前のブロックから離れ、
+						続く本文とは近づきます。
+					</p>
+					<h3>h3 の見出し</h3>
+					<p>h3 に続く本文です。</p>
+					<h4>h4 の見出し</h4>
+					<p>h4 に続く本文です。</p>
+					<h5>h5 の見出し</h5>
+					<p>h5 に続く本文です。</p>
+					<h6>h6 の見出し</h6>
+					<p>h6 に続く本文です。</p>
+					<h2>リスト</h2>
+					<ul>
+						<li>ul の項目です。</li>
+						<li>
+							入れ子にするとマーカーが disc → circle → square と変わります。
+							<ul>
+								<li>
+									2 階層目の項目
+									<ul>
+										<li>3 階層目の項目</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>項目の中には段落やコードも置けます。</li>
+					</ul>
+					<ol>
+						<li>ol の項目です。</li>
+						<li>
+							入れ子にすると decimal → lower-alpha → lower-roman と変わります。
+							<ol>
+								<li>
+									2 階層目の項目
+									<ol>
+										<li>3 階層目の項目</li>
+									</ol>
+								</li>
+							</ol>
+						</li>
+						<li>3 つ目の項目</li>
+					</ol>
+					<h3>定義リスト</h3>
+					<dl>
+						<dt>トークン</dt>
+						<dd>
+							配色やタイポグラフィの値に名前を付けたものです。tokens.css の
+							@theme で定義しています。
+						</dd>
+						<dt>prose</dt>
+						<dd>記事本文に付けるクラスの名前です。</dd>
+					</dl>
+					<h2>引用</h2>
+					<blockquote>
+						<p>
+							よいデザインは、できるだけ少ないデザインで成り立っている。
+							本質的でないものをすべて取り除けば、本質が際立つ。
+						</p>
+						<p>
+							— <cite>Dieter Rams</cite>
+						</p>
+					</blockquote>
+					<p>
+						文中の短い引用は <q>このように</q> 書きます。
+					</p>
+					<h2>コード</h2>
+					<p>
+						インラインのコードは <code>--color-fg</code> のように表示されます。
+						コマンドの出力は <samp>done</samp> のように示します。
+					</p>
+					<p>
+						pre と code を直に書いた場合は、ハイライトなしのコードブロックです。
+					</p>
+					<pre>
+						<code>{samplePreCode}</code>
+					</pre>
+					<p>
+						CodeBlock コンポーネントを使うと、同じ見た目のままハイライトと
+						クリックでの全選択が付きます。
+					</p>
+					<CodeBlock lang="css">{sampleProseCss}</CodeBlock>
+					<h2>表</h2>
+					<table>
+						<caption>エントリごとの内容</caption>
+						<thead>
+							<tr>
+								<th>import</th>
+								<th>内容</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>tokens.css</td>
+								<td>@theme によるトークン定義</td>
+							</tr>
+							<tr>
+								<td>base.css</td>
+								<td>body の既定のスタイル</td>
+							</tr>
+							<tr>
+								<td>prose.css</td>
+								<td>記事本文用のスタイル</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td>index.css</td>
+								<td>上記をまとめたエントリ</td>
+							</tr>
+						</tfoot>
+					</table>
+					<h2>図版</h2>
+					<figure>
+						<img
+							src="/logo.png"
+							alt="cloudensis のロゴ"
+							width="120"
+							height="120"
+						/>
+						<figcaption>
+							figure と figcaption。画像は max-width: 100% で枠に収まります。
+						</figcaption>
+					</figure>
+					<h2>開閉</h2>
+					<details>
+						<summary>details と summary</summary>
+						<p>
+							開いたときだけ表示される本文です。中のブロックにも同じ余白が
+							適用されます。
+						</p>
+					</details>
+					<hr />
+					<p>
+						hr
+						の下の段落です。区切り線の手前も、見出しと同じだけ余白を広げています。
 					</p>
 				</article>
 			</Section>

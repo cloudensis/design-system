@@ -31,3 +31,27 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm publish
+
+  deploy-docs:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run build:docs
+
+      # wrangler.jsonc ではなく、vite のビルドが出力する wrangler.json を指定します。
+      # 生成物（Worker のエントリと assets）へのパスが解決済みになっているためです。
+      - uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy -c docs-dist/cloudensis_design_system_docs/wrangler.json
