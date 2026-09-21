@@ -1,11 +1,12 @@
 import type { Child } from "hono/jsx";
 import { cn } from "../../lib/utils.ts";
+import { LogoIcon } from "../icon/logo.tsx";
 
 type HeaderProps = {
 	class?: string;
 	/** ロゴ／ブランド名をクリックした際の遷移先。 */
 	homeHref?: string;
-	/** ブランド名の左に置くロゴ画像など。 */
+	/** ブランド名の左に置くロゴ。省略すると LogoIcon になります。 */
 	logo?: Child;
 	/** ブランド名。 */
 	brand: Child;
@@ -19,7 +20,7 @@ type HeaderProps = {
 export function Header({
 	class: className,
 	homeHref = "/",
-	logo,
+	logo = <LogoIcon />,
 	brand,
 	children,
 }: HeaderProps) {
@@ -28,11 +29,9 @@ export function Header({
 			data-slot="header"
 			class={cn("flex items-center justify-between p-4 lg:px-8", className)}
 		>
-			<a href={homeHref} class="flex items-baseline gap-3">
+			<a href={homeHref} class="flex items-baseline gap-3 text-accent">
 				{logo}
-				<span class="font-extralight text-3xl text-accent tracking-wider">
-					{brand}
-				</span>
+				<span class="font-extralight text-3xl tracking-wider">{brand}</span>
 			</a>
 			{children}
 		</header>

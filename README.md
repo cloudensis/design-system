@@ -209,7 +209,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 import { Header } from "@cloudensis/design-system/components/layout/header";
 import { Footer } from "@cloudensis/design-system/components/layout/footer";
 
-<Header homeHref="/" logo={<img src="/logo.svg" alt="" />} brand="cloudensis" />
+<Header homeHref="/" brand="cloudensis" />
 
 <Footer
 	copyrightHolder={company.name}
@@ -217,7 +217,7 @@ import { Footer } from "@cloudensis/design-system/components/layout/footer";
 />
 ```
 
-`Header` は `children` を渡すとロゴ・ブランド名の右側に並びます（ナビゲーションやボタンなど）。`Footer` は `links` の代わりに `children` を渡すと、コピーライト表記の右側を自由な内容に差し替えられます。
+`Header` の `logo` は省略すると `LogoIcon`（cloudensis のロゴマーク）になります。差し替えたい場合は `logo` に任意の要素を渡してください。`children` を渡すとロゴ・ブランド名の右側に並びます（ナビゲーションやボタンなど）。`Footer` は `links` の代わりに `children` を渡すと、コピーライト表記の右側を自由な内容に差し替えられます。
 
 ## エントリ一覧
 
@@ -239,6 +239,7 @@ import { Footer } from "@cloudensis/design-system/components/layout/footer";
 | `@cloudensis/design-system/components/layout/header` | `Header` |
 | `@cloudensis/design-system/components/layout/footer` | `Footer` |
 | `@cloudensis/design-system/components/icon/copy` | `CopyIcon` |
+| `@cloudensis/design-system/components/icon/logo` | `LogoIcon` |
 | `@cloudensis/design-system/lib/highlight` | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
 | `@cloudensis/design-system/lib/utils` | `cn` |
 

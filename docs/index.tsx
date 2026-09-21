@@ -317,22 +317,14 @@ app.get("/components", (c) =>
 			<Section title="Header">
 				<p>
 					サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
-					を右（ナビゲーションやボタンなど）に並べます。
+					を右（ナビゲーションやボタンなど）に並べます。logo は省略すると
+					LogoIcon（cloudensis のロゴマーク）になります。
 				</p>
 				<div class="rounded border border-border">
-					<Header
-						homeHref="/"
-						logo={
-							<span
-								class="inline-block size-6 rounded bg-accent"
-								aria-hidden="true"
-							/>
-						}
-						brand="cloudensis"
-					/>
+					<Header homeHref="/" brand="cloudensis" />
 				</div>
 				<CodeBlock lang="tsx">
-					{`<Header homeHref="/" logo={<img src="/logo.svg" alt="" />} brand="cloudensis">\n\t<nav>...</nav>\n</Header>`}
+					{`<Header homeHref="/" brand="cloudensis">\n\t<nav>...</nav>\n</Header>`}
 				</CodeBlock>
 			</Section>
 			<Section title="Footer">
