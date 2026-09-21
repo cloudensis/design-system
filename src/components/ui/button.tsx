@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils.ts";
 const variants = {
 	variant: {
 		default: cn(
-			"inline-block cursor-pointer rounded bg-neutral-800 text-white hover:bg-neutral-700",
+			"inline-block cursor-pointer rounded bg-accent text-accent-fg hover:bg-accent-hover",
 		),
 	},
 	size: {

@@ -1,12 +1,13 @@
 import { Hono } from "hono";
 import { Section } from "../src/components/layout/section.tsx";
 import { Button, LinkButton } from "../src/components/ui/button.tsx";
+import { CodeBlock } from "../src/components/ui/code-block.tsx";
 import { DescriptionList } from "../src/components/ui/description-list.tsx";
 import { Input } from "../src/components/ui/input.tsx";
 import { Select } from "../src/components/ui/select.tsx";
 import { Textarea } from "../src/components/ui/textarea.tsx";
 import tokensCss from "../src/styles/tokens.css?raw";
-import { Code, Layout } from "./layout.tsx";
+import { Layout } from "./layout.tsx";
 
 const tokens = [...tokensCss.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(
 	([, name, value]) => ({ name, value: value.trim().replace(/\s+/g, " ") }),
@@ -26,31 +27,31 @@ app.get("/", (c) =>
 				</p>
 			</Section>
 			<Section title="導入">
-				<Code>{"npm install @cloudensis/design-system"}</Code>
+				<CodeBlock>{"npm install @cloudensis/design-system"}</CodeBlock>
 				<p>Tailwind CSS v4 のエントリで次の 1 行を読み込みます。</p>
-				<Code>
+				<CodeBlock>
 					{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
-				</Code>
+				</CodeBlock>
 				<p>
 					フォント（Outfit / Noto Sans
 					JP）とトークン、記事用スタイルの定義に加えて、コンポーネントが使用している
 					クラスの収集設定もこのファイルに含まれているため、利用側での @source
 					の指定は不要です。
 				</p>
-				<Code>
+				<CodeBlock>
 					{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
-				</Code>
+				</CodeBlock>
 			</Section>
 			<Section title="既定のスタイル">
 				<p>
 					body には --color-bg / --color-fg
-					とライト（300）の文字の太さが既定で適用されます。 利用側で bg-* や
-					text-*、font-*
+					とライト（300）の文字の太さが既定で適用されます。b / strong は
+					--font-weight-strong（500）です。 利用側で bg-* や text-*、font-*
 					のユーティリティクラスを指定すればいつでも上書きできます。
 				</p>
-				<Code>
-					{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-light);\n}`}
-				</Code>
+				<CodeBlock>
+					{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-base);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-strong);\n}`}
+				</CodeBlock>
 			</Section>
 		</Layout>,
 	),
@@ -83,6 +84,10 @@ app.get("/tokens", (c) =>
 											class="inline-block size-6 rounded border border-border align-middle"
 											style={`background: var(${token.name})`}
 										/>
+									) : token.name.startsWith("--font-weight-") ? (
+										<span style={`font-weight: var(${token.name})`}>
+											Aa あア亜 0123
+										</span>
 									) : (
 										<span style={`font-family: var(${token.name})`}>
 											Aa あア亜 0123
@@ -106,14 +111,14 @@ app.get("/components", (c) =>
 					<Button>ボタン</Button>
 					<Button disabled>disabled</Button>
 				</div>
-				<Code>{`<Button>ボタン</Button>`}</Code>
+				<CodeBlock>{`<Button>ボタン</Button>`}</CodeBlock>
 			</Section>
 			<Section title="LinkButton">
 				<p>見た目は Button と同じまま、a 要素としてレンダリングします。</p>
 				<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
 					<LinkButton href="/">リンクボタン</LinkButton>
 				</div>
-				<Code>{`<LinkButton href="/">リンクボタン</LinkButton>`}</Code>
+				<CodeBlock>{`<LinkButton href="/">リンクボタン</LinkButton>`}</CodeBlock>
 			</Section>
 			<Section title="Input">
 				<p>
@@ -132,9 +137,9 @@ app.get("/components", (c) =>
 						<label htmlFor="sample-radio">ラジオボタン</label>
 					</div>
 				</div>
-				<Code>
+				<CodeBlock>
 					{`<Input type="text" placeholder="テキスト" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
-				</Code>
+				</CodeBlock>
 			</Section>
 			<Section title="Select">
 				<div class="rounded border border-border p-6">
@@ -144,15 +149,15 @@ app.get("/components", (c) =>
 						<option value="b">選択肢 B</option>
 					</Select>
 				</div>
-				<Code>
+				<CodeBlock>
 					{`<Select>\n\t<option value="">選択してください</option>\n</Select>`}
-				</Code>
+				</CodeBlock>
 			</Section>
 			<Section title="Textarea">
 				<div class="rounded border border-border p-6">
 					<Textarea rows={4} placeholder="お問い合わせ内容" />
 				</div>
-				<Code>{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</Code>
+				<CodeBlock>{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
 			</Section>
 			<Section title="DescriptionList">
 				<p>term と details の組を、2 列のグリッドとして並べます。</p>
@@ -164,9 +169,9 @@ app.get("/components", (c) =>
 						]}
 					/>
 				</div>
-				<Code>
+				<CodeBlock>
 					{`<DescriptionList\n\titems={[{ term: "会社名", details: "cloudensis" }]}\n/>`}
-				</Code>
+				</CodeBlock>
 			</Section>
 			<Section title="Section">
 				<p>見出し付きのセクションです。id を渡すとページ内リンクになります。</p>
@@ -175,7 +180,7 @@ app.get("/components", (c) =>
 						<p>セクションの本文です。</p>
 					</Section>
 				</div>
-				<Code>{`<Section id="services" title="事業内容">...</Section>`}</Code>
+				<CodeBlock>{`<Section id="services" title="事業内容">...</Section>`}</CodeBlock>
 			</Section>
 		</Layout>,
 	),
@@ -189,7 +194,7 @@ app.get("/prose", (c) =>
 					記事本文を囲む要素に .prose
 					を付与すると、本文向けのスタイルが適用されます。
 				</p>
-				<Code>{`<article class="prose">...</article>`}</Code>
+				<CodeBlock>{`<article class="prose">...</article>`}</CodeBlock>
 				<article class="prose rounded border border-border p-6">
 					<h2>見出し</h2>
 					<p>

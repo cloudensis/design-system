@@ -5,7 +5,12 @@
 	body {
 		background-color: var(--color-bg);
 		color: var(--color-fg);
-		/* Tailwind の既定テーマの --font-weight-light（300）を参照します。 */
-		font-weight: var(--font-weight-light, 300);
+		font-weight: var(--font-weight-base);
+	}
+
+	/* preflight の bolder は継承値 300 に対して 400 にしかならないため上書きします。 */
+	b,
+	strong {
+		font-weight: var(--font-weight-strong);
 	}
 }

@@ -3,28 +3,30 @@ import { cn } from "../../lib/utils.ts";
 
 const variants = {
 	variant: {
-		default: cn("w-full rounded border border-border px-4 py-2"),
+		default: cn(
+			"overflow-x-auto rounded border border-border bg-surface p-4 text-sm",
+		),
 	},
 };
 
-type TextareaProps = JSX.IntrinsicElements["textarea"] & {
+type CodeBlockProps = JSX.IntrinsicElements["pre"] & {
 	class?: string;
 	variant?: keyof typeof variants.variant;
 };
 
-export function Textarea({
+export function CodeBlock({
 	variant = "default",
 	class: className,
 	children,
 	...props
-}: TextareaProps) {
+}: CodeBlockProps) {
 	return (
-		<textarea
-			data-slot="textarea"
+		<pre
+			data-slot="code-block"
 			class={cn(variants.variant[variant], className)}
 			{...props}
 		>
-			{children}
-		</textarea>
+			<code>{children}</code>
+		</pre>
 	);
 }
