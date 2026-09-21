@@ -368,57 +368,63 @@ app.get("/prose", (c) =>
 		>
 			<div class="space-y-8">
 				<Section title="prose">
-					<p>
-						記事本文を囲む要素に .prose
-						を付与すると、本文向けのスタイルが適用されます。見出し・段落・リスト・定義リスト・引用・コード・表・図版など、記事に現れる
-						HTML タグを一通りカバーしています。
-					</p>
-					<CodeBlock lang="tsx">{`<article class="prose">...</article>`}</CodeBlock>
-					<p>
-						セレクタはすべて :where() で包んで詳細度を 0 にしたうえで @layer
-						components に置いているため、本文中の要素に Tailwind
-						のユーティリティクラスを指定すればいつでも上書きできます。 配色は
-						トークンを参照しているので、@theme
-						でトークンを差し替えると本文の見た目にもそのまま反映されます。
-					</p>
+					<div class="space-y-3">
+						<p>
+							記事本文を囲む要素に .prose
+							を付与すると、本文向けのスタイルが適用されます。見出し・段落・リスト・定義リスト・引用・コード・表・図版など、記事に現れる
+							HTML タグを一通りカバーしています。
+						</p>
+						<CodeBlock lang="tsx">{`<article class="prose">...</article>`}</CodeBlock>
+						<p>
+							セレクタはすべて :where() で包んで詳細度を 0 にしたうえで @layer
+							components に置いているため、本文中の要素に Tailwind
+							のユーティリティクラスを指定すればいつでも上書きできます。 配色は
+							トークンを参照しているので、@theme
+							でトークンを差し替えると本文の見た目にもそのまま反映されます。
+						</p>
+					</div>
 				</Section>
 				<Section title="ブロック間の余白">
-					<p>
-						ブロックの余白は下方向にだけ持たせています。隣接する margin
-						の相殺に頼らないため、.prose を flex や grid
-						の中に置いても、ブロック同士の間隔は変わりません。
-					</p>
-					<p>
-						見出しと hr の手前だけは例外で、直前のブロックの下余白を :has()
-						で広げて距離を取ります。見出し側に上余白を持たせないので、
-						余白が二重になることがありません。
-					</p>
-					<CodeBlock lang="css">{proseSpacingCss}</CodeBlock>
-					<p>
-						コンテナの先頭と末尾の余白は打ち消しているため、.prose
-						を付けた要素に padding
-						を与えても上下だけ広く見えることはありません。このページのサンプルも、枠線と
-						padding を付けた要素に .prose を付けています。
-					</p>
+					<div class="space-y-3">
+						<p>
+							ブロックの余白は下方向にだけ持たせています。隣接する margin
+							の相殺に頼らないため、.prose を flex や grid
+							の中に置いても、ブロック同士の間隔は変わりません。
+						</p>
+						<p>
+							見出しと hr の手前だけは例外で、直前のブロックの下余白を :has()
+							で広げて距離を取ります。見出し側に上余白を持たせないので、
+							余白が二重になることがありません。
+						</p>
+						<CodeBlock lang="css">{proseSpacingCss}</CodeBlock>
+						<p>
+							コンテナの先頭と末尾の余白は打ち消しているため、.prose
+							を付けた要素に padding
+							を与えても上下だけ広く見えることはありません。このページのサンプルも、枠線と
+							padding を付けた要素に .prose を付けています。
+						</p>
+					</div>
 				</Section>
 				<Section title="対応している要素">
-					<p>prose.css がスタイルを当てている HTML タグの一覧です。</p>
-					<table class="w-full border-collapse text-left text-sm">
-						<thead>
-							<tr class="border-border border-b">
-								<th class="py-2 font-medium">分類</th>
-								<th class="py-2 font-medium">タグ</th>
-							</tr>
-						</thead>
-						<tbody>
-							{proseElements.map((group) => (
-								<tr key={group.name} class="border-border border-b">
-									<td class="whitespace-nowrap py-2">{group.name}</td>
-									<td class="py-2 font-mono text-fg-muted">{group.tags}</td>
+					<div class="space-y-3">
+						<p>prose.css がスタイルを当てている HTML タグの一覧です。</p>
+						<table class="w-full border-collapse text-left text-sm">
+							<thead>
+								<tr class="border-border border-b">
+									<th class="py-2 font-medium">分類</th>
+									<th class="py-2 font-medium">タグ</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{proseElements.map((group) => (
+									<tr key={group.name} class="border-border border-b">
+										<td class="whitespace-nowrap py-2">{group.name}</td>
+										<td class="py-2 font-mono text-fg-muted">{group.tags}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 				</Section>
 				<Section title="サンプル">
 					<p>
