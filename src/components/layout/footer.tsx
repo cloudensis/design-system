@@ -40,7 +40,7 @@ export function Footer({
 			</span>
 			{children ??
 				(links.length > 0 && (
-					<nav class="flex gap-4">
+					<nav class="flex gap-4 text-sm">
 						{links.map((link) => (
 							<a
 								key={link.href}

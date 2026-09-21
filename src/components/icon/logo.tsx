@@ -11,17 +11,19 @@ export function LogoIcon({ class: className }: LogoIconProps) {
 		<svg
 			data-slot="logo-icon"
 			class={cn("h-6 w-auto", className)}
-			viewBox="0 0 21 12"
+			viewBox="0 0 42 24"
 			fill="none"
 			aria-hidden="true"
 		>
+			<title>logo</title>
 			<path
-				d="M0.5 11.5C0.5 7 4 5.5 5.5 5.5C6 2.1 8.5 0.5 11 0.5C13.5 0.5 15.4 2 16.4 4.5C18.9 4.3 20.5 6 20.5 8C20.5 10 19 11.5 17 11.5C17 11.5 12.6667 11.5 11.5 11.5V7.5"
-				stroke="currentColor"
+				d="M1 23C1 14 8 11 11 11C12 4.2 17 1 22 1C27 1 30.8 4 32.8 9C37.8 8.6 41 12 41 16C41 20 38 23 34 23C34 23 25.3334 23 23 23V15"
+				stroke="#000"
+				stroke-width="2"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			/>
-			<circle cx="11.5" cy="7.5" r="1.5" fill="currentColor" />
+			<circle cx="23" cy="15" r="3" fill="#000" />
 		</svg>
 	);
 }
