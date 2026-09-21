@@ -33,11 +33,14 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 | `--color-fg` | `#525252` | 本文の文字色 |
 | `--color-fg-muted` | `#737373` | 補助的な文字色 |
 | `--color-bg` | `#f5f5f5` | ページの背景 |
-| `--color-surface` | `#fafafa` | カードやコードブロックなど、背景の上に置く面 |
+| `--color-surface` | `#fafafa` | カードなど、背景の上に置く面 |
 | `--color-border` | `#e5e5e5` | 区切り線・入力欄の枠線 |
 | `--color-accent` | `#262626` | ボタンなど主要な操作の塗り |
 | `--color-accent-hover` | `#404040` | その hover |
 | `--color-accent-fg` | `#ffffff` | アクセント色の上に置く文字色 |
+| `--color-code-bg` | `#121212` | コードブロックの背景 |
+| `--color-code-fg` | `#dbd7ca` | コードブロックの文字色 |
+| `--color-code-border` | `#2c2c2c` | コードブロックの枠線 |
 | `--font-weight-base` | `300` | 本文の太さ |
 | `--font-weight-strong` | `500` | `b` / `strong` の太さ |
 
@@ -106,7 +109,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 <Textarea name="message" rows={4} />
 <Button type="submit">送信</Button>
 <LinkButton href="/">リンク</LinkButton>
-<CodeBlock>{`npm install`}</CodeBlock>
+<CodeBlock lang="sh">{`npm install`}</CodeBlock>
 ```
 
 記事本文には `.prose` を付与します。
@@ -114,6 +117,49 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 ```tsx
 <article class="prose">...</article>
 ```
+
+## Tooltip
+
+ホバー（とフォーカス）で補足を表示します。開閉は CSS だけで行うため、クライアント JavaScript を読み込まずに SSG・SSR・CSR のいずれでも動作します。
+
+```tsx
+<Tooltip label="クリックで全選択">
+	<pre tabindex={0}>...</pre>
+</Tooltip>
+<Tooltip label="下に表示します" placement="bottom">...</Tooltip>
+```
+
+ラベルは `pointer-events-none` を指定しているため、表示中でもクリックやホバーを遮りません。キーボードから表示するには、中の要素がフォーカスを受け取れる必要があります（`tabindex` を指定するなど）。
+
+## CodeBlock
+
+`lang` を渡すとシンタックスハイライトが付きます。省略した場合はハイライトせずそのまま表示します。
+
+```tsx
+<CodeBlock lang="tsx">{code}</CodeBlock>
+<CodeBlock>{code}</CodeBlock>
+```
+
+コードブロックは、ページの配色に関わらず常にダークで表示します。配色は `--color-code-*` トークンで定義しており、Shiki のテーマ（vitesse-dark）と合わせています。
+
+ハイライトには [Shiki](https://shiki.style/) を使用しています。文法とテーマをパッケージに同梱した同期版のハイライターを使うため、`await` は不要で、SSG・SSR・CSR のいずれからでも同じように呼び出せます。正規表現エンジンは WASM を必要としない JavaScript 実装を選んでいるので、Cloudflare Workers やブラウザでもそのまま動作します。
+
+同梱している文法は次のとおりです。ここにない言語を `lang` に渡すことはできません（型で弾かれます）。
+
+| `lang` に渡せる値 | 文法 |
+| --- | --- |
+| `css` | CSS |
+| `html` | HTML |
+| `javascript` / `js` | JavaScript |
+| `json` / `jsonc` | JSON |
+| `markdown` / `md` | Markdown |
+| `shellscript` / `sh` / `bash` / `shell` / `zsh` | Shell |
+| `tsx` / `ts` / `typescript` / `jsx` | TypeScript / TSX |
+| `yaml` / `yml` | YAML |
+
+コードには [`user-select: all`](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を指定しています。クリック 1 回でコード全体が選択されるので、あとは Ctrl / Cmd + C でコピーできます。その操作はホバー（とフォーカス）時のツールチップで案内します。
+
+コピーのためのクライアント JavaScript は読み込みません。そのため SSG で書き出した静的な HTML でもそのまま動作し、CSP でインラインスクリプトを禁止していても影響を受けません。なお `user-select: all` の性質上、コードの一部だけをドラッグで選択することはできません。
 
 ## エントリ一覧
 
@@ -129,8 +175,11 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `@cloudensis/design-system/components/ui/input` | `Input`（`type` に応じてチェックボックス・ラジオにも対応） |
 | `@cloudensis/design-system/components/ui/select` | `Select` |
 | `@cloudensis/design-system/components/ui/textarea` | `Textarea` |
+| `@cloudensis/design-system/components/ui/tooltip` | `Tooltip` |
 | `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
 | `@cloudensis/design-system/components/layout/section` | `Section` |
+| `@cloudensis/design-system/components/icon/copy` | `CopyIcon` |
+| `@cloudensis/design-system/lib/highlight` | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
 | `@cloudensis/design-system/lib/utils` | `cn` |
 
 ## 開発

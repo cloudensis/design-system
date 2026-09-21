@@ -11,6 +11,12 @@
 	--color-accent-hover: #404040;
 	--color-accent-fg: #ffffff;
 
+	/* コードブロックは配色モードに関わらず常にダークで表示します。値は Shiki の
+	   vitesse-dark テーマ（コードのハイライトに使用）に合わせています。 */
+	--color-code-bg: #121212;
+	--color-code-fg: #dbd7ca;
+	--color-code-border: #2c2c2c;
+
 	--font-sans:
 		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
 		sans-serif;

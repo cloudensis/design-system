@@ -6,12 +6,31 @@ import { DescriptionList } from "../src/components/ui/description-list.tsx";
 import { Input } from "../src/components/ui/input.tsx";
 import { Select } from "../src/components/ui/select.tsx";
 import { Textarea } from "../src/components/ui/textarea.tsx";
+import { Tooltip } from "../src/components/ui/tooltip.tsx";
 import tokensCss from "../src/styles/tokens.css?raw";
 import { Layout } from "./layout.tsx";
 
 const tokens = [...tokensCss.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(
 	([, name, value]) => ({ name, value: value.trim().replace(/\s+/g, " ") }),
 );
+
+const sampleTsx = `import { Button } from "@cloudensis/design-system/components/ui/button";
+
+export function ContactForm() {
+	return (
+		<form method="post" action="/contact">
+			<Button type="submit">送信する</Button>
+		</form>
+	);
+}`;
+
+const sampleCss = `@import "tailwindcss";
+@import "@cloudensis/design-system/index.css";
+
+@theme {
+	--color-bg: #ffffff;
+	--color-fg: #171717;
+}`;
 
 const app = new Hono();
 
@@ -27,9 +46,11 @@ app.get("/", (c) =>
 				</p>
 			</Section>
 			<Section title="導入">
-				<CodeBlock>{"npm install @cloudensis/design-system"}</CodeBlock>
+				<CodeBlock lang="sh">
+					{"npm install @cloudensis/design-system"}
+				</CodeBlock>
 				<p>Tailwind CSS v4 のエントリで次の 1 行を読み込みます。</p>
-				<CodeBlock>
+				<CodeBlock lang="css">
 					{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
 				</CodeBlock>
 				<p>
@@ -38,7 +59,7 @@ app.get("/", (c) =>
 					クラスの収集設定もこのファイルに含まれているため、利用側での @source
 					の指定は不要です。
 				</p>
-				<CodeBlock>
+				<CodeBlock lang="tsx">
 					{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
 				</CodeBlock>
 			</Section>
@@ -49,7 +70,7 @@ app.get("/", (c) =>
 					--font-weight-strong（500）です。 利用側で bg-* や text-*、font-*
 					のユーティリティクラスを指定すればいつでも上書きできます。
 				</p>
-				<CodeBlock>
+				<CodeBlock lang="css">
 					{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-base);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-strong);\n}`}
 				</CodeBlock>
 			</Section>
@@ -111,14 +132,14 @@ app.get("/components", (c) =>
 					<Button>ボタン</Button>
 					<Button disabled>disabled</Button>
 				</div>
-				<CodeBlock>{`<Button>ボタン</Button>`}</CodeBlock>
+				<CodeBlock lang="tsx">{`<Button>ボタン</Button>`}</CodeBlock>
 			</Section>
 			<Section title="LinkButton">
 				<p>見た目は Button と同じまま、a 要素としてレンダリングします。</p>
 				<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
 					<LinkButton href="/">リンクボタン</LinkButton>
 				</div>
-				<CodeBlock>{`<LinkButton href="/">リンクボタン</LinkButton>`}</CodeBlock>
+				<CodeBlock lang="tsx">{`<LinkButton href="/">リンクボタン</LinkButton>`}</CodeBlock>
 			</Section>
 			<Section title="Input">
 				<p>
@@ -137,7 +158,7 @@ app.get("/components", (c) =>
 						<label htmlFor="sample-radio">ラジオボタン</label>
 					</div>
 				</div>
-				<CodeBlock>
+				<CodeBlock lang="tsx">
 					{`<Input type="text" placeholder="テキスト" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
 				</CodeBlock>
 			</Section>
@@ -149,7 +170,7 @@ app.get("/components", (c) =>
 						<option value="b">選択肢 B</option>
 					</Select>
 				</div>
-				<CodeBlock>
+				<CodeBlock lang="tsx">
 					{`<Select>\n\t<option value="">選択してください</option>\n</Select>`}
 				</CodeBlock>
 			</Section>
@@ -157,7 +178,56 @@ app.get("/components", (c) =>
 				<div class="rounded border border-border p-6">
 					<Textarea rows={4} placeholder="お問い合わせ内容" />
 				</div>
-				<CodeBlock>{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
+				<CodeBlock lang="tsx">{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
+			</Section>
+			<Section title="Tooltip">
+				<p>
+					ホバー（とフォーカス）で補足を表示します。開閉は CSS
+					だけで行うため、クライアント JavaScript を読み込まずに動作します。
+					ラベルは pointer-events-none
+					なので、表示中でもクリックやホバーを遮りません。
+				</p>
+				<div class="flex flex-wrap items-center gap-6 rounded border border-border p-6">
+					<Tooltip label="上に表示します">
+						<Button>ホバーしてください</Button>
+					</Tooltip>
+					<Tooltip label="下に表示します" placement="bottom">
+						<Button>placement=bottom</Button>
+					</Tooltip>
+				</div>
+				<CodeBlock lang="tsx">
+					{`<Tooltip label="上に表示します">\n\t<Button>ホバーしてください</Button>\n</Tooltip>`}
+				</CodeBlock>
+			</Section>
+			<Section title="CodeBlock">
+				<p>
+					lang を渡すと Shiki
+					でハイライトします。ハイライトは同期的に行うため、SSG・SSR・CSR
+					のいずれからでもそのまま呼び出せます。
+				</p>
+				<p>
+					コードは user-select: all を指定しているため、クリック 1
+					回で全体が選択されます。あとは Ctrl / Cmd + C でコピーできます。
+					その操作はホバー時のツールチップで案内しており、クライアント
+					JavaScript は一切読み込みません。
+				</p>
+				<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
+				<CodeBlock lang="css">{sampleCss}</CodeBlock>
+				<p>
+					コードブロックはページの配色に関わらず常にダークで表示します。配色は
+					--color-code-* トークンで定義しており、Shiki
+					のテーマ（vitesse-dark）と合わせています。
+				</p>
+				<p>lang を省略した場合はハイライトせずそのまま表示します。</p>
+				<CodeBlock>{"cloudensis Inc."}</CodeBlock>
+				<CodeBlock lang="tsx">
+					{`<CodeBlock lang="tsx">{code}</CodeBlock>\n<CodeBlock>{code}</CodeBlock>`}
+				</CodeBlock>
+				<p>
+					同梱している文法は css / html / javascript / json / markdown /
+					shellscript / tsx / yaml です。 ts・jsx・jsonc・sh・md・yml
+					などの別名も同じ文法として扱います。
+				</p>
 			</Section>
 			<Section title="DescriptionList">
 				<p>term と details の組を、2 列のグリッドとして並べます。</p>
@@ -169,7 +239,7 @@ app.get("/components", (c) =>
 						]}
 					/>
 				</div>
-				<CodeBlock>
+				<CodeBlock lang="tsx">
 					{`<DescriptionList\n\titems={[{ term: "会社名", details: "cloudensis" }]}\n/>`}
 				</CodeBlock>
 			</Section>
@@ -180,7 +250,7 @@ app.get("/components", (c) =>
 						<p>セクションの本文です。</p>
 					</Section>
 				</div>
-				<CodeBlock>{`<Section id="services" title="事業内容">...</Section>`}</CodeBlock>
+				<CodeBlock lang="tsx">{`<Section id="services" title="事業内容">...</Section>`}</CodeBlock>
 			</Section>
 		</Layout>,
 	),
@@ -194,7 +264,7 @@ app.get("/prose", (c) =>
 					記事本文を囲む要素に .prose
 					を付与すると、本文向けのスタイルが適用されます。
 				</p>
-				<CodeBlock>{`<article class="prose">...</article>`}</CodeBlock>
+				<CodeBlock lang="tsx">{`<article class="prose">...</article>`}</CodeBlock>
 				<article class="prose rounded border border-border p-6">
 					<h2>見出し</h2>
 					<p>
