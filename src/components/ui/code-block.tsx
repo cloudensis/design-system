@@ -2,10 +2,13 @@ import { Fragment, type JSX } from "hono/jsx";
 import { type CodeLanguage, highlight } from "../../lib/highlight.ts";
 import { cn } from "../../lib/utils.ts";
 import { CopyIcon } from "../icon/copy.tsx";
+import { Tooltip } from "./tooltip.tsx";
 
 const variants = {
 	variant: {
-		default: cn("overflow-hidden rounded border border-border bg-surface"),
+		default: cn(
+			"cursor-pointer select-all overflow-x-auto rounded border border-border bg-surface p-4 text-sm",
+		),
 	},
 };
 
@@ -29,25 +32,23 @@ export function CodeBlock({
 	const lines = lang ? highlight(code, lang) : undefined;
 
 	return (
-		<div
-			data-slot="code-block"
-			class={cn("group", variants.variant[variant], className)}
+		<Tooltip
+			class="block w-full"
+			label={
+				<>
+					<CopyIcon class="size-3.5" />
+					クリックで全選択
+				</>
+			}
 		>
-			{/* クリックで選択できることを示すラベル。コードに重ねると長い行が隠れて
-			    しまうため、コードの上に独立した行として置いています。 */}
-			<div
-				data-slot="code-block-hint"
-				class="flex select-none items-center justify-end gap-1 border-border border-b px-4 py-1.5 text-fg-muted text-xs transition-colors group-hover:text-fg"
-			>
-				<CopyIcon class="size-3.5" />
-				クリックで全選択
-			</div>
 			{/* user-select: all（select-all）により、クリック 1 回でコード全体が選択
 			    されます。あとは Ctrl / Cmd + C でコピーできるため、コピーのために
-			    クライアント JavaScript を読み込む必要がありません。 */}
+			    クライアント JavaScript を読み込む必要がありません。
+			    tabindex はキーボードでの横スクロールとツールチップの表示のためです。 */}
 			<pre
-				data-slot="code-block-pre"
-				class="cursor-pointer select-all overflow-x-auto p-4 text-sm"
+				data-slot="code-block"
+				tabindex={0}
+				class={cn(variants.variant[variant], className)}
 				{...props}
 			>
 				<code>
@@ -67,6 +68,6 @@ export function CodeBlock({
 						: code}
 				</code>
 			</pre>
-		</div>
+		</Tooltip>
 	);
 }

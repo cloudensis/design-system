@@ -6,6 +6,7 @@ import { DescriptionList } from "../src/components/ui/description-list.tsx";
 import { Input } from "../src/components/ui/input.tsx";
 import { Select } from "../src/components/ui/select.tsx";
 import { Textarea } from "../src/components/ui/textarea.tsx";
+import { Tooltip } from "../src/components/ui/tooltip.tsx";
 import tokensCss from "../src/styles/tokens.css?raw";
 import { Layout } from "./layout.tsx";
 
@@ -179,6 +180,25 @@ app.get("/components", (c) =>
 				</div>
 				<CodeBlock lang="tsx">{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
 			</Section>
+			<Section title="Tooltip">
+				<p>
+					ホバー（とフォーカス）で補足を表示します。開閉は CSS
+					だけで行うため、クライアント JavaScript を読み込まずに動作します。
+					ラベルは pointer-events-none
+					なので、表示中でもクリックやホバーを遮りません。
+				</p>
+				<div class="flex flex-wrap items-center gap-6 rounded border border-border p-6">
+					<Tooltip label="上に表示します">
+						<Button>ホバーしてください</Button>
+					</Tooltip>
+					<Tooltip label="下に表示します" placement="bottom">
+						<Button>placement=bottom</Button>
+					</Tooltip>
+				</div>
+				<CodeBlock lang="tsx">
+					{`<Tooltip label="上に表示します">\n\t<Button>ホバーしてください</Button>\n</Tooltip>`}
+				</CodeBlock>
+			</Section>
 			<Section title="CodeBlock">
 				<p>
 					lang を渡すと Shiki
@@ -188,7 +208,8 @@ app.get("/components", (c) =>
 				<p>
 					コードは user-select: all を指定しているため、クリック 1
 					回で全体が選択されます。あとは Ctrl / Cmd + C でコピーできます。
-					クライアント JavaScript は一切読み込みません。
+					その操作はホバー時のツールチップで案内しており、クライアント
+					JavaScript は一切読み込みません。
 				</p>
 				<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
 				<CodeBlock lang="css">{sampleCss}</CodeBlock>

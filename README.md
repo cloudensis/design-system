@@ -115,6 +115,19 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 <article class="prose">...</article>
 ```
 
+## Tooltip
+
+ホバー（とフォーカス）で補足を表示します。開閉は CSS だけで行うため、クライアント JavaScript を読み込まずに SSG・SSR・CSR のいずれでも動作します。
+
+```tsx
+<Tooltip label="クリックで全選択">
+	<pre tabindex={0}>...</pre>
+</Tooltip>
+<Tooltip label="下に表示します" placement="bottom">...</Tooltip>
+```
+
+ラベルは `pointer-events-none` を指定しているため、表示中でもクリックやホバーを遮りません。キーボードから表示するには、中の要素がフォーカスを受け取れる必要があります（`tabindex` を指定するなど）。
+
 ## CodeBlock
 
 `lang` を渡すとシンタックスハイライトが付きます。省略した場合はハイライトせずそのまま表示します。
@@ -139,7 +152,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `tsx` / `ts` / `typescript` / `jsx` | TypeScript / TSX |
 | `yaml` / `yml` | YAML |
 
-コードには [`user-select: all`](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を指定しています。クリック 1 回でコード全体が選択されるので、あとは Ctrl / Cmd + C でコピーできます。コードの上にはその操作を示すラベルを表示しています。
+コードには [`user-select: all`](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を指定しています。クリック 1 回でコード全体が選択されるので、あとは Ctrl / Cmd + C でコピーできます。その操作はホバー（とフォーカス）時のツールチップで案内します。
 
 コピーのためのクライアント JavaScript は読み込みません。そのため SSG で書き出した静的な HTML でもそのまま動作し、CSP でインラインスクリプトを禁止していても影響を受けません。なお `user-select: all` の性質上、コードの一部だけをドラッグで選択することはできません。
 
@@ -157,6 +170,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `@cloudensis/design-system/components/ui/input` | `Input`（`type` に応じてチェックボックス・ラジオにも対応） |
 | `@cloudensis/design-system/components/ui/select` | `Select` |
 | `@cloudensis/design-system/components/ui/textarea` | `Textarea` |
+| `@cloudensis/design-system/components/ui/tooltip` | `Tooltip` |
 | `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
 | `@cloudensis/design-system/components/layout/section` | `Section` |
 | `@cloudensis/design-system/components/icon/copy` | `CopyIcon` |
