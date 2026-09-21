@@ -90,43 +90,51 @@ app.get("/", (c) =>
 			description="cloudensis のデザインシステムの導入方法と、既定で適用されるスタイル。"
 			url={c.req.url}
 		>
-			<Section title="このデザインシステムについて">
-				<p>
-					cloudensis で利用する CSS
-					トークン・記事用スタイル・コンポーネントを提供します。
-					コンポーネントは Hono の JSX で実装されており、SSR・CSR・SSG
-					のいずれからも利用できます。
-				</p>
-			</Section>
-			<Section title="導入">
-				<CodeBlock lang="sh">
-					{"npm install @cloudensis/design-system"}
-				</CodeBlock>
-				<p>Tailwind CSS v4 のエントリで次の 1 行を読み込みます。</p>
-				<CodeBlock lang="css">
-					{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
-				</CodeBlock>
-				<p>
-					フォント（Outfit / Noto Sans
-					JP）とトークン、記事用スタイルの定義に加えて、コンポーネントが使用している
-					クラスの収集設定もこのファイルに含まれているため、利用側での @source
-					の指定は不要です。
-				</p>
-				<CodeBlock lang="tsx">
-					{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
-				</CodeBlock>
-			</Section>
-			<Section title="既定のスタイル">
-				<p>
-					body には --color-bg / --color-fg
-					とライト（300）の文字の太さが既定で適用されます。b / strong は
-					--font-weight-strong（500）です。 利用側で bg-* や text-*、font-*
-					のユーティリティクラスを指定すればいつでも上書きできます。
-				</p>
-				<CodeBlock lang="css">
-					{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-base);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-strong);\n}`}
-				</CodeBlock>
-			</Section>
+			<div class="space-y-8">
+				<Section title="このデザインシステムについて">
+					<p>
+						cloudensis で利用する CSS
+						トークン・記事用スタイル・コンポーネントを提供します。
+						コンポーネントは Hono の JSX で実装されており、SSR・CSR・SSG
+						のいずれからも利用できます。
+					</p>
+				</Section>
+
+				<Section title="導入">
+					<div class="space-y-3">
+						<CodeBlock lang="sh">
+							{"npm install @cloudensis/design-system"}
+						</CodeBlock>
+						<p>Tailwind CSS v4 のエントリで次の 1 行を読み込みます。</p>
+						<CodeBlock lang="css">
+							{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
+						</CodeBlock>
+						<p>
+							フォント（Outfit / Noto Sans
+							JP）とトークン、記事用スタイルの定義に加えて、コンポーネントが使用している
+							クラスの収集設定もこのファイルに含まれているため、利用側での
+							@source の指定は不要です。
+						</p>
+						<CodeBlock lang="tsx">
+							{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
+						</CodeBlock>
+					</div>
+				</Section>
+
+				<Section title="既定のスタイル">
+					<div class="space-y-3">
+						<p>
+							body には --color-bg / --color-fg
+							とライト（300）の文字の太さが既定で適用されます。b / strong は
+							--font-weight-strong（500）です。 利用側で bg-* や text-*、font-*
+							のユーティリティクラスを指定すればいつでも上書きできます。
+						</p>
+						<CodeBlock lang="css">
+							{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-base);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-strong);\n}`}
+						</CodeBlock>
+					</div>
+				</Section>
+			</div>
 		</Layout>,
 	),
 );

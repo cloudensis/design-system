@@ -67,8 +67,10 @@ export function Layout({
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
 				<body class="flex min-h-svh flex-col">
-					<Header brand="cloudensis">
-						<nav class="flex flex-wrap gap-4 text-sm">
+					<Header brand="cloudensis"></Header>
+
+					<main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 lg:px-8">
+						<nav class="flex flex-wrap gap-4 pb-8 text-sm">
 							{navItems.map((item) => (
 								<a
 									key={item.href}
@@ -79,8 +81,6 @@ export function Layout({
 								</a>
 							))}
 						</nav>
-					</Header>
-					<main class="mx-auto max-w-5xl flex-1 px-4 py-12 lg:px-8">
 						{children}
 					</main>
 					<Footer copyrightHolder="cloudensis" />
