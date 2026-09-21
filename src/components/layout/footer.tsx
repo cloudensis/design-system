@@ -33,14 +33,17 @@ export function Footer({
 	return (
 		<footer
 			data-slot="footer"
-			class={cn("flex justify-between px-4 py-8 lg:px-8", className)}
+			class={cn(
+				"flex items-center justify-between px-4 py-8 text-sm lg:px-8",
+				className,
+			)}
 		>
 			<span>
 				&copy; {year} {copyrightHolder}
 			</span>
 			{children ??
 				(links.length > 0 && (
-					<nav class="flex gap-4 text-sm">
+					<nav class="flex gap-4">
 						{links.map((link) => (
 							<a
 								key={link.href}
