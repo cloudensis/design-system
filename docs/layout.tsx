@@ -1,5 +1,7 @@
 import { raw } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
+import { Footer } from "../src/components/layout/footer.tsx";
+import { Header } from "../src/components/layout/header.tsx";
 import { site } from "./site.ts";
 import styleUrl from "./style.css?url";
 
@@ -66,10 +68,10 @@ export function Layout({
 				</head>
 				<body>
 					<div class="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
-						<header class="flex flex-col gap-4 border-border border-b pb-6">
-							<a href="/" class="font-bold text-lg">
-								{site.name}
-							</a>
+						<Header
+							class="border-border border-b p-0 pb-6 lg:px-0"
+							brand="cloudensis design system"
+						>
 							<nav class="flex flex-wrap gap-4 text-sm">
 								{navItems.map((item) => (
 									<a
@@ -81,8 +83,12 @@ export function Layout({
 									</a>
 								))}
 							</nav>
-						</header>
+						</Header>
 						<main class="flex flex-col gap-10">{children}</main>
+						<Footer
+							class="border-border border-t p-0 pt-6 lg:px-0"
+							copyrightHolder="cloudensis"
+						/>
 					</div>
 				</body>
 			</html>
