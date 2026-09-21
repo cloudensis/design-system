@@ -1,5 +1,7 @@
 import { raw } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
+import { Footer } from "../src/components/layout/footer.tsx";
+import { Header } from "../src/components/layout/header.tsx";
 import { site } from "./site.ts";
 import styleUrl from "./style.css?url";
 
@@ -64,26 +66,24 @@ export function Layout({
 
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
-				<body>
-					<div class="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
-						<header class="flex flex-col gap-4 border-border border-b pb-6">
-							<a href="/" class="font-bold text-lg">
-								{site.name}
-							</a>
-							<nav class="flex flex-wrap gap-4 text-sm">
-								{navItems.map((item) => (
-									<a
-										key={item.href}
-										href={item.href}
-										class="text-fg-muted underline-offset-4 hover:underline"
-									>
-										{item.label}
-									</a>
-								))}
-							</nav>
-						</header>
-						<main class="flex flex-col gap-10">{children}</main>
-					</div>
+				<body class="flex min-h-svh flex-col">
+					<Header brand="cloudensis"></Header>
+
+					<main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 lg:px-8">
+						<nav class="flex flex-wrap gap-4 pb-8 text-sm">
+							{navItems.map((item) => (
+								<a
+									key={item.href}
+									href={item.href}
+									class="text-fg-muted underline-offset-4 hover:underline"
+								>
+									{item.label}
+								</a>
+							))}
+						</nav>
+						{children}
+					</main>
+					<Footer copyrightHolder="cloudensis" />
 				</body>
 			</html>
 		</>
