@@ -162,9 +162,11 @@ app.get("/tokens", (c) =>
 					<tbody>
 						{tokens.map((token) => (
 							<tr key={token.name} class="border-border border-b">
-								<td class="py-2 font-mono">{token.name}</td>
-								<td class="py-2 font-mono text-fg-muted">{token.value}</td>
-								<td class="py-2">
+								<td class="p-2 font-mono">{token.name}</td>
+								<td class="max-w-56 p-2 font-mono text-fg-muted">
+									{token.value}
+								</td>
+								<td class="p-2">
 									{token.name.startsWith("--color-") ? (
 										<span
 											class="inline-block size-6 rounded border border-border align-middle"
