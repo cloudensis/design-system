@@ -329,8 +329,7 @@ app.get("/components", (c) =>
 				<Section title="Header">
 					<p>
 						サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
-						を右（ナビゲーションやボタンなど）に並べます。logo は省略すると
-						LogoIcon（cloudensis のロゴマーク）になります。
+						を右（ナビゲーションやボタンなど）に並べます。
 					</p>
 					<div class="rounded border border-border">
 						<Header homeHref="/" title="cloudensis" />

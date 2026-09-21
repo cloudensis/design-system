@@ -6,7 +6,7 @@ type HeaderProps = {
 	class?: string;
 	/** ロゴ／ブランド名をクリックした際の遷移先。 */
 	homeHref?: string;
-	/** ブランド名。 */
+	/** ロゴの右に表示するブランド名。 */
 	title: Child;
 	/** 右側に置くナビゲーションやボタンなど。 */
 	children?: Child;
