@@ -118,6 +118,46 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 <article class="prose">...</article>
 ```
 
+## 記事スタイル（prose）
+
+`.prose` を付けた要素の中では、記事に現れる HTML タグに本文向けのスタイルが当たります。対応しているタグは次のとおりです。
+
+| 分類 | タグ |
+| --- | --- |
+| 見出し | `h1` / `h2` / `h3` / `h4` / `h5` / `h6` |
+| 段落・区切り | `p` / `br` / `hr` |
+| リスト | `ul` / `ol` / `li` |
+| 定義リスト | `dl` / `dt` / `dd` |
+| 引用 | `blockquote` / `q` / `cite` |
+| コード | `pre` / `code` / `samp` / `kbd` / `var` |
+| 表 | `table` / `caption` / `thead` / `tbody` / `tfoot` / `tr` / `th` / `td` |
+| 図版 | `figure` / `figcaption` / `img` / `picture` / `video` / `svg` |
+| テキストレベル | `a` / `strong` / `b` / `em` / `i` / `mark` / `small` / `del` / `ins` / `s` / `u` / `sub` / `sup` / `abbr` / `dfn` |
+| 開閉 | `details` / `summary` |
+
+ブロックの余白は下方向にだけ持たせています。隣接する `margin` の相殺に頼らないため、`.prose` を flex や grid の中に置いてもブロック同士の間隔は変わりません。見出しと `hr` の手前だけは例外で、直前のブロックの下余白を `:has()` で広げて距離を取ります。見出し側に上余白を持たせないので、余白が二重になりません。コンテナの先頭と末尾の余白は打ち消しているため、`.prose` を付けた要素に `padding` を与えても上下だけ広く見えることはありません。
+
+```css
+/* ブロックの余白は下方向にだけ持たせる */
+.prose :where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, pre, blockquote, figure, table, details, hr) {
+	margin-block: 0 1.25em;
+}
+
+/* 見出しは続く本文と近づける */
+.prose :where(h1, h2, h3, h4, h5, h6) {
+	margin-block-end: 0.75em;
+}
+
+/* 見出しと hr の手前は、直前のブロックの下余白を広げて距離を取る */
+.prose :where(:has(+ :is(h1, h2, h3, h4, h5, h6, hr))) {
+	margin-block-end: 2.5em;
+}
+```
+
+セレクタはすべて `:where()` で包んで詳細度を 0 にしたうえで `@layer components` に置いているため、本文中の要素に Tailwind のユーティリティクラス（`text-*` / `font-*` / `my-*` など）を指定すればいつでも上書きできます。配色はトークンを参照しているので、`@theme` でトークンを差し替えると本文にも反映されます。
+
+コードブロック（`pre`）は `CodeBlock` コンポーネントと同じ見た目にそろえており、ページの配色に関わらず常にダークで表示します。
+
 ## Tooltip
 
 ホバー（とフォーカス）で補足を表示します。開閉は CSS だけで行うため、クライアント JavaScript を読み込まずに SSG・SSR・CSR のいずれでも動作します。
@@ -192,8 +232,16 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `npm run deploy:docs` | ドキュメントサイトを Cloudflare Workers にデプロイ |
 | `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック |
 
+## ドキュメントサイト
+
+`docs/` はこのパッケージ自体を使ったドキュメントサイトで、Cloudflare Workers で配信します。favicon と OGP 画像は [cloudensis.com](https://cloudensis.com) と同じものを `public/` に置いて共用しています（`public/` は npm の配布物には含みません）。
+
+`canonical` と OGP の絶対 URL はリクエストの URL から組み立てるため、デプロイ先のドメインをコードに持つ必要はありません。
+
 ## リリース
 
 1. `package.json` の `version` を上げて main にマージする
 2. GitHub で Release を作成する
-3. `.github/workflows/publish.yaml` が npm に publish する（Trusted Publishing による OIDC 認証のためトークンは不要）
+3. `.github/workflows/publish.yaml` が npm への publish（Trusted Publishing による OIDC 認証のためトークンは不要）と、ドキュメントサイトの Cloudflare Workers へのデプロイを行う
+
+ドキュメントサイトのデプロイには、リポジトリの Secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要です。
