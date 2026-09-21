@@ -47,11 +47,3 @@ export function Layout({ title, children }: LayoutProps) {
 		</>
 	);
 }
-
-export function Code({ children }: PropsWithChildren) {
-	return (
-		<pre class="overflow-x-auto rounded border border-border bg-neutral-50 p-4 text-sm">
-			<code>{children}</code>
-		</pre>
-	);
-}

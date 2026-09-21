@@ -24,19 +24,45 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 
 フォント・トークン・既定のスタイル・記事用スタイルの定義に加えて、コンポーネントが使用しているクラスの収集設定（`@source`）もこのファイルに含まれているため、利用側での追加設定は不要です。
 
+## トークン
+
+色と文字の太さはセマンティックな名前のトークンで定義しています。値はこのパッケージが所有しており、Tailwind の既定パレットは参照していません。コンポーネントも `neutral-*` のような生のパレットは使わず、すべてこのトークン経由で配色しています。
+
+| トークン | 値 | 用途 |
+| --- | --- | --- |
+| `--color-fg` | `#525252` | 本文の文字色 |
+| `--color-fg-muted` | `#737373` | 補助的な文字色 |
+| `--color-bg` | `#f5f5f5` | ページの背景 |
+| `--color-surface` | `#fafafa` | カードやコードブロックなど、背景の上に置く面 |
+| `--color-border` | `#e5e5e5` | 区切り線・入力欄の枠線 |
+| `--color-accent` | `#262626` | ボタンなど主要な操作の塗り |
+| `--color-accent-hover` | `#404040` | その hover |
+| `--color-accent-fg` | `#ffffff` | アクセント色の上に置く文字色 |
+| `--font-weight-base` | `300` | 本文の太さ |
+| `--font-weight-strong` | `500` | `b` / `strong` の太さ |
+
+いずれも `bg-accent` や `text-fg-muted`、`font-strong` のようなユーティリティクラスとして利用できます。
+
 ## 既定のスタイル
 
-`body` には次のスタイルが既定で適用されます。利用側で `bg-neutral-100` や `text-neutral-600`、`font-light` のようなクラスを指定する必要はありません。
+`body` には次のスタイルが既定で適用されます。利用側で配色や文字の太さのクラスを指定する必要はありません。
 
 ```css
 body {
-	background-color: var(--color-bg); /* neutral-100 */
-	color: var(--color-fg); /* neutral-600 */
-	font-weight: var(--font-weight-light); /* 300 */
+	background-color: var(--color-bg);
+	color: var(--color-fg);
+	font-weight: var(--font-weight-base); /* 300 */
+}
+
+b,
+strong {
+	font-weight: var(--font-weight-strong); /* 500 */
 }
 ```
 
-`@layer base` で定義しているため、ユーティリティクラス（`bg-*` / `text-*` / `font-*`）を指定すればいつでも上書きできます。配色をまとめて変えたい場合は、利用側の `@theme` で `--color-bg` / `--color-fg` を上書きしてください。
+`b` / `strong` を明示しているのは、Tailwind の preflight が指定する `font-weight: bolder` が、継承値 300 に対して 400 にしか解決されず本文と区別がつかないためです。
+
+`@layer base` で定義しているため、ユーティリティクラス（`bg-*` / `text-*` / `font-*`）を指定すればいつでも上書きできます。配色をまとめて変えたい場合は、利用側の `@theme` でトークンを上書きしてください。
 
 ```css
 @import "tailwindcss";
@@ -60,7 +86,7 @@ body {
 
 Tailwind CSS v4 は `--default-font-family` として `--font-sans` を参照するため、この定義だけで既定のフォントに反映されます。欧文・数字は Outfit で描画され、Outfit が字形を持たない和文は Noto Sans JP に落ちます。
 
-本文の文字の太さはライト（300）が既定です。太さを変えたい要素には `font-normal` などのユーティリティクラスを指定してください。
+本文の文字の太さはライト（300）が既定です。太さは `--font-weight-base` / `--font-weight-strong` の 2 つのトークンで管理しており、`font-base` / `font-strong` のユーティリティクラスからも利用できます。個別に変えたい要素には `font-normal` などを指定してください。
 
 webfont を利用側で読み込みたい場合（`next/font` を使う、フォントを差し替えるなど）は、`index.css` の代わりに `tokens.css` と `base.css` と `prose.css` を個別に読み込み、`@source` を自分で指定してください。
 
@@ -71,6 +97,7 @@ import { Button, LinkButton } from "@cloudensis/design-system/components/ui/butt
 import { Input } from "@cloudensis/design-system/components/ui/input";
 import { Select } from "@cloudensis/design-system/components/ui/select";
 import { Textarea } from "@cloudensis/design-system/components/ui/textarea";
+import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 
 <Input id="email" name="email" type="email" required />
 <Select name="type">
@@ -79,6 +106,7 @@ import { Textarea } from "@cloudensis/design-system/components/ui/textarea";
 <Textarea name="message" rows={4} />
 <Button type="submit">送信</Button>
 <LinkButton href="/">リンク</LinkButton>
+<CodeBlock>{`npm install`}</CodeBlock>
 ```
 
 記事本文には `.prose` を付与します。
@@ -97,6 +125,7 @@ import { Textarea } from "@cloudensis/design-system/components/ui/textarea";
 | `@cloudensis/design-system/base.css` | `body` の既定のスタイル（配色・文字の太さ） |
 | `@cloudensis/design-system/prose.css` | 記事本文用のスタイル |
 | `@cloudensis/design-system/components/ui/button` | `Button` / `LinkButton` |
+| `@cloudensis/design-system/components/ui/code-block` | `CodeBlock` |
 | `@cloudensis/design-system/components/ui/input` | `Input`（`type` に応じてチェックボックス・ラジオにも対応） |
 | `@cloudensis/design-system/components/ui/select` | `Select` |
 | `@cloudensis/design-system/components/ui/textarea` | `Textarea` |

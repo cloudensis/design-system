@@ -3,7 +3,7 @@ import { cn } from "../../lib/utils.ts";
 
 const variants = {
 	variant: {
-		default: cn("w-full rounded border border-neutral-800 px-4 py-2"),
+		default: cn("w-full rounded border border-border px-4 py-2"),
 	},
 };
 

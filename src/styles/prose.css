@@ -1,6 +1,6 @@
-/* 記事本文用のスタイル。本文を囲む要素に .prose を付与して使用します */
+/* 記事本文用のスタイル。本文を囲む要素に .prose を付与して使用します。
+   色は body（または .prose を囲む要素）から継承します。 */
 .prose {
-	color: var(--color-fg);
 	line-height: 1.8;
 }
 
@@ -16,7 +16,6 @@
 }
 
 .prose :where(a) {
-	color: var(--color-fg);
 	text-decoration: underline;
 	text-underline-offset: 0.2em;
 }
