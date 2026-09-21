@@ -66,30 +66,24 @@ export function Layout({
 
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
-				<body>
-					<div class="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
-						<Header
-							class="border-border border-b p-0 pb-6 lg:px-0"
-							brand="cloudensis design system"
-						>
-							<nav class="flex flex-wrap gap-4 text-sm">
-								{navItems.map((item) => (
-									<a
-										key={item.href}
-										href={item.href}
-										class="text-fg-muted underline-offset-4 hover:underline"
-									>
-										{item.label}
-									</a>
-								))}
-							</nav>
-						</Header>
-						<main class="flex flex-col gap-10">{children}</main>
-						<Footer
-							class="border-border border-t p-0 pt-6 lg:px-0"
-							copyrightHolder="cloudensis"
-						/>
-					</div>
+				<body class="flex min-h-svh flex-col">
+					<Header brand="cloudensis">
+						<nav class="flex flex-wrap gap-4 text-sm">
+							{navItems.map((item) => (
+								<a
+									key={item.href}
+									href={item.href}
+									class="text-fg-muted underline-offset-4 hover:underline"
+								>
+									{item.label}
+								</a>
+							))}
+						</nav>
+					</Header>
+					<main class="mx-auto max-w-5xl flex-1 px-4 py-12 lg:px-8">
+						{children}
+					</main>
+					<Footer copyrightHolder="cloudensis" />
 				</body>
 			</html>
 		</>
