@@ -139,7 +139,9 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `tsx` / `ts` / `typescript` / `jsx` | TypeScript / TSX |
 | `yaml` / `yml` | YAML |
 
-右上にはコピーボタンが付きます。動作に必要なスクリプトはコンポーネントが自身で出力するため、利用側での設置は不要です。クリップボードへの書き込みには `navigator.clipboard` を使うので、ブラウザの制約により https（または localhost）でのみ動作します。スクリプトはインラインで出力されるため、CSP を設定している場合は `script-src` に `'unsafe-inline'` かハッシュの許可が必要です。
+コードには [`user-select: all`](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を指定しています。クリック 1 回でコード全体が選択されるので、あとは Ctrl / Cmd + C でコピーできます。コードの上にはその操作を示すラベルを表示しています。
+
+コピーのためのクライアント JavaScript は読み込みません。そのため SSG で書き出した静的な HTML でもそのまま動作し、CSP でインラインスクリプトを禁止していても影響を受けません。なお `user-select: all` の性質上、コードの一部だけをドラッグで選択することはできません。
 
 ## エントリ一覧
 
@@ -157,6 +159,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `@cloudensis/design-system/components/ui/textarea` | `Textarea` |
 | `@cloudensis/design-system/components/ui/description-list` | `DescriptionList` |
 | `@cloudensis/design-system/components/layout/section` | `Section` |
+| `@cloudensis/design-system/components/icon/copy` | `CopyIcon` |
 | `@cloudensis/design-system/lib/highlight` | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
 | `@cloudensis/design-system/lib/utils` | `cn` |
 

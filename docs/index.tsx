@@ -184,8 +184,11 @@ app.get("/components", (c) =>
 					lang を渡すと Shiki
 					でハイライトします。ハイライトは同期的に行うため、SSG・SSR・CSR
 					のいずれからでもそのまま呼び出せます。
-					右上のコピーボタンは既定で付き、
-					動作に必要なスクリプトもコンポーネントに同梱しています。
+				</p>
+				<p>
+					コードは user-select: all を指定しているため、クリック 1
+					回で全体が選択されます。あとは Ctrl / Cmd + C でコピーできます。
+					クライアント JavaScript は一切読み込みません。
 				</p>
 				<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
 				<CodeBlock lang="css">{sampleCss}</CodeBlock>
