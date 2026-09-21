@@ -13,7 +13,7 @@ const navItems = [
 ];
 
 type LayoutProps = PropsWithChildren<{
-	title: string;
+	title?: string;
 	/** 省略するとサイト全体の説明を使います。 */
 	description?: string;
 	/** リクエストの URL（c.req.url）。canonical と OGP の絶対 URL に使います。 */
@@ -31,7 +31,7 @@ export function Layout({
 	const { origin, pathname } = new URL(url);
 	const canonicalUrl = new URL(pathname, origin).toString();
 	const ogImageUrl = new URL(site.ogImage.path, origin).toString();
-	const pageTitle = `${title} | ${site.name}`;
+	const pageTitle = title ? `${title} | ${site.name}` : site.name;
 
 	return (
 		<>
