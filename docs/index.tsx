@@ -213,6 +213,11 @@ app.get("/components", (c) =>
 				</p>
 				<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
 				<CodeBlock lang="css">{sampleCss}</CodeBlock>
+				<p>
+					コードブロックはページの配色に関わらず常にダークで表示します。配色は
+					--color-code-* トークンで定義しており、Shiki
+					のテーマ（vitesse-dark）と合わせています。
+				</p>
 				<p>lang を省略した場合はハイライトせずそのまま表示します。</p>
 				<CodeBlock>{"cloudensis Inc."}</CodeBlock>
 				<CodeBlock lang="tsx">

@@ -7,7 +7,7 @@ import { Tooltip } from "./tooltip.tsx";
 const variants = {
 	variant: {
 		default: cn(
-			"cursor-pointer select-all overflow-x-auto rounded border border-border bg-surface p-4 text-sm",
+			"cursor-pointer select-all overflow-x-auto rounded border border-code-border bg-code-bg p-4 text-code-fg text-sm",
 		),
 	},
 };

@@ -9,7 +9,7 @@ import markdown from "@shikijs/langs/markdown";
 import shellscript from "@shikijs/langs/shellscript";
 import tsx from "@shikijs/langs/tsx";
 import yaml from "@shikijs/langs/yaml";
-import theme from "@shikijs/themes/vitesse-light";
+import theme from "@shikijs/themes/vitesse-dark";
 import {
 	createHighlighterCoreSync,
 	getTokenStyleObject,
@@ -18,7 +18,7 @@ import {
 } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
-const themeName = "vitesse-light";
+const themeName = "vitesse-dark";
 
 /* 同梱する文法。html は内部で javascript と css の文法も読み込むため、
    実際にはそれらも利用できます。 */

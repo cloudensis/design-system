@@ -33,11 +33,14 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 | `--color-fg` | `#525252` | 本文の文字色 |
 | `--color-fg-muted` | `#737373` | 補助的な文字色 |
 | `--color-bg` | `#f5f5f5` | ページの背景 |
-| `--color-surface` | `#fafafa` | カードやコードブロックなど、背景の上に置く面 |
+| `--color-surface` | `#fafafa` | カードなど、背景の上に置く面 |
 | `--color-border` | `#e5e5e5` | 区切り線・入力欄の枠線 |
 | `--color-accent` | `#262626` | ボタンなど主要な操作の塗り |
 | `--color-accent-hover` | `#404040` | その hover |
 | `--color-accent-fg` | `#ffffff` | アクセント色の上に置く文字色 |
+| `--color-code-bg` | `#121212` | コードブロックの背景 |
+| `--color-code-fg` | `#dbd7ca` | コードブロックの文字色 |
+| `--color-code-border` | `#2c2c2c` | コードブロックの枠線 |
 | `--font-weight-base` | `300` | 本文の太さ |
 | `--font-weight-strong` | `500` | `b` / `strong` の太さ |
 
@@ -136,6 +139,8 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 <CodeBlock lang="tsx">{code}</CodeBlock>
 <CodeBlock>{code}</CodeBlock>
 ```
+
+コードブロックは、ページの配色に関わらず常にダークで表示します。配色は `--color-code-*` トークンで定義しており、Shiki のテーマ（vitesse-dark）と合わせています。
 
 ハイライトには [Shiki](https://shiki.style/) を使用しています。文法とテーマをパッケージに同梱した同期版のハイライターを使うため、`await` は不要で、SSG・SSR・CSR のいずれからでも同じように呼び出せます。正規表現エンジンは WASM を必要としない JavaScript 実装を選んでいるので、Cloudflare Workers やブラウザでもそのまま動作します。
 
