@@ -12,8 +12,25 @@ jobs:
   test:
     uses: ./.github/workflows/test.yaml
 
+  # Release のタグ（例: 0.10.0）と package.json の version が一致しない場合は、
+  # npm への publish もドキュメントサイトのデプロイも行いません。
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check version matches release tag
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "$TAG" != "$VERSION" ]; then
+            echo "::error::Release のタグ ($TAG) と package.json の version ($VERSION) が一致しません"
+            exit 1
+          fi
+
   publish:
-    needs: test
+    needs: [test, check-version]
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Trusted Publishing (OIDC) に必要
@@ -32,7 +49,7 @@ jobs:
       - run: npm publish
 
   deploy-docs:
-    needs: test
+    needs: [test, check-version]
     runs-on: ubuntu-latest
     permissions:
       contents: read

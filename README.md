@@ -294,7 +294,7 @@ import { Footer } from "@cloudensis/design-system/components/layout/footer";
 ## リリース
 
 1. `package.json` の `version` を上げて main にマージする
-2. GitHub で Release を作成する
+2. GitHub で Release を作成する（タグは `version` と同じ値にする。例: `0.10.0`。一致しない場合、publish とデプロイは行われません）
 3. `.github/workflows/publish.yaml` が npm への publish（Trusted Publishing による OIDC 認証のためトークンは不要）と、ドキュメントサイトの Cloudflare Workers へのデプロイを行う
 
 ドキュメントサイトのデプロイには、リポジトリの Secrets に `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要です。
