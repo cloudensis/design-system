@@ -24,7 +24,10 @@ export function Header({
 	return (
 		<header
 			data-slot="header"
-			class={cn("flex items-center justify-between p-4 lg:px-8", className)}
+			class={cn(
+				"flex flex-wrap items-center justify-between gap-4 p-4 lg:px-8",
+				className,
+			)}
 		>
 			<a href={homeHref} class="flex items-baseline gap-2 text-accent lg:gap-3">
 				<LogoIcon class="h-4 lg:h-6" />

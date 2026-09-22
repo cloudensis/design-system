@@ -34,7 +34,7 @@ export function Footer({
 		<footer
 			data-slot="footer"
 			class={cn(
-				"flex items-center justify-between px-4 py-8 text-sm lg:px-8",
+				"flex flex-wrap items-center justify-between gap-4 px-4 py-8 text-sm lg:px-8",
 				className,
 			)}
 		>
@@ -43,7 +43,7 @@ export function Footer({
 			</span>
 			{children ??
 				(links.length > 0 && (
-					<nav class="flex gap-4">
+					<nav class="flex flex-wrap gap-x-4 gap-y-2">
 						{links.map((link) => (
 							<a
 								key={link.href}
