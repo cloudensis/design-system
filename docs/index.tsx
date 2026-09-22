@@ -621,4 +621,25 @@ app.get("/prose", (c) =>
 	),
 );
 
+app.notFound((c) =>
+	c.html(
+		<Layout
+			title="ページが見つかりません"
+			description="お探しのページは見つかりませんでした。"
+			url={c.req.url}
+		>
+			<Section title="ページが見つかりません">
+				<div class="space-y-3">
+					<p>
+						お探しのページは移動または削除されたか、URL
+						が間違っている可能性があります。
+					</p>
+					<LinkButton href="/">概要に戻る</LinkButton>
+				</div>
+			</Section>
+		</Layout>,
+		404,
+	),
+);
+
 export default app;
