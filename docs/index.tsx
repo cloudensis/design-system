@@ -278,10 +278,10 @@ app.get("/components", (c) =>
 						のいずれからでもそのまま呼び出せます。
 					</p>
 					<p>
-						コードは user-select: all を指定しているため、クリック 1
-						回で全体が選択されます。あとは Ctrl / Cmd + C でコピーできます。
-						その操作はホバー時のツールチップで案内しており、クライアント
-						JavaScript は一切読み込みません。
+						右上のボタンでコード全体をコピーできます。処理は onclick
+						属性のインラインハンドラーだけで行うため、ハイドレーションなしに
+						SSG・SSR・CSR のいずれでも動作します。クリップボード API
+						が使えない環境では、代わりにコード全体を選択します。
 					</p>
 					<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
 					<CodeBlock lang="css">{sampleCss}</CodeBlock>
@@ -534,7 +534,7 @@ app.get("/prose", (c) =>
 						</pre>
 						<p>
 							CodeBlock コンポーネントを使うと、同じ見た目のままハイライトと
-							クリックでの全選択が付きます。
+							コピーボタンが付きます。
 						</p>
 						<CodeBlock lang="css">{sampleProseCss}</CodeBlock>
 						<h2>表</h2>

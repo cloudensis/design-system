@@ -183,7 +183,7 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 ホバー（とフォーカス）で補足を表示します。開閉は CSS だけで行うため、クライアント JavaScript を読み込まずに SSG・SSR・CSR のいずれでも動作します。
 
 ```tsx
-<Tooltip label="クリックで全選択">
+<Tooltip label="補足の説明">
 	<pre tabindex={0}>...</pre>
 </Tooltip>
 <Tooltip label="下に表示します" placement="bottom">...</Tooltip>
@@ -217,9 +217,13 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 | `tsx` / `ts` / `typescript` / `jsx`             | TypeScript / TSX |
 | `yaml` / `yml`                                  | YAML             |
 
-コードには [`user-select: all`](https://developer.mozilla.org/ja/docs/Web/CSS/user-select) を指定しています。クリック 1 回でコード全体が選択されるので、あとは Ctrl / Cmd + C でコピーできます。その操作はホバー（とフォーカス）時のツールチップで案内します。
+右上のボタンでコード全体をクリップボードにコピーします。コピーに成功するとアイコンがチェックマークに変わり、2 秒後に元に戻ります。
 
-コピーのためのクライアント JavaScript は読み込みません。そのため SSG で書き出した静的な HTML でもそのまま動作し、CSP でインラインスクリプトを禁止していても影響を受けません。なお `user-select: all` の性質上、コードの一部だけをドラッグで選択することはできません。
+コピーの処理はボタンの `onclick` 属性に書いた数行のインラインハンドラーだけで行います。hono/jsx の SSR（SSG を含む）では属性としてそのまま HTML に出力され、`hono/jsx/dom` による CSR でも属性として設定されるため、ハイドレーションや別途のスクリプト読み込みなしに SSG・SSR・CSR のいずれから描画しても動作します。
+
+クリップボード API が使えない環境（HTTP で配信している場合など）や書き込みが拒否された場合は、コード全体を選択した状態にするので、Ctrl / Cmd + C でコピーできます。
+
+インラインハンドラーを使うため、CSP で `script-src` を制限している場合は `'unsafe-hashes'` とハンドラーのハッシュ、または `'unsafe-inline'` の許可が必要です。
 
 ## Header / Footer
 
