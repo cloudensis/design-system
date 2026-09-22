@@ -200,158 +200,180 @@ app.get("/components", (c) =>
 		>
 			<div class="space-y-8">
 				<Section title="Button">
-					<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
-						<Button>ボタン</Button>
-						<Button disabled>disabled</Button>
+					<div class="space-y-3">
+						<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
+							<Button>ボタン</Button>
+							<Button disabled>disabled</Button>
+						</div>
+						<CodeBlock lang="tsx">{`<Button>ボタン</Button>`}</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">{`<Button>ボタン</Button>`}</CodeBlock>
 				</Section>
 				<Section title="LinkButton">
-					<p>見た目は Button と同じまま、a 要素としてレンダリングします。</p>
-					<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
-						<LinkButton href="/">リンクボタン</LinkButton>
+					<div class="space-y-3">
+						<p>見た目は Button と同じまま、a 要素としてレンダリングします。</p>
+						<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
+							<LinkButton href="/">リンクボタン</LinkButton>
+						</div>
+						<CodeBlock lang="tsx">{`<LinkButton href="/">リンクボタン</LinkButton>`}</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">{`<LinkButton href="/">リンクボタン</LinkButton>`}</CodeBlock>
 				</Section>
 				<Section title="Input">
-					<p>
-						type に checkbox / radio
-						を渡すと、それぞれに合わせたスタイルでレンダリングします。
-					</p>
-					<div class="flex flex-col gap-4 rounded border border-border p-6">
-						<Input type="text" placeholder="テキスト" />
-						<Input type="email" placeholder="メールアドレス" />
-						<div class="flex items-center gap-2">
-							<Input id="sample-checkbox" type="checkbox" />
-							<label htmlFor="sample-checkbox">チェックボックス</label>
+					<div class="space-y-3">
+						<p>
+							type に checkbox / radio
+							を渡すと、それぞれに合わせたスタイルでレンダリングします。
+						</p>
+						<div class="flex flex-col gap-4 rounded border border-border p-6">
+							<Input type="text" placeholder="テキスト" />
+							<Input type="email" placeholder="メールアドレス" />
+							<div class="flex items-center gap-2">
+								<Input id="sample-checkbox" type="checkbox" />
+								<label htmlFor="sample-checkbox">チェックボックス</label>
+							</div>
+							<div class="flex items-center gap-2">
+								<Input id="sample-radio" type="radio" name="sample" />
+								<label htmlFor="sample-radio">ラジオボタン</label>
+							</div>
 						</div>
-						<div class="flex items-center gap-2">
-							<Input id="sample-radio" type="radio" name="sample" />
-							<label htmlFor="sample-radio">ラジオボタン</label>
-						</div>
+						<CodeBlock lang="tsx">
+							{`<Input type="text" placeholder="テキスト" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
+						</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">
-						{`<Input type="text" placeholder="テキスト" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
-					</CodeBlock>
 				</Section>
 				<Section title="Select">
-					<div class="rounded border border-border p-6">
-						<Select>
-							<option value="">選択してください</option>
-							<option value="a">選択肢 A</option>
-							<option value="b">選択肢 B</option>
-						</Select>
+					<div class="space-y-3">
+						<div class="rounded border border-border p-6">
+							<Select>
+								<option value="">選択してください</option>
+								<option value="a">選択肢 A</option>
+								<option value="b">選択肢 B</option>
+							</Select>
+						</div>
+						<CodeBlock lang="tsx">
+							{`<Select>\n\t<option value="">選択してください</option>\n</Select>`}
+						</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">
-						{`<Select>\n\t<option value="">選択してください</option>\n</Select>`}
-					</CodeBlock>
 				</Section>
 				<Section title="Textarea">
-					<div class="rounded border border-border p-6">
-						<Textarea rows={4} placeholder="お問い合わせ内容" />
+					<div class="space-y-3">
+						<div class="rounded border border-border p-6">
+							<Textarea rows={4} placeholder="お問い合わせ内容" />
+						</div>
+						<CodeBlock lang="tsx">{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
 				</Section>
 				<Section title="Tooltip">
-					<p>
-						ホバー（とフォーカス）で補足を表示します。開閉は CSS
-						だけで行うため、クライアント JavaScript を読み込まずに動作します。
-						ラベルは pointer-events-none
-						なので、表示中でもクリックやホバーを遮りません。
-					</p>
-					<div class="flex flex-wrap items-center gap-6 rounded border border-border p-6">
-						<Tooltip label="上に表示します">
-							<Button>ホバーしてください</Button>
-						</Tooltip>
-						<Tooltip label="下に表示します" placement="bottom">
-							<Button>placement=bottom</Button>
-						</Tooltip>
+					<div class="space-y-3">
+						<p>
+							ホバー（とフォーカス）で補足を表示します。開閉は CSS
+							だけで行うため、クライアント JavaScript を読み込まずに動作します。
+							ラベルは pointer-events-none
+							なので、表示中でもクリックやホバーを遮りません。
+						</p>
+						<div class="flex flex-wrap items-center gap-6 rounded border border-border p-6">
+							<Tooltip label="上に表示します">
+								<Button>ホバーしてください</Button>
+							</Tooltip>
+							<Tooltip label="下に表示します" placement="bottom">
+								<Button>placement=bottom</Button>
+							</Tooltip>
+						</div>
+						<CodeBlock lang="tsx">
+							{`<Tooltip label="上に表示します">\n\t<Button>ホバーしてください</Button>\n</Tooltip>`}
+						</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">
-						{`<Tooltip label="上に表示します">\n\t<Button>ホバーしてください</Button>\n</Tooltip>`}
-					</CodeBlock>
 				</Section>
 				<Section title="CodeBlock">
-					<p>
-						lang を渡すと Shiki
-						でハイライトします。ハイライトは同期的に行うため、SSG・SSR・CSR
-						のいずれからでもそのまま呼び出せます。
-					</p>
-					<p>
-						コードは user-select: all を指定しているため、クリック 1
-						回で全体が選択されます。あとは Ctrl / Cmd + C でコピーできます。
-						その操作はホバー時のツールチップで案内しており、クライアント
-						JavaScript は一切読み込みません。
-					</p>
-					<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
-					<CodeBlock lang="css">{sampleCss}</CodeBlock>
-					<p>
-						コードブロックはページの配色に関わらず常にダークで表示します。配色は
-						--color-code-* トークンで定義しており、Shiki
-						のテーマ（vitesse-dark）と合わせています。
-					</p>
-					<p>lang を省略した場合はハイライトせずそのまま表示します。</p>
-					<CodeBlock>{"cloudensis Inc."}</CodeBlock>
-					<CodeBlock lang="tsx">
-						{`<CodeBlock lang="tsx">{code}</CodeBlock>\n<CodeBlock>{code}</CodeBlock>`}
-					</CodeBlock>
-					<p>
-						同梱している文法は css / html / javascript / json / markdown /
-						shellscript / tsx / yaml です。 ts・jsx・jsonc・sh・md・yml
-						などの別名も同じ文法として扱います。
-					</p>
+					<div class="space-y-3">
+						<p>
+							lang を渡すと Shiki
+							でハイライトします。ハイライトは同期的に行うため、SSG・SSR・CSR
+							のいずれからでもそのまま呼び出せます。
+						</p>
+						<p>
+							右上のボタンでコード全体をコピーできます。処理は onclick
+							属性のインラインハンドラーだけで行うため、ハイドレーションなしに
+							SSG・SSR・CSR のいずれでも動作します。クリップボード API
+							が使えない環境では、代わりにコード全体を選択します。
+						</p>
+						<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
+						<CodeBlock lang="css">{sampleCss}</CodeBlock>
+						<p>
+							コードブロックはページの配色に関わらず常にダークで表示します。配色は
+							--color-code-* トークンで定義しており、Shiki
+							のテーマ（vitesse-dark）と合わせています。
+						</p>
+						<p>lang を省略した場合はハイライトせずそのまま表示します。</p>
+						<CodeBlock>{"cloudensis Inc."}</CodeBlock>
+						<CodeBlock lang="tsx">
+							{`<CodeBlock lang="tsx">{code}</CodeBlock>\n<CodeBlock>{code}</CodeBlock>`}
+						</CodeBlock>
+						<p>
+							同梱している文法は css / html / javascript / json / markdown /
+							shellscript / tsx / yaml です。 ts・jsx・jsonc・sh・md・yml
+							などの別名も同じ文法として扱います。
+						</p>
+					</div>
 				</Section>
 				<Section title="DescriptionList">
-					<p>term と details の組を、2 列のグリッドとして並べます。</p>
-					<div class="rounded border border-border p-6">
-						<DescriptionList
-							items={[
-								{ term: "会社名", details: "cloudensis" },
-								{ term: "設立", details: "2026年9月17日" },
-							]}
-						/>
+					<div class="space-y-3">
+						<p>term と details の組を、2 列のグリッドとして並べます。</p>
+						<div class="rounded border border-border p-6">
+							<DescriptionList
+								items={[
+									{ term: "会社名", details: "cloudensis" },
+									{ term: "設立", details: "2026年9月17日" },
+								]}
+							/>
+						</div>
+						<CodeBlock lang="tsx">
+							{`<DescriptionList\n\titems={[{ term: "会社名", details: "cloudensis" }]}\n/>`}
+						</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">
-						{`<DescriptionList\n\titems={[{ term: "会社名", details: "cloudensis" }]}\n/>`}
-					</CodeBlock>
 				</Section>
 				<Section title="Section">
-					<p>
-						見出し付きのセクションです。id を渡すとページ内リンクになります。
-					</p>
-					<div class="rounded border border-border p-6">
-						<Section id="sample-section" title="セクションの見出し">
-							<p>セクションの本文です。</p>
-						</Section>
+					<div class="space-y-3">
+						<p>
+							見出し付きのセクションです。id を渡すとページ内リンクになります。
+						</p>
+						<div class="rounded border border-border p-6">
+							<Section id="sample-section" title="セクションの見出し">
+								<p>セクションの本文です。</p>
+							</Section>
+						</div>
+						<CodeBlock lang="tsx">{`<Section id="services" title="事業内容">...</Section>`}</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">{`<Section id="services" title="事業内容">...</Section>`}</CodeBlock>
 				</Section>
 				<Section title="Header">
-					<p>
-						サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
-						を右（ナビゲーションやボタンなど）に並べます。
-					</p>
-					<div class="rounded border border-border">
-						<Header homeHref="/" title="cloudensis" />
+					<div class="space-y-3">
+						<p>
+							サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
+							を右（ナビゲーションやボタンなど）に並べます。
+						</p>
+						<div class="rounded border border-border">
+							<Header homeHref="/" title="cloudensis" />
+						</div>
+						<CodeBlock lang="tsx">
+							{`<Header homeHref="/" title="cloudensis">\n\t<nav>...</nav>\n</Header>`}
+						</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">
-						{`<Header homeHref="/" title="cloudensis">\n\t<nav>...</nav>\n</Header>`}
-					</CodeBlock>
 				</Section>
 				<Section title="Footer">
-					<p>
-						サイト共通のフッターです。コピーライト表記を左に、links （または
-						children）を右に並べます。
-					</p>
-					<div class="rounded border border-border">
-						<Footer
-							copyrightHolder="cloudensis"
-							links={[{ href: "/privacy", label: "プライバシーポリシー" }]}
-						/>
+					<div class="space-y-3">
+						<p>
+							サイト共通のフッターです。コピーライト表記を左に、links （または
+							children）を右に並べます。
+						</p>
+						<div class="rounded border border-border">
+							<Footer
+								copyrightHolder="cloudensis"
+								links={[{ href: "/privacy", label: "プライバシーポリシー" }]}
+							/>
+						</div>
+						<CodeBlock lang="tsx">
+							{`<Footer\n\tcopyrightHolder={company.name}\n\tlinks={[{ href: "/privacy", label: "プライバシーポリシー" }]}\n/>`}
+						</CodeBlock>
 					</div>
-					<CodeBlock lang="tsx">
-						{`<Footer\n\tcopyrightHolder={company.name}\n\tlinks={[{ href: "/privacy", label: "プライバシーポリシー" }]}\n/>`}
-					</CodeBlock>
 				</Section>
 			</div>
 		</Layout>,
@@ -534,7 +556,7 @@ app.get("/prose", (c) =>
 						</pre>
 						<p>
 							CodeBlock コンポーネントを使うと、同じ見た目のままハイライトと
-							クリックでの全選択が付きます。
+							コピーボタンが付きます。
 						</p>
 						<CodeBlock lang="css">{sampleProseCss}</CodeBlock>
 						<h2>表</h2>
