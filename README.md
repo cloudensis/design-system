@@ -270,6 +270,7 @@ import { Footer } from "@cloudensis/design-system/components/layout/footer";
 | `@cloudensis/design-system/components/layout/section`      | `Section`                                                    |
 | `@cloudensis/design-system/components/layout/header`       | `Header`                                                     |
 | `@cloudensis/design-system/components/layout/footer`       | `Footer`                                                     |
+| `@cloudensis/design-system/components/icon/check`          | `CheckIcon`                                                  |
 | `@cloudensis/design-system/components/icon/copy`           | `CopyIcon`                                                   |
 | `@cloudensis/design-system/components/icon/logo`           | `LogoIcon`                                                   |
 | `@cloudensis/design-system/lib/highlight`                  | `highlight`（`CodeBlock` が使っている Shiki のハイライター） |
