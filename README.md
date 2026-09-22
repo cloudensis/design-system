@@ -223,7 +223,15 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 
 クリップボード API が使えない環境（HTTP で配信している場合など）や書き込みが拒否された場合は、コード全体を選択した状態にするので、Ctrl / Cmd + C でコピーできます。
 
-インラインハンドラーを使うため、CSP で `script-src` を制限している場合は `'unsafe-hashes'` とハンドラーのハッシュ、または `'unsafe-inline'` の許可が必要です。
+インラインハンドラーを使うため、CSP で `script-src` を制限している場合は、`'unsafe-hashes'` とハンドラーのハッシュを追加してください。許可されるのはこのハンドラーだけなので、`'unsafe-inline'` を追加する必要はありません（XSS への防御が大きく弱まるため、追加しないでください）。nonce や `'strict-dynamic'` と併用しても動作します。
+
+```
+Content-Security-Policy: script-src 'self' 'unsafe-hashes' 'sha256-wF1VEFzEsSuwjFla0DgdENA2ZrpzLrVe/rbZm+MK5ME='
+```
+
+ハッシュはハンドラーの内容から計算するため、ハンドラーを変更したバージョンでは値が変わります。CSP が効いていると、ハッシュが一致しない場合にコピーできなくなります（ブラウザのコンソールに違反が出力されます）。
+
+CSR では、`require-trusted-types-for 'script'`（Trusted Types）を強制しているページで描画するとエラーになります。インラインハンドラーを属性として設定する処理が拒否されるためです。
 
 ## Header / Footer
 
