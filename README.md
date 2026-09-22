@@ -204,6 +204,8 @@ import { CodeBlock } from "@cloudensis/design-system/components/ui/code-block";
 
 ハイライトには [Shiki](https://shiki.style/) を使用しています。文法とテーマをパッケージに同梱した同期版のハイライターを使うため、`await` は不要で、SSG・SSR・CSR のいずれからでも同じように呼び出せます。正規表現エンジンは WASM を必要としない JavaScript 実装を選んでいるので、Cloudflare Workers やブラウザでもそのまま動作します。
 
+文法・テーマ・正規表現エンジンは `CodeBlock`（と `lib/highlight`）を読み込んだ時点でまとめてバンドルに含まれます。`lang` を渡さない場合も同じです。SSR・SSG では配信サイズに影響しませんが、CSR でクライアントのバンドルに含めると minify 後でおよそ 830 KB（gzip でおよそ 130 KB）増えます。クライアントで描画する必要がなければ、`CodeBlock` はサーバー側だけで使ってください。
+
 同梱している文法は次のとおりです。ここにない言語を `lang` に渡すことはできません（型で弾かれます）。
 
 | `lang` に渡せる値                               | 文法             |
