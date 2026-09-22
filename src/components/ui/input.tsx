@@ -41,7 +41,7 @@ function Checkbox({ class: className, ...props }: CheckProps) {
 		<input
 			data-slot="checkbox"
 			type="checkbox"
-			class={cn("size-4", className)}
+			class={cn("size-4 accent-accent", className)}
 			{...props}
 		/>
 	);
@@ -53,5 +53,12 @@ type RadioProps = JSX.IntrinsicElements["input"] & {
 };
 
 function Radio({ class: className, ...props }: RadioProps) {
-	return <input data-slot="radio" type="radio" class={className} {...props} />;
+	return (
+		<input
+			data-slot="radio"
+			type="radio"
+			class={cn("size-4 accent-accent", className)}
+			{...props}
+		/>
+	);
 }
