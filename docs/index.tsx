@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { secureHeaders } from "hono/secure-headers";
 import { Footer } from "../src/components/layout/footer.tsx";
 import { Header } from "../src/components/layout/header.tsx";
 import { Section } from "../src/components/layout/section.tsx";
@@ -83,6 +84,31 @@ const proseElements = [
 ];
 
 const app = new Hono();
+
+/* README で案内している CSP をこのサイト自身にも適用します。CodeBlock のコピー
+   ハンドラーを変えてハッシュが変わると、ここの値が古いままではコピーボタンが
+   動かなくなるため、README の値の更新漏れにも気づけます。
+   style-src の 'unsafe-inline' は、Shiki のトークンやトークン一覧の見本が
+   style 属性を使うために必要です。 */
+app.use(
+	secureHeaders({
+		contentSecurityPolicy: {
+			defaultSrc: ["'self'"],
+			scriptSrc: [
+				"'self'",
+				"'unsafe-hashes'",
+				"'sha256-wF1VEFzEsSuwjFla0DgdENA2ZrpzLrVe/rbZm+MK5ME='",
+			],
+			styleSrc: ["'self'", "'unsafe-inline'"],
+			imgSrc: ["'self'", "data:"],
+			fontSrc: ["'self'", "data:"],
+			objectSrc: ["'none'"],
+			baseUri: ["'none'"],
+			formAction: ["'self'"],
+			frameAncestors: ["'none'"],
+		},
+	}),
+);
 
 app.get("/", (c) =>
 	c.html(
