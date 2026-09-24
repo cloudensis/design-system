@@ -34,27 +34,21 @@ const langAlias = {
 	typescript: "tsx",
 };
 
+/** 同梱している文法ごとの、CodeBlock の lang に渡せる言語名。 */
+export const codeLanguages = {
+	CSS: ["css"],
+	HTML: ["html"],
+	JavaScript: ["javascript", "js"],
+	JSON: ["json", "jsonc"],
+	Markdown: ["markdown", "md"],
+	Shell: ["shellscript", "sh", "bash", "shell", "zsh"],
+	"TypeScript / TSX": ["tsx", "ts", "typescript", "jsx"],
+	YAML: ["yaml", "yml"],
+} as const;
+
 /** CodeBlock の lang に渡せる言語名。 */
 export type CodeLanguage =
-	| "bash"
-	| "css"
-	| "html"
-	| "javascript"
-	| "js"
-	| "json"
-	| "jsonc"
-	| "jsx"
-	| "markdown"
-	| "md"
-	| "sh"
-	| "shell"
-	| "shellscript"
-	| "ts"
-	| "tsx"
-	| "typescript"
-	| "yaml"
-	| "yml"
-	| "zsh";
+	(typeof codeLanguages)[keyof typeof codeLanguages][number];
 
 /** ハイライト後のトークン 1 つ。style はそのまま style 属性に渡せる文字列です。 */
 export type CodeToken = {
