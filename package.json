@@ -7,7 +7,19 @@
 		"url": "git+https://github.com/cloudensis/design-system.git"
 	},
 	"type": "module",
+	"files": [
+		"dist",
+		"src/styles"
+	],
+	"exports": {
+		"./colors.css": "./src/styles/colors.css",
+		"./components/*": {
+			"types": "./dist/components/*.d.ts",
+			"default": "./dist/components/*.js"
+		}
+	},
 	"scripts": {
+		"build": "rm -rf dist && tsc -p tsconfig.build.json",
 		"typecheck": "tsc"
 	},
 	"peerDependencies": {
