@@ -8,7 +8,6 @@ type ButtonProps = JSX.IntrinsicElements["button"] & {
 export function Button({ class: className, children, ...props }: ButtonProps) {
 	return (
 		<button
-			data-slot="button"
 			class={cn(
 				"inline-block cursor-pointer rounded-sm bg-emphasis px-4 py-2 text-on-emphasis not-disabled:hover:bg-emphasis/90 disabled:cursor-not-allowed disabled:opacity-50",
 				className,
