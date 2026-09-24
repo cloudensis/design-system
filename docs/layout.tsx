@@ -61,7 +61,6 @@ export function Layout({
 	   クエリ文字列は canonical に含めません。 */
 	const { origin, pathname } = new URL(url);
 	const canonicalUrl = new URL(pathname, origin).toString();
-	const ogImageUrl = new URL(site.ogImage.path, origin).toString();
 	const pageTitle = title ? `${title} | ${site.name}` : site.name;
 
 	return (
@@ -80,7 +79,7 @@ export function Layout({
 					<meta property="og:title" content={pageTitle} />
 					<meta property="og:description" content={description} />
 					<meta property="og:url" content={canonicalUrl} />
-					<meta property="og:image" content={ogImageUrl} />
+					<meta property="og:image" content={site.ogImage.url} />
 					<meta
 						property="og:image:width"
 						content={String(site.ogImage.width)}
@@ -93,7 +92,7 @@ export function Layout({
 					<meta name="twitter:card" content="summary_large_image" />
 
 					<link rel="icon" type="image/svg+xml" href={site.favicon} />
-					<link rel="apple-touch-icon" href={site.appleTouchIcon} />
+					<link rel="apple-touch-icon" href={site.logo} />
 
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
