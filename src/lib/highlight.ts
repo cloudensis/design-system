@@ -1,7 +1,3 @@
-/* Shiki によるコードハイライト。文法とテーマを同梱した同期版のハイライターを
-   使うため、await を挟まずに呼び出せます。正規表現エンジンには WASM を必要と
-   しない JavaScript 実装を選んでいるので、Node.js・Cloudflare Workers・
-   ブラウザのいずれでも同じように動作します。 */
 import css from "@shikijs/langs/css";
 import html from "@shikijs/langs/html";
 import json from "@shikijs/langs/json";
@@ -20,8 +16,7 @@ import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
 const themeName = "vitesse-dark";
 
-/* コメントの色は半透明（#758575dd）で、背景と混ざるとコントラスト比が 4.5:1 に
-   届かないため、不透明にします。 */
+/* 半透明（#758575dd）ではコントラストが足りないため不透明にする。 */
 const theme = {
 	...vitesseDark,
 	tokenColors: vitesseDark.tokenColors?.map((tokenColor) =>
@@ -34,13 +29,10 @@ const theme = {
 	),
 };
 
-/* 同梱する文法。html は内部で javascript と css の文法も読み込むため、
-   実際にはそれらも利用できます。 */
+/* html は javascript と css の文法も読み込む。 */
 const langs = [css, html, json, markdown, shellscript, tsx, yaml];
 
-/* 同じ文法で解析できる言語名を別名として登録します。tsx の文法は TypeScript や
-   JavaScript もそのまま解析できるため、ts・jsx などは tsx に寄せています。
-   md・js・sh・yml などの別名は文法側が持っているため、ここでの指定は不要です。 */
+/* tsx の文法で ts・jsx なども解析できる。 */
 const langAlias = {
 	jsonc: "json",
 	jsx: "tsx",
@@ -48,7 +40,7 @@ const langAlias = {
 	typescript: "tsx",
 };
 
-/** 同梱している文法ごとの、CodeBlock の lang に渡せる言語名。 */
+/** 文法ごとの、lang に渡せる名前。 */
 export const codeLanguages = {
 	CSS: ["css"],
 	HTML: ["html"],
@@ -60,18 +52,15 @@ export const codeLanguages = {
 	YAML: ["yaml", "yml"],
 } as const;
 
-/** CodeBlock の lang に渡せる言語名。 */
 export type CodeLanguage =
 	(typeof codeLanguages)[keyof typeof codeLanguages][number];
 
-/** ハイライト後のトークン 1 つ。style はそのまま style 属性に渡せる文字列です。 */
+/** style は style 属性にそのまま渡せる。 */
 export type CodeToken = {
 	content: string;
 	style: string;
 };
 
-/* ハイライターの生成は文法の読み込みを伴うため、最初に必要になった時点で 1 度
-   だけ行い、以降はモジュールスコープで使い回します。 */
 let highlighter: HighlighterCore | undefined;
 
 const getHighlighter = (): HighlighterCore =>
@@ -82,10 +71,7 @@ const getHighlighter = (): HighlighterCore =>
 		themes: [theme],
 	}));
 
-/**
- * コードを行ごとのトークンに分解します。同梱していない言語が渡された場合は
- * undefined を返すので、呼び出し側はハイライトなしで描画してください。
- */
+/** 同梱していない言語なら undefined を返す。 */
 export function highlight(
 	code: string,
 	lang: CodeLanguage,

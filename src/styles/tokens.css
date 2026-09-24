@@ -1,5 +1,3 @@
-/* 色・余白・タイポグラフィなどの共通トークンを定義します。
-   theme ブロックで定義することで CSS 変数とユーティリティクラスの両方が利用できます。 */
 @theme {
 	--color-fg: #525252;
 	--color-fg-muted: #6b6b6b;
@@ -11,16 +9,14 @@
 	--color-accent-hover: #404040;
 	--color-accent-fg: #ffffff;
 
-	/* 入力エラーなど。背景に対して文字色としても使えるコントラスト（4.5:1 以上）を確保しています。 */
 	--color-danger: #b91c1c;
 
-	/* コードブロックは配色モードに関わらず常にダークで表示します。値は Shiki の
-	   vitesse-dark テーマ（コードのハイライトに使用）に合わせています。 */
+	/* Shiki の vitesse-dark に合わせる。 */
 	--color-code-bg: #121212;
 	--color-code-fg: #dbd7ca;
 	--color-code-border: #2c2c2c;
 
-	/* rounded（固定値）ではなく rounded-sm などを使うと、ここの値が反映されます。 */
+	/* rounded は固定値のため、rounded-sm などで参照する。 */
 	--radius-xs: 0.125rem;
 	--radius-sm: 0.25rem;
 

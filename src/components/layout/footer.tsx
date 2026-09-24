@@ -4,25 +4,20 @@ import { cn } from "../../lib/utils.ts";
 type FooterLink = {
 	href: string;
 	label: Child;
-	/** true で新しいタブで開きます（target="_blank" rel="noopener noreferrer"）。 */
+	/** 新しいタブで開く。 */
 	external?: boolean;
 };
 
 type FooterProps = {
 	class?: string;
-	/** コピーライト表記に使う名称（会社名など）。 */
 	copyrightHolder: Child;
-	/** コピーライト表記の年。省略すると現在の年になります。 */
+	/** 省略すると現在の年。 */
 	year?: number;
-	/** 右側に並べるリンク。 */
 	links?: FooterLink[];
-	/** リンクの代わりに任意の内容を右側に置きたい場合に使います。 */
+	/** links の代わりに右側に置く内容。 */
 	children?: Child;
 };
 
-/**
- * サイト共通のフッター。コピーライト表記を左、リンク（または children）を右に並べます。
- */
 export function Footer({
 	class: className,
 	copyrightHolder,

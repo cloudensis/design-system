@@ -1,7 +1,5 @@
 import { cn } from "../../lib/utils.ts";
 
-/* サイトのロゴマーク。大きさは h-* / w-* のクラスで、色は currentColor 経由で
-   親要素の color を継承します。 */
 type LogoIconProps = {
 	class?: string;
 };

@@ -32,7 +32,7 @@ async function CopyHandlerCsp() {
 	);
 }
 
-/* /components ページの各セクション。サイドバーのリンクもこの配列から作ります。 */
+/* サイドバーのリンクもこの配列から作る。 */
 export const componentSections: { name: string; body: Child }[] = [
 	{
 		name: "Button",
@@ -42,7 +42,7 @@ export const componentSections: { name: string; body: Child }[] = [
 					<Button>ボタン</Button>
 					<Button disabled>disabled</Button>
 				</div>
-				<p>disabled を指定すると半透明になり、ホバーしても色が変わりません。</p>
+				<p>disabled で半透明になり、ホバーしても色が変わりません。</p>
 				<CodeBlock lang="tsx">
 					{`<Button>ボタン</Button>\n<Button disabled>disabled</Button>`}
 				</CodeBlock>
@@ -53,15 +53,13 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "LinkButton",
 		body: (
 			<div class="space-y-3">
-				<p>見た目は Button と同じまま、a 要素としてレンダリングします。</p>
+				<p>Button と同じ見た目の a 要素です。</p>
 				<div class="flex flex-wrap items-center gap-4 rounded-sm border border-border p-6">
 					<LinkButton href="/">リンクボタン</LinkButton>
 					<LinkButton aria-disabled="true">aria-disabled</LinkButton>
 				</div>
 				<p>
-					a 要素には disabled がないため、無効にするときは href を外して
-					aria-disabled="true" を指定します。Button の disabled
-					と同じ見た目になり、クリックも受け付けません。
+					無効にするときは href を外して aria-disabled="true" を指定します。
 				</p>
 				<CodeBlock lang="tsx">
 					{`<LinkButton href="/">リンクボタン</LinkButton>\n<LinkButton aria-disabled="true">aria-disabled</LinkButton>`}
@@ -73,10 +71,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Input",
 		body: (
 			<div class="space-y-3">
-				<p>
-					type に checkbox / radio
-					を渡すと、それぞれに合わせたスタイルでレンダリングします。
-				</p>
+				<p>type に checkbox / radio を渡すと、それぞれのスタイルになります。</p>
 				<div class="flex flex-col gap-4 rounded-sm border border-border p-6">
 					<Input type="text" placeholder="テキスト" />
 					<Input type="email" placeholder="メールアドレス" />
@@ -97,9 +92,8 @@ export const componentSections: { name: string; body: Child }[] = [
 					</div>
 				</div>
 				<p>
-					disabled を指定すると半透明になります。入力エラーは
-					aria-invalid="true" で示し、枠線が --color-danger になります。Select
-					と Textarea も同じです。
+					disabled で半透明、aria-invalid="true" で枠線が --color-danger
+					になります。Select と Textarea も同じです。
 				</p>
 				<CodeBlock lang="tsx">
 					{`<Input type="text" placeholder="テキスト" />\n<Input type="text" disabled />\n<Input type="email" aria-invalid="true" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
@@ -140,14 +134,12 @@ export const componentSections: { name: string; body: Child }[] = [
 		body: (
 			<div class="space-y-3">
 				<p>
-					ホバー（とフォーカス）で補足を表示します。開閉は CSS
-					だけで行うため、クライアント JavaScript を読み込まずに動作します。
-					ラベルは pointer-events-none
-					なので、表示中でもクリックやホバーを遮りません。
+					ホバーとフォーカスで補足を表示します。CSS
+					だけで動き、表示中もクリックを遮りません。
 				</p>
 				<p>
-					キーボードから表示するには、中の要素がフォーカスを受け取れる必要があります（button
-					や a 以外の要素なら tabindex を指定するなど）。
+					キーボードで表示するには、中の要素がフォーカスできる必要があります（tabindex
+					など）。
 				</p>
 				<div class="flex flex-wrap items-center gap-6 rounded-sm border border-border p-6">
 					<Tooltip label="上に表示します">
@@ -169,31 +161,21 @@ export const componentSections: { name: string; body: Child }[] = [
 			<div class="space-y-3">
 				<p>
 					lang を渡すと Shiki
-					でハイライトします。ハイライトは同期的に行うため、SSG・SSR・CSR
-					のいずれからでもそのまま呼び出せます。
+					でハイライトします。同期的に動くので、SSG・SSR・CSR
+					のどこからでも使えます。
 				</p>
 				<p>
-					右上のボタンでコード全体をコピーできます。処理は onclick
-					属性のインラインハンドラーだけで行うため、ハイドレーションなしに
-					SSG・SSR・CSR のいずれでも動作します。クリップボード API
-					が使えない環境では、代わりにコード全体を選択します。
+					右上のボタンでコードをコピーできます。インラインハンドラーだけで動くため、ハイドレーションは不要です。
 				</p>
 				<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
 				<CodeBlock lang="css">{sampleCss}</CodeBlock>
-				<p>
-					コードブロックはページの配色に関わらず常にダークで表示します。配色は
-					--color-code-* トークンで定義しており、Shiki
-					のテーマ（vitesse-dark）と合わせています。
-				</p>
-				<p>lang を省略した場合はハイライトせずそのまま表示します。</p>
+				<p>ページの配色に関わらず常にダークで、配色は --color-code-* です。</p>
+				<p>lang を省略するとハイライトしません。</p>
 				<CodeBlock>{"cloudensis Inc."}</CodeBlock>
 				<CodeBlock lang="tsx">
 					{`<CodeBlock lang="tsx">{code}</CodeBlock>\n<CodeBlock>{code}</CodeBlock>`}
 				</CodeBlock>
-				<p>
-					同梱している文法と、lang に渡せる値は次のとおりです。ここにない言語を
-					lang に渡すことはできません（型で弾かれます）。
-				</p>
+				<p>lang に渡せる値です。ほかの値は型エラーになります。</p>
 				<table class="w-full border-collapse text-left text-sm">
 					<thead>
 						<tr class="border-border border-b">
@@ -213,45 +195,32 @@ export const componentSections: { name: string; body: Child }[] = [
 
 				<h3 class="pt-4 font-medium text-accent">バンドルサイズ</h3>
 				<p>
-					文法とテーマを同梱した同期版のハイライターを使うため、await
-					は不要です。正規表現エンジンは WASM を必要としない JavaScript
-					実装を選んでいるので、Cloudflare Workers
-					やブラウザでもそのまま動作します。
+					正規表現エンジンに WASM 不要の JavaScript
+					実装を使っているため、Cloudflare Workers やブラウザでも動きます。
 				</p>
 				<p>
-					文法・テーマ・正規表現エンジンは CodeBlock（と
-					lib/highlight）を読み込んだ時点でまとめてバンドルに含まれます。lang
-					を渡さない場合も同じです。SSR・SSG では配信サイズに影響しませんが、CSR
-					でクライアントのバンドルに含めると minify 後でおよそ 830 KB（gzip
-					でおよそ 130 KB）増えます。クライアントで描画する必要がなければ、
-					CodeBlock はサーバー側だけで使ってください。
+					文法とテーマは CodeBlock（と
+					lib/highlight）を読み込むとバンドルに含まれます。CSR
+					で使うとクライアントのバンドルが minify 後で約 830 KB（gzip で約 130
+					KB）増えるため、できるだけサーバー側で使ってください。
 				</p>
 
 				<h3 class="pt-4 font-medium text-accent">コピーボタン</h3>
 				<p>
-					コピーに成功するとアイコンがチェックマークに変わり、2
-					秒後に元に戻ります。クリップボード API が使えない環境（HTTP
-					で配信している場合など）や書き込みが拒否された場合は、コード全体を選択した状態にするので、Ctrl
-					/ Cmd + C でコピーできます。
+					コピーするとアイコンが 2 秒間チェックマークになります。クリップボード
+					API が使えない場合は、コード全体を選択します。
 				</p>
 
 				<h3 class="pt-4 font-medium text-accent">CSP</h3>
 				<p>
-					コピーボタンはインラインハンドラーを使うため、CSP で script-src
-					を制限している場合は、'unsafe-hashes'
-					とハンドラーのハッシュを追加してください。許可されるのはこのハンドラーだけなので、'unsafe-inline'
-					を追加する必要はありません（XSS
-					への防御が大きく弱まるため、追加しないでください）。nonce や
-					'strict-dynamic' と併用しても動作します。このサイトも同じ CSP
-					で配信しています。
+					CSP で script-src を制限している場合は、'unsafe-hashes'
+					と次のハッシュを追加してください。'unsafe-inline' は不要です。
 				</p>
 				<CopyHandlerCsp />
+				<p>ハッシュはハンドラーを変えたバージョンで変わります。</p>
 				<p>
-					ハッシュはハンドラーの内容から計算するため、ハンドラーを変更したバージョンでは値が変わります。ハッシュが一致しない場合はコピーできなくなります（ブラウザのコンソールに違反が出力されます）。
-				</p>
-				<p>
-					CSR では、require-trusted-types-for 'script'（Trusted
-					Types）を強制しているページで描画するとエラーになります。インラインハンドラーを属性として設定する処理が拒否されるためです。
+					CSR では、Trusted Types（require-trusted-types-for
+					'script'）を強制したページで描画するとエラーになります。
 				</p>
 			</div>
 		),
@@ -260,7 +229,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "DescriptionList",
 		body: (
 			<div class="space-y-3">
-				<p>term と details の組を、2 列のグリッドとして並べます。</p>
+				<p>term と details を 2 列で並べます。</p>
 				<div class="rounded-sm border border-border p-6">
 					<DescriptionList
 						items={[
@@ -279,7 +248,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Section",
 		body: (
 			<div class="space-y-3">
-				<p>見出し付きのセクションです。id を渡すとページ内リンクになります。</p>
+				<p>見出し付きのセクションです。id でページ内リンクにできます。</p>
 				<div class="rounded-sm border border-border p-6">
 					<Section id="sample-section" title="セクションの見出し">
 						<p>セクションの本文です。</p>
@@ -293,11 +262,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Header",
 		body: (
 			<div class="space-y-3">
-				<p>
-					サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
-					を右（ナビゲーションやボタンなど）に並べます。ロゴは
-					LogoIcon（cloudensis のロゴマーク）で固定です。
-				</p>
+				<p>ロゴ（LogoIcon）とブランド名を左、children を右に並べます。</p>
 				<div class="rounded-sm border border-border">
 					<Header homeHref="/" title="cloudensis" />
 				</div>
@@ -311,11 +276,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Footer",
 		body: (
 			<div class="space-y-3">
-				<p>
-					サイト共通のフッターです。コピーライト表記を左に、links （または
-					children）を右に並べます。links の代わりに children
-					を渡すと、右側を自由な内容に差し替えられます。
-				</p>
+				<p>コピーライトを左、links（または children）を右に並べます。</p>
 				<div class="rounded-sm border border-border">
 					<Footer
 						copyrightHolder="cloudensis"

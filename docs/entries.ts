@@ -1,7 +1,6 @@
 import pkg from "../package.json";
 
-/* package.json の exports から、公開しているエントリの一覧を作ります。
-   ./components/* はファイルに展開し、JS のエントリは export している名前を並べます。 */
+/* package.json の exports からエントリ一覧を作る。 */
 const modules: Record<string, Record<string, unknown>> = import.meta.glob(
 	["../src/components/**/*.tsx", "../src/lib/*.ts"],
 	{ eager: true },

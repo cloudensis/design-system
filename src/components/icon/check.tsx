@@ -1,7 +1,5 @@
 import { cn } from "../../lib/utils.ts";
 
-/* アイコンは装飾なので、読み上げの対象から外して class だけを受け取ります。
-   大きさは size-* のクラスで調整してください。 */
 type CheckIconProps = {
 	class?: string;
 };

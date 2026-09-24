@@ -10,20 +10,11 @@ const variants = {
 
 type TooltipProps = {
 	class?: string;
-	/** ホバー・フォーカス時に表示する内容。 */
 	label: Child;
 	placement?: keyof typeof variants.placement;
 	children: Child;
 };
 
-/**
- * ホバー（とフォーカス）で補足を表示するツールチップ。開閉は CSS だけで行うため、
- * クライアント JavaScript を読み込まずに SSG・SSR・CSR のいずれでも動作します。
- *
- * ラベルは pointer-events-none なので、表示中でもクリックやホバーを遮りません。
- * キーボードから表示するには、中の要素がフォーカスを受け取れる必要があります
- * （tabindex を指定するなど）。
- */
 export function Tooltip({
 	label,
 	placement = "top",

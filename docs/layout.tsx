@@ -7,8 +7,6 @@ import { componentSections } from "./components.tsx";
 import { site } from "./site.ts";
 import styleUrl from "./style.css?url";
 
-/* サイドバーのナビゲーション。コンポーネントは /components のセクションへの
-   ページ内リンクです。 */
 const navGroups = [
 	{
 		label: "Foundations",
@@ -32,9 +30,9 @@ const navGroups = [
 
 type LayoutProps = PropsWithChildren<{
 	title?: string;
-	/** 省略するとサイト全体の説明を使います。 */
+	/** 省略するとサイト全体の説明。 */
 	description?: string;
-	/** リクエストの URL（c.req.url）。canonical と OGP の絶対 URL に使います。 */
+	/** canonical と og:url に使う。 */
 	url: string;
 }>;
 
@@ -44,8 +42,7 @@ export function Layout({
 	url,
 	children,
 }: LayoutProps) {
-	/* デプロイ先のドメインを決め打ちせず、リクエストの URL から組み立てます。
-	   クエリ文字列は canonical に含めません。 */
+	/* ドメインを決め打ちしない。クエリ文字列は canonical に含めない。 */
 	const { origin, pathname } = new URL(url);
 	const canonicalUrl = new URL(pathname, origin).toString();
 	const pageTitle = title ? `${title} | ${site.name}` : site.name;
@@ -89,7 +86,7 @@ export function Layout({
 						class="sticky top-0 z-10 h-16 flex-nowrap border-border border-b bg-bg py-0"
 					/>
 
-					{/* 幅の狭い画面ではサイドバーの代わりにページ単位のリンクを横に並べます。 */}
+					{/* 狭い画面ではサイドバーの代わりに横に並べる。 */}
 					<nav class="flex gap-4 overflow-x-auto border-border border-b px-4 py-3 text-sm lg:hidden">
 						{[...navGroups[0].items, navGroups[1].items[0]].map((item) => (
 							<a

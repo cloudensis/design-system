@@ -7,7 +7,7 @@ export default defineConfig({
 	use: {
 		baseURL: "http://localhost:5173",
 		browserName: "chromium",
-		/* インストール済みの Chromium を使う場合はパスを指定します。 */
+		/* インストール済みの Chromium を使う場合に指定する。 */
 		launchOptions: { executablePath: process.env.CHROMIUM_PATH },
 	},
 	webServer: {

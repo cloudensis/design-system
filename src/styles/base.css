@@ -1,6 +1,3 @@
-/* 既定のスタイル。利用側で class を指定しなくてもトークンの配色と文字の太さが
-   適用されます。@layer base に置いているため、ユーティリティクラス
-   （bg-*, text-*, font-* など）でいつでも上書きできます。 */
 @layer base {
 	body {
 		background-color: var(--color-bg);
@@ -8,13 +5,12 @@
 		font-weight: var(--font-weight-light);
 	}
 
-	/* preflight の bolder は継承値 300 に対して 400 にしかならないため上書きします。 */
+	/* preflight の bolder は継承値 300 に対して 400 にしかならないため。 */
 	b,
 	strong {
 		font-weight: var(--font-weight-medium);
 	}
 
-	/* キーボード操作時のフォーカスを、要素によらず同じ見た目で示します。 */
 	:focus-visible {
 		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
