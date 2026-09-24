@@ -21,12 +21,3 @@
 		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
 		sans-serif;
 }
-
-/* 独自名のユーティリティは tailwind-merge が判別できないため、@theme に置きません。 */
-@layer theme {
-	:root,
-	:host {
-		--font-weight-base: 300;
-		--font-weight-strong: 500;
-	}
-}

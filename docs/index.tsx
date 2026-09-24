@@ -205,11 +205,11 @@ app.get("/", (c) =>
 					<p>
 						body には --color-bg / --color-fg
 						とライト（300）の文字の太さが既定で適用されます。b / strong は
-						--font-weight-strong（500）です。 利用側で bg-* や text-*、font-*
+						ミディアム（500）です。 利用側で bg-* や text-*、font-*
 						のユーティリティクラスを指定すればいつでも上書きできます。
 					</p>
 					<CodeBlock lang="css">
-						{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-base);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-strong);\n}`}
+						{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-light);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-medium);\n}`}
 					</CodeBlock>
 					<p>
 						b / strong を明示しているのは、Tailwind の preflight が指定する
@@ -283,7 +283,7 @@ app.get("/tokens", (c) =>
 	c.html(
 		<Layout
 			title="トークン"
-			description="配色・フォント・文字の太さを定義するデザイントークンの一覧。"
+			description="配色とフォントを定義するデザイントークンの一覧。"
 			url={c.req.url}
 		>
 			<Section title="トークン一覧">
@@ -294,12 +294,7 @@ app.get("/tokens", (c) =>
 					など）としても利用できます。
 				</p>
 				<p>
-					文字の太さ（--font-weight-*）は CSS
-					変数のみで、ユーティリティは生成しません。クラスでは font-light /
-					font-medium を使ってください。
-				</p>
-				<p>
-					色と文字の太さはセマンティックな名前で定義しています。値はこのパッケージが所有しており、Tailwind
+					色はセマンティックな名前で定義しています。値はこのパッケージが所有しており、Tailwind
 					の既定パレットは参照していません。コンポーネントも neutral-*
 					のような生のパレットは使わず、このトークン経由で配色しています。
 				</p>
@@ -324,10 +319,6 @@ app.get("/tokens", (c) =>
 											class="inline-block size-6 rounded border border-border align-middle"
 											style={`background: var(${token.name})`}
 										/>
-									) : token.name.startsWith("--font-weight-") ? (
-										<span style={`font-weight: var(${token.name})`}>
-											Aa あア亜 0123
-										</span>
 									) : (
 										<span style={`font-family: var(${token.name})`}>
 											Aa あア亜 0123
