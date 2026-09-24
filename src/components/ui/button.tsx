@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils.ts";
 const variants = {
 	variant: {
 		default: cn(
-			"inline-block cursor-pointer rounded bg-accent text-accent-fg hover:bg-accent-hover",
+			"inline-block cursor-pointer rounded-sm bg-accent text-accent-fg not-disabled:not-aria-disabled:hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
 		),
 	},
 	size: {

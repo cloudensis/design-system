@@ -40,7 +40,7 @@ export function Tooltip({
 				data-slot="tooltip-label"
 				role="tooltip"
 				class={cn(
-					"pointer-events-none absolute z-10 flex items-center gap-1 whitespace-nowrap rounded bg-accent px-2 py-1 text-accent-fg text-xs opacity-0 transition-opacity group-focus-within/tooltip:opacity-100 group-hover/tooltip:opacity-100",
+					"pointer-events-none absolute z-10 flex items-center gap-1 whitespace-nowrap rounded-sm bg-accent px-2 py-1 text-accent-fg text-xs opacity-0 transition-opacity group-focus-within/tooltip:opacity-100 group-hover/tooltip:opacity-100",
 					variants.placement[placement],
 				)}
 			>

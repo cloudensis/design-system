@@ -148,6 +148,10 @@ app.get("/", (c) =>
 						にしか解決されず本文と区別がつかないためです。
 					</p>
 					<p>
+						キーボードで操作したときのフォーカス（:focus-visible）には、要素によらず
+						--color-accent の 2px のアウトラインを表示します。
+					</p>
+					<p>
 						@layer base
 						で定義しているため、ユーティリティクラスを指定すればいつでも上書きできます。配色をまとめて変えたい場合は、利用側の
 						@theme でトークンを上書きしてください。
@@ -229,6 +233,12 @@ app.get("/tokens", (c) =>
 					の既定パレットは参照していません。コンポーネントも neutral-*
 					のような生のパレットは使わず、このトークン経由で配色しています。
 				</p>
+				<p>
+					角丸はコンポーネントで rounded-sm などを使い、--radius-*
+					を参照しています（Tailwind の rounded
+					は固定値でトークンを参照しません）。文字サイズなどそのほかの値は
+					Tailwind の既定値を使っています。
+				</p>
 				<table class="w-full border-collapse text-left text-sm">
 					<thead>
 						<tr class="border-border border-b">
@@ -247,8 +257,13 @@ app.get("/tokens", (c) =>
 								<td class="p-2">
 									{token.name.startsWith("--color-") ? (
 										<span
-											class="inline-block size-6 rounded border border-border align-middle"
+											class="inline-block size-6 rounded-sm border border-border align-middle"
 											style={`background: var(${token.name})`}
+										/>
+									) : token.name.startsWith("--radius-") ? (
+										<span
+											class="inline-block size-6 border border-fg-muted align-middle"
+											style={`border-radius: var(${token.name})`}
 										/>
 									) : (
 										<span style={`font-family: var(${token.name})`}>
@@ -367,7 +382,7 @@ app.get("/prose", (c) =>
 				<p>
 					上の表に挙げたタグを実際に並べた記事です。余白・行間・配色の確認に使えます。
 				</p>
-				<article class="prose rounded border border-border p-6">
+				<article class="prose rounded-sm border border-border p-6">
 					<h1>記事スタイルのサンプル</h1>
 					<p>
 						この記事は <code>.prose</code> が扱う HTML

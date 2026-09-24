@@ -3,7 +3,9 @@ import { cn } from "../../lib/utils.ts";
 
 const variants = {
 	variant: {
-		default: cn("w-full rounded border border-border px-4 py-2"),
+		default: cn(
+			"w-full rounded-sm border border-border px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-danger",
+		),
 	},
 };
 
@@ -41,7 +43,10 @@ function Checkbox({ class: className, ...props }: CheckProps) {
 		<input
 			data-slot="checkbox"
 			type="checkbox"
-			class={cn("size-4 accent-accent", className)}
+			class={cn(
+				"size-4 accent-accent disabled:cursor-not-allowed disabled:opacity-50",
+				className,
+			)}
 			{...props}
 		/>
 	);
@@ -57,7 +62,10 @@ function Radio({ class: className, ...props }: RadioProps) {
 		<input
 			data-slot="radio"
 			type="radio"
-			class={cn("size-4 accent-accent", className)}
+			class={cn(
+				"size-4 accent-accent disabled:cursor-not-allowed disabled:opacity-50",
+				className,
+			)}
 			{...props}
 		/>
 	);
