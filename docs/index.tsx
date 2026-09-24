@@ -12,6 +12,7 @@ import { Textarea } from "../src/components/ui/textarea.tsx";
 import { Tooltip } from "../src/components/ui/tooltip.tsx";
 import tokensCss from "../src/styles/tokens.css?raw";
 import { Layout } from "./layout.tsx";
+import { site } from "./site.ts";
 
 const tokens = [...tokensCss.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(
 	([, name, value]) => ({ name, value: value.trim().replace(/\s+/g, " ") }),
@@ -153,7 +154,7 @@ app.use(
 			defaultSrc: ["'self'"],
 			scriptSrc: ["'self'", "'unsafe-hashes'", copyHandlerHash],
 			styleSrc: ["'self'", "'unsafe-inline'"],
-			imgSrc: ["'self'", "data:"],
+			imgSrc: ["'self'", "data:", site.assetOrigin],
 			fontSrc: ["'self'", "data:"],
 			objectSrc: ["'none'"],
 			baseUri: ["'none'"],
@@ -810,7 +811,7 @@ app.get("/prose", (c) =>
 					<h2>図版</h2>
 					<figure>
 						<img
-							src="/logo.png"
+							src={site.logo}
 							alt="cloudensis のロゴ"
 							width="120"
 							height="120"

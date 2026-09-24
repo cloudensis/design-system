@@ -54,9 +54,9 @@ import { Button } from "@cloudensis/design-system/components/ui/button";
 
 ## ドキュメントサイト
 
-`docs/` はこのパッケージ自体を使ったドキュメントサイトで、Cloudflare Workers で配信します。トークンやコンポーネントの仕様など利用者向けの説明はドキュメントサイトを正とし、README には導入手順だけを書きます。仕様を変えたときは `docs/` を更新してください。favicon と OGP 画像は [cloudensis.com](https://cloudensis.com) と同じものを `public/` に置いて共用しています（`public/` は npm の配布物には含みません）。
+`docs/` はこのパッケージ自体を使ったドキュメントサイトで、Cloudflare Workers で配信します。トークンやコンポーネントの仕様など利用者向けの説明はドキュメントサイトを正とし、README には導入手順だけを書きます。仕様を変えたときは `docs/` を更新してください。favicon・ロゴ・OGP 画像は [cloudensis.com](https://cloudensis.com) 直下のものを参照しています。
 
-`canonical` と OGP の絶対 URL はリクエストの URL から組み立てるため、デプロイ先のドメインをコードに持つ必要はありません。
+`canonical` と `og:url` はリクエストの URL から組み立てるため、デプロイ先のドメインをコードに持つ必要はありません。
 
 ## リリース
 
