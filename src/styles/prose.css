@@ -63,7 +63,7 @@
 
 	/* ── 見出し ───────────────────────────────────────────────────────── */
 	.prose :where(h1, h2, h3, h4, h5, h6) {
-		font-weight: var(--font-weight-strong);
+		font-weight: var(--font-weight-medium);
 		line-height: 1.4;
 		text-wrap: balance;
 	}
@@ -100,7 +100,7 @@
 	}
 
 	.prose :where(b, strong) {
-		font-weight: var(--font-weight-strong);
+		font-weight: var(--font-weight-medium);
 	}
 
 	.prose :where(em, i, cite, dfn, var) {
@@ -232,7 +232,7 @@
 
 	/* ── 定義リスト ───────────────────────────────────────────────────── */
 	.prose :where(dt) {
-		font-weight: var(--font-weight-strong);
+		font-weight: var(--font-weight-medium);
 	}
 
 	.prose :where(dd) {
@@ -267,7 +267,7 @@
 	}
 
 	.prose :where(th) {
-		font-weight: var(--font-weight-strong);
+		font-weight: var(--font-weight-medium);
 	}
 
 	/* 表の最終行では罫線を引きません（tfoot がある場合はそちらが最終行です）。 */
@@ -315,7 +315,7 @@
 
 	.prose :where(summary) {
 		cursor: pointer;
-		font-weight: var(--font-weight-strong);
+		font-weight: var(--font-weight-medium);
 	}
 
 	.prose :where(details[open]) > :where(summary) {

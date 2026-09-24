@@ -5,12 +5,12 @@
 	body {
 		background-color: var(--color-bg);
 		color: var(--color-fg);
-		font-weight: var(--font-weight-base);
+		font-weight: var(--font-weight-light);
 	}
 
 	/* preflight の bolder は継承値 300 に対して 400 にしかならないため上書きします。 */
 	b,
 	strong {
-		font-weight: var(--font-weight-strong);
+		font-weight: var(--font-weight-medium);
 	}
 }
