@@ -10,7 +10,7 @@ export function Button({ class: className, children, ...props }: ButtonProps) {
 		<button
 			data-slot="button"
 			class={cn(
-				"inline-block cursor-pointer rounded-sm bg-accent px-4 py-2 text-accent-fg not-disabled:hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50",
+				"inline-block cursor-pointer rounded-sm bg-accent px-4 py-2 text-accent-fg not-disabled:hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50",
 				className,
 			)}
 			{...props}
