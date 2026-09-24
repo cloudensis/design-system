@@ -1,5 +1,8 @@
 @theme {
 	--color-fg: #525252;
 	--color-bg: #f5f5f5;
+
 	--color-accent: #262626;
+	--color-accent-hover: #404040;
+	--color-accent-fg: #ffffff;
 }
