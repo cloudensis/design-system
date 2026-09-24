@@ -20,57 +20,9 @@
 		"./tokens.css": "./dist/styles/tokens.css",
 		"./base.css": "./dist/styles/base.css",
 		"./prose.css": "./dist/styles/prose.css",
-		"./components/ui/button": {
-			"types": "./dist/components/ui/button.d.ts",
-			"default": "./dist/components/ui/button.js"
-		},
-		"./components/ui/code-block": {
-			"types": "./dist/components/ui/code-block.d.ts",
-			"default": "./dist/components/ui/code-block.js"
-		},
-		"./components/ui/description-list": {
-			"types": "./dist/components/ui/description-list.d.ts",
-			"default": "./dist/components/ui/description-list.js"
-		},
-		"./components/ui/input": {
-			"types": "./dist/components/ui/input.d.ts",
-			"default": "./dist/components/ui/input.js"
-		},
-		"./components/ui/select": {
-			"types": "./dist/components/ui/select.d.ts",
-			"default": "./dist/components/ui/select.js"
-		},
-		"./components/ui/textarea": {
-			"types": "./dist/components/ui/textarea.d.ts",
-			"default": "./dist/components/ui/textarea.js"
-		},
-		"./components/ui/tooltip": {
-			"types": "./dist/components/ui/tooltip.d.ts",
-			"default": "./dist/components/ui/tooltip.js"
-		},
-		"./components/layout/footer": {
-			"types": "./dist/components/layout/footer.d.ts",
-			"default": "./dist/components/layout/footer.js"
-		},
-		"./components/layout/header": {
-			"types": "./dist/components/layout/header.d.ts",
-			"default": "./dist/components/layout/header.js"
-		},
-		"./components/layout/section": {
-			"types": "./dist/components/layout/section.d.ts",
-			"default": "./dist/components/layout/section.js"
-		},
-		"./components/icon/check": {
-			"types": "./dist/components/icon/check.d.ts",
-			"default": "./dist/components/icon/check.js"
-		},
-		"./components/icon/copy": {
-			"types": "./dist/components/icon/copy.d.ts",
-			"default": "./dist/components/icon/copy.js"
-		},
-		"./components/icon/logo": {
-			"types": "./dist/components/icon/logo.d.ts",
-			"default": "./dist/components/icon/logo.js"
+		"./components/*": {
+			"types": "./dist/components/*.d.ts",
+			"default": "./dist/components/*.js"
 		},
 		"./lib/highlight": {
 			"types": "./dist/lib/highlight.d.ts",
