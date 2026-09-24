@@ -24,17 +24,17 @@ const components = [
    ページ内リンクです。 */
 const navGroups = [
 	{
-		label: "ガイド",
+		label: "Foundations",
 		items: [
-			{ href: "/", label: "概要" },
-			{ href: "/tokens", label: "トークン" },
-			{ href: "/prose", label: "記事スタイル" },
+			{ href: "/", label: "Introduction" },
+			{ href: "/tokens", label: "Tokens" },
+			{ href: "/prose", label: "Prose" },
 		],
 	},
 	{
-		label: "コンポーネント",
+		label: "Components",
 		items: [
-			{ href: "/components", label: "一覧" },
+			{ href: "/components", label: "Overview" },
 			...components.map((name) => ({
 				href: `/components#${name.toLowerCase()}`,
 				label: name,
@@ -114,7 +114,7 @@ export function Layout({
 									item.href === pathname && "font-medium text-accent",
 								)}
 							>
-								{item.href === "/components" ? "コンポーネント" : item.label}
+								{item.href === "/components" ? "Components" : item.label}
 							</a>
 						))}
 					</nav>
