@@ -1,0 +1,26 @@
+@theme {
+	--color-fg: #525252;
+	--color-fg-muted: #6b6b6b;
+	--color-bg: #f5f5f5;
+	--color-surface: #fafafa;
+	--color-border: #e5e5e5;
+
+	--color-accent: #262626;
+	--color-accent-hover: #404040;
+	--color-accent-fg: #ffffff;
+
+	--color-danger: #b91c1c;
+
+	/* Shiki の vitesse-dark に合わせる。 */
+	--color-code-bg: #121212;
+	--color-code-fg: #dbd7ca;
+	--color-code-border: #2c2c2c;
+
+	/* rounded は固定値のため、rounded-sm などで参照する。 */
+	--radius-xs: 0.125rem;
+	--radius-sm: 0.25rem;
+
+	--font-sans:
+		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
+		sans-serif;
+}
