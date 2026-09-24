@@ -53,12 +53,32 @@ const proseSpacingCss = `/* ブロックの余白は下方向にだけ持たせ�
 const samplePreCode = `npm install @cloudensis/design-system
 npm run dev`;
 
+const sampleSplitImportCss = `@import "tailwindcss";
+@import "@cloudensis/design-system/tokens.css";
+@import "@cloudensis/design-system/base.css";
+@import "@cloudensis/design-system/prose.css";
+
+/* パスはこの CSS ファイルからの相対で指定します。 */
+@source "../node_modules/@cloudensis/design-system/dist/components";`;
+
 const sampleProseCss = `@import "tailwindcss";
 @import "@cloudensis/design-system/index.css";
 
 .prose {
 	max-width: 42rem;
 }`;
+
+/* CodeBlock の lang に渡せる値。lib/highlight の CodeLanguage と対応させています。 */
+const codeLanguages = [
+	{ values: "css", grammar: "CSS" },
+	{ values: "html", grammar: "HTML" },
+	{ values: "javascript / js", grammar: "JavaScript" },
+	{ values: "json / jsonc", grammar: "JSON" },
+	{ values: "markdown / md", grammar: "Markdown" },
+	{ values: "shellscript / sh / bash / shell / zsh", grammar: "Shell" },
+	{ values: "tsx / ts / typescript / jsx", grammar: "TypeScript / TSX" },
+	{ values: "yaml / yml", grammar: "YAML" },
+];
 
 /* prose.css がスタイルを当てている HTML タグ。サンプルの並び順と対応させています。 */
 const proseElements = [
@@ -83,22 +103,55 @@ const proseElements = [
 	{ name: "開閉", tags: "details / summary" },
 ];
 
+/* パッケージが公開しているエントリ。package.json の exports と対応させています。 */
+const entries = [
+	{
+		path: "index.css",
+		content: "下記の CSS をまとめたエントリ（通常はこれを読み込む）",
+	},
+	{ path: "fonts.css", content: "Outfit / Noto Sans JP の @font-face 定義" },
+	{ path: "tokens.css", content: "@theme によるトークン定義" },
+	{ path: "base.css", content: "body の既定のスタイル（配色・文字の太さ）" },
+	{ path: "prose.css", content: "記事本文用のスタイル" },
+	{ path: "components/ui/button", content: "Button / LinkButton" },
+	{ path: "components/ui/code-block", content: "CodeBlock" },
+	{
+		path: "components/ui/input",
+		content: "Input（type に応じてチェックボックス・ラジオにも対応）",
+	},
+	{ path: "components/ui/select", content: "Select" },
+	{ path: "components/ui/textarea", content: "Textarea" },
+	{ path: "components/ui/tooltip", content: "Tooltip" },
+	{ path: "components/ui/description-list", content: "DescriptionList" },
+	{ path: "components/layout/section", content: "Section" },
+	{ path: "components/layout/header", content: "Header" },
+	{ path: "components/layout/footer", content: "Footer" },
+	{ path: "components/icon/check", content: "CheckIcon" },
+	{ path: "components/icon/copy", content: "CopyIcon" },
+	{ path: "components/icon/logo", content: "LogoIcon" },
+	{
+		path: "lib/highlight",
+		content: "highlight（CodeBlock が使っている Shiki のハイライター）",
+	},
+	{ path: "lib/utils", content: "cn" },
+];
+
+/* CodeBlock のコピーボタンが使うインラインハンドラーのハッシュ。このサイトの CSP と、
+   /components で案内している CSP の両方にこの値を使います。ハンドラーを変えて
+   ハッシュが変わると、ここの値が古いままではこのサイトのコピーボタンが動かなく
+   なるため、案内している値の更新漏れにも気づけます。 */
+const copyHandlerHash = "'sha256-wF1VEFzEsSuwjFla0DgdENA2ZrpzLrVe/rbZm+MK5ME='";
+
 const app = new Hono();
 
-/* README で案内している CSP をこのサイト自身にも適用します。CodeBlock のコピー
-   ハンドラーを変えてハッシュが変わると、ここの値が古いままではコピーボタンが
-   動かなくなるため、README の値の更新漏れにも気づけます。
+/* /components で案内している CSP をこのサイト自身にも適用します。
    style-src の 'unsafe-inline' は、Shiki のトークンやトークン一覧の見本が
    style 属性を使うために必要です。 */
 app.use(
 	secureHeaders({
 		contentSecurityPolicy: {
 			defaultSrc: ["'self'"],
-			scriptSrc: [
-				"'self'",
-				"'unsafe-hashes'",
-				"'sha256-wF1VEFzEsSuwjFla0DgdENA2ZrpzLrVe/rbZm+MK5ME='",
-			],
+			scriptSrc: ["'self'", "'unsafe-hashes'", copyHandlerHash],
 			styleSrc: ["'self'", "'unsafe-inline'"],
 			imgSrc: ["'self'", "data:"],
 			fontSrc: ["'self'", "data:"],
@@ -127,6 +180,7 @@ app.get("/", (c) =>
 
 			<Section title="導入">
 				<div class="space-y-3">
+					<p>Tailwind CSS v4 と Hono v4 が必要です。</p>
 					<CodeBlock lang="sh">
 						{"npm install @cloudensis/design-system"}
 					</CodeBlock>
@@ -157,6 +211,68 @@ app.get("/", (c) =>
 					<CodeBlock lang="css">
 						{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-base);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-strong);\n}`}
 					</CodeBlock>
+					<p>
+						b / strong を明示しているのは、Tailwind の preflight が指定する
+						font-weight: bolder が、継承値 300 に対して 400
+						にしか解決されず本文と区別がつかないためです。
+					</p>
+					<p>
+						@layer base
+						で定義しているため、ユーティリティクラスを指定すればいつでも上書きできます。配色をまとめて変えたい場合は、利用側の
+						@theme でトークンを上書きしてください。
+					</p>
+					<CodeBlock lang="css">{sampleCss}</CodeBlock>
+				</div>
+			</Section>
+
+			<Section title="フォント">
+				<div class="space-y-3">
+					<p>
+						欧文に Outfit、和文に Noto Sans JP を使用します。webfont は
+						Fontsource の可変フォントを依存に含めており、index.css
+						を読み込むだけで同一オリジンから配信されます（外部 CDN
+						への接続は発生しません）。woff2 は unicode-range
+						で分割されているため、ブラウザは表示に必要なスライスだけを取得します。
+					</p>
+					<p>
+						フォントの指定は --font-sans トークン 1
+						つにまとまっています。Tailwind CSS v4 は既定のフォントとして
+						--font-sans を参照するため、この定義だけで反映されます。欧文・数字は
+						Outfit で描画され、Outfit が字形を持たない和文は Noto Sans JP
+						に落ちます。
+					</p>
+					<CodeBlock lang="css">
+						{`--font-sans:\n\t"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,\n\tsans-serif;`}
+					</CodeBlock>
+					<p>
+						webfont を利用側で読み込みたい場合（next/font
+						を使う、フォントを差し替えるなど）は、index.css の代わりに
+						tokens.css・base.css・prose.css を個別に読み込み、@source
+						を自分で指定してください。
+					</p>
+					<CodeBlock lang="css">{sampleSplitImportCss}</CodeBlock>
+				</div>
+			</Section>
+
+			<Section title="エントリ一覧">
+				<div class="space-y-3">
+					<p>いずれも @cloudensis/design-system/ に続けて import します。</p>
+					<table class="w-full border-collapse text-left text-sm">
+						<thead>
+							<tr class="border-border border-b">
+								<th class="py-2 font-medium">import</th>
+								<th class="py-2 font-medium">内容</th>
+							</tr>
+						</thead>
+						<tbody>
+							{entries.map((entry) => (
+								<tr key={entry.path} class="border-border border-b">
+									<td class="py-2 pr-4 font-mono">{entry.path}</td>
+									<td class="py-2 text-fg-muted">{entry.content}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</div>
 			</Section>
 		</Layout>,
@@ -173,7 +289,13 @@ app.get("/tokens", (c) =>
 			<Section title="トークン一覧">
 				<p>
 					tokens.css の @theme で定義している値です。CSS 変数としても、 Tailwind
-					のユーティリティクラスとしても利用できます。
+					のユーティリティクラス（bg-accent、text-fg-muted、font-strong
+					など）としても利用できます。
+				</p>
+				<p>
+					色と文字の太さはセマンティックな名前で定義しています。値はこのパッケージが所有しており、Tailwind
+					の既定パレットは参照していません。コンポーネントも neutral-*
+					のような生のパレットは使わず、このトークン経由で配色しています。
 				</p>
 				<table class="w-full border-collapse text-left text-sm">
 					<thead>
@@ -210,6 +332,18 @@ app.get("/tokens", (c) =>
 						))}
 					</tbody>
 				</table>
+			</Section>
+			<Section title="ダークモード">
+				<div class="space-y-3">
+					<p>
+						配色はライトテーマのみで、prefers-color-scheme
+						によるダークモードの切り替えは行いません（コードブロックだけは常にダークで表示します）。ダークモードに対応したい場合は、利用側で
+						--color-* トークンを上書きしてください。
+					</p>
+					<CodeBlock lang="css">
+						{`@media (prefers-color-scheme: dark) {\n\t:root {\n\t\t--color-bg: #171717;\n\t\t--color-fg: #d4d4d4;\n\t}\n}`}
+					</CodeBlock>
+				</div>
 			</Section>
 		</Layout>,
 	),
@@ -293,6 +427,10 @@ app.get("/components", (c) =>
 						ラベルは pointer-events-none
 						なので、表示中でもクリックやホバーを遮りません。
 					</p>
+					<p>
+						キーボードから表示するには、中の要素がフォーカスを受け取れる必要があります（button
+						や a 以外の要素なら tabindex を指定するなど）。
+					</p>
 					<div class="flex flex-wrap items-center gap-6 rounded border border-border p-6">
 						<Tooltip label="上に表示します">
 							<Button>ホバーしてください</Button>
@@ -334,7 +472,70 @@ app.get("/components", (c) =>
 					<p>
 						同梱している文法は css / html / javascript / json / markdown /
 						shellscript / tsx / yaml です。 ts・jsx・jsonc・sh・md・yml
-						などの別名も同じ文法として扱います。
+						などの別名も同じ文法として扱います。ここにない言語を lang
+						に渡すことはできません（型で弾かれます）。
+					</p>
+					<table class="w-full border-collapse text-left text-sm">
+						<thead>
+							<tr class="border-border border-b">
+								<th class="py-2 font-medium">lang に渡せる値</th>
+								<th class="py-2 font-medium">文法</th>
+							</tr>
+						</thead>
+						<tbody>
+							{codeLanguages.map((language) => (
+								<tr key={language.grammar} class="border-border border-b">
+									<td class="py-2 pr-4 font-mono">{language.values}</td>
+									<td class="py-2 text-fg-muted">{language.grammar}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+
+					<h3 class="pt-4 font-medium text-accent">バンドルサイズ</h3>
+					<p>
+						文法とテーマを同梱した同期版のハイライターを使うため、await
+						は不要です。正規表現エンジンは WASM を必要としない JavaScript
+						実装を選んでいるので、Cloudflare Workers
+						やブラウザでもそのまま動作します。
+					</p>
+					<p>
+						文法・テーマ・正規表現エンジンは CodeBlock（と
+						lib/highlight）を読み込んだ時点でまとめてバンドルに含まれます。lang
+						を渡さない場合も同じです。SSR・SSG
+						では配信サイズに影響しませんが、CSR
+						でクライアントのバンドルに含めると minify 後でおよそ 830 KB（gzip
+						でおよそ 130 KB）増えます。クライアントで描画する必要がなければ、
+						CodeBlock はサーバー側だけで使ってください。
+					</p>
+
+					<h3 class="pt-4 font-medium text-accent">コピーボタン</h3>
+					<p>
+						コピーに成功するとアイコンがチェックマークに変わり、2
+						秒後に元に戻ります。クリップボード API が使えない環境（HTTP
+						で配信している場合など）や書き込みが拒否された場合は、コード全体を選択した状態にするので、Ctrl
+						/ Cmd + C でコピーできます。
+					</p>
+
+					<h3 class="pt-4 font-medium text-accent">CSP</h3>
+					<p>
+						コピーボタンはインラインハンドラーを使うため、CSP で script-src
+						を制限している場合は、'unsafe-hashes'
+						とハンドラーのハッシュを追加してください。許可されるのはこのハンドラーだけなので、'unsafe-inline'
+						を追加する必要はありません（XSS
+						への防御が大きく弱まるため、追加しないでください）。nonce や
+						'strict-dynamic' と併用しても動作します。このサイトも同じ CSP
+						で配信しています。
+					</p>
+					<CodeBlock>
+						{`Content-Security-Policy: script-src 'self' 'unsafe-hashes' ${copyHandlerHash}`}
+					</CodeBlock>
+					<p>
+						ハッシュはハンドラーの内容から計算するため、ハンドラーを変更したバージョンでは値が変わります。ハッシュが一致しない場合はコピーできなくなります（ブラウザのコンソールに違反が出力されます）。
+					</p>
+					<p>
+						CSR では、require-trusted-types-for 'script'（Trusted
+						Types）を強制しているページで描画するとエラーになります。インラインハンドラーを属性として設定する処理が拒否されるためです。
 					</p>
 				</div>
 			</Section>
@@ -371,7 +572,8 @@ app.get("/components", (c) =>
 				<div class="space-y-3">
 					<p>
 						サイト共通のヘッダーです。ロゴ + ブランド名を左に、children
-						を右（ナビゲーションやボタンなど）に並べます。
+						を右（ナビゲーションやボタンなど）に並べます。ロゴは
+						LogoIcon（cloudensis のロゴマーク）で固定です。
 					</p>
 					<div class="rounded border border-border">
 						<Header homeHref="/" title="cloudensis" />
@@ -385,7 +587,8 @@ app.get("/components", (c) =>
 				<div class="space-y-3">
 					<p>
 						サイト共通のフッターです。コピーライト表記を左に、links （または
-						children）を右に並べます。
+						children）を右に並べます。links の代わりに children
+						を渡すと、右側を自由な内容に差し替えられます。
 					</p>
 					<div class="rounded border border-border">
 						<Footer
