@@ -4,17 +4,12 @@ import { LogoIcon } from "../icon/logo.tsx";
 
 type HeaderProps = {
 	class?: string;
-	/** ロゴ／ブランド名をクリックした際の遷移先。 */
 	homeHref?: string;
-	/** ロゴの右に表示するブランド名。 */
 	title: Child;
-	/** 右側に置くナビゲーションやボタンなど。 */
+	/** 右側に置く内容。 */
 	children?: Child;
 };
 
-/**
- * サイト共通のヘッダー。ロゴ + ブランド名を左、children を右に並べます。
- */
 export function Header({
 	class: className,
 	homeHref = "/",

@@ -10,11 +10,7 @@ const htmlEntities: Record<string, string> = {
 
 let hash: Promise<string> | undefined;
 
-/**
- * CodeBlock のコピーボタンのインラインハンドラーから、CSP に指定するハッシュ
- * （'sha256-...'）を計算します。実際に描画した onclick 属性から求めるため、
- * ハンドラーを変えても値を書き換える必要はありません。
- */
+/** CodeBlock のコピーハンドラーから CSP のハッシュを計算する。 */
 export const getCopyHandlerHash = (): Promise<string> =>
 	(hash ??= (async () => {
 		const markup = String(CodeBlock({ children: "" }));

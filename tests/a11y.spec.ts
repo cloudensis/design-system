@@ -1,8 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-/* ドキュメントサイトの全ページを axe で検査します。コンポーネントの見本が
-   すべて載っているため、コンポーネントの検査も兼ねます。 */
 const paths = ["/", "/tokens", "/components", "/prose", "/not-found"];
 
 for (const path of paths) {

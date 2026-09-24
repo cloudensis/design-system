@@ -48,7 +48,6 @@ const sampleProseCss = `@import "tailwindcss";
 	max-width: 42rem;
 }`;
 
-/* prose.css がスタイルを当てている HTML タグ。サンプルの並び順と対応させています。 */
 const proseElements = [
 	{ name: "見出し", tags: "h1 / h2 / h3 / h4 / h5 / h6" },
 	{ name: "段落・区切り", tags: "p / br / hr" },
@@ -73,9 +72,7 @@ const proseElements = [
 
 const app = new Hono();
 
-/* /components で案内している CSP をこのサイト自身にも適用します。
-   style-src の 'unsafe-inline' は、Shiki のトークンやトークン一覧の見本が
-   style 属性を使うために必要です。 */
+/* 案内している CSP をこのサイトにも適用する。'unsafe-inline' は style 属性のため。 */
 let csp: MiddlewareHandler | undefined;
 app.use(async (c, next) => {
 	csp ??= secureHeaders({
@@ -102,10 +99,8 @@ app.get("/", (c) =>
 		>
 			<Section title="このデザインシステムについて">
 				<p>
-					cloudensis で利用する CSS
-					トークン・記事用スタイル・コンポーネントを提供します。
-					コンポーネントは Hono の JSX で実装されており、SSR・CSR・SSG
-					のいずれからも利用できます。
+					cloudensis の CSS トークン・記事用スタイル・Hono JSX
+					コンポーネントです。SSR・CSR・SSG のいずれでも使えます。
 				</p>
 			</Section>
 
@@ -120,10 +115,7 @@ app.get("/", (c) =>
 						{`@import "tailwindcss";\n@import "@cloudensis/design-system/index.css";`}
 					</CodeBlock>
 					<p>
-						フォント（Outfit / Noto Sans
-						JP）とトークン、記事用スタイルの定義に加えて、コンポーネントが使用している
-						クラスの収集設定もこのファイルに含まれているため、利用側での @source
-						の指定は不要です。
+						フォント・トークン・記事用スタイルと、コンポーネントのクラスの収集設定（@source）が含まれます。
 					</p>
 					<CodeBlock lang="tsx">
 						{`import { Button } from "@cloudensis/design-system/components/ui/button";`}
@@ -134,27 +126,24 @@ app.get("/", (c) =>
 			<Section title="既定のスタイル">
 				<div class="space-y-3">
 					<p>
-						body には --color-bg / --color-fg
-						とライト（300）の文字の太さが既定で適用されます。b / strong は
-						ミディアム（500）です。 利用側で bg-* や text-*、font-*
-						のユーティリティクラスを指定すればいつでも上書きできます。
+						body に --color-bg / --color-fg と太さ 300 を、b / strong に太さ 500
+						を適用します。
 					</p>
 					<CodeBlock lang="css">
 						{`body {\n\tbackground-color: var(--color-bg);\n\tcolor: var(--color-fg);\n\tfont-weight: var(--font-weight-light);\n}\n\nb,\nstrong {\n\tfont-weight: var(--font-weight-medium);\n}`}
 					</CodeBlock>
 					<p>
-						b / strong を明示しているのは、Tailwind の preflight が指定する
-						font-weight: bolder が、継承値 300 に対して 400
-						にしか解決されず本文と区別がつかないためです。
+						b / strong を指定するのは、preflight の bolder が 300 に対して 400
+						にしかならないためです。
 					</p>
 					<p>
-						キーボードで操作したときのフォーカス（:focus-visible）には、要素によらず
-						--color-accent の 2px のアウトラインを表示します。
+						キーボード操作時のフォーカス（:focus-visible）には、--color-accent
+						の 2px のアウトラインを表示します。
 					</p>
 					<p>
-						@layer base
-						で定義しているため、ユーティリティクラスを指定すればいつでも上書きできます。配色をまとめて変えたい場合は、利用側の
-						@theme でトークンを上書きしてください。
+						いずれも @layer base
+						にあり、ユーティリティクラスで上書きできます。配色は @theme
+						でトークンを上書きして変えます。
 					</p>
 					<CodeBlock lang="css">{sampleCss}</CodeBlock>
 				</div>
@@ -163,27 +152,17 @@ app.get("/", (c) =>
 			<Section title="フォント">
 				<div class="space-y-3">
 					<p>
-						欧文に Outfit、和文に Noto Sans JP を使用します。webfont は
-						Fontsource の可変フォントを依存に含めており、index.css
-						を読み込むだけで同一オリジンから配信されます（外部 CDN
-						への接続は発生しません）。woff2 は unicode-range
-						で分割されているため、ブラウザは表示に必要なスライスだけを取得します。
+						欧文は Outfit、和文は Noto Sans JP です。Fontsource
+						の可変フォントを同一オリジンから配信し、unicode-range
+						で必要な分だけ読み込みます。
 					</p>
-					<p>
-						フォントの指定は --font-sans トークン 1
-						つにまとまっています。Tailwind CSS v4 は既定のフォントとして
-						--font-sans を参照するため、この定義だけで反映されます。欧文・数字は
-						Outfit で描画され、Outfit が字形を持たない和文は Noto Sans JP
-						に落ちます。
-					</p>
+					<p>フォントは --font-sans で指定しています。</p>
 					<CodeBlock lang="css">
 						{`--font-sans:\n\t"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,\n\tsans-serif;`}
 					</CodeBlock>
 					<p>
-						webfont を利用側で読み込みたい場合（next/font
-						を使う、フォントを差し替えるなど）は、index.css の代わりに
-						tokens.css・base.css・prose.css を個別に読み込み、@source
-						を自分で指定してください。
+						フォントを自分で読み込む場合（next/font など）は、index.css
+						の代わりに次のように読み込みます。
 					</p>
 					<CodeBlock lang="css">{sampleSplitImportCss}</CodeBlock>
 				</div>
@@ -223,21 +202,16 @@ app.get("/tokens", (c) =>
 		>
 			<Section title="トークン一覧">
 				<p>
-					tokens.css で定義している値です。色とフォントは @theme
-					で定義しているため、CSS 変数としても、Tailwind
-					のユーティリティクラス（bg-accent、text-fg-muted
-					など）としても利用できます。
+					tokens.css の値です。色とフォントは CSS
+					変数とユーティリティクラス（bg-accent など）の両方で使えます。
 				</p>
 				<p>
-					色はセマンティックな名前で定義しています。値はこのパッケージが所有しており、Tailwind
-					の既定パレットは参照していません。コンポーネントも neutral-*
-					のような生のパレットは使わず、このトークン経由で配色しています。
+					色はセマンティックな名前で定義し、Tailwind
+					の既定パレットは使いません。
 				</p>
 				<p>
-					角丸はコンポーネントで rounded-sm などを使い、--radius-*
-					を参照しています（Tailwind の rounded
-					は固定値でトークンを参照しません）。文字サイズなどそのほかの値は
-					Tailwind の既定値を使っています。
+					角丸は rounded-sm などで --radius-* を参照します（rounded
+					は固定値のため使いません）。文字サイズなどは Tailwind の既定値です。
 				</p>
 				<table class="w-full border-collapse text-left text-sm">
 					<thead>
@@ -279,9 +253,8 @@ app.get("/tokens", (c) =>
 			<Section title="ダークモード">
 				<div class="space-y-3">
 					<p>
-						配色はライトテーマのみで、prefers-color-scheme
-						によるダークモードの切り替えは行いません（コードブロックだけは常にダークで表示します）。ダークモードに対応したい場合は、利用側で
-						--color-* トークンを上書きしてください。
+						ライトテーマのみです（コードブロックは常にダーク）。ダークモードにするには
+						--color-* を上書きします。
 					</p>
 					<CodeBlock lang="css">
 						{`@media (prefers-color-scheme: dark) {\n\t:root {\n\t\t--color-bg: #171717;\n\t\t--color-fg: #d4d4d4;\n\t}\n}`}
@@ -321,45 +294,33 @@ app.get("/prose", (c) =>
 		>
 			<Section title="prose">
 				<div class="space-y-3">
-					<p>
-						記事本文を囲む要素に .prose
-						を付与すると、本文向けのスタイルが適用されます。見出し・段落・リスト・定義リスト・引用・コード・表・図版など、記事に現れる
-						HTML タグを一通りカバーしています。
-					</p>
+					<p>記事本文を囲む要素に .prose を付けます。</p>
 					<CodeBlock lang="tsx">{`<article class="prose">...</article>`}</CodeBlock>
 					<p>
-						セレクタはすべて :where() で包んで詳細度を 0 にしたうえで @layer
-						components に置いているため、本文中の要素に Tailwind
-						のユーティリティクラスを指定すればいつでも上書きできます。 配色は
-						トークンを参照しているので、@theme
-						でトークンを差し替えると本文の見た目にもそのまま反映されます。
+						セレクタは :where() で詳細度を 0 にし、@layer components
+						に置いているため、ユーティリティクラスで上書きできます。
 					</p>
 				</div>
 			</Section>
 			<Section title="ブロック間の余白">
 				<div class="space-y-3">
 					<p>
-						ブロックの余白は下方向にだけ持たせています。隣接する margin
-						の相殺に頼らないため、.prose を flex や grid
-						の中に置いても、ブロック同士の間隔は変わりません。
+						余白は下方向だけに持たせ、margin の相殺に頼りません。flex や grid
+						の中でも間隔が変わりません。
 					</p>
 					<p>
-						見出しと hr の手前だけは例外で、直前のブロックの下余白を :has()
-						で広げて距離を取ります。見出し側に上余白を持たせないので、
-						余白が二重になることがありません。
+						見出しと hr の手前は、直前のブロックの下余白を :has() で広げます。
 					</p>
 					<CodeBlock lang="css">{proseSpacingCss}</CodeBlock>
 					<p>
-						コンテナの先頭と末尾の余白は打ち消しているため、.prose
-						を付けた要素に padding
-						を与えても上下だけ広く見えることはありません。このページのサンプルも、枠線と
-						padding を付けた要素に .prose を付けています。
+						先頭と末尾の余白は打ち消すため、.prose の要素に padding
+						を付けても上下だけ広くなりません。
 					</p>
 				</div>
 			</Section>
 			<Section title="対応している要素">
 				<div class="space-y-3">
-					<p>prose.css がスタイルを当てている HTML タグの一覧です。</p>
+					<p>prose.css が対応しているタグです。</p>
 					<table class="w-full border-collapse text-left text-sm">
 						<thead>
 							<tr class="border-border border-b">
@@ -379,9 +340,7 @@ app.get("/prose", (c) =>
 				</div>
 			</Section>
 			<Section title="サンプル">
-				<p>
-					上の表に挙げたタグを実際に並べた記事です。余白・行間・配色の確認に使えます。
-				</p>
+				<p>上の表のタグを並べたサンプルです。</p>
 				<article class="prose rounded-sm border border-border p-6">
 					<h1>記事スタイルのサンプル</h1>
 					<p>

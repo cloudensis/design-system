@@ -12,8 +12,7 @@ jobs:
   test:
     uses: ./.github/workflows/test.yaml
 
-  # Release のタグ（例: 0.10.0）と package.json の version が一致しない場合は、
-  # npm への publish もドキュメントサイトのデプロイも行いません。
+  # タグと version が一致しなければ publish もデプロイもしない。
   check-version:
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +47,7 @@ jobs:
       - run: npm run build
       - run: npm publish
 
-  # npm への publish が成功してからデプロイし、未公開のバージョンのドキュメントを出さないようにします。
+  # publish の成功後にデプロイする。
   deploy-docs:
     needs: [publish]
     runs-on: ubuntu-latest
@@ -65,8 +64,7 @@ jobs:
       - run: npm ci
       - run: npm run build:docs
 
-      # wrangler.jsonc ではなく、vite のビルドが出力する wrangler.json を指定します。
-      # 生成物（Worker のエントリと assets）へのパスが解決済みになっているためです。
+      # vite が出力する、パス解決済みの wrangler.json を使う。
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

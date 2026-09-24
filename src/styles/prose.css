@@ -1,18 +1,9 @@
-/* 記事本文用のスタイル。本文を囲む要素に .prose を付与して使用します。
-   配色と文字の太さは body（または .prose を囲む要素）から継承し、色はすべて
-   トークンを参照するため、theme ブロックでトークンを上書きすれば本文にも反映されます。
-
-   セレクタはすべて :where() で包んで詳細度を 0 にしたうえで layer components に
-   置いているため、本文中の要素に Tailwind のユーティリティクラス（text-*, font-*,
-   my-* など）を指定すればいつでも上書きできます。 */
 @layer components {
 	.prose {
 		line-height: 1.8;
 	}
 
-	/* ── ブロック間の余白 ──────────────────────────────────────────────────
-	   ブロックの余白は下方向にだけ持たせます。隣接する余白の相殺に頼らないため、
-	   .prose を flex / grid の中に置いても間隔が変わりません。 */
+	/* 余白は下方向だけに持たせ、margin の相殺に頼らない。 */
 	.prose
 	:where(
 		h1,
@@ -35,24 +26,20 @@
 		margin-block: 0 1.25em;
 	}
 
-	/* 見出しは続く本文と近づけます（近接の法則）。 */
 	.prose :where(h1, h2, h3, h4, h5, h6) {
 		margin-block-end: 0.75em;
 	}
 
-	/* 見出しと区切り線の手前は、直前のブロックの下余白を広げて距離を取ります。
-	   見出し側に上余白を持たせないことで、余白が二重にならずに済みます。 */
+	/* 見出しと hr の手前は、直前のブロックの下余白で距離を取る。 */
 	.prose :where(:has(+ :is(h1, h2, h3, h4, h5, h6, hr))) {
 		margin-block-end: 2.5em;
 	}
 
-	/* ただし見出しが連続する場合は詰めたままにします。 */
 	.prose
-	:where(:is(h1, h2, h3, h4, h5, h6):has(+ :is(h1, h2, h3, h4, h5, h6))) {
+		:where(:is(h1, h2, h3, h4, h5, h6):has(+ :is(h1, h2, h3, h4, h5, h6))) {
 		margin-block-end: 0.75em;
 	}
 
-	/* リストの項目と、項目の中に置いたブロックは間隔を詰めます。 */
 	.prose :where(li) {
 		margin-block: 0 0.25em;
 	}
@@ -61,7 +48,6 @@
 		margin-block: 0.25em 0.5em;
 	}
 
-	/* ── 見出し ───────────────────────────────────────────────────────── */
 	.prose :where(h1, h2, h3, h4, h5, h6) {
 		font-weight: var(--font-weight-medium);
 		line-height: 1.4;
@@ -93,7 +79,6 @@
 		color: var(--color-fg-muted);
 	}
 
-	/* ── テキストレベルの要素 ────────────────────────────────────────────── */
 	.prose :where(a) {
 		text-decoration: underline;
 		text-underline-offset: 0.2em;
@@ -128,14 +113,13 @@
 		font-size: 0.875em;
 	}
 
-	/* title を持つ略語だけ、説明があることが分かるように点線を引きます。 */
 	.prose :where(abbr[title]) {
 		cursor: help;
 		text-decoration: underline dotted;
 		text-underline-offset: 0.2em;
 	}
 
-	/* 上付き・下付きが行の高さを押し広げないようにします。 */
+	/* 行の高さを広げない。 */
 	.prose :where(sub, sup) {
 		font-size: 0.75em;
 		line-height: 0;
@@ -155,7 +139,6 @@
 		font-size: 0.875em;
 	}
 
-	/* ── コード ───────────────────────────────────────────────────────── */
 	.prose :where(code, samp) {
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-sm);
@@ -165,8 +148,7 @@
 		font-size: 0.875em;
 	}
 
-	/* コードブロックは CodeBlock コンポーネントと同じ見た目にそろえ、配色モードに
-	   関わらず常にダークで表示します。 */
+	/* CodeBlock と同じく常にダーク。 */
 	.prose :where(pre) {
 		border: 1px solid var(--color-code-border);
 		border-radius: var(--radius-sm);
@@ -179,7 +161,6 @@
 		line-height: 1.7;
 	}
 
-	/* pre の中の code には、インラインコードの装飾を持ち込みません。 */
 	.prose :where(pre) :where(code, samp) {
 		border: 0;
 		border-radius: 0;
@@ -189,19 +170,17 @@
 		color: inherit;
 	}
 
-	/* ── 引用 ─────────────────────────────────────────────────────────── */
 	.prose :where(blockquote) {
 		border-inline-start: 2px solid var(--color-border);
 		padding-inline-start: 1em;
 		color: var(--color-fg-muted);
 	}
 
-	/* ── リスト ───────────────────────────────────────────────────────── */
 	.prose :where(ul, ol) {
 		padding-inline-start: 1.5em;
 	}
 
-	/* preflight がリストマーカーを消すため、ここで指定し直します。 */
+	/* preflight がマーカーを消すため。 */
 	.prose :where(ul) {
 		list-style-type: disc;
 	}
@@ -230,7 +209,6 @@
 		color: var(--color-fg-muted);
 	}
 
-	/* ── 定義リスト ───────────────────────────────────────────────────── */
 	.prose :where(dt) {
 		font-weight: var(--font-weight-medium);
 	}
@@ -244,7 +222,6 @@
 		margin-block-start: 1em;
 	}
 
-	/* ── 表 ───────────────────────────────────────────────────────────── */
 	.prose :where(table) {
 		width: 100%;
 		border-collapse: collapse;
@@ -270,7 +247,6 @@
 		font-weight: var(--font-weight-medium);
 	}
 
-	/* 表の最終行では罫線を引きません（tfoot がある場合はそちらが最終行です）。 */
 	.prose
 		:where(tbody:last-child tr:last-child, tfoot tr:last-child)
 		:where(th, td) {
@@ -282,7 +258,6 @@
 		color: var(--color-fg-muted);
 	}
 
-	/* ── 図版・メディア ───────────────────────────────────────────────── */
 	.prose :where(img, picture, video, canvas, svg, iframe) {
 		display: block;
 		border-radius: var(--radius-sm);
@@ -300,13 +275,11 @@
 		line-height: 1.6;
 	}
 
-	/* ── 区切り線 ─────────────────────────────────────────────────────── */
 	.prose :where(hr) {
 		border: 0;
 		border-block-start: 1px solid var(--color-border);
 	}
 
-	/* ── 開閉 ─────────────────────────────────────────────────────────── */
 	.prose :where(details) {
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-sm);
@@ -322,10 +295,7 @@
 		margin-block-end: 0.75em;
 	}
 
-	/* ── 先頭と末尾のリセット ─────────────────────────────────────────────
-	   コンテナの先頭と末尾には余白を残しません。.prose を付けたボックスに padding を
-	   与えたときに、上下だけ広く見えるのを防ぎます。これまでのすべての余白指定を
-	   打ち消すため、ファイルの最後に置いています。 */
+	/* 先頭と末尾の余白を打ち消す。ほかの余白指定より後に置く。 */
 	.prose :where(:first-child) {
 		margin-block-start: 0;
 	}

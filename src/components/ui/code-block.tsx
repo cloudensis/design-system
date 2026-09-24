@@ -12,15 +12,7 @@ const variants = {
 	},
 };
 
-/* コピーボタンの onclick に渡すクライアント JavaScript。関数ではなく文字列の
-   インラインハンドラーにしているのは、hono/jsx の SSR（SSG を含む）では属性として
-   そのまま HTML に出力され、hono/jsx/dom の CSR でも on + 小文字の属性は
-   setAttribute で設定されるためです。これにより、ハイドレーションや別途の
-   スクリプト読み込みなしに、どこから描画しても同じように動作します。
-
-   クリップボード API が使えない環境（HTTP 配信など）や書き込みが拒否された
-   場合は、コード全体を選択して Ctrl / Cmd + C でコピーできるようにします。
-   コピーに成功すると data-copied を 2 秒間付与し、表示を切り替えます。 */
+/* SSR でも CSR でも属性として出力され、ハイドレーションなしで動くよう文字列にする。 */
 const copyScript =
 	"const b=this,c=b.parentElement.querySelector('code'),s=()=>getSelection().selectAllChildren(c);" +
 	"navigator.clipboard?navigator.clipboard.writeText(c.textContent).then(()=>{" +
@@ -28,7 +20,7 @@ const copyScript =
 
 type CodeBlockProps = Omit<JSX.IntrinsicElements["pre"], "children"> & {
 	class?: string;
-	/** 省略するとハイライトせずそのまま表示します。 */
+	/** 省略するとハイライトしない。 */
 	lang?: CodeLanguage;
 	variant?: keyof typeof variants.variant;
 	children: string;
@@ -41,13 +33,13 @@ export function CodeBlock({
 	children,
 	...props
 }: CodeBlockProps) {
-	/* JSX のテンプレートリテラルで前後に入りやすい空行を落とします。 */
+	/* テンプレートリテラルの前後の空行を落とす。 */
 	const code = children.replace(/^[\r\n]+/, "").trimEnd();
 	const lines = lang ? highlight(code, lang) : undefined;
 
 	return (
 		<div data-slot="code-block-container" class="relative">
-			{/* tabindex はキーボードで横スクロールできるようにするためです。 */}
+			{/* キーボードで横スクロールできるように。 */}
 			<pre
 				data-slot="code-block"
 				tabindex={0}
@@ -57,8 +49,7 @@ export function CodeBlock({
 				<code>
 					{lines
 						? lines.map((line, index) => (
-								/* 行の区切りは改行文字で表現します。要素で囲むと
-								   コピー時に改行が失われるためです。 */
+								/* 要素で囲むとコピー時に改行が失われるため。 */
 								<Fragment key={String(index)}>
 									{index > 0 ? "\n" : null}
 									{line.map((token, tokenIndex) => (
@@ -71,8 +62,7 @@ export function CodeBlock({
 						: code}
 				</code>
 			</pre>
-			{/* ボタンを pre の外に置くことで、横スクロールしても右上に留まります。
-			    アイコンと読み上げ用の文言は data-copied の有無で CSS だけで切り替えます。 */}
+			{/* pre の外に置き、横スクロールしても右上に留める。 */}
 			<button
 				data-slot="code-block-copy"
 				type="button"

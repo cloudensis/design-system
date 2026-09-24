@@ -1,5 +1,2 @@
-/* webfont の読み込み。Fontsource の可変フォントを同一オリジンから配信します。
-   woff2 は unicode-range で分割されており、ブラウザは表示に必要なスライスだけを
-   取得します。url() は利用側のバンドラが解決するため追加設定は不要です。 */
 @import "@fontsource-variable/outfit";
 @import "@fontsource-variable/noto-sans-jp";
