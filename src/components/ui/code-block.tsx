@@ -7,7 +7,7 @@ import { CopyIcon } from "../icon/copy.tsx";
 const variants = {
 	variant: {
 		default: cn(
-			"overflow-x-auto rounded border border-code-border bg-code-bg p-4 pr-12 text-code-fg text-sm",
+			"overflow-x-auto rounded-sm border border-code-border bg-code-bg p-4 pr-12 text-code-fg text-sm",
 		),
 	},
 };
@@ -76,7 +76,7 @@ export function CodeBlock({
 			<button
 				data-slot="code-block-copy"
 				type="button"
-				class="group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded border border-code-border bg-code-bg p-1.5 text-code-fg opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+				class="group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-code-border bg-code-bg p-1.5 text-code-fg opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-code-fg"
 				onclick={copyScript}
 			>
 				<CopyIcon class="size-4 group-data-copied/copy:hidden" />

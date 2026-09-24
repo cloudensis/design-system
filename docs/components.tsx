@@ -38,11 +38,14 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Button",
 		body: (
 			<div class="space-y-3">
-				<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
+				<div class="flex flex-wrap items-center gap-4 rounded-sm border border-border p-6">
 					<Button>ボタン</Button>
 					<Button disabled>disabled</Button>
 				</div>
-				<CodeBlock lang="tsx">{`<Button>ボタン</Button>`}</CodeBlock>
+				<p>disabled を指定すると半透明になり、ホバーしても色が変わりません。</p>
+				<CodeBlock lang="tsx">
+					{`<Button>ボタン</Button>\n<Button disabled>disabled</Button>`}
+				</CodeBlock>
 			</div>
 		),
 	},
@@ -51,10 +54,18 @@ export const componentSections: { name: string; body: Child }[] = [
 		body: (
 			<div class="space-y-3">
 				<p>見た目は Button と同じまま、a 要素としてレンダリングします。</p>
-				<div class="flex flex-wrap items-center gap-4 rounded border border-border p-6">
+				<div class="flex flex-wrap items-center gap-4 rounded-sm border border-border p-6">
 					<LinkButton href="/">リンクボタン</LinkButton>
+					<LinkButton aria-disabled="true">aria-disabled</LinkButton>
 				</div>
-				<CodeBlock lang="tsx">{`<LinkButton href="/">リンクボタン</LinkButton>`}</CodeBlock>
+				<p>
+					a 要素には disabled がないため、無効にするときは href を外して
+					aria-disabled="true" を指定します。Button の disabled
+					と同じ見た目になり、クリックも受け付けません。
+				</p>
+				<CodeBlock lang="tsx">
+					{`<LinkButton href="/">リンクボタン</LinkButton>\n<LinkButton aria-disabled="true">aria-disabled</LinkButton>`}
+				</CodeBlock>
 			</div>
 		),
 	},
@@ -66,9 +77,16 @@ export const componentSections: { name: string; body: Child }[] = [
 					type に checkbox / radio
 					を渡すと、それぞれに合わせたスタイルでレンダリングします。
 				</p>
-				<div class="flex flex-col gap-4 rounded border border-border p-6">
+				<div class="flex flex-col gap-4 rounded-sm border border-border p-6">
 					<Input type="text" placeholder="テキスト" />
 					<Input type="email" placeholder="メールアドレス" />
+					<Input type="text" placeholder="disabled" disabled />
+					<Input
+						type="email"
+						aria-label="入力エラーの例"
+						value="invalid@"
+						aria-invalid="true"
+					/>
 					<div class="flex items-center gap-2">
 						<Input id="sample-checkbox" type="checkbox" />
 						<label htmlFor="sample-checkbox">チェックボックス</label>
@@ -78,8 +96,13 @@ export const componentSections: { name: string; body: Child }[] = [
 						<label htmlFor="sample-radio">ラジオボタン</label>
 					</div>
 				</div>
+				<p>
+					disabled を指定すると半透明になります。入力エラーは
+					aria-invalid="true" で示し、枠線が --color-danger になります。Select
+					と Textarea も同じです。
+				</p>
 				<CodeBlock lang="tsx">
-					{`<Input type="text" placeholder="テキスト" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
+					{`<Input type="text" placeholder="テキスト" />\n<Input type="text" disabled />\n<Input type="email" aria-invalid="true" />\n<Input type="checkbox" />\n<Input type="radio" name="sample" />`}
 				</CodeBlock>
 			</div>
 		),
@@ -88,7 +111,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Select",
 		body: (
 			<div class="space-y-3">
-				<div class="rounded border border-border p-6">
+				<div class="rounded-sm border border-border p-6">
 					<Select aria-label="選択肢">
 						<option value="">選択してください</option>
 						<option value="a">選択肢 A</option>
@@ -105,7 +128,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		name: "Textarea",
 		body: (
 			<div class="space-y-3">
-				<div class="rounded border border-border p-6">
+				<div class="rounded-sm border border-border p-6">
 					<Textarea rows={4} placeholder="お問い合わせ内容" />
 				</div>
 				<CodeBlock lang="tsx">{`<Textarea rows={4} placeholder="お問い合わせ内容" />`}</CodeBlock>
@@ -126,7 +149,7 @@ export const componentSections: { name: string; body: Child }[] = [
 					キーボードから表示するには、中の要素がフォーカスを受け取れる必要があります（button
 					や a 以外の要素なら tabindex を指定するなど）。
 				</p>
-				<div class="flex flex-wrap items-center gap-6 rounded border border-border p-6">
+				<div class="flex flex-wrap items-center gap-6 rounded-sm border border-border p-6">
 					<Tooltip label="上に表示します">
 						<Button>ホバーしてください</Button>
 					</Tooltip>
@@ -238,7 +261,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		body: (
 			<div class="space-y-3">
 				<p>term と details の組を、2 列のグリッドとして並べます。</p>
-				<div class="rounded border border-border p-6">
+				<div class="rounded-sm border border-border p-6">
 					<DescriptionList
 						items={[
 							{ term: "会社名", details: "cloudensis" },
@@ -257,7 +280,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		body: (
 			<div class="space-y-3">
 				<p>見出し付きのセクションです。id を渡すとページ内リンクになります。</p>
-				<div class="rounded border border-border p-6">
+				<div class="rounded-sm border border-border p-6">
 					<Section id="sample-section" title="セクションの見出し">
 						<p>セクションの本文です。</p>
 					</Section>
@@ -275,7 +298,7 @@ export const componentSections: { name: string; body: Child }[] = [
 					を右（ナビゲーションやボタンなど）に並べます。ロゴは
 					LogoIcon（cloudensis のロゴマーク）で固定です。
 				</p>
-				<div class="rounded border border-border">
+				<div class="rounded-sm border border-border">
 					<Header homeHref="/" title="cloudensis" />
 				</div>
 				<CodeBlock lang="tsx">
@@ -293,7 +316,7 @@ export const componentSections: { name: string; body: Child }[] = [
 					children）を右に並べます。links の代わりに children
 					を渡すと、右側を自由な内容に差し替えられます。
 				</p>
-				<div class="rounded border border-border">
+				<div class="rounded-sm border border-border">
 					<Footer
 						copyrightHolder="cloudensis"
 						links={[{ href: "/privacy", label: "プライバシーポリシー" }]}

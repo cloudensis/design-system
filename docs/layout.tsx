@@ -119,7 +119,7 @@ export function Layout({
 													<a
 														href={item.href}
 														class={cn(
-															"block rounded px-2 py-1.5 text-fg-muted hover:text-accent",
+															"block rounded-sm px-2 py-1.5 text-fg-muted hover:text-accent",
 															item.href === pathname &&
 																"bg-border/60 font-medium text-accent",
 														)}
