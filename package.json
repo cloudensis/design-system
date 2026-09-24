@@ -1,0 +1,10 @@
+{
+	"name": "@cloudensis/design-system",
+	"version": "0.12.0",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cloudensis/design-system.git"
+	},
+	"type": "module"
+}
