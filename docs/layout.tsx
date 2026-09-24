@@ -3,22 +3,9 @@ import type { PropsWithChildren } from "hono/jsx";
 import { Footer } from "../src/components/layout/footer.tsx";
 import { Header } from "../src/components/layout/header.tsx";
 import { cn } from "../src/lib/utils.ts";
+import { componentSections } from "./components.tsx";
 import { site } from "./site.ts";
 import styleUrl from "./style.css?url";
-
-const components = [
-	"Button",
-	"LinkButton",
-	"Input",
-	"Select",
-	"Textarea",
-	"Tooltip",
-	"CodeBlock",
-	"DescriptionList",
-	"Section",
-	"Header",
-	"Footer",
-];
 
 /* サイドバーのナビゲーション。コンポーネントは /components のセクションへの
    ページ内リンクです。 */
@@ -35,7 +22,7 @@ const navGroups = [
 		label: "Components",
 		items: [
 			{ href: "/components", label: "Overview" },
-			...components.map((name) => ({
+			...componentSections.map(({ name }) => ({
 				href: `/components#${name.toLowerCase()}`,
 				label: name,
 			})),
