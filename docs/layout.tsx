@@ -24,7 +24,7 @@ const components = [
    ページ内リンクです。 */
 const navGroups = [
 	{
-		label: "基礎",
+		label: "ガイド",
 		items: [
 			{ href: "/", label: "概要" },
 			{ href: "/tokens", label: "トークン" },
