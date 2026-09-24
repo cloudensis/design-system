@@ -40,7 +40,7 @@ import { Button } from "@cloudensis/design-system/components/ui/button";
 
 ## ドキュメント
 
-トークン・既定のスタイル・フォント・記事スタイル・各コンポーネントの仕様と、エントリ一覧は[ドキュメントサイト](DOCS_URL_TODO)にまとめています。このリポジトリの `docs/` がそのソースで、`npm run dev` で手元でも確認できます。
+トークン・既定のスタイル・フォント・記事スタイル・各コンポーネントの仕様と、エントリ一覧は[ドキュメントサイト](https://design-system.cloudensis.com/)にまとめています。このリポジトリの `docs/` がそのソースで、`npm run dev` で手元でも確認できます。
 
 ## 開発
 
