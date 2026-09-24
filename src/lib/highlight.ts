@@ -9,7 +9,7 @@ import markdown from "@shikijs/langs/markdown";
 import shellscript from "@shikijs/langs/shellscript";
 import tsx from "@shikijs/langs/tsx";
 import yaml from "@shikijs/langs/yaml";
-import theme from "@shikijs/themes/vitesse-dark";
+import vitesseDark from "@shikijs/themes/vitesse-dark";
 import {
 	createHighlighterCoreSync,
 	getTokenStyleObject,
@@ -19,6 +19,20 @@ import {
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
 const themeName = "vitesse-dark";
+
+/* コメントの色は半透明（#758575dd）で、背景と混ざるとコントラスト比が 4.5:1 に
+   届かないため、不透明にします。 */
+const theme = {
+	...vitesseDark,
+	tokenColors: vitesseDark.tokenColors?.map((tokenColor) =>
+		tokenColor.settings.foreground === "#758575dd"
+			? {
+					...tokenColor,
+					settings: { ...tokenColor.settings, foreground: "#758575" },
+				}
+			: tokenColor,
+	),
+};
 
 /* 同梱する文法。html は内部で javascript と css の文法も読み込むため、
    実際にはそれらも利用できます。 */

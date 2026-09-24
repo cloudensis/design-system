@@ -26,6 +26,14 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["**", "!node_modules", "!dist", "!docs-dist", "!.wrangler"]
+		"includes": [
+			"**",
+			"!node_modules",
+			"!dist",
+			"!docs-dist",
+			"!.wrangler",
+			"!test-results",
+			"!playwright-report"
+		]
 	}
 }

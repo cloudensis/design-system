@@ -89,7 +89,7 @@ export const componentSections: { name: string; body: Child }[] = [
 		body: (
 			<div class="space-y-3">
 				<div class="rounded border border-border p-6">
-					<Select>
+					<Select aria-label="選択肢">
 						<option value="">選択してください</option>
 						<option value="a">選択肢 A</option>
 						<option value="b">選択肢 B</option>
