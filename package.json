@@ -16,6 +16,10 @@
 		"./components/*": {
 			"types": "./dist/components/*.d.ts",
 			"default": "./dist/components/*.js"
+		},
+		"./lib/utils": {
+			"types": "./dist/lib/utils.d.ts",
+			"default": "./dist/lib/utils.js"
 		}
 	},
 	"scripts": {
