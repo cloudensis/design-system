@@ -48,8 +48,9 @@ jobs:
       - run: npm run build
       - run: npm publish
 
+  # npm への publish が成功してからデプロイし、未公開のバージョンのドキュメントを出さないようにします。
   deploy-docs:
-    needs: [test, check-version]
+    needs: [publish]
     runs-on: ubuntu-latest
     permissions:
       contents: read
