@@ -1,6 +1,6 @@
 {
 	"name": "@cloudensis/design-system",
-	"version": "0.11.0",
+	"version": "0.11.1",
 	"description": "cloudensis で利用する CSS トークン・記事用スタイル・コンポーネント",
 	"license": "MIT",
 	"repository": {
@@ -66,14 +66,14 @@
 	"devDependencies": {
 		"@axe-core/playwright": "^4.13.0",
 		"@biomejs/biome": "^2.5.14",
-		"@cloudflare/vite-plugin": "^1.56.0",
+		"@cloudflare/vite-plugin": "^1.57.0",
 		"@playwright/test": "^1.63.0",
 		"@tailwindcss/vite": "^4.3.3",
-		"@types/node": "^24.13.6",
+		"@types/node": "^26.6.2",
 		"hono": "^4.13.8",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
 		"vite": "^8.3.0",
-		"wrangler": "^4.135.0"
+		"wrangler": "^4.136.0"
 	}
 }
