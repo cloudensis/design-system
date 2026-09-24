@@ -52,6 +52,8 @@ import { Button } from "@cloudensis/design-system/components/ui/button";
 | `npm run deploy:docs`                                   | ドキュメントサイトを Cloudflare Workers にデプロイ |
 | `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                       |
 
+`src/components/` 以下のファイルはすべて公開 API になります（`exports` の `./components/*`）。内部用の部品は `components/` の外に置いてください。
+
 ## ドキュメントサイト
 
 `docs/` はこのパッケージ自体を使ったドキュメントサイトで、Cloudflare Workers で配信します。トークンやコンポーネントの仕様など利用者向けの説明はドキュメントサイトを正とし、README には導入手順だけを書きます。仕様を変えたときは `docs/` を更新してください。favicon・ロゴ・OGP 画像は [cloudensis.com](https://cloudensis.com) 直下のものを参照しています。

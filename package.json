@@ -1,6 +1,6 @@
 {
 	"name": "@cloudensis/design-system",
-	"version": "0.10.1",
+	"version": "0.11.0",
 	"description": "cloudensis で利用する CSS トークン・記事用スタイル・コンポーネント",
 	"license": "MIT",
 	"repository": {
@@ -20,9 +20,17 @@
 		"./tokens.css": "./dist/styles/tokens.css",
 		"./base.css": "./dist/styles/base.css",
 		"./prose.css": "./dist/styles/prose.css",
-		"./*": {
-			"types": "./dist/*.d.ts",
-			"default": "./dist/*.js"
+		"./components/*": {
+			"types": "./dist/components/*.d.ts",
+			"default": "./dist/components/*.js"
+		},
+		"./lib/highlight": {
+			"types": "./dist/lib/highlight.d.ts",
+			"default": "./dist/lib/highlight.js"
+		},
+		"./lib/utils": {
+			"types": "./dist/lib/utils.d.ts",
+			"default": "./dist/lib/utils.js"
 		}
 	},
 	"publishConfig": {
