@@ -2,14 +2,45 @@ import { raw } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
 import { Footer } from "../src/components/layout/footer.tsx";
 import { Header } from "../src/components/layout/header.tsx";
+import { cn } from "../src/lib/utils.ts";
 import { site } from "./site.ts";
 import styleUrl from "./style.css?url";
 
-const navItems = [
-	{ href: "/", label: "概要" },
-	{ href: "/tokens", label: "トークン" },
-	{ href: "/components", label: "コンポーネント" },
-	{ href: "/prose", label: "記事スタイル" },
+const components = [
+	"Button",
+	"LinkButton",
+	"Input",
+	"Select",
+	"Textarea",
+	"Tooltip",
+	"CodeBlock",
+	"DescriptionList",
+	"Section",
+	"Header",
+	"Footer",
+];
+
+/* サイドバーのナビゲーション。コンポーネントは /components のセクションへの
+   ページ内リンクです。 */
+const navGroups = [
+	{
+		label: "Foundations",
+		items: [
+			{ href: "/", label: "Introduction" },
+			{ href: "/tokens", label: "Tokens" },
+			{ href: "/prose", label: "Prose" },
+		],
+	},
+	{
+		label: "Components",
+		items: [
+			{ href: "/components", label: "Overview" },
+			...components.map((name) => ({
+				href: `/components#${name.toLowerCase()}`,
+				label: name,
+			})),
+		],
+	},
 ];
 
 type LayoutProps = PropsWithChildren<{
@@ -36,7 +67,7 @@ export function Layout({
 	return (
 		<>
 			{raw("<!doctype html>")}
-			<html lang="ja">
+			<html lang="ja" class="scroll-pt-16">
 				<head>
 					<meta charset="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,24 +97,75 @@ export function Layout({
 
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
-				<body class="flex min-h-svh flex-col">
-					<Header title="cloudensis"></Header>
+				<body class="min-h-svh">
+					<Header
+						title="cloudensis"
+						class="sticky top-0 z-10 h-16 flex-nowrap border-border border-b bg-bg py-0"
+					/>
 
-					<main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 lg:px-8">
-						<nav class="flex flex-wrap gap-4 pb-8 text-sm">
-							{navItems.map((item) => (
-								<a
-									key={item.href}
-									href={item.href}
-									class="text-fg-muted underline-offset-4 hover:underline"
-								>
-									{item.label}
-								</a>
-							))}
-						</nav>
-						{children}
-					</main>
-					<Footer copyrightHolder="cloudensis" />
+					{/* 幅の狭い画面ではサイドバーの代わりにページ単位のリンクを横に並べます。 */}
+					<nav class="flex gap-4 overflow-x-auto border-border border-b px-4 py-3 text-sm lg:hidden">
+						{[...navGroups[0].items, navGroups[1].items[0]].map((item) => (
+							<a
+								key={item.href}
+								href={item.href}
+								class={cn(
+									"shrink-0 text-fg-muted",
+									item.href === pathname && "font-medium text-accent",
+								)}
+							>
+								{item.href === "/components" ? "Components" : item.label}
+							</a>
+						))}
+					</nav>
+
+					<div class="flex">
+						<aside class="sticky top-16 hidden h-[calc(100svh-4rem)] w-60 shrink-0 overflow-y-auto border-border border-r p-4 lg:block">
+							<nav class="space-y-6 text-sm">
+								{navGroups.map((group) => (
+									<div key={group.label}>
+										<p class="mb-2 px-2 font-medium text-accent">
+											{group.label}
+										</p>
+										<ul>
+											{group.items.map((item) => (
+												<li key={item.href}>
+													<a
+														href={item.href}
+														class={cn(
+															"block rounded px-2 py-1.5 text-fg-muted hover:text-accent",
+															item.href === pathname &&
+																"bg-border/60 font-medium text-accent",
+														)}
+													>
+														{item.label}
+													</a>
+												</li>
+											))}
+										</ul>
+									</div>
+								))}
+							</nav>
+						</aside>
+
+						<div class="flex min-h-[calc(100svh-4rem)] min-w-0 flex-1 flex-col">
+							<main class="flex-1">
+								<div class="border-border border-b px-6 py-12 lg:px-12">
+									<h1 class="font-medium text-3xl text-accent lg:text-4xl">
+										{title ?? site.name}
+									</h1>
+									<p class="mt-3 text-fg-muted text-lg">{description}</p>
+								</div>
+								<div class="divide-y divide-border *:px-6 *:py-10 lg:*:px-12">
+									{children}
+								</div>
+							</main>
+							<Footer
+								copyrightHolder="cloudensis"
+								class="border-border border-t"
+							/>
+						</div>
+					</div>
 				</body>
 			</html>
 		</>
