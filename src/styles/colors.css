@@ -1,7 +1,7 @@
 @theme {
-	--color-fg: #525252;
-	--color-bg: #f5f5f5;
+	--text-color-default: #525252;
+	--text-color-on-emphasis: #ffffff;
 
-	--color-accent: #262626;
-	--color-accent-fg: #ffffff;
+	--background-color-default: #f5f5f5;
+	--background-color-emphasis: #262626;
 }
