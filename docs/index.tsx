@@ -288,9 +288,23 @@ app.get("/tokens", (c) =>
 		>
 			<Section title="トークン一覧">
 				<p>
-					tokens.css の @theme で定義している値です。CSS 変数としても、 Tailwind
-					のユーティリティクラス（bg-accent、text-fg-muted、font-strong
+					tokens.css で定義している値です。色とフォントは @theme
+					で定義しているため、CSS 変数としても、Tailwind
+					のユーティリティクラス（bg-accent、text-fg-muted
 					など）としても利用できます。
+				</p>
+				<p>
+					文字の太さ（--font-weight-*）は CSS
+					変数としてだけ定義しており、ユーティリティクラスは生成しません。body
+					や .prose
+					の既定の太さはこの変数を参照しています。クラスで太さを指定するときは
+					font-light / font-medium などの標準のクラスを使ってください。
+				</p>
+				<p>
+					色以外の名前空間（文字の太さ・文字サイズ・角丸・余白など）では、独自の名前のユーティリティを作りません。cn
+					が使っている tailwind-merge は、色なら独自の名前（bg-bg
+					など）も正しく判別しますが、それ以外は Tailwind
+					の標準の名前しか判別できず、クラスの上書きの解決を誤るためです。
 				</p>
 				<p>
 					色と文字の太さはセマンティックな名前で定義しています。値はこのパッケージが所有しており、Tailwind

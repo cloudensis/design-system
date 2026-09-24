@@ -20,7 +20,19 @@
 	--font-sans:
 		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
 		sans-serif;
+}
 
-	--font-weight-base: 300;
-	--font-weight-strong: 500;
+/* 文字の太さは CSS 変数としてだけ定義し、@theme には置きません。@theme に置くと
+   font-base / font-strong のような独自名のユーティリティが生成され、cn が使う
+   tailwind-merge がそれを font-family と誤判定して、上書きの解決を誤るためです。
+   色以外の名前空間では独自名のユーティリティを作らない方針にしています。
+   コンポーネントや利用側では font-light / font-medium などの標準のクラスを
+   使ってください。Tailwind が @theme の変数を出力するのと同じ layer theme に
+   置いているため、利用側の :root で上書きできます。 */
+@layer theme {
+	:root,
+	:host {
+		--font-weight-base: 300;
+		--font-weight-strong: 500;
+	}
 }
