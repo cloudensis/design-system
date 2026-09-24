@@ -29,7 +29,7 @@ Tailwind CSS のエントリで次の 1 行を読み込みます。
 ```tsx
 import { Button } from "@cloudensis/design-system/components/ui/button";
 
-<Button type="submit">送信</Button>
+<Button type="submit">送信</Button>;
 ```
 
 記事本文には `.prose` を付与します。
@@ -51,6 +51,7 @@ import { Button } from "@cloudensis/design-system/components/ui/button";
 | `npm run build:docs`                                    | ドキュメントサイトをビルド                         |
 | `npm run deploy:docs`                                   | ドキュメントサイトを Cloudflare Workers にデプロイ |
 | `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                       |
+| `npm run test:a11y`                                     | ドキュメントサイトの全ページを axe で検査          |
 
 `src/components/` 以下のファイルはすべて公開 API になります（`exports` の `./components/*`）。内部用の部品は `components/` の外に置いてください。
 

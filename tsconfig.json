@@ -12,5 +12,12 @@
 		"allowImportingTsExtensions": true,
 		"rewriteRelativeImportExtensions": true,
 		"noEmit": true
-	}
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		"docs-dist",
+		"tests",
+		"playwright.config.ts"
+	]
 }

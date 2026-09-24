@@ -45,7 +45,8 @@
 		"build:docs": "vite build",
 		"preview:docs": "vite preview",
 		"deploy:docs": "npm run build:docs && wrangler deploy -c docs-dist/cloudensis_design_system_docs/wrangler.json",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "tsc --noEmit && tsc --noEmit -p tests",
+		"test:a11y": "playwright test",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe"
 	},
@@ -63,9 +64,12 @@
 		"tailwind-merge": "^3.7.0"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.13.0",
 		"@biomejs/biome": "^2.5.14",
 		"@cloudflare/vite-plugin": "^1.56.0",
+		"@playwright/test": "^1.63.0",
 		"@tailwindcss/vite": "^4.3.3",
+		"@types/node": "^24.13.6",
 		"hono": "^4.13.8",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
