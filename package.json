@@ -9,7 +9,8 @@
 	"type": "module",
 	"files": [
 		"dist",
-		"src/styles"
+		"src/styles",
+		"src/assets"
 	],
 	"exports": {
 		"./colors.css": "./src/styles/colors.css",
@@ -22,7 +23,8 @@
 		"./lib/utils": {
 			"types": "./dist/lib/utils.d.ts",
 			"default": "./dist/lib/utils.js"
-		}
+		},
+		"./assets/*": "./src/assets/*"
 	},
 	"scripts": {
 		"build": "rm -rf dist && tsc -p tsconfig.build.json",
