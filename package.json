@@ -20,6 +20,10 @@
 			"types": "./dist/components/*.d.ts",
 			"default": "./dist/components/*.js"
 		},
+		"./icons/*": {
+			"types": "./dist/icons/*.d.ts",
+			"default": "./dist/icons/*.js"
+		},
 		"./lib/utils": {
 			"types": "./dist/lib/utils.d.ts",
 			"default": "./dist/lib/utils.js"
