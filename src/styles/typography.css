@@ -1,4 +1,8 @@
 @theme {
+	--font-sans:
+		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
+		sans-serif;
+
 	--text-heading-1: 1.875rem;
 	--text-heading-1--line-height: 1.4;
 	--text-heading-1--font-weight: 500;
