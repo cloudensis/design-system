@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { raw } from "hono/html";
 import { Button } from "../src/components/button.tsx";
+import { LogoIcon } from "../src/icons/logo.tsx";
 import colorsCss from "../src/styles/colors.css?raw";
 import typographyCss from "../src/styles/typography.css?raw";
 import styleUrl from "./style.css?url";
@@ -129,6 +130,26 @@ app.get("/", (c) => {
 											</td>
 										</tr>
 									))}
+								</tbody>
+							</table>
+						</section>
+
+						<section class="space-y-4">
+							<h2 class="text-heading-2">Icons</h2>
+							<table class="w-full text-left text-sm">
+								<thead>
+									<tr>
+										<th class="py-2 font-medium">コンポーネント</th>
+										<th class="py-2 font-medium">見本</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="py-2 font-mono">LogoIcon</td>
+										<td class="py-2">
+											<LogoIcon label="cloudensis" />
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</section>
