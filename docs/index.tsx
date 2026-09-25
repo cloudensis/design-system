@@ -27,8 +27,9 @@ const fonts = [...typographyCss.matchAll(/^\s*--font-([\w-]+):\s*([^;]+);/gm)].m
 
 const app = new Hono();
 
-app.get("/", (c) =>
-	c.html(
+app.get("/", (c) => {
+	const ogImageUrl = new URL("/ogp.png", c.req.url).toString();
+	return c.html(
 		<>
 			{raw("<!doctype html>")}
 			<html lang="ja">
@@ -36,6 +37,14 @@ app.get("/", (c) =>
 					<meta charset="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 					<title>cloudensis design system</title>
+					<meta property="og:type" content="website" />
+					<meta property="og:title" content="cloudensis design system" />
+					<meta property="og:image" content={ogImageUrl} />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
+					<meta name="twitter:card" content="summary_large_image" />
+					<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+					<link rel="apple-touch-icon" href="/logo.png" />
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
 				<body class="bg-default text-default">
@@ -135,7 +144,7 @@ app.get("/", (c) =>
 				</body>
 			</html>
 		</>,
-	),
-);
+	);
+});
 
 export default app;
