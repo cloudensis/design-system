@@ -1,7 +1,9 @@
 import { Hono } from "hono";
 import { raw } from "hono/html";
+import { LogoLockup } from "../src/brand/logo-lockup.tsx";
+import { LogoMark } from "../src/brand/logo-mark.tsx";
+import { LogoType } from "../src/brand/logo-type.tsx";
 import { Button } from "../src/components/button.tsx";
-import { LogoIcon } from "../src/icons/logo.tsx";
 import colorsCss from "../src/styles/colors.css?raw";
 import typographyCss from "../src/styles/typography.css?raw";
 import styleUrl from "./style.css?url";
@@ -135,7 +137,7 @@ app.get("/", (c) => {
 						</section>
 
 						<section class="space-y-4">
-							<h2 class="text-heading-2">Icons</h2>
+							<h2 class="text-heading-2">Brand</h2>
 							<table class="w-full text-left text-sm">
 								<thead>
 									<tr>
@@ -145,9 +147,26 @@ app.get("/", (c) => {
 								</thead>
 								<tbody>
 									<tr>
-										<td class="py-2 font-mono">LogoIcon</td>
+										<td class="py-2 font-mono">LogoMark</td>
 										<td class="py-2">
-											<LogoIcon label="cloudensis" />
+											<LogoMark label="cloudensis" />
+										</td>
+									</tr>
+									<tr>
+										<td class="py-2 font-mono">LogoType</td>
+										<td class="py-2 text-xl">
+											<LogoType />
+										</td>
+									</tr>
+									<tr>
+										<td class="py-2 font-mono">LogoLockup</td>
+										<td class="space-y-2 py-2">
+											<div>
+												<LogoLockup />
+											</div>
+											<div>
+												<LogoLockup class="text-3xl" />
+											</div>
 										</td>
 									</tr>
 								</tbody>
