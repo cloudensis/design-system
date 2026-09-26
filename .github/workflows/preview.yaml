@@ -21,8 +21,6 @@ jobs:
 
       - run: npm run build:docs
 
-      # 本番に切り替えずにバージョンだけを作り、プレビュー URL で確認する。
-      # vite が出力する、パス解決済みの wrangler.json を使う。
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
