@@ -1,5 +1,5 @@
-import { Icon, type IconProps } from "../icons/icon.tsx";
-import { cn } from "../lib/utils.ts";
+import { Icon, type IconProps } from "../../icons/icon.tsx";
+import { cn } from "../../lib/utils.ts";
 
 export function LogoMark({ class: className, ...props }: IconProps) {
 	return (
