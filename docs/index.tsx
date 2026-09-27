@@ -46,6 +46,7 @@ const renderer = jsxRenderer(({ children }) => {
 					<Button
 						type="button"
 						variant="outline"
+						size="sm"
 						popovertarget="mobile-nav"
 						class="lg:hidden"
 					>
@@ -65,6 +66,7 @@ const renderer = jsxRenderer(({ children }) => {
 					<Button
 						type="button"
 						variant="outline"
+						size="sm"
 						popovertarget="mobile-nav"
 						popovertargetaction="hide"
 						class="mb-4"
