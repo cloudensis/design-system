@@ -70,17 +70,25 @@ const copyScript = [
 
 function CopyButton() {
 	return (
-		<button
-			type="button"
-			class="group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-current/30 bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
-			onclick={copyScript}
-		>
-			<CopyIcon class="group-data-copied/copy:hidden" />
-			<CheckIcon class="hidden group-data-copied/copy:block" />
-			<span class="sr-only group-data-copied/copy:hidden">コピー</span>
-			<span class="sr-only hidden group-data-copied/copy:inline">
-				コピーしました
+		<>
+			<button
+				type="button"
+				class="peer/copy group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-current/30 bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+				onclick={copyScript}
+			>
+				<CopyIcon
+					label="コードをコピー"
+					class="group-data-copied/copy:hidden"
+				/>
+				<CheckIcon
+					label="コピーしました"
+					class="hidden group-data-copied/copy:block"
+				/>
+			</button>
+			{/* ボタンの中のライブ領域は読み上げられないため、隣に置く。 */}
+			<span role="status" class="sr-only peer-data-copied/copy:*:inline">
+				<span class="hidden">コピーしました</span>
 			</span>
-		</button>
+		</>
 	);
 }
