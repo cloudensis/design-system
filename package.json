@@ -39,7 +39,9 @@
 	},
 	"scripts": {
 		"build": "rm -rf dist && tsc -p tsconfig.build.json",
-		"typecheck": "tsc"
+		"typecheck": "tsc",
+		"lint": "biome check",
+		"format": "biome check --write --unsafe"
 	},
 	"peerDependencies": {
 		"hono": "^4.13.8",
@@ -52,6 +54,7 @@
 		"tailwind-merge": "^3.7.0"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^2.5.14",
 		"hono": "^4.13.8",
 		"typescript": "^7.0.2"
 	}
