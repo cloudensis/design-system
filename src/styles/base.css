@@ -1,0 +1,6 @@
+@layer base {
+	body {
+		background-color: var(--background-color-default);
+		color: var(--text-color-default);
+	}
+}

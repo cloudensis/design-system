@@ -13,6 +13,7 @@
 		"src/assets"
 	],
 	"exports": {
+		"./base.css": "./src/styles/base.css",
 		"./colors.css": "./src/styles/colors.css",
 		"./typography.css": "./src/styles/typography.css",
 		"./fonts.css": "./src/styles/fonts.css",
