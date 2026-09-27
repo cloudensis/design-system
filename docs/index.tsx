@@ -50,7 +50,7 @@ app.get("/", (c) => {
 					<link rel="apple-touch-icon" href="/logo.png" />
 					<link rel="stylesheet" href={styleUrl} />
 				</head>
-				<body class="bg-default text-default">
+				<body>
 					<main class="mx-auto max-w-3xl space-y-12 px-6 py-12">
 						<h1 class="text-heading-1">cloudensis design system</h1>
 
