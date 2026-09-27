@@ -26,7 +26,7 @@ export function Template() {
 						alt={asset.file}
 						width={asset.width}
 						height={asset.height}
-						class="h-auto max-h-64 w-auto max-w-full rounded-sm border border-default bg-white"
+						class="scheme-light p-4 h-auto max-h-64 w-auto max-w-full rounded-sm border border-default"
 					/>
 				</section>
 			))}
