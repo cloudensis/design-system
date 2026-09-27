@@ -1,0 +1,74 @@
+import typographyCss from "../../../../src/styles/typography.css?raw";
+
+const typography = [
+	...typographyCss.matchAll(/--text-([\w-]+?):\s*([^;]+);/g),
+].reduce<Record<string, Record<string, string>>>((styles, [, name, value]) => {
+	const [base, property = "font-size"] = name.split("--");
+	styles[base] = { ...styles[base], [property]: value.trim() };
+	return styles;
+}, {});
+
+const fonts = [
+	...typographyCss.matchAll(/^\s*--font-([\w-]+):\s*([^;]+);/gm),
+].map(([, name, value]) => ({
+	name,
+	value: value.trim().replace(/\s+/g, " "),
+}));
+
+export function Template() {
+	return (
+		<>
+			<table class="w-full text-left text-sm">
+				<thead>
+					<tr>
+						<th class="py-2 font-medium">クラス</th>
+						<th class="py-2 font-medium">値</th>
+						<th class="py-2 font-medium">見本</th>
+					</tr>
+				</thead>
+				<tbody>
+					{fonts.map(({ name, value }) => (
+						<tr key={name}>
+							<td class="whitespace-nowrap py-2 pr-4 font-mono">font-{name}</td>
+							<td class="py-2 font-mono">{value}</td>
+							<td class="py-2 text-lg" style={`font-family: ${value}`}>
+								Aa あア亜 0123
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+			<table class="w-full text-left text-sm">
+				<thead>
+					<tr>
+						<th class="py-2 font-medium">クラス</th>
+						<th class="py-2 font-medium">値</th>
+						<th class="py-2 font-medium">見本</th>
+					</tr>
+				</thead>
+				<tbody>
+					{Object.entries(typography).map(([name, style]) => (
+						<tr key={name}>
+							<td class="py-2 font-mono">text-{name}</td>
+							<td class="py-2 font-mono">
+								{Object.entries(style).map(([property, value]) => (
+									<div key={property}>
+										{property}: {value}
+									</div>
+								))}
+							</td>
+							<td
+								class="py-2"
+								style={Object.entries(style)
+									.map(([property, value]) => `${property}: ${value}`)
+									.join("; ")}
+							>
+								見出し Heading
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</>
+	);
+}

@@ -1,12 +1,27 @@
 import { Hono } from "hono";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
+import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
+import { nav } from "./nav.ts";
+import { Template as AssetsTemplate } from "./routes/assets/template.tsx";
+import { Template as CloudensisTemplate } from "./routes/brand/cloudensis/template.tsx";
+import { Template as ButtonTemplate } from "./routes/components/button/template.tsx";
+import { Template as ColorsTemplate } from "./routes/styles/colors/template.tsx";
+import { Template as ProseTemplate } from "./routes/styles/prose/template.tsx";
+import { Template as TypographyTemplate } from "./routes/styles/typography/template.tsx";
 import { Template as HomeTemplate } from "./routes/template.tsx";
+import { SideNav } from "./side-nav.tsx";
 import styleUrl from "./style.css?url";
 
 const siteName = "cloudensis design system";
 
 const renderer = jsxRenderer(({ children }) => {
 	const c = useRequestContext();
+	const current = c.req.path;
+	const page = nav
+		.flatMap((group) => group.items)
+		.find((item) => item.href === current);
+	const heading = current === "/" || !page ? siteName : page.label;
+	const title = heading === siteName ? siteName : `${heading} | ${siteName}`;
 	const ogImageUrl = new URL("/ogp.png", c.req.url).toString();
 
 	return (
@@ -14,9 +29,9 @@ const renderer = jsxRenderer(({ children }) => {
 			<head>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<title>{siteName}</title>
+				<title>{title}</title>
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content={siteName} />
+				<meta property="og:title" content={title} />
 				<meta property="og:image" content={ogImageUrl} />
 				<meta property="og:image:width" content="1200" />
 				<meta property="og:image:height" content="630" />
@@ -26,7 +41,47 @@ const renderer = jsxRenderer(({ children }) => {
 				<link rel="stylesheet" href={styleUrl} />
 			</head>
 			<body>
-				<main class="mx-auto max-w-3xl space-y-12 px-6 py-12">{children}</main>
+				<header class="sticky top-0 z-10 flex h-14 items-center gap-4 border-default border-b bg-default px-4 lg:px-6">
+					<button
+						type="button"
+						popovertarget="mobile-nav"
+						class="cursor-pointer rounded-sm border border-default px-3 py-1 text-sm lg:hidden"
+					>
+						メニュー
+					</button>
+					<a href="/" class="flex items-baseline gap-2">
+						<LogoLockup class="text-lg" />
+						<span class="text-sm">design system</span>
+					</a>
+				</header>
+
+				<div
+					id="mobile-nav"
+					popover="auto"
+					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] border-default border-r bg-default p-4 text-default backdrop:bg-black/30"
+				>
+					<button
+						type="button"
+						popovertarget="mobile-nav"
+						popovertargetaction="hide"
+						class="mb-4 cursor-pointer rounded-sm border border-default px-3 py-1 text-sm"
+					>
+						閉じる
+					</button>
+					<SideNav current={current} />
+				</div>
+
+				<div class="flex">
+					<aside class="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-default border-r p-4 lg:block">
+						<SideNav current={current} />
+					</aside>
+					<main class="min-w-0 flex-1 px-6 py-10 lg:px-12">
+						<div class="mx-auto max-w-3xl space-y-8">
+							<h1 class="text-heading-1">{heading}</h1>
+							{children}
+						</div>
+					</main>
+				</div>
 			</body>
 		</html>
 	);
@@ -37,5 +92,11 @@ const app = new Hono();
 app.use(renderer);
 
 app.get("/", (c) => c.render(<HomeTemplate />));
+app.get("/styles/colors", (c) => c.render(<ColorsTemplate />));
+app.get("/styles/typography", (c) => c.render(<TypographyTemplate />));
+app.get("/styles/prose", (c) => c.render(<ProseTemplate />));
+app.get("/components/button", (c) => c.render(<ButtonTemplate />));
+app.get("/brand/cloudensis", (c) => c.render(<CloudensisTemplate />));
+app.get("/assets", (c) => c.render(<AssetsTemplate />));
 
 export default app;
