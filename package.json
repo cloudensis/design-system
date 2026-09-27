@@ -41,7 +41,9 @@
 		"build": "rm -rf dist && tsc -p tsconfig.build.json",
 		"typecheck": "tsc",
 		"dev": "vite",
-		"build:docs": "vite build"
+		"build:docs": "vite build",
+		"lint": "biome check",
+		"format": "biome check --write --unsafe"
 	},
 	"peerDependencies": {
 		"hono": "^4.13.8",
@@ -54,6 +56,7 @@
 		"tailwind-merge": "^3.7.0"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^2.5.14",
 		"@cloudflare/vite-plugin": "^1.60.0",
 		"@tailwindcss/vite": "^4.3.3",
 		"hono": "^4.13.8",

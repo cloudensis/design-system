@@ -13,7 +13,12 @@ type IconBaseProps = IconProps & {
 };
 
 /** アイコン共通の外枠。線と塗りは currentColor で、文字色に従う。大きさは各アイコンが決める。 */
-export function Icon({ class: className, label, viewBox, children }: IconBaseProps) {
+export function Icon({
+	class: className,
+	label,
+	viewBox,
+	children,
+}: IconBaseProps) {
 	return (
 		<svg
 			class={cn("shrink-0", className)}

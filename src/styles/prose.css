@@ -97,7 +97,6 @@
 		text-underline-offset: 0.2em;
 	}
 
-
 	.prose :where(small) {
 		font-size: 0.875em;
 	}
@@ -188,7 +187,6 @@
 	.prose :where(ol ol ol) {
 		list-style-type: lower-roman;
 	}
-
 
 	.prose :where(dt) {
 		font-weight: var(--font-weight-semibold);
