@@ -90,12 +90,14 @@
 			font-size: 0.875em;
 		}
 
+		/* 横スクロールするとキーボードで操作できないため、長い行は折り返す。 */
 		:where(pre) {
 			border-radius: var(--radius-sm);
 			background-color: var(--background-color-emphasis);
 			padding: 1rem;
-			overflow-x: auto;
 			color: var(--text-color-on-emphasis);
+			white-space: pre-wrap;
+			overflow-wrap: anywhere;
 			font-family: var(--font-mono);
 			font-size: 0.875em;
 			line-height: 1.7;
