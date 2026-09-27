@@ -1,6 +1,6 @@
-import { LogoLockup } from "../../src/brand/logo-lockup.tsx";
-import { LogoMark } from "../../src/brand/logo-mark.tsx";
-import { LogoType } from "../../src/brand/logo-type.tsx";
+import { LogoLockup } from "../../src/brand/cloudensis/logo-lockup.tsx";
+import { LogoMark } from "../../src/brand/cloudensis/logo-mark.tsx";
+import { LogoType } from "../../src/brand/cloudensis/logo-type.tsx";
 import { Button } from "../../src/components/button.tsx";
 import colorsCss from "../../src/styles/colors.css?raw";
 import typographyCss from "../../src/styles/typography.css?raw";
