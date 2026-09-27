@@ -33,7 +33,7 @@ export function CodeBlock({
 			<pre
 				tabindex={0}
 				class={cn(
-					"overflow-x-auto rounded-sm bg-emphasis p-4 pr-12 text-on-emphasis text-sm",
+					"overflow-x-auto rounded-sm bg-emphasis p-4 pr-12 text-on-emphasis text-sm leading-[1.7]",
 					className,
 				)}
 				{...props}
