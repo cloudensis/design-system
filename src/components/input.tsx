@@ -11,7 +11,7 @@ export function Input({ type, class: className, ...props }: InputProps) {
 			<input
 				type={type}
 				class={cn(
-					"size-4 accent-[var(--background-color-emphasis)] disabled:cursor-not-allowed disabled:opacity-50",
+					"size-4 accent-(--background-color-emphasis) disabled:cursor-not-allowed disabled:opacity-50",
 					className,
 				)}
 				{...props}
