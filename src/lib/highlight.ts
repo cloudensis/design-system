@@ -14,8 +14,6 @@ import {
 } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
-const themeName = "vitesse-dark";
-
 /*
  * 背景（--background-color-emphasis）とのコントラスト比を 4.5 以上にする。
  * 半透明の色は不透明にし、足りない色は明るくする。
@@ -93,12 +91,10 @@ export function highlight(
 	const shiki = getHighlighter();
 	if (!shiki.getLoadedLanguages().includes(lang)) return undefined;
 
-	return shiki
-		.codeToTokens(code, { lang, theme: themeName })
-		.tokens.map((line) =>
-			line.map((token) => ({
-				content: token.content,
-				style: stringifyTokenStyle(getTokenStyleObject(token)),
-			})),
-		);
+	return shiki.codeToTokens(code, { lang, theme }).tokens.map((line) =>
+		line.map((token) => ({
+			content: token.content,
+			style: stringifyTokenStyle(getTokenStyleObject(token)),
+		})),
+	);
 }
