@@ -2,3 +2,5 @@ node_modules
 dist
 docs-dist
 .wrangler
+test-results
+playwright-report
