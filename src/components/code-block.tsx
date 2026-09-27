@@ -40,22 +40,20 @@ type CodeProps = {
 };
 
 function Code({ code, lang }: CodeProps) {
-	const lines = lang ? highlight(code, lang) : undefined;
+	const lines = lang && highlight(code, lang);
 
 	return (
 		/* 横スクロールは code が担う。tabindex はキーボードでスクロールするため。 */
 		<code tabindex={0} class="block overflow-x-auto p-4 pr-12">
-			{lines
-				? lines.map((line, index) => (
-						/* 要素で囲むとコピー時に改行が失われるため。 */
-						<>
-							{index > 0 && "\n"}
-							{line.map((token) => (
-								<span style={token.style}>{token.content}</span>
-							))}
-						</>
-					))
-				: code}
+			{lines?.map((line, index) => (
+				/* 要素で囲むとコピー時に改行が失われるため。 */
+				<>
+					{index > 0 && "\n"}
+					{line.map((token) => (
+						<span style={token.style}>{token.content}</span>
+					))}
+				</>
+			)) ?? code}
 		</code>
 	);
 }
