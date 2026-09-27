@@ -17,6 +17,7 @@
 		"./colors.css": "./src/styles/colors.css",
 		"./typography.css": "./src/styles/typography.css",
 		"./fonts.css": "./src/styles/fonts.css",
+		"./prose.css": "./src/styles/prose.css",
 		"./components/*": {
 			"types": "./dist/components/*.d.ts",
 			"default": "./dist/components/*.js"
