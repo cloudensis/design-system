@@ -71,7 +71,7 @@ export function Template() {
 					</li>
 					<li>3 つ目の項目</li>
 				</ol>
-				<h3>定義リスト</h3>
+				<h3>説明リスト</h3>
 				<dl>
 					<dt>トークン</dt>
 					<dd>
