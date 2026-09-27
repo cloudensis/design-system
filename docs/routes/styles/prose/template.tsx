@@ -1,5 +1,17 @@
+import { Button } from "../../../../src/components/button.tsx";
+import { CodeBlock } from "../../../../src/components/code-block.tsx";
+
 const samplePreCode = `npm install @cloudensis/design-system
 npm run dev`;
+
+const sampleNotProse = `<article class="prose">
+	<p>本文</p>
+	<div class="not-prose">
+		<ul>
+			<li>prose のスタイルが効かない</li>
+		</ul>
+	</div>
+</article>`;
 
 export function Template() {
 	return (
@@ -166,6 +178,35 @@ export function Template() {
 					の下の段落です。区切り線の手前も、見出しと同じだけ余白を広げています。
 				</p>
 			</article>
+
+			<h2 class="text-heading-2">not-prose</h2>
+			<div class="prose">
+				<p>
+					.prose の中で、not-prose
+					を付けた要素とその中には、記事用のスタイルが効きません。コンポーネントを記事の中に置くときなどに使います。
+				</p>
+				<p>
+					not-prose を付けた要素が p や pre
+					などのブロック要素なら、ほかのブロックと同じ前後の余白を受けます。CodeBlock
+					もこれに当たります。div には余白が付かないので、必要なら mb-*
+					などで付けてください。
+				</p>
+			</div>
+			<article class="prose rounded-sm border border-default p-6">
+				<p>ここは .prose のスタイルが効く段落です。</p>
+				<div class="not-prose mb-5 flex flex-wrap gap-2">
+					<Button size="sm">not-prose の中</Button>
+					<ul>
+						<li>このリストにはマーカーが付かない</li>
+					</ul>
+				</div>
+				<p>
+					この段落も .prose のスタイルが効きます。CodeBlock は not-prose
+					を付けているので、記事の中に置いても prose の pre
+					のスタイルを受けません。
+				</p>
+			</article>
+			<CodeBlock lang="html">{sampleNotProse}</CodeBlock>
 		</>
 	);
 }
