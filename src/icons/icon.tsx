@@ -3,7 +3,7 @@ import { cn } from "../lib/utils.ts";
 
 export type IconProps = {
 	class?: string;
-	/** 指定すると読み上げられる。省略すると装飾として扱い、読み上げない。 */
+	/** 省略すると装飾として扱う。 */
 	label?: string;
 };
 
@@ -12,7 +12,7 @@ type IconBaseProps = IconProps & {
 	children: Child;
 };
 
-/** アイコン共通の外枠。線と塗りは currentColor で、文字色に従う。大きさは各アイコンが決める。 */
+/** 大きさは各アイコンで指定する。 */
 export function Icon({
 	class: className,
 	label,

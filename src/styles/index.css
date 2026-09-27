@@ -4,5 +4,5 @@
 @import "./base.css";
 @import "./prose.css";
 
-/* コンポーネントのクラスを収集する。パッケージでは dist にビルド済みの JS がある。 */
+/* パッケージではビルド済みの dist からクラスを収集する。 */
 @source "../../dist";

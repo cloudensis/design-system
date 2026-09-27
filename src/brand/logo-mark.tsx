@@ -1,7 +1,6 @@
 import { Icon, type IconProps } from "../icons/icon.tsx";
 import { cn } from "../lib/utils.ts";
 
-/** ロゴのシンボル部分（雲のマーク）。 */
 export function LogoMark({ class: className, ...props }: IconProps) {
 	return (
 		<Icon viewBox="0 0 42 24" class={cn("h-6 w-auto", className)} {...props}>
