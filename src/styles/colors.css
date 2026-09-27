@@ -1,11 +1,8 @@
 @theme {
 	--text-color-default: #525252;
-	--text-color-muted: #6b6b6b;
 	--text-color-on-emphasis: #ffffff;
 
 	--background-color-default: #f5f5f5;
-	--background-color-muted: #fafafa;
-	--background-color-neutral-muted: #e5e5e5;
 	--background-color-emphasis: #262626;
 
 	--border-color-default: #e5e5e5;
