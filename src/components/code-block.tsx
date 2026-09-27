@@ -52,11 +52,21 @@ function renderCode(code: string, lang?: CodeLanguage) {
 	));
 }
 
-/* ハイドレーションなしで動くよう、インラインハンドラーの文字列にする。 */
-const copyScript =
-	"const b=this,c=b.parentElement.querySelector('code'),s=()=>getSelection().selectAllChildren(c);" +
-	"navigator.clipboard?navigator.clipboard.writeText(c.textContent).then(()=>{" +
-	"b.dataset.copied='';clearTimeout(b.t);b.t=setTimeout(()=>delete b.dataset.copied,2000)},s):s()";
+/*
+ * ハイドレーションなしで動くよう、インラインハンドラーの文字列にする。
+ * 変えると CSP のハッシュが変わるので、利用側で CSP の設定を更新する必要がある。
+ */
+const copyScript = [
+	"const button = this;",
+	"const code = button.parentElement.querySelector('code');",
+	"const selectAll = () => getSelection().selectAllChildren(code);",
+	"if (!navigator.clipboard) return selectAll();",
+	"navigator.clipboard.writeText(code.textContent).then(() => {",
+	"button.dataset.copied = '';",
+	"clearTimeout(button.timer);",
+	"button.timer = setTimeout(() => delete button.dataset.copied, 2000);",
+	"}, selectAll);",
+].join("");
 
 function CopyButton() {
 	return (
