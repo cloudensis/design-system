@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
+import { Button } from "../src/components/button.tsx";
 import { nav } from "./nav.ts";
 import { Template as AssetsTemplate } from "./routes/assets/template.tsx";
 import { Template as CloudensisTemplate } from "./routes/brand/cloudensis/template.tsx";
@@ -42,13 +43,14 @@ const renderer = jsxRenderer(({ children }) => {
 			</head>
 			<body>
 				<header class="sticky top-0 z-10 flex h-14 items-center gap-4 border-default border-b bg-default px-4 lg:px-6">
-					<button
+					<Button
 						type="button"
+						variant="outline"
 						popovertarget="mobile-nav"
-						class="cursor-pointer rounded-sm border border-default px-3 py-1 text-sm lg:hidden"
+						class="lg:hidden"
 					>
 						メニュー
-					</button>
+					</Button>
 					<a href="/" class="flex items-baseline gap-2">
 						<LogoLockup class="text-lg" />
 						<span class="text-sm">design system</span>
@@ -60,14 +62,15 @@ const renderer = jsxRenderer(({ children }) => {
 					popover="auto"
 					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] border-default border-r bg-default p-4 text-default backdrop:bg-black/30"
 				>
-					<button
+					<Button
 						type="button"
+						variant="outline"
 						popovertarget="mobile-nav"
 						popovertargetaction="hide"
-						class="mb-4 cursor-pointer rounded-sm border border-default px-3 py-1 text-sm"
+						class="mb-4"
 					>
 						閉じる
-					</button>
+					</Button>
 					<SideNav current={current} />
 				</div>
 
