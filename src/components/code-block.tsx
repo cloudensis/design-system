@@ -28,33 +28,29 @@ export function CodeBlock({
 	const lines = lang ? highlight(code, lang) : undefined;
 
 	return (
-		<div class="relative">
-			{/* キーボードで横スクロールできるように。 */}
-			<pre
-				tabindex={0}
-				class={cn(
-					"overflow-x-auto rounded-sm bg-emphasis p-4 pr-12 text-on-emphasis text-sm leading-[1.7]",
-					className,
-				)}
-				{...props}
-			>
-				<code>
-					{lines
-						? lines.map((line, index) => (
-								/* 要素で囲むとコピー時に改行が失われるため。 */
-								<Fragment key={String(index)}>
-									{index > 0 ? "\n" : null}
-									{line.map((token, tokenIndex) => (
-										<span key={String(tokenIndex)} style={token.style}>
-											{token.content}
-										</span>
-									))}
-								</Fragment>
-							))
-						: code}
-				</code>
-			</pre>
-			{/* pre の外に置き、横スクロールしても右上に留める。 */}
+		<pre
+			class={cn(
+				"relative overflow-visible rounded-sm bg-emphasis p-0 text-on-emphasis text-sm leading-[1.7]",
+				className,
+			)}
+			{...props}
+		>
+			{/* スクロールは code に任せ、ボタンを右上に留める。tabindex はキーボードで横スクロールするため。 */}
+			<code tabindex={0} class="block overflow-x-auto p-4 pr-12">
+				{lines
+					? lines.map((line, index) => (
+							/* 要素で囲むとコピー時に改行が失われるため。 */
+							<Fragment key={String(index)}>
+								{index > 0 ? "\n" : null}
+								{line.map((token, tokenIndex) => (
+									<span key={String(tokenIndex)} style={token.style}>
+										{token.content}
+									</span>
+								))}
+							</Fragment>
+						))
+					: code}
+			</code>
 			<button
 				type="button"
 				class="group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-current/30 bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
@@ -67,6 +63,6 @@ export function CodeBlock({
 					コピーしました
 				</span>
 			</button>
-		</div>
+		</pre>
 	);
 }
