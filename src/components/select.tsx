@@ -9,7 +9,8 @@ export function Select({ class: className, children, ...props }: SelectProps) {
 	return (
 		<select
 			class={cn(
-				"w-full rounded-sm border border-default px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50",
+				/* select は line-height を無視して Input より低くなるため、高さを Input と同じ計算で決める。 */
+				"h-[calc(1lh+--spacing(4)+2px)] w-full rounded-sm border border-default px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50",
 				className,
 			)}
 			{...props}
