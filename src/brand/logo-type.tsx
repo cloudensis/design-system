@@ -4,7 +4,6 @@ type LogoTypeProps = {
 	class?: string;
 };
 
-/** ロゴのテキスト部分。大きさは文字サイズに従う。 */
 export function LogoType({ class: className }: LogoTypeProps) {
 	return (
 		<span class={cn("font-extralight tracking-wider", className)}>

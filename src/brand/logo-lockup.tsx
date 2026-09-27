@@ -6,10 +6,7 @@ type LogoLockupProps = {
 	class?: string;
 };
 
-/**
- * LogoMark と LogoType の横組み。
- * マークの高さと間隔は em で決めているので、text-* だけで全体の大きさが変わる。
- */
+/** 大きさは text-* で変える。 */
 export function LogoLockup({ class: className }: LogoLockupProps) {
 	return (
 		<span
