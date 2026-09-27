@@ -16,6 +16,7 @@ export const nav: NavGroup[] = [
 		label: "components",
 		items: [
 			{ href: "/components/button", label: "Button" },
+			{ href: "/components/code-block", label: "CodeBlock" },
 			{ href: "/components/input", label: "Input" },
 			{ href: "/components/select", label: "Select" },
 			{ href: "/components/textarea", label: "Textarea" },
