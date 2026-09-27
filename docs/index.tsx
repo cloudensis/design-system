@@ -15,18 +15,18 @@ const colors = [...colorsCss.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(
 /* --text-heading-1--line-height などの修飾子を、親の名前ごとにまとめる。 */
 const typography = [
 	...typographyCss.matchAll(/--text-([\w-]+?):\s*([^;]+);/g),
-].reduce<Record<string, Record<string, string>>>(
-	(styles, [, name, value]) => {
-		const [base, property = "font-size"] = name.split("--");
-		styles[base] = { ...styles[base], [property]: value.trim() };
-		return styles;
-	},
-	{},
-);
+].reduce<Record<string, Record<string, string>>>((styles, [, name, value]) => {
+	const [base, property = "font-size"] = name.split("--");
+	styles[base] = { ...styles[base], [property]: value.trim() };
+	return styles;
+}, {});
 
-const fonts = [...typographyCss.matchAll(/^\s*--font-([\w-]+):\s*([^;]+);/gm)].map(
-	([, name, value]) => ({ name, value: value.trim().replace(/\s+/g, " ") }),
-);
+const fonts = [
+	...typographyCss.matchAll(/^\s*--font-([\w-]+):\s*([^;]+);/gm),
+].map(([, name, value]) => ({
+	name,
+	value: value.trim().replace(/\s+/g, " "),
+}));
 
 const samplePreCode = `npm install @cloudensis/design-system
 npm run dev`;
@@ -97,7 +97,9 @@ app.get("/", (c) => {
 								<tbody>
 									{fonts.map(({ name, value }) => (
 										<tr key={name}>
-											<td class="whitespace-nowrap py-2 pr-4 font-mono">font-{name}</td>
+											<td class="whitespace-nowrap py-2 pr-4 font-mono">
+												font-{name}
+											</td>
 											<td class="py-2 font-mono">{value}</td>
 											<td class="py-2 text-lg" style={`font-family: ${value}`}>
 												Aa あア亜 0123
@@ -184,11 +186,11 @@ app.get("/", (c) => {
 								<p>
 									この記事は <code>.prose</code> が扱う HTML
 									タグを一通り並べたものです。本文の中では{" "}
-									<strong>strong による強い強調</strong>や<em>em による強調</em>、
-									<a href="#prose">a によるリンク</a>、
-									<mark>mark によるハイライト</mark>、<small>small による注記</small>
-									、<del>del で消した文</del>、<ins>ins で足した文</ins>、
-									<s>s で無効になった文</s>
+									<strong>strong による強い強調</strong>や<em>em による強調</em>
+									、<a href="#prose">a によるリンク</a>、
+									<mark>mark によるハイライト</mark>、
+									<small>small による注記</small>、<del>del で消した文</del>、
+									<ins>ins で足した文</ins>、<s>s で無効になった文</s>
 									をそのまま使えます。
 								</p>
 								<p>
@@ -218,7 +220,8 @@ app.get("/", (c) => {
 								<ul>
 									<li>ul の項目です。</li>
 									<li>
-										入れ子にするとマーカーが disc → circle → square と変わります。
+										入れ子にするとマーカーが disc → circle → square
+										と変わります。
 										<ul>
 											<li>
 												2 階層目の項目
@@ -233,7 +236,8 @@ app.get("/", (c) => {
 								<ol>
 									<li>ol の項目です。</li>
 									<li>
-										入れ子にすると decimal → lower-alpha → lower-roman と変わります。
+										入れ子にすると decimal → lower-alpha → lower-roman
+										と変わります。
 										<ol>
 											<li>
 												2 階層目の項目
@@ -249,8 +253,8 @@ app.get("/", (c) => {
 								<dl>
 									<dt>トークン</dt>
 									<dd>
-										配色やタイポグラフィの値に名前を付けたものです。colors.css と
-										typography.css の @theme で定義しています。
+										配色やタイポグラフィの値に名前を付けたものです。colors.css
+										と typography.css の @theme で定義しています。
 									</dd>
 									<dt>prose</dt>
 									<dd>記事本文に付けるクラスの名前です。</dd>
@@ -270,11 +274,13 @@ app.get("/", (c) => {
 								</p>
 								<h2>コード</h2>
 								<p>
-									インラインのコードは <code>--text-color-default</code> のように表示されます。
-									コマンドの出力は <samp>done</samp> のように示します。
+									インラインのコードは <code>--text-color-default</code>{" "}
+									のように表示されます。 コマンドの出力は <samp>done</samp>{" "}
+									のように示します。
 								</p>
 								<p>
-									pre と code を直に書いた場合は、ハイライトなしのコードブロックです。
+									pre と code
+									を直に書いた場合は、ハイライトなしのコードブロックです。
 								</p>
 								<pre>
 									<code>{samplePreCode}</code>
@@ -322,7 +328,8 @@ app.get("/", (c) => {
 										height="120"
 									/>
 									<figcaption>
-										figure と figcaption。画像は max-width: 100% で枠に収まります。
+										figure と figcaption。画像は max-width: 100%
+										で枠に収まります。
 									</figcaption>
 								</figure>
 								<h2>開閉</h2>

@@ -10,12 +10,7 @@
 		"allowImportingTsExtensions": true,
 		"rewriteRelativeImportExtensions": true,
 		"noEmit": true,
-		"types": [
-			"vite/client"
-		]
+		"types": ["vite/client"]
 	},
-	"include": [
-		"src",
-		"docs"
-	]
+	"include": ["src", "docs"]
 }
