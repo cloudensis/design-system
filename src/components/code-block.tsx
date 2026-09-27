@@ -28,34 +28,28 @@ export function CodeBlock({
 			)}
 			{...props}
 		>
-			<Code code={code} lang={lang} />
+			{/* 横スクロールは code が担う。tabindex はキーボードでスクロールするため。 */}
+			<code tabindex={0} class="block overflow-x-auto p-4 pr-12">
+				{renderCode(code, lang)}
+			</code>
 			<CopyButton />
 		</pre>
 	);
 }
 
-type CodeProps = {
-	code: string;
-	lang?: CodeLanguage;
-};
-
-function Code({ code, lang }: CodeProps) {
+function renderCode(code: string, lang?: CodeLanguage) {
 	const lines = lang && highlight(code, lang);
+	if (!lines) return code;
 
-	return (
-		/* 横スクロールは code が担う。tabindex はキーボードでスクロールするため。 */
-		<code tabindex={0} class="block overflow-x-auto p-4 pr-12">
-			{lines?.map((line, index) => (
-				/* 要素で囲むとコピー時に改行が失われるため。 */
-				<>
-					{index > 0 && "\n"}
-					{line.map((token) => (
-						<span style={token.style}>{token.content}</span>
-					))}
-				</>
-			)) ?? code}
-		</code>
-	);
+	/* 要素で囲むとコピー時に改行が失われるため。 */
+	return lines.map((line, index) => (
+		<>
+			{index > 0 && "\n"}
+			{line.map((token) => (
+				<span style={token.style}>{token.content}</span>
+			))}
+		</>
+	));
 }
 
 /* ハイドレーションなしで動くよう、インラインハンドラーの文字列にする。 */
