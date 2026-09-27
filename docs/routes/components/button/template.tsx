@@ -1,4 +1,4 @@
-import { Button } from "../../../../src/components/button.tsx";
+import { Button, LinkButton } from "../../../../src/components/button.tsx";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";
@@ -6,6 +6,11 @@ const importTsx = `import { Button } from "@cloudensis/design-system/components/
 <Button>保存する</Button>
 <Button variant="outline">キャンセル</Button>
 <Button size="sm">小さいボタン</Button>`;
+
+const linkTsx = `import { LinkButton } from "@cloudensis/design-system/components/button";
+
+<LinkButton href="/contact">お問い合わせ</LinkButton>
+<LinkButton aria-disabled="true">無効なリンク</LinkButton>`;
 
 export function Template() {
 	return (
@@ -31,6 +36,23 @@ export function Template() {
 				</Button>
 			</div>
 			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
+
+			<h2 class="text-heading-2">LinkButton</h2>
+			<p>
+				Button と同じ見た目の a 要素です。variant と size も同じものを使えます。
+			</p>
+			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
+				<LinkButton href="/">default</LinkButton>
+				<LinkButton href="/" variant="outline">
+					outline
+				</LinkButton>
+				<LinkButton href="/" size="sm">
+					sm
+				</LinkButton>
+				<LinkButton aria-disabled="true">aria-disabled</LinkButton>
+			</div>
+			<p>無効にするときは href を外し、aria-disabled="true" を付けます。</p>
+			<CodeBlock lang="tsx">{linkTsx}</CodeBlock>
 		</>
 	);
 }
