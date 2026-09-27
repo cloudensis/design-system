@@ -1,4 +1,5 @@
 import { Button } from "../../../../src/components/button.tsx";
+import { CodeBlock } from "../../../../src/components/code-block.tsx";
 
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";
 
@@ -29,11 +30,7 @@ export function Template() {
 					outline sm disabled
 				</Button>
 			</div>
-			<div class="prose">
-				<pre>
-					<code>{importTsx}</code>
-				</pre>
-			</div>
+			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
 		</>
 	);
 }

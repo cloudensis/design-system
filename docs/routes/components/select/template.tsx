@@ -1,3 +1,4 @@
+import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Select } from "../../../../src/components/select.tsx";
 
 const importTsx = `import { Select } from "@cloudensis/design-system/components/select";
@@ -20,11 +21,7 @@ export function Template() {
 					<option value="">disabled</option>
 				</Select>
 			</div>
-			<div class="prose">
-				<pre>
-					<code>{importTsx}</code>
-				</pre>
-			</div>
+			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
 		</>
 	);
 }

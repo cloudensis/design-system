@@ -1,3 +1,4 @@
+import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Input } from "../../../../src/components/input.tsx";
 
 const importTsx = `import { Input } from "@cloudensis/design-system/components/input";
@@ -40,10 +41,8 @@ export function Template() {
 			</div>
 			<div class="prose">
 				<p>type に checkbox / radio を渡すと、それぞれの見た目になります。</p>
-				<pre>
-					<code>{importTsx}</code>
-				</pre>
 			</div>
+			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
 		</>
 	);
 }

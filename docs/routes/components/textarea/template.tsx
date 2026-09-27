@@ -1,3 +1,4 @@
+import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Textarea } from "../../../../src/components/textarea.tsx";
 
 const importTsx = `import { Textarea } from "@cloudensis/design-system/components/textarea";
@@ -16,11 +17,7 @@ export function Template() {
 					disabled
 				/>
 			</div>
-			<div class="prose">
-				<pre>
-					<code>{importTsx}</code>
-				</pre>
-			</div>
+			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
 		</>
 	);
 }
