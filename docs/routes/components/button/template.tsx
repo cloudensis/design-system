@@ -19,8 +19,14 @@ export function Template() {
 			</div>
 			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
 				<Button size="sm">sm</Button>
+				<Button size="sm" disabled>
+					sm disabled
+				</Button>
 				<Button variant="outline" size="sm">
 					outline sm
+				</Button>
+				<Button variant="outline" size="sm" disabled>
+					outline sm disabled
 				</Button>
 			</div>
 			<div class="prose">
