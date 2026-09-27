@@ -3,279 +3,284 @@
 		line-height: 1.8;
 	}
 
-	/* 余白は下方向だけに持たせる。 */
-	.prose
-	:where(
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		ul,
-		ol,
-		dl,
-		pre,
-		blockquote,
-		figure,
-		table,
-		details,
-		hr
-	) {
-		margin-block: 0 1.25em;
-	}
+	/* 要素の見た目。not-prose を付けた要素とその中には効かない。 */
+	@scope (.prose) to (.not-prose) {
+		:where(h1, h2, h3, h4, h5, h6) {
+			font-weight: var(--font-weight-semibold);
+			line-height: 1.4;
+			text-wrap: balance;
+		}
 
-	.prose :where(h1, h2, h3, h4, h5, h6) {
-		margin-block-end: 0.75em;
-	}
+		:where(h1) {
+			font-size: 1.875em;
+		}
 
-	/* 見出しと hr の手前は広げる。 */
-	.prose :where(:has(+ :is(h1, h2, h3, h4, h5, h6, hr))) {
-		margin-block-end: 2.5em;
-	}
+		:where(h2) {
+			font-size: 1.5em;
+		}
 
-	.prose
-		:where(:is(h1, h2, h3, h4, h5, h6):has(+ :is(h1, h2, h3, h4, h5, h6))) {
-		margin-block-end: 0.75em;
-	}
+		:where(h3) {
+			font-size: 1.25em;
+		}
 
-	.prose :where(li) {
-		margin-block: 0 0.25em;
-	}
+		:where(h4) {
+			font-size: 1.125em;
+		}
 
-	.prose :where(li) > :where(p, ul, ol, dl, pre, blockquote, figure, table) {
-		margin-block: 0.25em 0.5em;
-	}
+		:where(h5) {
+			font-size: 1em;
+		}
 
-	.prose :where(h1, h2, h3, h4, h5, h6) {
-		font-weight: var(--font-weight-semibold);
-		line-height: 1.4;
-		text-wrap: balance;
-	}
+		:where(h6) {
+			font-size: 0.875em;
+		}
 
-	.prose :where(h1) {
-		font-size: 1.875em;
-	}
+		:where(a) {
+			text-decoration: underline;
+			text-underline-offset: 0.2em;
+		}
 
-	.prose :where(h2) {
-		font-size: 1.5em;
-	}
+		:where(em, i, cite, dfn, var) {
+			font-style: italic;
+		}
 
-	.prose :where(h3) {
-		font-size: 1.25em;
-	}
+		:where(del, s) {
+			text-decoration: line-through;
+		}
 
-	.prose :where(h4) {
-		font-size: 1.125em;
-	}
+		:where(ins, u) {
+			text-decoration: underline;
+			text-underline-offset: 0.2em;
+		}
 
-	.prose :where(h5) {
-		font-size: 1em;
-	}
+		:where(small) {
+			font-size: 0.875em;
+		}
 
-	.prose :where(h6) {
-		font-size: 0.875em;
-	}
+		:where(abbr[title]) {
+			cursor: help;
+			text-decoration: underline dotted;
+			text-underline-offset: 0.2em;
+		}
 
-	.prose :where(a) {
-		text-decoration: underline;
-		text-underline-offset: 0.2em;
-	}
+		/* 行の高さを広げない。 */
+		:where(sub, sup) {
+			font-size: 0.75em;
+			line-height: 0;
+		}
 
-	.prose :where(em, i, cite, dfn, var) {
-		font-style: italic;
-	}
+		:where(q) {
+			quotes: "「" "」" "『" "』";
+		}
 
-	.prose :where(del, s) {
-		text-decoration: line-through;
-	}
+		:where(kbd) {
+			box-shadow: 0 1px 0 var(--border-color-default);
+			border: 1px solid var(--border-color-default);
+			border-radius: var(--radius-sm);
+			padding: 0.15em 0.4em;
+			font-family: var(--font-mono);
+			font-size: 0.875em;
+		}
 
-	.prose :where(ins, u) {
-		text-decoration: underline;
-		text-underline-offset: 0.2em;
-	}
+		:where(code, samp) {
+			border: 1px solid var(--border-color-default);
+			border-radius: var(--radius-sm);
+			padding: 0.15em 0.4em;
+			font-family: var(--font-mono);
+			font-size: 0.875em;
+		}
 
-	.prose :where(small) {
-		font-size: 0.875em;
-	}
+		:where(pre) {
+			border-radius: var(--radius-sm);
+			background-color: var(--background-color-emphasis);
+			padding: 1rem;
+			overflow-x: auto;
+			color: var(--text-color-on-emphasis);
+			font-family: var(--font-mono);
+			font-size: 0.875em;
+			line-height: 1.7;
+		}
 
-	.prose :where(abbr[title]) {
-		cursor: help;
-		text-decoration: underline dotted;
-		text-underline-offset: 0.2em;
-	}
+		:where(pre) :where(code, samp) {
+			border: 0;
+			border-radius: 0;
+			background-color: transparent;
+			padding: 0;
+			font-size: inherit;
+			color: inherit;
+		}
 
-	/* 行の高さを広げない。 */
-	.prose :where(sub, sup) {
-		font-size: 0.75em;
-		line-height: 0;
-	}
+		:where(blockquote) {
+			border-inline-start: 2px solid var(--border-color-default);
+			padding-inline-start: 1em;
+		}
 
-	.prose :where(q) {
-		quotes: "「" "」" "『" "』";
-	}
+		:where(ul, ol) {
+			padding-inline-start: 1.5em;
+		}
 
-	.prose :where(kbd) {
-		box-shadow: 0 1px 0 var(--border-color-default);
-		border: 1px solid var(--border-color-default);
-		border-radius: var(--radius-sm);
-		padding: 0.15em 0.4em;
-		font-family: var(--font-mono);
-		font-size: 0.875em;
-	}
+		/* preflight がマーカーを消すため。 */
+		:where(ul) {
+			list-style-type: disc;
+		}
 
-	.prose :where(code, samp) {
-		border: 1px solid var(--border-color-default);
-		border-radius: var(--radius-sm);
-		padding: 0.15em 0.4em;
-		font-family: var(--font-mono);
-		font-size: 0.875em;
-	}
+		:where(ul ul) {
+			list-style-type: circle;
+		}
 
-	.prose :where(pre) {
-		border-radius: var(--radius-sm);
-		background-color: var(--background-color-emphasis);
-		padding: 1rem;
-		overflow-x: auto;
-		color: var(--text-color-on-emphasis);
-		font-family: var(--font-mono);
-		font-size: 0.875em;
-		line-height: 1.7;
-	}
+		:where(ul ul ul) {
+			list-style-type: square;
+		}
 
-	.prose :where(pre) :where(code, samp) {
-		border: 0;
-		border-radius: 0;
-		background-color: transparent;
-		padding: 0;
-		font-size: inherit;
-		color: inherit;
-	}
+		:where(ol) {
+			list-style-type: decimal;
+		}
 
-	.prose :where(blockquote) {
-		border-inline-start: 2px solid var(--border-color-default);
-		padding-inline-start: 1em;
-	}
+		:where(ol ol) {
+			list-style-type: lower-alpha;
+		}
 
-	.prose :where(ul, ol) {
-		padding-inline-start: 1.5em;
-	}
+		:where(ol ol ol) {
+			list-style-type: lower-roman;
+		}
 
-	/* preflight がマーカーを消すため。 */
-	.prose :where(ul) {
-		list-style-type: disc;
-	}
+		:where(dt) {
+			font-weight: var(--font-weight-semibold);
+		}
 
-	.prose :where(ul ul) {
-		list-style-type: circle;
-	}
+		:where(dd) {
+			margin-inline-start: 1.5em;
+		}
 
-	.prose :where(ul ul ul) {
-		list-style-type: square;
-	}
+		:where(table) {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.875em;
+			line-height: 1.6;
+			text-align: left;
+		}
 
-	.prose :where(ol) {
-		list-style-type: decimal;
-	}
+		:where(caption) {
+			margin-block-end: 0.5em;
+			font-size: 0.875em;
+			text-align: left;
+		}
 
-	.prose :where(ol ol) {
-		list-style-type: lower-alpha;
-	}
-
-	.prose :where(ol ol ol) {
-		list-style-type: lower-roman;
-	}
-
-	.prose :where(dt) {
-		font-weight: var(--font-weight-semibold);
-	}
-
-	.prose :where(dd) {
-		margin-block: 0 0.5em;
-		margin-inline-start: 1.5em;
-	}
-
-	.prose :where(dd + dt) {
-		margin-block-start: 1em;
-	}
-
-	.prose :where(table) {
-		width: 100%;
-		border-collapse: collapse;
-		font-size: 0.875em;
-		line-height: 1.6;
-		text-align: left;
-	}
-
-	.prose :where(caption) {
-		margin-block-end: 0.5em;
-		font-size: 0.875em;
-		text-align: left;
-	}
-
-	.prose :where(th, td) {
-		border-block-end: 1px solid var(--border-color-default);
-		padding: 0.5em 0.75em;
-		vertical-align: top;
-	}
-
-	.prose :where(th) {
-		font-weight: var(--font-weight-semibold);
-	}
-
-	.prose
-		:where(tbody:last-child tr:last-child, tfoot tr:last-child)
 		:where(th, td) {
-		border-block-end: 0;
+			border-block-end: 1px solid var(--border-color-default);
+			padding: 0.5em 0.75em;
+			vertical-align: top;
+		}
+
+		:where(th) {
+			font-weight: var(--font-weight-semibold);
+		}
+
+		:where(tbody:last-child tr:last-child, tfoot tr:last-child) :where(th, td) {
+			border-block-end: 0;
+		}
+
+		:where(tfoot) :where(th, td) {
+			border-block-start: 1px solid var(--border-color-default);
+		}
+
+		:where(img, picture, video, canvas, svg, iframe) {
+			display: block;
+			border-radius: var(--radius-sm);
+			max-width: 100%;
+			height: auto;
+		}
+
+		:where(figure) > :where(*) {
+			margin-block-end: 0.5em;
+		}
+
+		:where(figcaption) {
+			font-size: 0.875em;
+			line-height: 1.6;
+		}
+
+		:where(hr) {
+			border: 0;
+			border-block-start: 1px solid var(--border-color-default);
+		}
+
+		:where(details) {
+			border: 1px solid var(--border-color-default);
+			border-radius: var(--radius-sm);
+			padding: 0.75em 1em;
+		}
+
+		:where(summary) {
+			cursor: pointer;
+			font-weight: var(--font-weight-semibold);
+		}
+
+		:where(details[open]) > :where(summary) {
+			margin-block-end: 0.75em;
+		}
 	}
 
-	.prose :where(tfoot) :where(th, td) {
-		border-block-start: 1px solid var(--border-color-default);
-	}
+	/* ブロック間の余白。not-prose を付けた要素自体には効かせ、記事の流れを保つ。見た目より後に置く。 */
+	@scope (.prose) to (.not-prose > *) {
+		/* 余白は下方向だけに持たせる。 */
+		:where(
+				h1,
+				h2,
+				h3,
+				h4,
+				h5,
+				h6,
+				p,
+				ul,
+				ol,
+				dl,
+				pre,
+				blockquote,
+				figure,
+				table,
+				details,
+				hr
+			) {
+			margin-block: 0 1.25em;
+		}
 
-	.prose :where(img, picture, video, canvas, svg, iframe) {
-		display: block;
-		border-radius: var(--radius-sm);
-		max-width: 100%;
-		height: auto;
-	}
+		:where(h1, h2, h3, h4, h5, h6) {
+			margin-block-end: 0.75em;
+		}
 
-	.prose :where(figure) > :where(*) {
-		margin-block-end: 0.5em;
-	}
+		/* 見出しと hr の手前は広げる。 */
+		:where(:has(+ :is(h1, h2, h3, h4, h5, h6, hr))) {
+			margin-block-end: 2.5em;
+		}
 
-	.prose :where(figcaption) {
-		font-size: 0.875em;
-		line-height: 1.6;
-	}
+		:where(:is(h1, h2, h3, h4, h5, h6):has(+ :is(h1, h2, h3, h4, h5, h6))) {
+			margin-block-end: 0.75em;
+		}
 
-	.prose :where(hr) {
-		border: 0;
-		border-block-start: 1px solid var(--border-color-default);
-	}
+		:where(li) {
+			margin-block: 0 0.25em;
+		}
 
-	.prose :where(details) {
-		border: 1px solid var(--border-color-default);
-		border-radius: var(--radius-sm);
-		padding: 0.75em 1em;
-	}
+		:where(li) > :where(p, ul, ol, dl, pre, blockquote, figure, table) {
+			margin-block: 0.25em 0.5em;
+		}
 
-	.prose :where(summary) {
-		cursor: pointer;
-		font-weight: var(--font-weight-semibold);
-	}
+		:where(dd) {
+			margin-block: 0 0.5em;
+		}
 
-	.prose :where(details[open]) > :where(summary) {
-		margin-block-end: 0.75em;
-	}
+		:where(dd + dt) {
+			margin-block-start: 1em;
+		}
 
-	/* ほかの余白指定より後に置く。 */
-	.prose :where(:first-child) {
-		margin-block-start: 0;
-	}
+		/* ほかの余白指定より後に置く。 */
+		:where(:first-child) {
+			margin-block-start: 0;
+		}
 
-	.prose :where(:last-child) {
-		margin-block-end: 0;
+		:where(:last-child) {
+			margin-block-end: 0;
+		}
 	}
 }

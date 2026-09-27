@@ -23,7 +23,7 @@ export function CodeBlock({
 	return (
 		<pre
 			class={cn(
-				"relative overflow-visible rounded-sm bg-emphasis p-0 text-on-emphasis text-sm leading-[1.7]",
+				"not-prose relative rounded-sm bg-emphasis text-on-emphasis text-sm leading-[1.7]",
 				className,
 			)}
 			{...props}
