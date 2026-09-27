@@ -1,4 +1,4 @@
-import { cn } from "../lib/utils.ts";
+import { cn } from "../../lib/utils.ts";
 import { LogoMark } from "./logo-mark.tsx";
 import { LogoType } from "./logo-type.tsx";
 
