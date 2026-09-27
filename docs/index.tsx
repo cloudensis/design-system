@@ -12,7 +12,6 @@ const colors = [...colorsCss.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(
 	([, name, value]) => ({ name, value: value.trim() }),
 );
 
-/* --text-heading-1--line-height などの修飾子を、親の名前ごとにまとめる。 */
 const typography = [
 	...typographyCss.matchAll(/--text-([\w-]+?):\s*([^;]+);/g),
 ].reduce<Record<string, Record<string, string>>>((styles, [, name, value]) => {
