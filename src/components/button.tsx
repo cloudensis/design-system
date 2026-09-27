@@ -3,10 +3,8 @@ import { cn } from "../lib/utils.ts";
 
 const variants = {
 	variant: {
-		default: cn(
-			"bg-emphasis text-on-emphasis not-disabled:hover:bg-emphasis/90",
-		),
-		outline: cn("border-default not-disabled:hover:bg-emphasis/5"),
+		default: cn("bg-emphasis text-on-emphasis enabled:hover:bg-emphasis/90"),
+		outline: cn("border-default enabled:hover:bg-emphasis/5"),
 	},
 	size: {
 		default: cn("px-4 py-2"),
