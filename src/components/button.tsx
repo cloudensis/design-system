@@ -2,12 +2,17 @@ import type { JSX } from "hono/jsx";
 import { cn } from "../lib/utils.ts";
 
 const variants = {
-	/* <a> は :enabled に一致しないため、hover は not-disabled で書く。 */
+	/*
+	 * <a> は :enabled に一致しないため、hover は not-disabled で書く。
+	 * 無効のときは枠線を残すため、opacity ではなく背景や文字だけを薄くする。
+	 */
 	variant: {
 		default: cn(
-			"bg-emphasis text-on-emphasis not-disabled:hover:bg-emphasis/90",
+			"bg-emphasis text-on-emphasis not-disabled:hover:bg-emphasis/90 disabled:bg-emphasis/50 aria-disabled:bg-emphasis/50",
 		),
-		outline: cn("border-default not-disabled:hover:bg-emphasis/5"),
+		outline: cn(
+			"border-default not-disabled:hover:bg-emphasis/5 disabled:text-default/50 aria-disabled:text-default/50",
+		),
 	},
 	size: {
 		default: cn("h-10 px-4"),
@@ -40,7 +45,7 @@ export function Button({
 		<button
 			class={cn(
 				base,
-				"disabled:cursor-not-allowed disabled:opacity-50",
+				"disabled:cursor-not-allowed",
 				variants.variant[variant],
 				variants.size[size],
 				className,
@@ -69,7 +74,7 @@ export function LinkButton({
 		<a
 			class={cn(
 				base,
-				"not-prose aria-disabled:pointer-events-none aria-disabled:opacity-50",
+				"not-prose aria-disabled:pointer-events-none",
 				variants.variant[variant],
 				variants.size[size],
 				className,

@@ -13,7 +13,7 @@ export function Textarea({
 	return (
 		<textarea
 			class={cn(
-				"w-full rounded-sm border border-default px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50",
+				"w-full rounded-sm border border-default px-4 py-2 disabled:cursor-not-allowed disabled:text-default/50",
 				className,
 			)}
 			{...props}
