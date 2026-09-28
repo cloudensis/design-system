@@ -41,15 +41,29 @@ export function Template() {
 			<p>
 				Button と同じ見た目の a 要素です。variant と size も同じものを使えます。
 			</p>
-			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
+			<div class="flex flex-wrap gap-4 rounded-sm border border-default p-6">
 				<LinkButton href="/">default</LinkButton>
+				<LinkButton aria-disabled="true">default disabled</LinkButton>
 				<LinkButton href="/" variant="outline">
 					outline
 				</LinkButton>
+				<LinkButton variant="outline" aria-disabled="true">
+					outline disabled
+				</LinkButton>
+			</div>
+			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
 				<LinkButton href="/" size="sm">
 					sm
 				</LinkButton>
-				<LinkButton aria-disabled="true">aria-disabled</LinkButton>
+				<LinkButton size="sm" aria-disabled="true">
+					sm disabled
+				</LinkButton>
+				<LinkButton href="/" variant="outline" size="sm">
+					outline sm
+				</LinkButton>
+				<LinkButton variant="outline" size="sm" aria-disabled="true">
+					outline sm disabled
+				</LinkButton>
 			</div>
 			<p>無効にするときは href を外し、aria-disabled="true" を付けます。</p>
 			<CodeBlock lang="tsx">{linkTsx}</CodeBlock>
