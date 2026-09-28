@@ -6,12 +6,13 @@ type InputProps = JSX.IntrinsicElements["input"] & {
 };
 
 export function Input({ type, class: className, ...props }: InputProps) {
+	/* 無効時はブラウザ標準で薄くなるため、opacity は重ねない。 */
 	if (type === "checkbox" || type === "radio") {
 		return (
 			<input
 				type={type}
 				class={cn(
-					"size-4 accent-(--background-color-emphasis) disabled:cursor-not-allowed disabled:opacity-50",
+					"size-4 accent-(--background-color-emphasis) disabled:cursor-not-allowed",
 					className,
 				)}
 				{...props}
