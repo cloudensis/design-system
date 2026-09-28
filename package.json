@@ -1,0 +1,79 @@
+{
+	"name": "@cloudensis/design-system",
+	"version": "0.12.0",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cloudensis/design-system.git"
+	},
+	"type": "module",
+	"files": [
+		"dist",
+		"src/styles",
+		"src/assets"
+	],
+	"exports": {
+		"./index.css": "./src/styles/index.css",
+		"./base.css": "./src/styles/base.css",
+		"./colors.css": "./src/styles/colors.css",
+		"./typography.css": "./src/styles/typography.css",
+		"./fonts.css": "./src/styles/fonts.css",
+		"./prose.css": "./src/styles/prose.css",
+		"./components/*": {
+			"types": "./dist/components/*.d.ts",
+			"default": "./dist/components/*.js"
+		},
+		"./brand/*": {
+			"types": "./dist/brand/*.d.ts",
+			"default": "./dist/brand/*.js"
+		},
+		"./icons/*": {
+			"types": "./dist/icons/*.d.ts",
+			"default": "./dist/icons/*.js"
+		},
+		"./lib/highlight": {
+			"types": "./dist/lib/highlight.d.ts",
+			"default": "./dist/lib/highlight.js"
+		},
+		"./lib/utils": {
+			"types": "./dist/lib/utils.d.ts",
+			"default": "./dist/lib/utils.js"
+		},
+		"./assets/*": "./src/assets/*"
+	},
+	"scripts": {
+		"build": "rm -rf dist && tsc -p tsconfig.build.json",
+		"typecheck": "tsc && tsc -p tests",
+		"dev": "vite",
+		"build:docs": "vite build",
+		"lint": "biome check",
+		"format": "biome check --write --unsafe",
+		"test:a11y": "playwright test"
+	},
+	"peerDependencies": {
+		"hono": "^4.13.8",
+		"tailwindcss": "^4.3.3"
+	},
+	"dependencies": {
+		"@fontsource-variable/noto-sans-jp": "^5.3.0",
+		"@fontsource-variable/outfit": "^5.3.0",
+		"@shikijs/langs": "^4.4.3",
+		"@shikijs/themes": "^4.4.3",
+		"clsx": "^2.1.1",
+		"shiki": "^4.4.3",
+		"tailwind-merge": "^3.7.0"
+	},
+	"devDependencies": {
+		"@axe-core/playwright": "^4.13.0",
+		"@biomejs/biome": "^2.5.14",
+		"@cloudflare/vite-plugin": "^1.60.0",
+		"@playwright/test": "^1.63.0",
+		"@tailwindcss/vite": "^4.3.3",
+		"@types/node": "^26.6.2",
+		"hono": "^4.13.8",
+		"tailwindcss": "^4.3.3",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.1",
+		"wrangler": "^4.139.0"
+	}
+}

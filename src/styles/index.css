@@ -1,0 +1,8 @@
+@import "./fonts.css";
+@import "./colors.css";
+@import "./typography.css";
+@import "./base.css";
+@import "./prose.css";
+
+/* パッケージではビルド済みの dist からクラスを収集する。 */
+@source "../../dist";
