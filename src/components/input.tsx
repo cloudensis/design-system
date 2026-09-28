@@ -23,7 +23,7 @@ export function Input({ type, class: className, ...props }: InputProps) {
 		<input
 			type={type}
 			class={cn(
-				"w-full rounded-sm border border-default px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50",
+				"h-10 w-full rounded-sm border border-default px-4 disabled:cursor-not-allowed disabled:opacity-50",
 				className,
 			)}
 			{...props}
