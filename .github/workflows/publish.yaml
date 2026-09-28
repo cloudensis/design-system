@@ -12,7 +12,7 @@ jobs:
   test:
     uses: ./.github/workflows/test.yaml
 
-  # タグと version が一致しなければ publish しない。
+  # タグと version が一致しなければ publish もデプロイもしない。
   check-version:
     runs-on: ubuntu-latest
     steps:
@@ -47,3 +47,24 @@ jobs:
       # .npmrc の ignore-scripts で prepack などが動かないため、明示的にビルドする。
       - run: npm run build
       - run: npm publish
+
+  # publish の成功後にデプロイする。
+  deploy-docs:
+    needs: [publish]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run build:docs
+
+      - uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy -c docs-dist/cloudensis_design_system_docs/wrangler.json
