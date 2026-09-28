@@ -44,6 +44,7 @@ jobs:
           package-manager-cache: false
 
       - run: npm ci
+      # .npmrc の ignore-scripts で prepack などが動かないため、明示的にビルドする。
       - run: npm run build
       - run: npm publish
 
@@ -51,8 +52,6 @@ jobs:
   deploy-docs:
     needs: [publish]
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v7
 
@@ -64,7 +63,6 @@ jobs:
       - run: npm ci
       - run: npm run build:docs
 
-      # vite が出力する、パス解決済みの wrangler.json を使う。
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

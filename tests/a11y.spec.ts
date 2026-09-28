@@ -1,7 +1,8 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { nav } from "../docs/nav.ts";
 
-const paths = ["/", "/tokens", "/components", "/prose", "/not-found"];
+const paths = nav.flatMap((group) => group.items.map((item) => item.href));
 
 for (const path of paths) {
 	test(`${path} にアクセシビリティの違反がない`, async ({ page }) => {

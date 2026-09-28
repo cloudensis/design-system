@@ -1,7 +1,8 @@
 @import "./fonts.css";
-@import "./tokens.css";
+@import "./colors.css";
+@import "./typography.css";
 @import "./base.css";
 @import "./prose.css";
 
-/* コンポーネントのクラスを収集する。消すとコンポーネントのスタイルが出力されない。 */
-@source "../components";
+/* パッケージではビルド済みの dist からクラスを収集する。 */
+@source "../../dist";

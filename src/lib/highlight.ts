@@ -14,19 +14,31 @@ import {
 } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
-const themeName = "vitesse-dark";
+/*
+ * 背景（--background-color-emphasis）とのコントラスト比を 4.5 以上にする。
+ * 半透明の色は不透明にし、足りない色は明るくする。
+ */
+const contrastFixes: Record<string, string> = {
+	"#4d9375": "#599b7f",
+	"#666666": "#8e8e8e",
+	"#758575": "#849284",
+};
 
-/* 半透明（#758575dd）ではコントラストが足りないため不透明にする。 */
 const theme = {
 	...vitesseDark,
-	tokenColors: vitesseDark.tokenColors?.map((tokenColor) =>
-		tokenColor.settings.foreground === "#758575dd"
-			? {
-					...tokenColor,
-					settings: { ...tokenColor.settings, foreground: "#758575" },
-				}
-			: tokenColor,
-	),
+	tokenColors: vitesseDark.tokenColors?.map((tokenColor) => {
+		const foreground = tokenColor.settings.foreground
+			?.slice(0, 7)
+			.toLowerCase();
+		if (!foreground) return tokenColor;
+		return {
+			...tokenColor,
+			settings: {
+				...tokenColor.settings,
+				foreground: contrastFixes[foreground] ?? foreground,
+			},
+		};
+	}),
 };
 
 /* html は javascript と css の文法も読み込む。 */
@@ -79,12 +91,10 @@ export function highlight(
 	const shiki = getHighlighter();
 	if (!shiki.getLoadedLanguages().includes(lang)) return undefined;
 
-	return shiki
-		.codeToTokens(code, { lang, theme: themeName })
-		.tokens.map((line) =>
-			line.map((token) => ({
-				content: token.content,
-				style: stringifyTokenStyle(getTokenStyleObject(token)),
-			})),
-		);
+	return shiki.codeToTokens(code, { lang, theme }).tokens.map((line) =>
+		line.map((token) => ({
+			content: token.content,
+			style: stringifyTokenStyle(getTokenStyleObject(token)),
+		})),
+	);
 }
