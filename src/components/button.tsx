@@ -10,8 +10,8 @@ const variants = {
 		outline: cn("border-default not-disabled:hover:bg-emphasis/5"),
 	},
 	size: {
-		default: cn("px-4 py-2"),
-		sm: cn("px-3 py-1 text-sm"),
+		default: cn("h-10 px-4"),
+		sm: cn("h-8 px-3 text-sm"),
 	},
 };
 
@@ -20,7 +20,9 @@ type Variants = {
 	size?: keyof typeof variants.size;
 };
 
-const base = "inline-block cursor-pointer rounded-sm border border-transparent";
+/* <a> でも文字が縦の中央に来るよう、inline-flex にする。 */
+const base =
+	"inline-flex cursor-pointer items-center justify-center rounded-sm border border-transparent";
 
 type ButtonProps = JSX.IntrinsicElements["button"] &
 	Variants & {
