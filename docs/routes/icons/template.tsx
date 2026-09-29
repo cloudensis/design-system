@@ -1,10 +1,12 @@
 import { CodeBlock } from "../../../src/components/code-block.tsx";
 import { CheckIcon } from "../../../src/icons/check.tsx";
 import { CopyIcon } from "../../../src/icons/copy.tsx";
+import { MenuIcon } from "../../../src/icons/menu.tsx";
 
 const icons = [
 	{ name: "CheckIcon", file: "check", Component: CheckIcon },
 	{ name: "CopyIcon", file: "copy", Component: CopyIcon },
+	{ name: "MenuIcon", file: "menu", Component: MenuIcon },
 ];
 
 const importTsx = `import { CheckIcon } from "@cloudensis/design-system/icons/check";
