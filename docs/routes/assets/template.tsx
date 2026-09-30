@@ -1,12 +1,25 @@
 const assets = [
-	{ file: "favicon.svg", width: 42, height: 24, description: "favicon" },
+	{
+		file: "favicon.svg",
+		width: 42,
+		height: 24,
+		description: "favicon",
+		alt: "cloudensis のロゴマーク",
+	},
 	{
 		file: "logo.png",
 		width: 512,
 		height: 512,
 		description: "apple-touch-icon など",
+		alt: "cloudensis のロゴマーク",
 	},
-	{ file: "ogp.png", width: 1200, height: 630, description: "OGP 画像" },
+	{
+		file: "ogp.png",
+		width: 1200,
+		height: 630,
+		description: "OGP 画像",
+		alt: "cloudensis のロゴ",
+	},
 ];
 
 export function Template() {
@@ -23,7 +36,7 @@ export function Template() {
 					</p>
 					<img
 						src={`/${asset.file}`}
-						alt={asset.file}
+						alt={asset.alt}
 						width={asset.width}
 						height={asset.height}
 						class="scheme-light h-auto max-h-64 w-auto max-w-full rounded-sm border border-default p-4"
