@@ -2,6 +2,8 @@ import { Hono } from "hono";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
 import { Button } from "../src/components/button.tsx";
+import { MenuIcon } from "../src/icons/menu.tsx";
+import { XIcon } from "../src/icons/x.tsx";
 import { nav } from "./nav.ts";
 import { Template as AssetsTemplate } from "./routes/assets/template.tsx";
 import { Template as CloudensisTemplate } from "./routes/brand/cloudensis/template.tsx";
@@ -53,9 +55,10 @@ const renderer = jsxRenderer(({ children }) => {
 						variant="outline"
 						size="sm"
 						popovertarget="mobile-nav"
-						class="lg:hidden"
+						aria-label="メニュー"
+						class="size-8 px-0 lg:hidden"
 					>
-						メニュー
+						<MenuIcon />
 					</Button>
 					<a href="/" class="flex items-baseline gap-2">
 						<LogoLockup class="text-lg" />
@@ -74,9 +77,10 @@ const renderer = jsxRenderer(({ children }) => {
 						size="sm"
 						popovertarget="mobile-nav"
 						popovertargetaction="hide"
-						class="mb-4"
+						aria-label="閉じる"
+						class="mb-4 size-8 px-0"
 					>
-						閉じる
+						<XIcon />
 					</Button>
 					<SideNav current={current} />
 				</div>
