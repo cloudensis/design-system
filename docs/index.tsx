@@ -69,20 +69,25 @@ const renderer = jsxRenderer(({ children }) => {
 				<div
 					id="mobile-nav"
 					popover="auto"
-					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] border-default border-r bg-default p-4 text-default backdrop:bg-black/30"
+					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-default border-r bg-default p-0 text-default backdrop:bg-black/30 open:flex"
 				>
-					<Button
-						type="button"
-						variant="outline"
-						size="sm"
-						popovertarget="mobile-nav"
-						popovertargetaction="hide"
-						aria-label="閉じる"
-						class="mb-4 size-8 px-0"
-					>
-						<XIcon />
-					</Button>
-					<SideNav current={current} />
+					{/* 開閉ボタンの位置をそろえるため、ページの header と同じ高さと余白にする。 */}
+					<header class="flex h-14 shrink-0 items-center border-default border-b px-4">
+						<Button
+							type="button"
+							variant="outline"
+							size="sm"
+							popovertarget="mobile-nav"
+							popovertargetaction="hide"
+							aria-label="閉じる"
+							class="size-8 px-0"
+						>
+							<XIcon />
+						</Button>
+					</header>
+					<div class="min-h-0 flex-1 overflow-y-auto p-4">
+						<SideNav current={current} />
+					</div>
 				</div>
 
 				<div class="flex">
