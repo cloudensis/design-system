@@ -49,12 +49,6 @@ const renderer = jsxRenderer(({ children }) => {
 				<link rel="stylesheet" href={styleUrl} />
 			</head>
 			<body>
-				<a
-					href="#main"
-					class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-20 focus:rounded-sm focus:border focus:border-default focus:bg-default focus:px-4 focus:py-2"
-				>
-					本文へ移動
-				</a>
 				<header class="sticky top-0 z-10 flex h-14 items-center gap-4 border-default border-b bg-default px-4 lg:px-6">
 					<Button
 						type="button"
@@ -98,10 +92,7 @@ const renderer = jsxRenderer(({ children }) => {
 					<aside class="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-default border-r p-4 lg:block">
 						<SideNav current={current} />
 					</aside>
-					<main
-						id="main"
-						class="min-w-0 flex-1 scroll-mt-14 px-6 py-10 lg:px-12"
-					>
+					<main class="min-w-0 flex-1 px-6 py-10 lg:px-12">
 						<div class="mx-auto max-w-3xl space-y-8">
 							<h1 class="text-heading-1">{heading}</h1>
 							{children}
