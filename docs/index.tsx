@@ -53,10 +53,10 @@ const renderer = jsxRenderer(({ children }) => {
 					<Button
 						type="button"
 						variant="outline"
-						size="sm"
+						size="icon"
 						popovertarget="mobile-nav"
 						aria-label="メニュー"
-						class="size-8 px-0 lg:hidden"
+						class="lg:hidden"
 					>
 						<MenuIcon />
 					</Button>
@@ -75,11 +75,10 @@ const renderer = jsxRenderer(({ children }) => {
 						<Button
 							type="button"
 							variant="outline"
-							size="sm"
+							size="icon"
 							popovertarget="mobile-nav"
 							popovertargetaction="hide"
 							aria-label="閉じる"
-							class="size-8 px-0"
 						>
 							<XIcon />
 						</Button>
