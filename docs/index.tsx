@@ -2,6 +2,8 @@ import { Hono } from "hono";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
 import { Button } from "../src/components/button.tsx";
+import { MenuIcon } from "../src/icons/menu.tsx";
+import { XIcon } from "../src/icons/x.tsx";
 import { nav } from "./nav.ts";
 import { Template as AssetsTemplate } from "./routes/assets/template.tsx";
 import { Template as CloudensisTemplate } from "./routes/brand/cloudensis/template.tsx";
@@ -51,11 +53,12 @@ const renderer = jsxRenderer(({ children }) => {
 					<Button
 						type="button"
 						variant="outline"
-						size="sm"
+						size="icon"
 						popovertarget="mobile-nav"
+						aria-label="メニュー"
 						class="lg:hidden"
 					>
-						メニュー
+						<MenuIcon />
 					</Button>
 					<a href="/" class="flex items-baseline gap-2">
 						<LogoLockup class="text-lg" />
@@ -66,19 +69,23 @@ const renderer = jsxRenderer(({ children }) => {
 				<div
 					id="mobile-nav"
 					popover="auto"
-					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] border-default border-r bg-default p-4 text-default backdrop:bg-black/30"
+					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-default border-r bg-default p-0 text-default backdrop:bg-black/30 open:flex"
 				>
-					<Button
-						type="button"
-						variant="outline"
-						size="sm"
-						popovertarget="mobile-nav"
-						popovertargetaction="hide"
-						class="mb-4"
-					>
-						閉じる
-					</Button>
-					<SideNav current={current} />
+					<header class="flex h-14 shrink-0 items-center border-default border-b px-4">
+						<Button
+							type="button"
+							variant="outline"
+							size="icon"
+							popovertarget="mobile-nav"
+							popovertargetaction="hide"
+							aria-label="閉じる"
+						>
+							<XIcon />
+						</Button>
+					</header>
+					<div class="min-h-0 flex-1 overflow-y-auto p-4">
+						<SideNav current={current} />
+					</div>
 				</div>
 
 				<div class="flex">

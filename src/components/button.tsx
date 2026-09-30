@@ -17,6 +17,7 @@ const variants = {
 	size: {
 		default: cn("h-10 px-4"),
 		sm: cn("h-8 px-3 text-sm"),
+		icon: cn("size-8"),
 	},
 };
 
