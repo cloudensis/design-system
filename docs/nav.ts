@@ -23,6 +23,9 @@ export const nav: NavGroup[] = [
 		],
 	},
 	{
+		items: [{ href: "/icons", label: "Icons" }],
+	},
+	{
 		label: "brand",
 		items: [{ href: "/brand/cloudensis", label: "cloudensis" }],
 	},

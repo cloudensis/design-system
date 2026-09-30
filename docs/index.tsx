@@ -10,6 +10,7 @@ import { Template as CodeBlockTemplate } from "./routes/components/code-block/te
 import { Template as InputTemplate } from "./routes/components/input/template.tsx";
 import { Template as SelectTemplate } from "./routes/components/select/template.tsx";
 import { Template as TextareaTemplate } from "./routes/components/textarea/template.tsx";
+import { Template as IconsTemplate } from "./routes/icons/template.tsx";
 import { Template as ColorsTemplate } from "./routes/styles/colors/template.tsx";
 import { Template as ProseTemplate } from "./routes/styles/prose/template.tsx";
 import { Template as TypographyTemplate } from "./routes/styles/typography/template.tsx";
@@ -109,6 +110,7 @@ app.get("/components/code-block", (c) => c.render(<CodeBlockTemplate />));
 app.get("/components/input", (c) => c.render(<InputTemplate />));
 app.get("/components/select", (c) => c.render(<SelectTemplate />));
 app.get("/components/textarea", (c) => c.render(<TextareaTemplate />));
+app.get("/icons", (c) => c.render(<IconsTemplate />));
 app.get("/brand/cloudensis", (c) => c.render(<CloudensisTemplate />));
 app.get("/assets", (c) => c.render(<AssetsTemplate />));
 
