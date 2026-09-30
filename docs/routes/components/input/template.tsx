@@ -3,25 +3,41 @@ import { Input } from "../../../../src/components/input.tsx";
 
 const importTsx = `import { Input } from "@cloudensis/design-system/components/input";
 
-<Input type="email" placeholder="メールアドレス" />
+<label for="email">メールアドレス</label>
+<Input type="email" id="email" placeholder="name@example.com" />
 <Input type="checkbox" id="agree" />`;
 
 export function Template() {
 	return (
 		<>
 			<div class="space-y-4 rounded-sm border border-default p-6">
-				<Input type="text" aria-label="テキスト" placeholder="テキスト" />
-				<Input
-					type="email"
-					aria-label="メールアドレス"
-					placeholder="メールアドレス"
-				/>
-				<Input
-					type="text"
-					aria-label="disabled"
-					placeholder="disabled"
-					disabled
-				/>
+				<div class="space-y-1">
+					<label for="sample-text" class="block text-sm">
+						テキスト
+					</label>
+					<Input type="text" id="sample-text" placeholder="テキスト" />
+				</div>
+				<div class="space-y-1">
+					<label for="sample-email" class="block text-sm">
+						メールアドレス
+					</label>
+					<Input
+						type="email"
+						id="sample-email"
+						placeholder="name@example.com"
+					/>
+				</div>
+				<div class="space-y-1">
+					<label for="sample-disabled" class="block text-sm">
+						disabled
+					</label>
+					<Input
+						type="text"
+						id="sample-disabled"
+						placeholder="disabled"
+						disabled
+					/>
+				</div>
 				<div class="flex items-center gap-2">
 					<Input type="checkbox" id="sample-checkbox" />
 					<label for="sample-checkbox">チェックボックス</label>

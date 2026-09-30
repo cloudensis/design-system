@@ -18,7 +18,6 @@ export function Template() {
 		<>
 			<p>記事本文を囲む要素に .prose を付けます。</p>
 			<article class="prose rounded-sm border border-default p-6">
-				<h1>記事スタイルのサンプル</h1>
 				<p>
 					この記事は <code>.prose</code> が扱う HTML
 					タグを一通り並べたものです。本文の中では{" "}
@@ -42,7 +41,8 @@ export function Template() {
 				<p>
 					h1 から h6
 					まで、サイズと余白が段階的に変わります。見出しは直前のブロックから離れ、
-					続く本文とは近づきます。
+					続く本文とは近づきます。h1
+					はページの見出しと重なるため、このサンプルには入れていません。
 				</p>
 				<h3>h3 の見出し</h3>
 				<p>h3 に続く本文です。</p>
