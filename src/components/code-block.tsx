@@ -73,7 +73,7 @@ function CopyButton() {
 		<>
 			<button
 				type="button"
-				class="peer/copy group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-current/30 bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-(--text-color-on-emphasis)"
+				class="peer/copy group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-on-emphasis bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
 				onclick={copyScript}
 			>
 				<CopyIcon

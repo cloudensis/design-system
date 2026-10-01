@@ -5,7 +5,7 @@
 	}
 
 	:focus-visible {
-		outline: 2px solid var(--background-color-emphasis);
+		outline: 2px solid var(--outline-color-focus);
 		outline-offset: 2px;
 	}
 }

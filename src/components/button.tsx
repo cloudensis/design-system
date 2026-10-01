@@ -11,7 +11,7 @@ const variants = {
 			"bg-emphasis text-on-emphasis not-disabled:hover:bg-emphasis/90 disabled:bg-emphasis/50 aria-disabled:bg-emphasis/50",
 		),
 		outline: cn(
-			"border-default not-disabled:hover:bg-emphasis/5 disabled:text-default/50 aria-disabled:text-default/50",
+			"border-default not-disabled:hover:bg-neutral-muted disabled:text-disabled aria-disabled:text-disabled",
 		),
 	},
 	size: {
