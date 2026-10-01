@@ -1,9 +1,12 @@
 @theme {
 	--text-color-default: #525252;
 	--text-color-on-emphasis: #ffffff;
+	--text-color-danger: #b91c1c;
 
 	--background-color-default: #f5f5f5;
 	--background-color-emphasis: #262626;
 
-	--border-color-default: #d4d4d4;
+	/* 入力欄の枠線にも使うため、背景とのコントラストを 3:1 以上にする（WCAG 1.4.11）。 */
+	--border-color-default: #8a8a8a;
+	--border-color-danger: #b91c1c;
 }
