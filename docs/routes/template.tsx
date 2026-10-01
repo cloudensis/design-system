@@ -19,7 +19,7 @@ export function Template() {
 			<CodeBlock lang="css">{installCss}</CodeBlock>
 			<p>
 				index.css にはフォント・色・タイポグラフィ・body
-				の既定のスタイル・記事用スタイルと、コンポーネントのクラスの収集設定が含まれます。
+				とフォーカス枠の既定のスタイル・記事用スタイルと、コンポーネントのクラスの収集設定が含まれます。
 			</p>
 			<p>コンポーネントはファイルごとに import します。</p>
 			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
