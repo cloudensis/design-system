@@ -24,6 +24,23 @@ export function Template() {
 					</Select>
 				</div>
 				<div class="space-y-1">
+					<label for="sample-select-error" class="block text-sm">
+						エラー
+					</label>
+					<Select
+						id="sample-select-error"
+						aria-invalid="true"
+						aria-describedby="sample-select-error-message"
+					>
+						<option value="">選択してください</option>
+						<option value="a">選択肢 A</option>
+						<option value="b">選択肢 B</option>
+					</Select>
+					<p id="sample-select-error-message" class="text-danger text-sm">
+						選択してください。
+					</p>
+				</div>
+				<div class="space-y-1">
 					<label for="sample-select-disabled" class="block text-sm">
 						disabled
 					</label>

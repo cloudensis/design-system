@@ -69,7 +69,7 @@ const renderer = jsxRenderer(({ children }) => {
 				<div
 					id="mobile-nav"
 					popover="auto"
-					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-default border-r bg-default p-0 text-default backdrop:bg-black/30 open:flex"
+					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-default border-r bg-default p-0 text-default backdrop:bg-overlay-backdrop open:flex"
 				>
 					<header class="flex h-14 shrink-0 items-center border-default border-b px-4">
 						<Button

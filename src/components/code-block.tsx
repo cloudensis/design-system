@@ -29,7 +29,7 @@ export function CodeBlock({
 			{...props}
 		>
 			{/* 横スクロールは code が担う。tabindex はキーボードでスクロールするため。 */}
-			<code tabindex={0} class="block overflow-x-auto p-4 pr-12">
+			<code tabindex={0} class="block overflow-x-auto rounded-sm p-4 pr-12">
 				{renderCode(code, lang)}
 			</code>
 			<CopyButton />
@@ -73,7 +73,7 @@ function CopyButton() {
 		<>
 			<button
 				type="button"
-				class="peer/copy group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-current/30 bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+				class="peer/copy group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-on-emphasis bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
 				onclick={copyScript}
 			>
 				<CopyIcon

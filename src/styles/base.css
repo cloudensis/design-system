@@ -3,4 +3,9 @@
 		background-color: var(--background-color-default);
 		color: var(--text-color-default);
 	}
+
+	:focus-visible {
+		outline: 2px solid var(--outline-color-focus);
+		outline-offset: 2px;
+	}
 }

@@ -6,6 +6,14 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"a11y": {
+				"noLabelWithoutControl": {
+					"level": "on",
+					"options": {
+						"inputComponents": ["Input", "Select", "Textarea"]
+					}
+				}
+			},
 			"nursery": {
 				"useSortedClasses": {
 					"level": "on",

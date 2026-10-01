@@ -12,7 +12,7 @@ export function Input({ type, class: className, ...props }: InputProps) {
 			<input
 				type={type}
 				class={cn(
-					"size-4 accent-(--background-color-emphasis) disabled:cursor-not-allowed",
+					"size-4 accent-checked disabled:cursor-not-allowed",
 					className,
 				)}
 				{...props}
@@ -24,7 +24,7 @@ export function Input({ type, class: className, ...props }: InputProps) {
 		<input
 			type={type}
 			class={cn(
-				"h-10 w-full rounded-sm border border-default px-4 disabled:cursor-not-allowed disabled:text-default/50",
+				"h-10 w-full rounded-sm border border-emphasis px-4 placeholder:text-muted disabled:cursor-not-allowed disabled:text-disabled disabled:placeholder:text-disabled aria-invalid:border-danger-emphasis",
 				className,
 			)}
 			{...props}
