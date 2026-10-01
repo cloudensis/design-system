@@ -20,11 +20,12 @@ export function Input({ type, class: className, ...props }: InputProps) {
 		);
 	}
 
+	/* placeholder の文字も背景とのコントラストを 4.5:1 以上にするため、current から薄めすぎない。 */
 	return (
 		<input
 			type={type}
 			class={cn(
-				"h-10 w-full rounded-sm border border-default px-4 disabled:cursor-not-allowed disabled:text-default/50",
+				"h-10 w-full rounded-sm border border-default px-4 placeholder:text-current/85 disabled:cursor-not-allowed disabled:text-default/50 aria-invalid:border-danger",
 				className,
 			)}
 			{...props}
