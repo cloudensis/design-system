@@ -21,6 +21,20 @@ export function Template() {
 					/>
 				</div>
 				<div class="space-y-1">
+					<label for="sample-textarea-error" class="block text-sm">
+						エラー
+					</label>
+					<Textarea
+						id="sample-textarea-error"
+						rows={2}
+						aria-invalid="true"
+						aria-describedby="sample-textarea-error-message"
+					/>
+					<p id="sample-textarea-error-message" class="text-danger text-sm">
+						お問い合わせ内容を入力してください。
+					</p>
+				</div>
+				<div class="space-y-1">
 					<label for="sample-textarea-disabled" class="block text-sm">
 						disabled
 					</label>
