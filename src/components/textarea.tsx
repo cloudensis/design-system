@@ -10,7 +10,6 @@ export function Textarea({
 	children,
 	...props
 }: TextareaProps) {
-	/* placeholder の文字も背景とのコントラストを 4.5:1 以上にするため、current から薄めすぎない。 */
 	return (
 		<textarea
 			class={cn(

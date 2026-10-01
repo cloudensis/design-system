@@ -27,7 +27,6 @@ const errorTsx = `<label for="email">メールアドレス</label>
 <Input type="email" id="email" aria-invalid="true" aria-describedby="email-error" />
 <p id="email-error" class="text-danger text-sm">メールアドレスの形式で入力してください。</p>`;
 
-/* 無効のときはラベルも薄くする。 */
 const choiceLabel = "flex items-center gap-2 has-disabled:text-default/50";
 
 export function Template() {

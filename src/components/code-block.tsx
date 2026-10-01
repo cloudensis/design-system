@@ -28,10 +28,7 @@ export function CodeBlock({
 			)}
 			{...props}
 		>
-			{/*
-			 * 横スクロールは code が担う。tabindex はキーボードでスクロールするため。
-			 * code のロールには名前を付けられないため、aria-label は付けない。フォーカスすると中身が読み上げられる。
-			 */}
+			{/* 横スクロールは code が担う。tabindex はキーボードでスクロールするため。 */}
 			<code tabindex={0} class="block overflow-x-auto rounded-sm p-4 pr-12">
 				{renderCode(code, lang)}
 			</code>
@@ -72,7 +69,6 @@ const copyScript = [
 ].join("");
 
 function CopyButton() {
-	/* 暗い背景の上にあるため、フォーカス枠を明るい色にする。 */
 	return (
 		<>
 			<button

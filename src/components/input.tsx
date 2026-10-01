@@ -20,7 +20,6 @@ export function Input({ type, class: className, ...props }: InputProps) {
 		);
 	}
 
-	/* placeholder の文字も背景とのコントラストを 4.5:1 以上にするため、current から薄めすぎない。 */
 	return (
 		<input
 			type={type}
