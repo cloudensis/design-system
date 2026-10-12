@@ -14,17 +14,18 @@ export default defineConfig({
 	publicDir: "src/assets",
 	plugins: [tailwindcss(), devServer({ entry })],
 	environments: {
+		/* HTML を書き出すためのアプリを Node.js 向けにビルドする。 */
 		ssr: {
 			build: {
 				outDir,
+				/* ssr の既定では CSS やフォントを書き出さないため、明示する。 */
 				emitAssets: true,
-				copyPublicDir: true,
-				rolldownOptions: { input: { index: entry } },
+				rolldownOptions: { input: entry },
 			},
 		},
 	},
 	builder: {
-		/* アプリを CSS などのアセットと一緒にビルドし、HTML を書き出したらアプリは消す。 */
+		/* 既定の client のビルドの代わりに、アプリをビルドして HTML を書き出し、アプリは消す。 */
 		async buildApp(builder) {
 			await builder.build(builder.environments.ssr);
 			const appPath = resolve(outDir, "index.js");
