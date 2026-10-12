@@ -67,6 +67,7 @@
 		"@axe-core/playwright": "^4.13.0",
 		"@biomejs/biome": "^2.5.15",
 		"@hono/vite-dev-server": "^0.26.1",
+		"@hono/vite-ssg": "^0.3.3",
 		"@playwright/test": "^1.63.0",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/node": "^26.6.4",
