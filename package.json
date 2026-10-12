@@ -45,7 +45,7 @@
 		"build": "rm -rf dist && tsc -p tsconfig.build.json",
 		"typecheck": "tsc && tsc -p tests",
 		"dev": "vite",
-		"build:docs": "vite build",
+		"build:docs": "vite build && node scripts/ssg.ts",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe",
 		"test:a11y": "playwright test"
