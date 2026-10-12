@@ -1,9 +1,12 @@
-import { cloudflare } from "@cloudflare/vite-plugin";
+import devServer from "@hono/vite-dev-server";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
+const entry = "docs/index.tsx";
+
 export default defineConfig({
-	build: { outDir: "docs-dist" },
+	/* HTML の書き出しに使うアプリを、CSS やフォントと一緒にビルドする。 */
+	build: { ssr: entry, outDir: "docs-dist", emitAssets: true },
 	publicDir: "src/assets",
-	plugins: [cloudflare(), tailwindcss()],
+	plugins: [tailwindcss(), devServer({ entry })],
 });

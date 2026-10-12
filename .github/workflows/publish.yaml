@@ -67,4 +67,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy -c docs-dist/cloudensis_design_system_docs/wrangler.json
+          command: deploy

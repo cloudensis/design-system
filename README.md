@@ -23,13 +23,13 @@ import { Button } from "@cloudensis/design-system/components/button";
 
 ## 開発
 
-| script                                                  | 内容                             |
-| ------------------------------------------------------- | -------------------------------- |
-| `npm run dev`                                           | ドキュメントサイトの開発サーバー |
-| `npm run build`                                         | 配布物を `dist/` にビルド        |
-| `npm run build:docs`                                    | ドキュメントサイトをビルド       |
-| `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                     |
-| `npm run test:a11y`                                     | ドキュメントサイトを axe で検査  |
+| script                                                  | 内容                                                         |
+| ------------------------------------------------------- | ------------------------------------------------------------ |
+| `npm run dev`                                           | ドキュメントサイトの開発サーバー                             |
+| `npm run build`                                         | 配布物を `dist/` にビルド                                    |
+| `npm run build:docs`                                    | ドキュメントサイトを静的サイトとして `docs-dist/` に書き出す |
+| `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                                 |
+| `npm run test:a11y`                                     | ドキュメントサイトを axe で検査                              |
 
 ## リリース
 
