@@ -94,6 +94,7 @@ const renderer = jsxRenderer(({ children }) => {
 					</aside>
 					<main class="min-w-0 flex-1 px-6 py-10 lg:px-12">
 						<div class="mx-auto max-w-3xl space-y-8">
+							<p class="text-sm">Preview テスト中</p>
 							<h1 class="text-heading-1">{heading}</h1>
 							{children}
 						</div>
