@@ -18,11 +18,12 @@ import { Template as ProseTemplate } from "./routes/styles/prose/template.tsx";
 import { Template as TypographyTemplate } from "./routes/styles/typography/template.tsx";
 import { Template as HomeTemplate } from "./routes/template.tsx";
 import { SideNav } from "./side-nav.tsx";
-import styleUrl from "./style.css?url";
 
 const siteName = "cloudensis design system";
 /* 静的に書き出すため、リクエストの URL ではなく本番の URL から OGP 画像の URL を作る。 */
 const siteUrl = "https://design-system.cloudensis.com";
+/* 開発中は Vite が変換した CSS を、書き出し後はビルドした CSS を読み込む。 */
+const styleUrl = import.meta.env.PROD ? "/assets/style.css" : "/docs/style.css";
 
 const renderer = jsxRenderer(({ children }) => {
 	const c = useRequestContext();
