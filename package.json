@@ -1,6 +1,6 @@
 {
 	"name": "@cloudensis/design-system",
-	"version": "0.14.2",
+	"version": "0.14.3",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -51,11 +51,11 @@
 		"test:a11y": "playwright test"
 	},
 	"peerDependencies": {
-		"hono": "^4.13.8",
+		"hono": "^4.13.13",
 		"tailwindcss": "^4.3.3"
 	},
 	"dependencies": {
-		"@fontsource-variable/noto-sans-jp": "^5.3.0",
+		"@fontsource-variable/noto-sans-jp": "^5.3.1",
 		"@fontsource-variable/outfit": "^5.3.0",
 		"@shikijs/langs": "^4.5.0",
 		"@shikijs/themes": "^4.5.0",
@@ -64,16 +64,16 @@
 		"tailwind-merge": "^3.7.0"
 	},
 	"devDependencies": {
-		"@axe-core/playwright": "^4.13.0",
+		"@axe-core/playwright": "^4.14.0",
 		"@biomejs/biome": "^2.5.15",
 		"@hono/vite-dev-server": "^0.26.1",
-		"@playwright/test": "^1.63.0",
+		"@playwright/test": "^1.64.1",
 		"@tailwindcss/vite": "^4.3.3",
-		"@types/node": "^26.6.4",
+		"@types/node": "^26.6.5",
 		"hono": "^4.13.13",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
-		"vite": "^8.3.3",
-		"wrangler": "^4.148.0"
+		"vite": "^8.3.4",
+		"wrangler": "^4.151.1"
 	}
 }
