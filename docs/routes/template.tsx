@@ -1,28 +1,35 @@
 import { CodeBlock } from "../../src/components/code-block.tsx";
 
-const installCss = `@import "tailwindcss";
-@import "@cloudensis/design-system/index.css";`;
-
-const importTsx = `import { Button } from "@cloudensis/design-system/components/button";`;
-
 export function Template() {
 	return (
 		<div class="prose">
+			<p>Cloudensis合同会社のデザインシステム</p>
+
+			<h2>Installation</h2>
+
+			<p>`@cloudensis/design-system`, `hono`, `tailwindcss`をインストール</p>
+			<CodeBlock lang="sh">
+				{"npm install @cloudensis/design-system hono tailwindcss"}
+			</CodeBlock>
+
+			<p>cssファイルに`@import`を追加</p>
+			<CodeBlock lang="css">
+				{[
+					'@import "tailwindcss";',
+					'@import "@cloudensis/design-system/index.css";',
+				].join("\n")}
+			</CodeBlock>
 			<p>
-				cloudensis の CSS トークン・記事用スタイル・Hono JSX
-				コンポーネントです。
-			</p>
-			<h2>導入</h2>
-			<p>Tailwind CSS v4 と Hono v4 が必要です。</p>
-			<CodeBlock lang="sh">npm install @cloudensis/design-system</CodeBlock>
-			<p>Tailwind CSS のエントリで index.css を読み込みます。</p>
-			<CodeBlock lang="css">{installCss}</CodeBlock>
-			<p>
-				index.css にはフォント・色・タイポグラフィ・body
+				※ index.css にはフォント・色・タイポグラフィ・body
 				とフォーカス枠の既定のスタイル・記事用スタイルと、コンポーネントのクラスの収集設定が含まれます。
 			</p>
-			<p>コンポーネントはファイルごとに import します。</p>
-			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
+
+			<p>コンポーネントはファイルごとに import</p>
+			<CodeBlock lang="tsx">
+				{
+					'import { Button } from "@cloudensis/design-system/components/button";'
+				}
+			</CodeBlock>
 		</div>
 	);
 }
