@@ -4,4 +4,5 @@ docs-dist
 test-results
 playwright-report
 .wrangler
+.cloudflare
 .DS_Store
