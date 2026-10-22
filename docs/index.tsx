@@ -21,7 +21,6 @@ import { SideNav } from "./side-nav.tsx";
 import styleUrl from "./style.css?url";
 
 const siteName = "cloudensis design system";
-/* 静的に書き出すため、リクエストの URL ではなく本番の URL から OGP 画像の URL を作る。 */
 const siteUrl = "https://design-system.cloudensis.com";
 
 const renderer = jsxRenderer(({ children }) => {

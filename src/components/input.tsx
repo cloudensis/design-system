@@ -6,7 +6,6 @@ type InputProps = JSX.IntrinsicElements["input"] & {
 };
 
 export function Input({ type, class: className, ...props }: InputProps) {
-	/* 無効時はブラウザ標準で薄くなるため、opacity は重ねない。 */
 	if (type === "checkbox" || type === "radio") {
 		return (
 			<input

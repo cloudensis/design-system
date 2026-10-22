@@ -3,7 +3,6 @@ import { cn } from "../lib/utils.ts";
 
 export type IconProps = {
 	class?: string;
-	/** 省略すると装飾として扱う。 */
 	label?: string;
 };
 
@@ -12,7 +11,6 @@ type IconBaseProps = IconProps & {
 	children: Child;
 };
 
-/** 大きさは各アイコンで指定する。 */
 export function Icon({
 	class: className,
 	label,

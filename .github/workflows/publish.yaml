@@ -12,7 +12,6 @@ jobs:
   test:
     uses: ./.github/workflows/test.yaml
 
-  # タグと version が一致しなければ publish もデプロイもしない。
   check-version:
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +31,7 @@ jobs:
     needs: [test, check-version]
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # Trusted Publishing (OIDC) に必要
+      id-token: write
       contents: read
     steps:
       - uses: actions/checkout@v7
@@ -44,11 +43,9 @@ jobs:
           package-manager-cache: false
 
       - run: npm ci
-      # .npmrc の ignore-scripts で prepack などが動かないため、明示的にビルドする。
       - run: npm run build
       - run: npm publish
 
-  # publish の成功後にデプロイする。
   deploy-docs:
     needs: [publish]
     runs-on: ubuntu-latest

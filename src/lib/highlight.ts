@@ -14,10 +14,6 @@ import {
 } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
-/*
- * 背景（--background-color-emphasis）とのコントラスト比を 4.5 以上にする。
- * 半透明の色は不透明にし、足りない色は明るくする。
- */
 const contrastFixes: Record<string, string> = {
 	"#4d9375": "#599b7f",
 	"#666666": "#8e8e8e",
@@ -41,10 +37,8 @@ const theme = {
 	}),
 };
 
-/* html は javascript と css の文法も読み込む。 */
 const langs = [css, html, json, markdown, shellscript, tsx, yaml];
 
-/* tsx の文法で ts・jsx なども解析できる。 */
 const langAlias = {
 	jsonc: "json",
 	jsx: "tsx",
@@ -52,7 +46,6 @@ const langAlias = {
 	typescript: "tsx",
 };
 
-/** 文法ごとの、lang に渡せる名前。 */
 export const codeLanguages = {
 	CSS: ["css"],
 	HTML: ["html"],
@@ -67,7 +60,6 @@ export const codeLanguages = {
 export type CodeLanguage =
 	(typeof codeLanguages)[keyof typeof codeLanguages][number];
 
-/** style は style 属性にそのまま渡せる。 */
 export type CodeToken = {
 	content: string;
 	style: string;
@@ -83,7 +75,6 @@ const getHighlighter = (): HighlighterCore =>
 		themes: [theme],
 	}));
 
-/** 同梱していない言語なら undefined を返す。 */
 export function highlight(
 	code: string,
 	lang: CodeLanguage,
