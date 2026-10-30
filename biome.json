@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.6.3/schema.json",
 	"formatter": {
 		"enabled": true
 	},
@@ -15,12 +15,7 @@
 				}
 			},
 			"nursery": {
-				"useSortedClasses": {
-					"level": "on",
-					"options": {
-						"functions": ["cn"]
-					}
-				}
+				"useTailwindSortedClasses": "warn"
 			}
 		}
 	},

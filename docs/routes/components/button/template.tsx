@@ -20,7 +20,7 @@ const linkTsx = `import { LinkButton } from "@cloudensis/design-system/component
 export function Template() {
 	return (
 		<>
-			<div class="flex flex-wrap gap-4 rounded-sm border border-default p-6">
+			<div class="border-default flex flex-wrap gap-4 rounded-sm border p-6">
 				<Button>default</Button>
 				<Button disabled>default disabled</Button>
 				<Button variant="outline">outline</Button>
@@ -28,7 +28,7 @@ export function Template() {
 					outline disabled
 				</Button>
 			</div>
-			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
+			<div class="border-default flex flex-wrap items-center gap-4 rounded-sm border p-6">
 				<Button size="sm">sm</Button>
 				<Button size="sm" disabled>
 					sm disabled
@@ -40,7 +40,7 @@ export function Template() {
 					outline sm disabled
 				</Button>
 			</div>
-			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
+			<div class="border-default flex flex-wrap items-center gap-4 rounded-sm border p-6">
 				<Button size="icon" aria-label="icon">
 					<MenuIcon />
 				</Button>
@@ -69,7 +69,7 @@ export function Template() {
 			<p>
 				Button と同じ見た目の a 要素です。variant と size も同じものを使えます。
 			</p>
-			<div class="flex flex-wrap gap-4 rounded-sm border border-default p-6">
+			<div class="border-default flex flex-wrap gap-4 rounded-sm border p-6">
 				<LinkButton href="/">default</LinkButton>
 				<LinkButton aria-disabled="true">default disabled</LinkButton>
 				<LinkButton href="/" variant="outline">
@@ -79,7 +79,7 @@ export function Template() {
 					outline disabled
 				</LinkButton>
 			</div>
-			<div class="flex flex-wrap items-center gap-4 rounded-sm border border-default p-6">
+			<div class="border-default flex flex-wrap items-center gap-4 rounded-sm border p-6">
 				<LinkButton href="/" size="sm">
 					sm
 				</LinkButton>

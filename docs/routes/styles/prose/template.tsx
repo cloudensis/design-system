@@ -17,7 +17,7 @@ export function Template() {
 	return (
 		<>
 			<p>記事本文を囲む要素に .prose を付けます。</p>
-			<article class="prose rounded-sm border border-default p-6">
+			<article class="prose border-default rounded-sm border p-6">
 				<p>
 					この記事は <code>.prose</code> が扱う HTML
 					タグを一通り並べたものです。本文の中では{" "}
@@ -192,7 +192,7 @@ export function Template() {
 					などで付けてください。
 				</p>
 			</div>
-			<article class="prose rounded-sm border border-default p-6">
+			<article class="prose border-default rounded-sm border p-6">
 				<p>ここは .prose のスタイルが効く段落です。</p>
 				<div class="not-prose mb-5 flex flex-wrap gap-2">
 					<Button size="sm">not-prose の中</Button>
