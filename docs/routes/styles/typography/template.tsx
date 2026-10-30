@@ -1,4 +1,6 @@
 import typographyCss from "../../../../src/styles/typography.css?raw";
+import shared from "../../shared.module.css";
+import styles from "./typography.module.css";
 
 const typography = [
 	...typographyCss.matchAll(/--text-([\w-]+?):\s*([^;]+);/g),
@@ -18,39 +20,39 @@ const fonts = [
 export function Template() {
 	return (
 		<>
-			<table class="w-full text-left text-sm">
+			<table class={shared.table}>
 				<thead>
 					<tr>
-						<th class="py-2 font-medium">クラス</th>
-						<th class="py-2 font-medium">値</th>
-						<th class="py-2 font-medium">見本</th>
+						<th>変数</th>
+						<th>値</th>
+						<th>見本</th>
 					</tr>
 				</thead>
 				<tbody>
 					{fonts.map(({ name, value }) => (
 						<tr key={name}>
-							<td class="py-2 pr-4 font-mono whitespace-nowrap">font-{name}</td>
-							<td class="py-2 font-mono">{value}</td>
-							<td class="py-2 text-lg" style={`font-family: ${value}`}>
+							<td class={styles.name}>--font-{name}</td>
+							<td class={shared.mono}>{value}</td>
+							<td class={styles.fontSample} style={`font-family: ${value}`}>
 								Aa あア亜 0123
 							</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<table class="w-full text-left text-sm">
+			<table class={shared.table}>
 				<thead>
 					<tr>
-						<th class="py-2 font-medium">クラス</th>
-						<th class="py-2 font-medium">値</th>
-						<th class="py-2 font-medium">見本</th>
+						<th>変数</th>
+						<th>値</th>
+						<th>見本</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Object.entries(typography).map(([name, style]) => (
 						<tr key={name}>
-							<td class="py-2 font-mono">text-{name}</td>
-							<td class="py-2 font-mono">
+							<td class={styles.name}>--text-{name}</td>
+							<td class={shared.mono}>
 								{Object.entries(style).map(([property, value]) => (
 									<div key={property}>
 										{property}: {value}
@@ -58,7 +60,6 @@ export function Template() {
 								))}
 							</td>
 							<td
-								class="py-2"
 								style={Object.entries(style)
 									.map(([property, value]) => `${property}: ${value}`)
 									.join("; ")}

@@ -19,6 +19,9 @@
 		"./typography.css": "./src/styles/typography.css",
 		"./fonts.css": "./src/styles/fonts.css",
 		"./prose.css": "./src/styles/prose.css",
+		"./radius.css": "./src/styles/radius.css",
+		"./reset.css": "./src/styles/reset.css",
+		"./components.css": "./dist/components.css",
 		"./components/*": {
 			"types": "./dist/components/*.d.ts",
 			"default": "./dist/components/*.js"
@@ -42,17 +45,16 @@
 		"./assets/*": "./src/assets/*"
 	},
 	"scripts": {
-		"build": "rm -rf dist && tsc -p tsconfig.build.json",
+		"build": "rm -rf dist && vite build && tsc -p tsconfig.build.json",
 		"typecheck": "tsc && tsc -p tests",
-		"dev": "vite",
-		"build:docs": "vite build && node scripts/ssg.ts",
+		"dev": "vite -c vite.docs.config.ts",
+		"build:docs": "vite build -c vite.docs.config.ts && node scripts/ssg.ts",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe",
 		"test:a11y": "playwright test"
 	},
 	"peerDependencies": {
-		"hono": "^4.13.13",
-		"tailwindcss": "^4.3.3"
+		"hono": "^4.13.13"
 	},
 	"dependencies": {
 		"@fontsource-variable/noto-sans-jp": "^5.3.1",
@@ -60,19 +62,16 @@
 		"@shikijs/langs": "^4.5.0",
 		"@shikijs/themes": "^4.5.0",
 		"clsx": "^2.1.1",
-		"shiki": "^4.5.0",
-		"tailwind-merge": "^3.7.0"
+		"shiki": "^4.5.0"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "^4.14.0",
 		"@biomejs/biome": "^2.6.3",
 		"@hono/vite-dev-server": "^0.26.1",
 		"@playwright/test": "^1.64.1",
-		"@tailwindcss/vite": "^4.3.3",
 		"@types/node": "^26.6.5",
 		"cf": "^1.0.0-beta.23",
 		"hono": "^4.13.14",
-		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
 		"vite": "^8.3.5",
 		"wrangler": "^4.153.0"

@@ -1,0 +1,71 @@
+@layer components {
+	.codeBlock {
+		position: relative;
+		border-radius: var(--radius-sm);
+		background-color: var(--background-color-emphasis);
+		color: var(--text-color-on-emphasis);
+		font-size: 0.875rem;
+		line-height: 1.7;
+	}
+
+	/* 横スクロールは code が担う。 */
+	.code {
+		display: block;
+		overflow-x: auto;
+		border-radius: var(--radius-sm);
+		padding: 1rem 3rem 1rem 1rem;
+	}
+
+	.copyButton {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--border-color-on-emphasis);
+		border-radius: var(--radius-sm);
+		background-color: var(--background-color-emphasis);
+		padding: 0.375rem;
+		color: var(--text-color-on-emphasis);
+		opacity: 0.7;
+		cursor: pointer;
+		transition: opacity 150ms;
+
+		&:hover,
+		&:focus-visible {
+			opacity: 1;
+		}
+	}
+
+	.copiedIcon {
+		display: none;
+	}
+
+	.copyButton[data-copied] {
+		.copyIcon {
+			display: none;
+		}
+
+		.copiedIcon {
+			display: block;
+		}
+	}
+
+	.status {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	.statusText {
+		display: none;
+	}
+
+	.copyButton[data-copied] ~ .status .statusText {
+		display: inline;
+	}
+}

@@ -1,5 +1,6 @@
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { codeLanguages } from "../../../../src/lib/highlight.ts";
+import shared from "../../shared.module.css";
 
 const sampleTsx = `import { CodeBlock } from "@cloudensis/design-system/components/code-block";
 
@@ -7,8 +8,7 @@ export function Example() {
 	return <CodeBlock lang="tsx">{code}</CodeBlock>;
 }`;
 
-const sampleCss = `@import "tailwindcss";
-@import "@cloudensis/design-system/index.css";`;
+const sampleCss = `@import "@cloudensis/design-system/index.css";`;
 
 /* インラインハンドラーの CSP 用ハッシュを、描画結果から計算する。 */
 async function CopyHandlerHash() {
@@ -32,7 +32,7 @@ async function CopyHandlerHash() {
 
 export function Template() {
 	return (
-		<div class="space-y-6">
+		<div class={shared.stack}>
 			<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
 			<CodeBlock lang="css">{sampleCss}</CodeBlock>
 			<CodeBlock>{"lang を省略するとハイライトしません。"}</CodeBlock>

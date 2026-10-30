@@ -1,5 +1,6 @@
 import type { JSX } from "hono/jsx";
 import { cn } from "../lib/utils.ts";
+import styles from "./textarea.module.css";
 
 type TextareaProps = JSX.IntrinsicElements["textarea"] & {
 	class?: string;
@@ -11,13 +12,7 @@ export function Textarea({
 	...props
 }: TextareaProps) {
 	return (
-		<textarea
-			class={cn(
-				"border-emphasis placeholder:text-muted disabled:text-disabled disabled:placeholder:text-disabled aria-invalid:border-danger-emphasis w-full rounded-sm border px-4 py-2 disabled:cursor-not-allowed",
-				className,
-			)}
-			{...props}
-		>
+		<textarea class={cn(styles.textarea, className)} {...props}>
 			{children}
 		</textarea>
 	);

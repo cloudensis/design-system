@@ -6,7 +6,7 @@
 	/* 要素の見た目。not-prose を付けた要素とその中には効かない。 */
 	@scope (.prose) to (.not-prose) {
 		:where(h1, h2, h3, h4, h5, h6) {
-			font-weight: var(--font-weight-semibold);
+			font-weight: 600;
 			line-height: 1.4;
 			text-wrap: balance;
 		}
@@ -121,7 +121,7 @@
 			padding-inline-start: 1.5em;
 		}
 
-		/* preflight がマーカーを消すため。 */
+		/* reset.css がマーカーを消すため。 */
 		:where(ul) {
 			list-style-type: disc;
 		}
@@ -147,7 +147,7 @@
 		}
 
 		:where(dt) {
-			font-weight: var(--font-weight-semibold);
+			font-weight: 600;
 		}
 
 		:where(dd) {
@@ -175,7 +175,7 @@
 		}
 
 		:where(th) {
-			font-weight: var(--font-weight-semibold);
+			font-weight: 600;
 		}
 
 		:where(tbody:last-child tr:last-child, tfoot tr:last-child) :where(th, td) {
@@ -215,7 +215,7 @@
 
 		:where(summary) {
 			cursor: pointer;
-			font-weight: var(--font-weight-semibold);
+			font-weight: 600;
 		}
 
 		:where(details[open]) > :where(summary) {

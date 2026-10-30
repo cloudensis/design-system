@@ -1,4 +1,5 @@
 import { nav } from "./nav.ts";
+import styles from "./side-nav.module.css";
 
 type SideNavProps = {
 	current: string;
@@ -6,13 +7,13 @@ type SideNavProps = {
 
 export function SideNav({ current }: SideNavProps) {
 	return (
-		<nav aria-label="ドキュメント" class="space-y-6 text-sm">
+		<nav aria-label="ドキュメント" class={styles.nav}>
 			{nav.map((group, index) => {
 				const labelId = group.label ? `nav-${group.label}` : undefined;
 				return (
-					<div key={String(index)} class="space-y-1">
+					<div key={String(index)} class={styles.group}>
 						{group.label && (
-							<p id={labelId} class="px-2 font-mono text-xs">
+							<p id={labelId} class={styles.groupLabel}>
 								{group.label}
 							</p>
 						)}
@@ -22,7 +23,7 @@ export function SideNav({ current }: SideNavProps) {
 									<a
 										href={item.href}
 										aria-current={item.href === current ? "page" : undefined}
-										class="aria-[current=page]:bg-emphasis aria-[current=page]:text-on-emphasis block rounded-sm px-2 py-1.5 hover:underline aria-[current=page]:font-semibold aria-[current=page]:no-underline"
+										class={styles.link}
 									>
 										{item.label}
 									</a>

@@ -1,0 +1,24 @@
+@layer components {
+	.mark {
+		width: auto;
+		height: 1.5rem;
+	}
+
+	.type {
+		font-weight: 200;
+		letter-spacing: 0.05em;
+	}
+
+	.lockup {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.4em;
+		font-size: 1.25rem;
+		line-height: 1.4;
+
+		/* LogoMark の既定の高さより優先させる。 */
+		& > svg {
+			height: 0.8em;
+		}
+	}
+}

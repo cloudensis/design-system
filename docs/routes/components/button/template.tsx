@@ -1,6 +1,8 @@
 import { Button, LinkButton } from "../../../../src/components/button.tsx";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { MenuIcon } from "../../../../src/icons/menu.tsx";
+import { cn } from "../../../../src/lib/utils.ts";
+import shared from "../../shared.module.css";
 
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";
 import { MenuIcon } from "@cloudensis/design-system/icons/menu";
@@ -20,7 +22,7 @@ const linkTsx = `import { LinkButton } from "@cloudensis/design-system/component
 export function Template() {
 	return (
 		<>
-			<div class="border-default flex flex-wrap gap-4 rounded-sm border p-6">
+			<div class={cn(shared.preview, shared.row)}>
 				<Button>default</Button>
 				<Button disabled>default disabled</Button>
 				<Button variant="outline">outline</Button>
@@ -28,7 +30,7 @@ export function Template() {
 					outline disabled
 				</Button>
 			</div>
-			<div class="border-default flex flex-wrap items-center gap-4 rounded-sm border p-6">
+			<div class={cn(shared.preview, shared.row)}>
 				<Button size="sm">sm</Button>
 				<Button size="sm" disabled>
 					sm disabled
@@ -40,7 +42,7 @@ export function Template() {
 					outline sm disabled
 				</Button>
 			</div>
-			<div class="border-default flex flex-wrap items-center gap-4 rounded-sm border p-6">
+			<div class={cn(shared.preview, shared.row)}>
 				<Button size="icon" aria-label="icon">
 					<MenuIcon />
 				</Button>
@@ -65,11 +67,11 @@ export function Template() {
 			</p>
 			<CodeBlock lang="tsx">{importTsx}</CodeBlock>
 
-			<h2 class="text-heading-2">LinkButton</h2>
+			<h2 class={shared.heading2}>LinkButton</h2>
 			<p>
 				Button と同じ見た目の a 要素です。variant と size も同じものを使えます。
 			</p>
-			<div class="border-default flex flex-wrap gap-4 rounded-sm border p-6">
+			<div class={cn(shared.preview, shared.row)}>
 				<LinkButton href="/">default</LinkButton>
 				<LinkButton aria-disabled="true">default disabled</LinkButton>
 				<LinkButton href="/" variant="outline">
@@ -79,7 +81,7 @@ export function Template() {
 					outline disabled
 				</LinkButton>
 			</div>
-			<div class="border-default flex flex-wrap items-center gap-4 rounded-sm border p-6">
+			<div class={cn(shared.preview, shared.row)}>
 				<LinkButton href="/" size="sm">
 					sm
 				</LinkButton>

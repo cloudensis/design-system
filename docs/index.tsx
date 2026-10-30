@@ -4,6 +4,8 @@ import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
 import { Button } from "../src/components/button.tsx";
 import { MenuIcon } from "../src/icons/menu.tsx";
 import { XIcon } from "../src/icons/x.tsx";
+import styles from "./layout.module.css";
+import { moduleStyles } from "./module-styles.ts";
 import { nav } from "./nav.ts";
 import { Template as AssetsTemplate } from "./routes/assets/template.tsx";
 import { Template as CloudensisTemplate } from "./routes/brand/cloudensis/template.tsx";
@@ -49,31 +51,28 @@ const renderer = jsxRenderer(({ children }) => {
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<link rel="apple-touch-icon" href="/logo.png" />
 				<link rel="stylesheet" href={styleUrl} />
+				<style dangerouslySetInnerHTML={{ __html: moduleStyles }} />
 			</head>
 			<body>
-				<header class="border-default bg-default sticky top-0 z-10 flex h-14 items-center gap-4 border-b px-4 lg:px-6">
+				<header class={styles.header}>
 					<Button
 						type="button"
 						variant="outline"
 						size="icon"
 						popovertarget="mobile-nav"
 						aria-label="メニュー"
-						class="lg:hidden"
+						class={styles.menuButton}
 					>
 						<MenuIcon />
 					</Button>
-					<a href="/" class="flex items-baseline gap-2">
-						<LogoLockup class="text-lg" />
-						<span class="text-sm">design system</span>
+					<a href="/" class={styles.home}>
+						<LogoLockup class={styles.logo} />
+						<span class={styles.homeLabel}>design system</span>
 					</a>
 				</header>
 
-				<div
-					id="mobile-nav"
-					popover="auto"
-					class="border-default bg-default text-default backdrop:bg-overlay-backdrop inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-r p-0 open:flex"
-				>
-					<header class="border-default flex h-14 shrink-0 items-center border-b px-4">
+				<div id="mobile-nav" popover="auto" class={styles.mobileNav}>
+					<header class={styles.mobileNavHeader}>
 						<Button
 							type="button"
 							variant="outline"
@@ -85,18 +84,18 @@ const renderer = jsxRenderer(({ children }) => {
 							<XIcon />
 						</Button>
 					</header>
-					<div class="min-h-0 flex-1 overflow-y-auto p-4">
+					<div class={styles.mobileNavBody}>
 						<SideNav current={current} />
 					</div>
 				</div>
 
-				<div class="flex">
-					<aside class="border-default sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r p-4 lg:block">
+				<div class={styles.body}>
+					<aside class={styles.sideNav}>
 						<SideNav current={current} />
 					</aside>
-					<main class="min-w-0 flex-1 px-6 py-10 lg:px-12">
-						<div class="mx-auto max-w-3xl space-y-8">
-							<h1 class="text-heading-1">{heading}</h1>
+					<main class={styles.main}>
+						<div class={styles.content}>
+							<h1 class={styles.title}>{heading}</h1>
 							{children}
 						</div>
 					</main>

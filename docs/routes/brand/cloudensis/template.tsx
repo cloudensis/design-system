@@ -1,6 +1,9 @@
 import { LogoLockup } from "../../../../src/brand/cloudensis/logo-lockup.tsx";
 import { LogoMark } from "../../../../src/brand/cloudensis/logo-mark.tsx";
 import { LogoType } from "../../../../src/brand/cloudensis/logo-type.tsx";
+import { cn } from "../../../../src/lib/utils.ts";
+import shared from "../../shared.module.css";
+import styles from "./cloudensis.module.css";
 
 const logos = [
 	{
@@ -8,17 +11,21 @@ const logos = [
 		file: "logo-mark",
 		sample: <LogoMark label="cloudensis" />,
 	},
-	{ name: "LogoType", file: "logo-type", sample: <LogoType class="text-xl" /> },
+	{
+		name: "LogoType",
+		file: "logo-type",
+		sample: <LogoType class={styles.logoType} />,
+	},
 	{
 		name: "LogoLockup",
 		file: "logo-lockup",
 		sample: (
-			<div class="space-y-2">
+			<div class={styles.lockups}>
 				<div>
 					<LogoLockup />
 				</div>
 				<div>
-					<LogoLockup class="text-3xl" />
+					<LogoLockup class={styles.largeLockup} />
 				</div>
 			</div>
 		),
@@ -27,16 +34,14 @@ const logos = [
 
 export function Template() {
 	return (
-		<div class="space-y-10">
+		<div class={shared.sections}>
 			{logos.map((logo) => (
-				<section key={logo.name} class="space-y-3">
-					<h2 class="text-heading-3">{logo.name}</h2>
-					<p class="font-mono text-xs break-all">
+				<section key={logo.name} class={shared.section}>
+					<h2 class={shared.heading3}>{logo.name}</h2>
+					<p class={shared.path}>
 						@cloudensis/design-system/brand/cloudensis/{logo.file}
 					</p>
-					<div class="border-default overflow-x-auto rounded-sm border p-6">
-						{logo.sample}
-					</div>
+					<div class={cn(shared.preview, styles.sample)}>{logo.sample}</div>
 				</section>
 			))}
 		</div>

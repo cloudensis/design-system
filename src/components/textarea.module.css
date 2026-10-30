@@ -1,0 +1,25 @@
+@layer components {
+	.textarea {
+		width: 100%;
+		border: 1px solid var(--border-color-emphasis);
+		border-radius: var(--radius-sm);
+		padding: 0.5rem 1rem;
+
+		&::placeholder {
+			color: var(--text-color-muted);
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			color: var(--text-color-disabled);
+
+			&::placeholder {
+				color: var(--text-color-disabled);
+			}
+		}
+
+		&[aria-invalid="true"] {
+			border-color: var(--border-color-danger-emphasis);
+		}
+	}
+}
