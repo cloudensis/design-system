@@ -51,7 +51,7 @@ const renderer = jsxRenderer(({ children }) => {
 				<link rel="stylesheet" href={styleUrl} />
 			</head>
 			<body>
-				<header class="sticky top-0 z-10 flex h-14 items-center gap-4 border-default border-b bg-default px-4 lg:px-6">
+				<header class="border-default bg-default sticky top-0 z-10 flex h-14 items-center gap-4 border-b px-4 lg:px-6">
 					<Button
 						type="button"
 						variant="outline"
@@ -71,9 +71,9 @@ const renderer = jsxRenderer(({ children }) => {
 				<div
 					id="mobile-nav"
 					popover="auto"
-					class="inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-default border-r bg-default p-0 text-default backdrop:bg-overlay-backdrop open:flex"
+					class="border-default bg-default text-default backdrop:bg-overlay-backdrop inset-y-0 right-auto left-0 m-0 h-svh w-72 max-w-[80vw] flex-col border-r p-0 open:flex"
 				>
-					<header class="flex h-14 shrink-0 items-center border-default border-b px-4">
+					<header class="border-default flex h-14 shrink-0 items-center border-b px-4">
 						<Button
 							type="button"
 							variant="outline"
@@ -91,7 +91,7 @@ const renderer = jsxRenderer(({ children }) => {
 				</div>
 
 				<div class="flex">
-					<aside class="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-default border-r p-4 lg:block">
+					<aside class="border-default sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r p-4 lg:block">
 						<SideNav current={current} />
 					</aside>
 					<main class="min-w-0 flex-1 px-6 py-10 lg:px-12">

@@ -39,7 +39,7 @@ export function Template() {
 						alt={asset.alt}
 						width={asset.width}
 						height={asset.height}
-						class="scheme-light h-auto max-h-64 w-auto max-w-full rounded-sm border border-default p-4"
+						class="border-default h-auto max-h-64 w-auto max-w-full rounded-sm border p-4 scheme-light"
 					/>
 				</section>
 			))}

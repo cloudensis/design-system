@@ -30,10 +30,10 @@ export function Template() {
 				{icons.map(({ name, file, Component }) => (
 					<section key={name} class="space-y-3">
 						<h2 class="text-heading-3">{name}</h2>
-						<p class="break-all font-mono text-xs">
+						<p class="font-mono text-xs break-all">
 							@cloudensis/design-system/icons/{file}
 						</p>
-						<div class="flex flex-wrap items-center gap-6 rounded-sm border border-default p-6">
+						<div class="border-default flex flex-wrap items-center gap-6 rounded-sm border p-6">
 							<Component />
 							<Component class="size-6" />
 							<Component class="size-8" />
