@@ -1,2 +1,10 @@
-@import "tailwindcss";
-@import "../src/styles/index.css";
+/* index.css はビルド済みのコンポーネントのスタイルを読み込むため、ソースのファイルを個別に読み込む。 */
+@layer base, components;
+
+@import "../src/styles/fonts.css";
+@import "../src/styles/colors.css";
+@import "../src/styles/typography.css";
+@import "../src/styles/radius.css";
+@import "../src/styles/reset.css";
+@import "../src/styles/base.css";
+@import "../src/styles/prose.css";

@@ -1,5 +1,7 @@
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Textarea } from "../../../../src/components/textarea.tsx";
+import { cn } from "../../../../src/lib/utils.ts";
+import shared from "../../shared.module.css";
 
 const importTsx = `import { Textarea } from "@cloudensis/design-system/components/textarea";
 
@@ -9,9 +11,9 @@ const importTsx = `import { Textarea } from "@cloudensis/design-system/component
 export function Template() {
 	return (
 		<>
-			<div class="border-default space-y-4 rounded-sm border p-6">
-				<div class="space-y-1">
-					<label for="sample-textarea" class="block text-sm">
+			<div class={cn(shared.preview, shared.fields)}>
+				<div class={shared.field}>
+					<label for="sample-textarea" class={shared.label}>
 						お問い合わせ内容
 					</label>
 					<Textarea
@@ -20,8 +22,8 @@ export function Template() {
 						placeholder="ご用件をお書きください"
 					/>
 				</div>
-				<div class="space-y-1">
-					<label for="sample-textarea-error" class="block text-sm">
+				<div class={shared.field}>
+					<label for="sample-textarea-error" class={shared.label}>
 						エラー
 					</label>
 					<Textarea
@@ -30,12 +32,12 @@ export function Template() {
 						aria-invalid="true"
 						aria-describedby="sample-textarea-error-message"
 					/>
-					<p id="sample-textarea-error-message" class="text-danger text-sm">
+					<p id="sample-textarea-error-message" class={shared.error}>
 						お問い合わせ内容を入力してください。
 					</p>
 				</div>
-				<div class="space-y-1">
-					<label for="sample-textarea-disabled" class="block text-sm">
+				<div class={shared.field}>
+					<label for="sample-textarea-disabled" class={shared.label}>
 						disabled
 					</label>
 					<Textarea

@@ -13,15 +13,7 @@
 						"inputComponents": ["Input", "Select", "Textarea"]
 					}
 				}
-			},
-			"nursery": {
-				"useTailwindSortedClasses": "warn"
 			}
-		}
-	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
 		}
 	},
 	"assist": {

@@ -1,7 +1,6 @@
 import { CodeBlock } from "../../src/components/code-block.tsx";
 
-const installCss = `@import "tailwindcss";
-@import "@cloudensis/design-system/index.css";`;
+const installCss = `@import "@cloudensis/design-system/index.css";`;
 
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";`;
 
@@ -13,13 +12,19 @@ export function Template() {
 				コンポーネントです。
 			</p>
 			<h2>導入</h2>
-			<p>Tailwind CSS v4 と Hono v4 が必要です。</p>
+			<p>Hono v4 が必要です。</p>
 			<CodeBlock lang="sh">npm install @cloudensis/design-system</CodeBlock>
-			<p>Tailwind CSS のエントリで index.css を読み込みます。</p>
+			<p>CSS で index.css を読み込みます。</p>
 			<CodeBlock lang="css">{installCss}</CodeBlock>
 			<p>
-				index.css にはフォント・色・タイポグラフィ・body
-				とフォーカス枠の既定のスタイル・記事用スタイルと、コンポーネントのクラスの収集設定が含まれます。
+				index.css
+				にはフォント・色・タイポグラフィ・角丸のトークン、リセット、body
+				とフォーカス枠の既定のスタイル、記事用スタイルと、コンポーネントのスタイルが含まれます。
+			</p>
+			<p>
+				コンポーネントのスタイルは CSS Modules で書かれ、@layer components
+				に入っています。レイヤーの外に書いたスタイルはレイヤーの中より優先されるため、class
+				で渡したスタイルでコンポーネントの見た目を上書きできます。
 			</p>
 			<p>コンポーネントはファイルごとに import します。</p>
 			<CodeBlock lang="tsx">{importTsx}</CodeBlock>

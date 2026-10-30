@@ -6,14 +6,13 @@ cloudensis の CSS トークン・記事用スタイル・Hono JSX コンポー�
 
 ## 導入
 
-Tailwind CSS v4 と Hono v4 が必要です。
+Hono v4 が必要です。
 
 ```sh
 npm install @cloudensis/design-system
 ```
 
 ```css
-@import "tailwindcss";
 @import "@cloudensis/design-system/index.css";
 ```
 
@@ -23,13 +22,13 @@ import { Button } from "@cloudensis/design-system/components/button";
 
 ## 開発
 
-| script                                                  | 内容                                                         |
-| ------------------------------------------------------- | ------------------------------------------------------------ |
-| `npm run dev`                                           | ドキュメントサイトの開発サーバー                             |
-| `npm run build`                                         | 配布物を `dist/` にビルド                                    |
-| `npm run build:docs`                                    | ドキュメントサイトを静的サイトとして `docs-dist/` に書き出す |
-| `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                                 |
-| `npm run test:a11y`                                     | ドキュメントサイトを axe で検査                              |
+| script                                                  | 内容                                                                         |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `npm run dev`                                           | ドキュメントサイトの開発サーバー                                             |
+| `npm run build`                                         | 配布物を `dist/` にビルド（CSS Modules は `dist/components.css` にまとめる） |
+| `npm run build:docs`                                    | ドキュメントサイトを静的サイトとして `docs-dist/` に書き出す                 |
+| `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                                                 |
+| `npm run test:a11y`                                     | ドキュメントサイトを axe で検査                                              |
 
 ## リリース
 
