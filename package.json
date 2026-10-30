@@ -45,10 +45,10 @@
 		"./assets/*": "./src/assets/*"
 	},
 	"scripts": {
-		"build": "rm -rf dist && vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json",
+		"build": "rm -rf dist && vite build && tsc -p tsconfig.build.json",
 		"typecheck": "tsc && tsc -p tests",
-		"dev": "vite",
-		"build:docs": "vite build && node scripts/ssg.ts",
+		"dev": "vite -c vite.docs.config.ts",
+		"build:docs": "vite build -c vite.docs.config.ts && node scripts/ssg.ts",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe",
 		"test:a11y": "playwright test"
