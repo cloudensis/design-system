@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Select } from "../../../../src/components/select.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
@@ -11,7 +12,7 @@ const importTsx = `import { Select } from "@cloudensis/design-system/components/
 	<option value="a">選択肢 A</option>
 </Select>`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<div class={cn(shared.preview, shared.fields)}>
@@ -55,3 +56,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Select",
+		description: "Select コンポーネント",
+	});
+
+export { GET, ssg };

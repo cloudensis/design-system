@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Input } from "../../../../src/components/input.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
@@ -29,7 +30,7 @@ const errorTsx = `<label for="email">メールアドレス</label>
 <Input type="email" id="email" aria-invalid="true" aria-describedby="email-error" />
 <p id="email-error" class={styles.error}>メールアドレスの形式で入力してください。</p>`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<div class={cn(shared.preview, shared.fields)}>
@@ -121,3 +122,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Input",
+		description: "Input コンポーネント",
+	});
+
+export { GET, ssg };

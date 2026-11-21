@@ -1,26 +1,14 @@
-import { globSync } from "node:fs";
+/// <reference types="vitest/config" />
+import { cloudflare } from "@cloudflare/vite-plugin";
 import { defineConfig } from "vite";
+import ssrPlugin from "vite-ssr-components/plugin";
 
-/* CSS Modules を処理するため、tsc ではなく Vite で配布物をビルドする。型定義は tsc で書き出す。 */
-const entries = globSync("src/{components,brand,icons,lib}/**/*.{ts,tsx}");
-
+/* ドキュメントサイトの設定。パッケージのビルドは vite.lib.config.ts で行う。 */
 export default defineConfig({
-	build: {
-		outDir: "dist",
-		lib: {
-			entry: entries,
-			formats: ["es"],
-			/* コンポーネントのスタイルは 1 ファイルにまとめる。 */
-			cssFileName: "components",
-		},
-		rolldownOptions: {
-			/* 依存パッケージは同梱しない。 */
-			external: (id) => !id.startsWith(".") && !id.startsWith("/"),
-			output: {
-				preserveModules: true,
-				preserveModulesRoot: "src",
-				entryFileNames: "[name].js",
-			},
-		},
+	/* パッケージで配布しているアセットを、そのままサイトでも配信する。 */
+	publicDir: "src/assets",
+	plugins: [cloudflare(), ssrPlugin()],
+	test: {
+		include: ["docs/**/*.test.ts"],
 	},
 });

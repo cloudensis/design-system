@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { Button, LinkButton } from "../../../../src/components/button.tsx";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { MenuIcon } from "../../../../src/icons/menu.tsx";
@@ -19,7 +20,7 @@ const linkTsx = `import { LinkButton } from "@cloudensis/design-system/component
 <LinkButton href="/contact">お問い合わせ</LinkButton>
 <LinkButton aria-disabled="true">無効なリンク</LinkButton>`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<div class={cn(shared.preview, shared.row)}>
@@ -100,3 +101,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Button",
+		description: "Button と LinkButton コンポーネント",
+	});
+
+export { GET, ssg };

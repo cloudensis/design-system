@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import shared from "../shared.module.css";
 import styles from "./assets.module.css";
 
@@ -25,7 +26,7 @@ const assets = [
 	},
 ];
 
-export function Template() {
+function Page() {
 	return (
 		<div class={shared.sections}>
 			{assets.map((asset) => (
@@ -49,3 +50,13 @@ export function Template() {
 		</div>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Assets",
+		description: "配布している画像",
+	});
+
+export { GET, ssg };

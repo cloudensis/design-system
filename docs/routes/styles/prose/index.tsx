@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { Button } from "../../../../src/components/button.tsx";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
@@ -16,7 +17,7 @@ const sampleNotProse = `<article class="prose">
 	</div>
 </article>`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<p>記事本文を囲む要素に .prose を付けます。</p>
@@ -213,3 +214,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Prose",
+		description: "記事用スタイル",
+	});
+
+export { GET, ssg };
