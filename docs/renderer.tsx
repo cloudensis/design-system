@@ -32,7 +32,7 @@ export const renderer = jsxRenderer(
 		const ogImageUrl = new URL("/ogp.png", siteUrl).toString();
 
 		return (
-			<html lang="ja">
+			<html lang="ja" data-theme="auto">
 				<head>
 					<meta charset="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />

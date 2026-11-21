@@ -2,9 +2,11 @@
 @layer base, components;
 
 @import "./fonts.css";
+@import "./palette.css";
 @import "./colors.css";
 @import "./typography.css";
 @import "./radius.css";
+@import "./sizes.css";
 @import "./reset.css";
 @import "./base.css";
 @import "./prose.css";

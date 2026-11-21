@@ -30,6 +30,15 @@
 	background-color: var(--background-color-emphasis);
 }
 
+.onCode {
+	background-color: var(--background-color-code);
+}
+
+/* 背景と同じ色でも範囲がわかるよう、枠線を付ける。 */
+.paletteSwatch {
+	border: 1px solid var(--border-color-default);
+}
+
 .checkbox {
 	display: inline-block;
 	width: 1rem;

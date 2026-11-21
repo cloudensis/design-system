@@ -61,19 +61,19 @@
 	}
 
 	.sizeDefault {
-		height: 2.5rem;
-		padding-inline: 1rem;
+		height: var(--control-height-md);
+		padding-inline: var(--control-padding-inline-md);
 	}
 
 	.sizeSm {
-		height: 2rem;
-		padding-inline: 0.75rem;
-		font-size: 0.875rem;
-		line-height: 1.25rem;
+		height: var(--control-height-sm);
+		padding-inline: var(--control-padding-inline-sm);
+		font-size: var(--text-sm);
+		line-height: var(--text-sm--line-height);
 	}
 
 	.sizeIcon {
-		width: 2rem;
-		height: 2rem;
+		width: var(--control-height-sm);
+		height: var(--control-height-sm);
 	}
 }
