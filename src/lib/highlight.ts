@@ -17,11 +17,16 @@ import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 /*
  * 背景（--background-color-emphasis）とのコントラスト比を 4.5 以上にする。
  * 半透明の色は不透明にし、足りない色は明るくする。
+ * テーマを更新したときは highlight.test.ts で確かめる。
  */
 const contrastFixes: Record<string, string> = {
 	"#4d9375": "#599b7f",
 	"#666666": "#8e8e8e",
 	"#758575": "#849284",
+	/* 正規表現 */
+	"#c4704f": "#c77859",
+	/* 正規表現の文字クラスなど */
+	"#6872ab": "#828aba",
 };
 
 const theme = {
