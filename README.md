@@ -33,8 +33,6 @@ import { Button } from "@cloudensis/design-system/components/button";
 
 ### ドキュメントサイト
 
-`docs/` は [@cloudensis/create-hono](https://github.com/cloudensis/create-hono) のテンプレートと同じ構成です。
-
 - `docs/index.tsx`: アプリのエントリーポイント
 - `docs/renderer.tsx`: レイアウトと `<head>`
 - `docs/routes` 以下の `index.ts` / `index.tsx` がルートになります（例: `routes/components/button/index.tsx` → `/components/button`）。HTTP メソッド名でハンドラーを export し、`ssg = true` を export すると `npm run build:docs` で HTML に書き出します
