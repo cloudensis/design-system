@@ -38,3 +38,11 @@ import { Button } from "@cloudensis/design-system/components/button";
 3. npm への publish とドキュメントサイトのデプロイが自動で行われる
 
 デプロイは [cf CLI](https://www.npmjs.com/package/cf) で Cloudflare Workers に行います（設定は `cloudflare.config.ts`）。Secrets の `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要です。
+
+## リポジトリの設定
+
+Dependabot の自動マージ（`.github/workflows/dependabot-auto-merge.yaml`）は、必須チェックが通るまで待つことを前提にしています。main のブランチ保護（または ruleset）で、次を必須チェックにしてください。
+
+- `Test / test`
+
+GitHub Actions はコミット SHA で固定しています（`uses: actions/checkout@<sha> # v7.0.1`）。更新は Dependabot が SHA とコメントをあわせて行います。ワークフローを変えた PR では zizmor で検査します（`.github/workflows/workflow-lint.yaml`）。
