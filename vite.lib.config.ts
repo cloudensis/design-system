@@ -2,7 +2,9 @@ import { globSync } from "node:fs";
 import { defineConfig } from "vite";
 
 /* CSS Modules を処理するため、tsc ではなく Vite で配布物をビルドする。型定義は tsc で書き出す。 */
-const entries = globSync("src/{components,brand,icons,lib}/**/*.{ts,tsx}");
+const entries = globSync(
+	"src/{components,brand,icons,lib,scripts}/**/*.{ts,tsx}",
+);
 
 export default defineConfig({
 	build: {

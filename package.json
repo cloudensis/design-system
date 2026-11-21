@@ -34,6 +34,10 @@
 			"types": "./dist/icons/*.d.ts",
 			"default": "./dist/icons/*.js"
 		},
+		"./scripts/code-block": {
+			"types": "./dist/scripts/code-block.d.ts",
+			"default": "./dist/scripts/code-block.js"
+		},
 		"./lib/highlight": {
 			"types": "./dist/lib/highlight.d.ts",
 			"default": "./dist/lib/highlight.js"

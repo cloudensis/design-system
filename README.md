@@ -20,6 +20,12 @@ npm install @cloudensis/design-system
 import { Button } from "@cloudensis/design-system/components/button";
 ```
 
+CodeBlock のコピーボタンを使う場合は、ブラウザで動くスクリプトで次を読み込みます。
+
+```ts
+import "@cloudensis/design-system/scripts/code-block";
+```
+
 ## 開発
 
 | script                                                  | 内容                                                                         |

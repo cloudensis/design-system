@@ -38,6 +38,11 @@
 		}
 	}
 
+	/* display を指定しているため、hidden 属性だけでは隠れない。 */
+	.copyButton[hidden] {
+		display: none;
+	}
+
 	.copiedIcon {
 		display: none;
 	}
