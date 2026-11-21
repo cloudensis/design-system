@@ -1,8 +1,8 @@
+import { LogoLockup } from "@cloudensis/design-system/brand/cloudensis/logo-lockup";
+import { LogoMark } from "@cloudensis/design-system/brand/cloudensis/logo-mark";
+import { LogoType } from "@cloudensis/design-system/brand/cloudensis/logo-type";
+import { cn } from "@cloudensis/design-system/lib/utils";
 import type { Handler } from "hono";
-import { LogoLockup } from "../../../../src/brand/cloudensis/logo-lockup.tsx";
-import { LogoMark } from "../../../../src/brand/cloudensis/logo-mark.tsx";
-import { LogoType } from "../../../../src/brand/cloudensis/logo-type.tsx";
-import { cn } from "../../../../src/lib/utils.ts";
 import shared from "../../shared.module.css";
 import styles from "./cloudensis.module.css";
 

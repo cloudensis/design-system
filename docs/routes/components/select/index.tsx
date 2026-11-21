@@ -1,7 +1,7 @@
+import { CodeBlock } from "@cloudensis/design-system/components/code-block";
+import { Select } from "@cloudensis/design-system/components/select";
+import { cn } from "@cloudensis/design-system/lib/utils";
 import type { Handler } from "hono";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
-import { Select } from "../../../../src/components/select.tsx";
-import { cn } from "../../../../src/lib/utils.ts";
 import shared from "../../shared.module.css";
 
 const importTsx = `import { Select } from "@cloudensis/design-system/components/select";

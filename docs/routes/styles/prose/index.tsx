@@ -1,7 +1,7 @@
+import { Button } from "@cloudensis/design-system/components/button";
+import { CodeBlock } from "@cloudensis/design-system/components/code-block";
+import { cn } from "@cloudensis/design-system/lib/utils";
 import type { Handler } from "hono";
-import { Button } from "../../../../src/components/button.tsx";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
-import { cn } from "../../../../src/lib/utils.ts";
 import shared from "../../shared.module.css";
 import styles from "./prose.module.css";
 
