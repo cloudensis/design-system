@@ -31,15 +31,6 @@ import { Button } from "@cloudensis/design-system/components/button";
 | `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                                                 |
 | `npm run test:a11y`                                     | ドキュメントサイトを axe で検査                                              |
 
-### ドキュメントサイト
-
-- `docs/index.tsx`: アプリのエントリーポイント
-- `docs/renderer.tsx`: レイアウトと `<head>`
-- `docs/routes` 以下の `index.ts` / `index.tsx` がルートになります（例: `routes/components/button/index.tsx` → `/components/button`）。HTTP メソッド名でハンドラーを export し、`ssg = true` を export すると `npm run build:docs` で HTML に書き出します
-- ページを増やしたら、サイドメニューの `docs/nav.ts` にも追加します（アクセシビリティのテストもこの一覧を使います）
-
-ビルドの設定は、ドキュメントサイトが `vite.config.ts`、配布物が `vite.lib.config.ts` です。
-
 ## リリース
 
 1. `package.json` の `version` を上げて main にマージする
