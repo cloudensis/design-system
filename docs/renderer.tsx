@@ -1,5 +1,5 @@
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
-import { Link, ViteClient } from "vite-ssr-components/hono";
+import { Link, Script, ViteClient } from "vite-ssr-components/hono";
 import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
 import { Button } from "../src/components/button.tsx";
 import { MenuIcon } from "../src/icons/menu.tsx";
@@ -51,6 +51,7 @@ export const renderer = jsxRenderer(
 					<Link href="/docs/style.css" rel="stylesheet" />
 					<style dangerouslySetInnerHTML={{ __html: moduleStyles }} />
 					<ViteClient />
+					<Script src="/docs/client.ts" />
 				</head>
 				<body>
 					<header class={styles.header}>

@@ -47,26 +47,16 @@ function renderCode(code: string, lang?: CodeLanguage) {
 	));
 }
 
-/*
- * ハイドレーションなしで動くよう、インラインハンドラーの文字列にする。
- * 変えると CSP のハッシュが変わるので、利用側で CSP の設定を更新する必要がある。
- */
-const copyScript = [
-	"const button = this;",
-	"const code = button.parentElement.querySelector('code');",
-	"const selectAll = () => getSelection().selectAllChildren(code);",
-	"if (!navigator.clipboard) return selectAll();",
-	"navigator.clipboard.writeText(code.textContent).then(() => {",
-	"button.dataset.copied = '';",
-	"clearTimeout(button.timer);",
-	"button.timer = setTimeout(() => delete button.dataset.copied, 2000);",
-	"}, selectAll);",
-].join("");
-
 function CopyButton() {
 	return (
 		<>
-			<button type="button" class={styles.copyButton} onclick={copyScript}>
+			{/* @cloudensis/design-system/scripts/code-block が動くまで隠しておく。 */}
+			<button
+				type="button"
+				class={styles.copyButton}
+				data-code-block-copy
+				hidden
+			>
 				<CopyIcon label="コードをコピー" class={styles.copyIcon} />
 				<CheckIcon label="コピーしました" class={styles.copiedIcon} />
 			</button>
