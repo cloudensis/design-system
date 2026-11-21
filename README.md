@@ -43,4 +43,6 @@ import "@cloudensis/design-system/scripts/code-block";
 2. 公開するバージョンのタグ（例: `0.12.0`）で GitHub の Release を作成する
 3. npm への publish とドキュメントサイトのデプロイが自動で行われる
 
+ドキュメントサイトのセキュリティヘッダー（CSP など）は `docs/security-headers.ts` で定義しています。Worker が返すレスポンスには middleware で、SSG した静的ファイルには `npm run build:docs` が書き出す `_headers` で付けます。
+
 デプロイは [cf CLI](https://www.npmjs.com/package/cf) で Cloudflare Workers に行います（設定は `cloudflare.config.ts`）。Secrets の `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要です。
