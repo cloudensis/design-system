@@ -1,6 +1,6 @@
+import { CodeBlock } from "@cloudensis/design-system/components/code-block";
+import { codeLanguages } from "@cloudensis/design-system/lib/highlight";
 import type { Handler } from "hono";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
-import { codeLanguages } from "../../../../src/lib/highlight.ts";
 import shared from "../../shared.module.css";
 
 const sampleTsx = `import { CodeBlock } from "@cloudensis/design-system/components/code-block";

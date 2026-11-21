@@ -12,7 +12,14 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx",
 		"allowImportingTsExtensions": true,
-		"rewriteRelativeImportExtensions": true
+		"rewriteRelativeImportExtensions": true,
+		/* ドキュメントサイトから、配布物と同じパスでソースを import する。vite.config.ts の alias と合わせる。 */
+		"paths": {
+			"@cloudensis/design-system/components/*": ["./src/components/*.tsx"],
+			"@cloudensis/design-system/icons/*": ["./src/icons/*.tsx"],
+			"@cloudensis/design-system/brand/*": ["./src/brand/*.tsx"],
+			"@cloudensis/design-system/lib/*": ["./src/lib/*.ts"]
+		}
 	},
 	"include": ["src", "docs", "*.config.ts", ".cloudflare/types"]
 }

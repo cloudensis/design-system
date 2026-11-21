@@ -1,0 +1,15 @@
+/*
+ * トークン・リセット・ベース・記事用スタイル。コンポーネントのスタイルは含まない。
+ * index.css とドキュメントサイトの両方から読み込み、一覧を一か所で管理する。
+ */
+
+/* 後に書いたレイヤーが優先される。レイヤーの外に書いたスタイルは、どのレイヤーよりも優先される。 */
+@layer base, components;
+
+@import "./fonts.css";
+@import "./colors.css";
+@import "./typography.css";
+@import "./radius.css";
+@import "./reset.css";
+@import "./base.css";
+@import "./prose.css";

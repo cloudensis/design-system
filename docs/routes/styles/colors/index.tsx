@@ -1,5 +1,5 @@
+import { cn } from "@cloudensis/design-system/lib/utils";
 import type { Handler } from "hono";
-import { cn } from "../../../../src/lib/utils.ts";
 import colorsCss from "../../../../src/styles/colors.css?raw";
 import shared from "../../shared.module.css";
 import styles from "./colors.module.css";

@@ -14,6 +14,7 @@
 	],
 	"exports": {
 		"./index.css": "./src/styles/index.css",
+		"./foundation.css": "./src/styles/foundation.css",
 		"./base.css": "./src/styles/base.css",
 		"./colors.css": "./src/styles/colors.css",
 		"./typography.css": "./src/styles/typography.css",

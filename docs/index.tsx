@@ -1,11 +1,21 @@
 import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
 import { type RouteModule, registerRoutes } from "./lib/router";
+import { moduleStyles, moduleStylesPath } from "./module-styles.ts";
 import { renderer } from "./renderer";
 
 const app = new Hono();
 
 app.use(trimTrailingSlash({ alwaysRedirect: true }));
+
+/* SSG で静的ファイルとして書き出す。URL にハッシュを付けているので、長くキャッシュしてよい。 */
+app.get(moduleStylesPath, (c) =>
+	c.body(moduleStyles, 200, {
+		"Content-Type": "text/css; charset=utf-8",
+		"Cache-Control": "public, max-age=31536000, immutable",
+	}),
+);
+
 app.use(renderer);
 
 registerRoutes(

@@ -1,11 +1,11 @@
+import { LogoLockup } from "@cloudensis/design-system/brand/cloudensis/logo-lockup";
+import { Button } from "@cloudensis/design-system/components/button";
+import { MenuIcon } from "@cloudensis/design-system/icons/menu";
+import { XIcon } from "@cloudensis/design-system/icons/x";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { Link, ViteClient } from "vite-ssr-components/hono";
-import { LogoLockup } from "../src/brand/cloudensis/logo-lockup.tsx";
-import { Button } from "../src/components/button.tsx";
-import { MenuIcon } from "../src/icons/menu.tsx";
-import { XIcon } from "../src/icons/x.tsx";
 import styles from "./layout.module.css";
-import { moduleStyles } from "./module-styles.ts";
+import { moduleStylesUrl } from "./module-styles.ts";
 import { SideNav } from "./side-nav.tsx";
 
 export const siteName = "cloudensis design system";
@@ -49,7 +49,7 @@ export const renderer = jsxRenderer(
 					<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 					<link rel="apple-touch-icon" href="/logo.png" />
 					<Link href="/docs/style.css" rel="stylesheet" />
-					<style dangerouslySetInnerHTML={{ __html: moduleStyles }} />
+					<link rel="stylesheet" href={moduleStylesUrl} />
 					<ViteClient />
 				</head>
 				<body>
