@@ -24,7 +24,9 @@ type ButtonProps = JSX.IntrinsicElements["button"] &
 		class?: string;
 	};
 
+/** type を省略すると "button" になる。フォームを送信するときは type="submit" を指定する。 */
 export function Button({
+	type = "button",
 	variant = "default",
 	size = "default",
 	class: className,
@@ -33,6 +35,7 @@ export function Button({
 }: ButtonProps) {
 	return (
 		<button
+			type={type}
 			class={cn(
 				styles.button,
 				variants.variant[variant],
