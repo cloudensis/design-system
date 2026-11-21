@@ -12,9 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: metadata
-        uses: dependabot/fetch-metadata@v3
-      # major は手動でレビューする
-      - if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+      # 自動マージは、配布物に入らない devDependencies と GitHub Actions の minor・patch に限る。
+      # dependencies（利用者に再配布される）と major は手動でレビューする。
+      # main の必須チェック（Test）が通るまでマージされない。
+      - if: >-
+          steps.metadata.outputs.update-type != 'version-update:semver-major' &&
+          (steps.metadata.outputs.dependency-type == 'direct:development' ||
+           steps.metadata.outputs.package-ecosystem == 'github_actions')
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
