@@ -1,0 +1,11 @@
+@layer components {
+	.icon {
+		flex-shrink: 0;
+	}
+
+	/* アイコンの既定の大きさ。 */
+	.size {
+		width: 1rem;
+		height: 1rem;
+	}
+}

@@ -3,6 +3,7 @@ import { CheckIcon } from "../icons/check.tsx";
 import { CopyIcon } from "../icons/copy.tsx";
 import { type CodeLanguage, highlight } from "../lib/highlight.ts";
 import { cn } from "../lib/utils.ts";
+import styles from "./code-block.module.css";
 
 type CodeBlockProps = Omit<JSX.IntrinsicElements["pre"], "children"> & {
 	class?: string;
@@ -21,15 +22,9 @@ export function CodeBlock({
 	const code = children.replace(/^[\r\n]+/, "").trimEnd();
 
 	return (
-		<pre
-			class={cn(
-				"not-prose bg-emphasis text-on-emphasis relative rounded-sm text-sm leading-[1.7]",
-				className,
-			)}
-			{...props}
-		>
-			{/* 横スクロールは code が担う。tabindex はキーボードでスクロールするため。 */}
-			<code tabindex={0} class="block overflow-x-auto rounded-sm p-4 pr-12">
+		<pre class={cn("not-prose", styles.codeBlock, className)} {...props}>
+			{/* tabindex はキーボードでスクロールするため。 */}
+			<code tabindex={0} class={styles.code}>
 				{renderCode(code, lang)}
 			</code>
 			<CopyButton />
@@ -71,23 +66,13 @@ const copyScript = [
 function CopyButton() {
 	return (
 		<>
-			<button
-				type="button"
-				class="peer/copy group/copy border-on-emphasis bg-emphasis text-on-emphasis absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border p-1.5 opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
-				onclick={copyScript}
-			>
-				<CopyIcon
-					label="コードをコピー"
-					class="group-data-copied/copy:hidden"
-				/>
-				<CheckIcon
-					label="コピーしました"
-					class="hidden group-data-copied/copy:block"
-				/>
+			<button type="button" class={styles.copyButton} onclick={copyScript}>
+				<CopyIcon label="コードをコピー" class={styles.copyIcon} />
+				<CheckIcon label="コピーしました" class={styles.copiedIcon} />
 			</button>
 			{/* ボタンの中のライブ領域は読み上げられないため、隣に置く。 */}
-			<span role="status" class="sr-only peer-data-copied/copy:*:inline">
-				<span class="hidden">コピーしました</span>
+			<span role="status" class={styles.status}>
+				<span class={styles.statusText}>コピーしました</span>
 			</span>
 		</>
 	);

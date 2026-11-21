@@ -1,0 +1,10 @@
+.image {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	max-height: 16rem;
+	border: 1px solid var(--border-color-default);
+	border-radius: var(--radius-sm);
+	padding: 1rem;
+	color-scheme: light;
+}

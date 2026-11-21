@@ -1,7 +1,10 @@
-@theme {
+:root {
 	--font-sans:
 		"Outfit Variable", "Noto Sans JP Variable", ui-sans-serif, system-ui,
 		sans-serif;
+	--font-mono:
+		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
 
 	--text-heading-1: 1.875rem;
 	--text-heading-1--line-height: 1.4;

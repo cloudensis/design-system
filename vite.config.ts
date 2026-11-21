@@ -1,12 +1,14 @@
-import devServer from "@hono/vite-dev-server";
-import tailwindcss from "@tailwindcss/vite";
+/// <reference types="vitest/config" />
+import { cloudflare } from "@cloudflare/vite-plugin";
 import { defineConfig } from "vite";
+import ssrPlugin from "vite-ssr-components/plugin";
 
-const entry = "docs/index.tsx";
-
+/* ドキュメントサイトの設定。パッケージのビルドは vite.lib.config.ts で行う。 */
 export default defineConfig({
-	/* HTML の書き出しに使うアプリを、CSS やフォントと一緒にビルドする。 */
-	build: { ssr: entry, outDir: "docs-dist", emitAssets: true },
+	/* パッケージで配布しているアセットを、そのままサイトでも配信する。 */
 	publicDir: "src/assets",
-	plugins: [tailwindcss(), devServer({ entry })],
+	plugins: [cloudflare(), ssrPlugin()],
+	test: {
+		include: ["docs/**/*.test.ts"],
+	},
 });

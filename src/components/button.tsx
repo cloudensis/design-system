@@ -1,23 +1,16 @@
 import type { JSX } from "hono/jsx";
 import { cn } from "../lib/utils.ts";
+import styles from "./button.module.css";
 
 const variants = {
-	/*
-	 * <a> は :enabled に一致しないため、hover は not-disabled で書く。
-	 * 無効のときは枠線を残すため、opacity ではなく背景や文字だけを薄くする。
-	 */
 	variant: {
-		default: cn(
-			"bg-emphasis text-on-emphasis not-disabled:hover:bg-emphasis/90 disabled:bg-emphasis/50 aria-disabled:bg-emphasis/50",
-		),
-		outline: cn(
-			"border-default not-disabled:hover:bg-neutral-muted disabled:text-disabled aria-disabled:text-disabled",
-		),
+		default: styles.variantDefault,
+		outline: styles.variantOutline,
 	},
 	size: {
-		default: cn("h-10 px-4"),
-		sm: cn("h-8 px-3 text-sm"),
-		icon: cn("size-8"),
+		default: styles.sizeDefault,
+		sm: styles.sizeSm,
+		icon: styles.sizeIcon,
 	},
 };
 
@@ -25,10 +18,6 @@ type Variants = {
 	variant?: keyof typeof variants.variant;
 	size?: keyof typeof variants.size;
 };
-
-/* <a> でも文字が縦の中央に来るよう、inline-flex にする。 */
-const base =
-	"inline-flex cursor-pointer items-center justify-center rounded-sm border border-transparent";
 
 type ButtonProps = JSX.IntrinsicElements["button"] &
 	Variants & {
@@ -45,8 +34,7 @@ export function Button({
 	return (
 		<button
 			class={cn(
-				base,
-				"disabled:cursor-not-allowed",
+				styles.button,
 				variants.variant[variant],
 				variants.size[size],
 				className,
@@ -74,8 +62,9 @@ export function LinkButton({
 	return (
 		<a
 			class={cn(
-				base,
-				"not-prose aria-disabled:pointer-events-none",
+				"not-prose",
+				styles.button,
+				styles.link,
 				variants.variant[variant],
 				variants.size[size],
 				className,

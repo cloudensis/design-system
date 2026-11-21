@@ -1,3 +1,7 @@
+import type { Handler } from "hono";
+import shared from "../shared.module.css";
+import styles from "./assets.module.css";
+
 const assets = [
 	{
 		file: "favicon.svg",
@@ -22,16 +26,16 @@ const assets = [
 	},
 ];
 
-export function Template() {
+function Page() {
 	return (
-		<div class="space-y-10">
+		<div class={shared.sections}>
 			{assets.map((asset) => (
-				<section key={asset.file} class="space-y-3">
-					<h2 class="text-heading-3">{asset.file}</h2>
-					<p class="text-sm">
+				<section key={asset.file} class={shared.section}>
+					<h2 class={shared.heading3}>{asset.file}</h2>
+					<p class={shared.note}>
 						{asset.description}（{asset.width} × {asset.height}）
 					</p>
-					<p class="font-mono text-xs">
+					<p class={shared.path}>
 						@cloudensis/design-system/assets/{asset.file}
 					</p>
 					<img
@@ -39,10 +43,20 @@ export function Template() {
 						alt={asset.alt}
 						width={asset.width}
 						height={asset.height}
-						class="border-default h-auto max-h-64 w-auto max-w-full rounded-sm border p-4 scheme-light"
+						class={styles.image}
 					/>
 				</section>
 			))}
 		</div>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Assets",
+		description: "配布している画像",
+	});
+
+export { GET, ssg };

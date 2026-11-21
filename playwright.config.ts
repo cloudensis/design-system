@@ -16,7 +16,8 @@ export default defineConfig({
 		{ name: "mobile", use: { viewport: { width: 390, height: 844 } } },
 	],
 	webServer: {
-		command: "npm run dev -- --port 5173 --strictPort",
+		/* cf dev は vite に委譲する。cf dev を止めても vite が残り終了しないため、vite を直接起動する。 */
+		command: "vite --port 5173 --strictPort",
 		url: "http://localhost:5173",
 		reuseExistingServer: !process.env.CI,
 	},

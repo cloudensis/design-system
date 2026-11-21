@@ -1,4 +1,5 @@
 import { cn } from "../../lib/utils.ts";
+import styles from "./logo.module.css";
 import { LogoMark } from "./logo-mark.tsx";
 import { LogoType } from "./logo-type.tsx";
 
@@ -6,13 +7,11 @@ type LogoLockupProps = {
 	class?: string;
 };
 
-/** 大きさは text-* で変える。 */
+/** 大きさは font-size で変える。 */
 export function LogoLockup({ class: className }: LogoLockupProps) {
 	return (
-		<span
-			class={cn("inline-flex items-baseline gap-[0.4em] text-xl", className)}
-		>
-			<LogoMark class="h-[0.8em]" />
+		<span class={cn(styles.lockup, className)}>
+			<LogoMark />
 			<LogoType />
 		</span>
 	);

@@ -1,0 +1,79 @@
+@layer components {
+	/* <a> でも文字が縦の中央に来るよう、inline-flex にする。 */
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid transparent;
+		border-radius: var(--radius-sm);
+		cursor: pointer;
+
+		&:disabled {
+			cursor: not-allowed;
+		}
+	}
+
+	.link[aria-disabled="true"] {
+		pointer-events: none;
+	}
+
+	/*
+	 * <a> は :enabled に一致しないため、hover は :not(:disabled) で書く。
+	 * 無効のときは枠線を残すため、opacity ではなく背景や文字だけを薄くする。
+	 */
+	.variantDefault {
+		background-color: var(--background-color-emphasis);
+		color: var(--text-color-on-emphasis);
+
+		@media (hover: hover) {
+			&:not(:disabled):hover {
+				background-color: color-mix(
+					in oklab,
+					var(--background-color-emphasis) 90%,
+					transparent
+				);
+			}
+		}
+
+		&:disabled,
+		&[aria-disabled="true"] {
+			background-color: color-mix(
+				in oklab,
+				var(--background-color-emphasis) 50%,
+				transparent
+			);
+		}
+	}
+
+	.variantOutline {
+		border-color: var(--border-color-default);
+
+		@media (hover: hover) {
+			&:not(:disabled):hover {
+				background-color: var(--background-color-neutral-muted);
+			}
+		}
+
+		&:disabled,
+		&[aria-disabled="true"] {
+			color: var(--text-color-disabled);
+		}
+	}
+
+	.sizeDefault {
+		height: 2.5rem;
+		padding-inline: 1rem;
+	}
+
+	.sizeSm {
+		height: 2rem;
+		padding-inline: 0.75rem;
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+	}
+
+	.sizeIcon {
+		width: 2rem;
+		height: 2rem;
+	}
+}

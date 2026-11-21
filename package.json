@@ -1,6 +1,6 @@
 {
 	"name": "@cloudensis/design-system",
-	"version": "0.14.4",
+	"version": "0.0.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -19,6 +19,9 @@
 		"./typography.css": "./src/styles/typography.css",
 		"./fonts.css": "./src/styles/fonts.css",
 		"./prose.css": "./src/styles/prose.css",
+		"./radius.css": "./src/styles/radius.css",
+		"./reset.css": "./src/styles/reset.css",
+		"./components.css": "./dist/components.css",
 		"./components/*": {
 			"types": "./dist/components/*.d.ts",
 			"default": "./dist/components/*.js"
@@ -42,17 +45,17 @@
 		"./assets/*": "./src/assets/*"
 	},
 	"scripts": {
-		"build": "rm -rf dist && tsc -p tsconfig.build.json",
-		"typecheck": "tsc && tsc -p tests",
-		"dev": "vite",
-		"build:docs": "vite build && node scripts/ssg.ts",
+		"build": "rm -rf dist && vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json",
+		"typecheck": "cf workers types && tsc && tsc -p tests",
+		"dev": "cf dev",
+		"build:docs": "cf build && node scripts/ssg.mjs",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe",
+		"test": "vitest",
 		"test:a11y": "playwright test"
 	},
 	"peerDependencies": {
-		"hono": "^4.13.13",
-		"tailwindcss": "^4.3.3"
+		"hono": "^4.13.13"
 	},
 	"dependencies": {
 		"@fontsource-variable/noto-sans-jp": "^5.3.1",
@@ -60,21 +63,19 @@
 		"@shikijs/langs": "^4.6.0",
 		"@shikijs/themes": "^4.6.0",
 		"clsx": "^2.1.1",
-		"shiki": "^4.6.0",
-		"tailwind-merge": "^3.7.0"
+		"shiki": "^4.6.0"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "^4.14.0",
 		"@biomejs/biome": "^2.6.8",
-		"@hono/vite-dev-server": "^0.26.1",
+		"@cloudflare/vite-plugin": "^2.0.0-rc.1",
 		"@playwright/test": "^1.65.1",
-		"@tailwindcss/vite": "^4.3.5",
 		"@types/node": "^26.6.6",
 		"cf": "^1.0.0-rc.1",
 		"hono": "^4.13.19",
-		"tailwindcss": "^4.3.5",
 		"typescript": "^7.0.2",
 		"vite": "^8.3.8",
-		"wrangler": "^4.164.0"
+		"vite-ssr-components": "^0.9.0",
+		"vitest": "^5.1.1"
 	}
 }

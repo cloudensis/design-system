@@ -1,5 +1,9 @@
+import type { Handler } from "hono";
 import { Button } from "../../../../src/components/button.tsx";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
+import { cn } from "../../../../src/lib/utils.ts";
+import shared from "../../shared.module.css";
+import styles from "./prose.module.css";
 
 const samplePreCode = `npm install @cloudensis/design-system
 npm run dev`;
@@ -13,11 +17,11 @@ const sampleNotProse = `<article class="prose">
 	</div>
 </article>`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<p>記事本文を囲む要素に .prose を付けます。</p>
-			<article class="prose border-default rounded-sm border p-6">
+			<article class={cn("prose", shared.preview)}>
 				<p>
 					この記事は <code>.prose</code> が扱う HTML
 					タグを一通り並べたものです。本文の中では{" "}
@@ -88,7 +92,7 @@ export function Template() {
 					<dt>トークン</dt>
 					<dd>
 						配色やタイポグラフィの値に名前を付けたものです。colors.css と
-						typography.css の @theme で定義しています。
+						typography.css の :root で定義しています。
 					</dd>
 					<dt>prose</dt>
 					<dd>記事本文に付けるクラスの名前です。</dd>
@@ -179,7 +183,7 @@ export function Template() {
 				</p>
 			</article>
 
-			<h2 class="text-heading-2">not-prose</h2>
+			<h2 class={shared.heading2}>not-prose</h2>
 			<div class="prose">
 				<p>
 					.prose の中で、not-prose
@@ -188,13 +192,13 @@ export function Template() {
 				<p>
 					not-prose を付けた要素が p や pre
 					などのブロック要素なら、ほかのブロックと同じ前後の余白を受けます。CodeBlock
-					もこれに当たります。div には余白が付かないので、必要なら mb-*
-					などで付けてください。
+					もこれに当たります。div には余白が付かないので、必要なら
+					margin-block-end などで付けてください。
 				</p>
 			</div>
-			<article class="prose border-default rounded-sm border p-6">
+			<article class={cn("prose", shared.preview)}>
 				<p>ここは .prose のスタイルが効く段落です。</p>
-				<div class="not-prose mb-5 flex flex-wrap gap-2">
+				<div class={cn("not-prose", styles.notProse)}>
 					<Button size="sm">not-prose の中</Button>
 					<ul>
 						<li>このリストにはマーカーが付かない</li>
@@ -210,3 +214,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Prose",
+		description: "記事用スタイル",
+	});
+
+export { GET, ssg };

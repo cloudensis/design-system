@@ -1,0 +1,10 @@
+.name {
+	padding-inline-end: 1rem;
+	font-family: var(--font-mono);
+	white-space: nowrap;
+}
+
+.fontSample {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
+}

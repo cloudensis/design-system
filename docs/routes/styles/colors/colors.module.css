@@ -1,0 +1,38 @@
+.swatch {
+	display: inline-block;
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: var(--radius-sm);
+	vertical-align: middle;
+}
+
+.text {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+
+	&::before {
+		content: "Aa";
+	}
+}
+
+.border {
+	border-width: 1px;
+}
+
+.outline {
+	outline-width: 2px;
+	outline-style: solid;
+}
+
+.onEmphasis {
+	background-color: var(--background-color-emphasis);
+}
+
+.checkbox {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	vertical-align: middle;
+}

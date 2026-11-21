@@ -13,15 +13,7 @@
 						"inputComponents": ["Input", "Select", "Textarea"]
 					}
 				}
-			},
-			"nursery": {
-				"useTailwindSortedClasses": "warn"
 			}
-		}
-	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
 		}
 	},
 	"assist": {
@@ -33,7 +25,6 @@
 			"**",
 			"!node_modules",
 			"!dist",
-			"!docs-dist",
 			"!.wrangler",
 			"!.cloudflare",
 			"!test-results",

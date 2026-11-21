@@ -1,5 +1,6 @@
 import type { Child } from "hono/jsx";
 import { cn } from "../lib/utils.ts";
+import styles from "./icon.module.css";
 
 export type IconProps = {
 	class?: string;
@@ -21,7 +22,7 @@ export function Icon({
 }: IconBaseProps) {
 	return (
 		<svg
-			class={cn("shrink-0", className)}
+			class={cn(styles.icon, className)}
 			viewBox={viewBox}
 			fill="none"
 			stroke="currentColor"

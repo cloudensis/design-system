@@ -1,8 +1,13 @@
+/* 後に書いたレイヤーが優先される。レイヤーの外に書いたスタイルは、どのレイヤーよりも優先される。 */
+@layer base, components;
+
 @import "./fonts.css";
 @import "./colors.css";
 @import "./typography.css";
+@import "./radius.css";
+@import "./reset.css";
 @import "./base.css";
 @import "./prose.css";
 
-/* パッケージではビルド済みの dist からクラスを収集する。 */
-@source "../../dist";
+/* コンポーネントのスタイル。npm run build で dist に書き出す。 */
+@import "../../dist/components.css";
