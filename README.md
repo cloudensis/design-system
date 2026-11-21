@@ -27,7 +27,7 @@ import { Button } from "@cloudensis/design-system/components/button";
 | `npm run dev`                                           | ドキュメントサイトの開発サーバー                                             |
 | `npm run build`                                         | 配布物を `dist/` にビルド（CSS Modules は `dist/components.css` にまとめる） |
 | `npm run build:docs`                                    | ドキュメントサイトをビルドし、各ページを SSG で HTML に書き出す              |
-| `npm test`                                              | ドキュメントサイトのルーターのテスト                                         |
+| `npm test`                                              | コンポーネント・ハイライト・ドキュメントサイトのルーターのテスト             |
 | `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                                                 |
 | `npm run test:a11y`                                     | ドキュメントサイトを axe で検査                                              |
 

@@ -9,6 +9,6 @@ export default defineConfig({
 	publicDir: "src/assets",
 	plugins: [cloudflare(), ssrPlugin()],
 	test: {
-		include: ["docs/**/*.test.ts"],
+		include: ["docs/**/*.test.ts", "src/**/*.test.{ts,tsx}"],
 	},
 });
