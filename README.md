@@ -20,6 +20,31 @@ npm install @cloudensis/design-system
 import { Button } from "@cloudensis/design-system/components/button";
 ```
 
+### テーマ
+
+既定はライトです。`html` 要素の `data-theme` で切り替えます。
+
+```html
+<html data-theme="dark">
+  <!-- ダーク -->
+</html>
+<html data-theme="auto">
+  <!-- OS の設定に従う -->
+</html>
+```
+
+色は `light-dark()` で定義しているため、Safari 17.5 以降・Chrome 123 以降・Firefox 120 以降が必要です。
+
+### トークン
+
+| ファイル         | 内容                                                                         |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `palette.css`    | プリミティブな色（`--color-neutral-*` など）。直接は使わない                 |
+| `colors.css`     | セマンティックな色（`--text-color-default` など）。ライトとダークの値を持つ  |
+| `typography.css` | フォント、本文（`--text-sm` など）と見出し（`--text-heading-*`）の文字サイズ |
+| `sizes.css`      | 余白（`--space-*`）とコントロールの大きさ（`--control-height-*` など）       |
+| `radius.css`     | 角丸（`--radius-*`）                                                         |
+
 ## 開発
 
 | script                                                  | 内容                                                                         |

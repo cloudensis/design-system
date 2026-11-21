@@ -1,0 +1,26 @@
+/*
+ * プリミティブな色。コンポーネントや利用側からは直接使わず、colors.css のセマンティックトークンを通して使う。
+ * 番号が大きいほど暗い。
+ */
+:root {
+	--color-neutral-0: #ffffff;
+	--color-neutral-50: #f5f5f5;
+	--color-neutral-200: #e5e5e5;
+	--color-neutral-300: #d4d4d4;
+	--color-neutral-400: #a3a3a3;
+	--color-neutral-500: #8a8a8a;
+	--color-neutral-550: #737373;
+	--color-neutral-600: #6a6a6a;
+	--color-neutral-650: #676767;
+	--color-neutral-700: #525252;
+	--color-neutral-800: #404040;
+	--color-neutral-850: #262626;
+	--color-neutral-900: #171717;
+	--color-neutral-1000: #000000;
+
+	--color-red-400: #f87171;
+	--color-red-700: #b91c1c;
+
+	--color-blue-400: #60a5fa;
+	--color-blue-600: #1d72e8;
+}

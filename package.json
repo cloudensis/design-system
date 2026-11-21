@@ -15,11 +15,13 @@
 	"exports": {
 		"./index.css": "./src/styles/index.css",
 		"./base.css": "./src/styles/base.css",
+		"./palette.css": "./src/styles/palette.css",
 		"./colors.css": "./src/styles/colors.css",
 		"./typography.css": "./src/styles/typography.css",
 		"./fonts.css": "./src/styles/fonts.css",
 		"./prose.css": "./src/styles/prose.css",
 		"./radius.css": "./src/styles/radius.css",
+		"./sizes.css": "./src/styles/sizes.css",
 		"./reset.css": "./src/styles/reset.css",
 		"./components.css": "./dist/components.css",
 		"./components/*": {

@@ -12,15 +12,15 @@
 		}
 
 		:where(h1) {
-			font-size: 1.875em;
+			font-size: calc(var(--scale-heading-1) * 1em);
 		}
 
 		:where(h2) {
-			font-size: 1.5em;
+			font-size: calc(var(--scale-heading-2) * 1em);
 		}
 
 		:where(h3) {
-			font-size: 1.25em;
+			font-size: calc(var(--scale-heading-3) * 1em);
 		}
 
 		:where(h4) {
@@ -93,9 +93,9 @@
 		/* 横スクロールするとキーボードで操作できないため、長い行は折り返す。 */
 		:where(pre) {
 			border-radius: var(--radius-sm);
-			background-color: var(--background-color-emphasis);
-			padding: 1rem;
-			color: var(--text-color-on-emphasis);
+			background-color: var(--background-color-code);
+			padding: var(--space-4);
+			color: var(--text-color-on-code);
 			white-space: pre-wrap;
 			overflow-wrap: anywhere;
 			font-family: var(--font-mono);

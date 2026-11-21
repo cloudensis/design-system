@@ -1,21 +1,77 @@
+/*
+ * セマンティックな色。light-dark() の 1 つ目がライト、2 つ目がダークの値。
+ * 既定はライト。<html data-theme="dark"> でダーク、<html data-theme="auto"> で OS の設定に従う。
+ */
 :root {
-	--text-color-default: #525252;
-	--text-color-muted: #6a6a6a;
-	--text-color-disabled: #a3a3a3;
-	--text-color-on-emphasis: #ffffff;
-	--text-color-danger: #b91c1c;
+	color-scheme: light;
 
-	--background-color-default: #f5f5f5;
-	--background-color-emphasis: #262626;
-	--background-color-neutral-muted: #2626260d;
-	--background-color-overlay-backdrop: #0000004d;
+	&[data-theme="dark"] {
+		color-scheme: dark;
+	}
 
-	--border-color-default: #d4d4d4;
-	--border-color-emphasis: #8a8a8a;
-	--border-color-on-emphasis: #676767;
-	--border-color-danger-emphasis: #b91c1c;
+	&[data-theme="auto"] {
+		color-scheme: light dark;
+	}
+}
 
-	--outline-color-focus: #1d72e8;
+:root {
+	--text-color-default: light-dark(
+		var(--color-neutral-700),
+		var(--color-neutral-300)
+	);
+	--text-color-muted: light-dark(
+		var(--color-neutral-600),
+		var(--color-neutral-400)
+	);
+	--text-color-disabled: light-dark(
+		var(--color-neutral-400),
+		var(--color-neutral-600)
+	);
+	--text-color-on-emphasis: light-dark(
+		var(--color-neutral-0),
+		var(--color-neutral-900)
+	);
+	--text-color-on-code: var(--color-neutral-0);
+	--text-color-danger: light-dark(var(--color-red-700), var(--color-red-400));
 
-	--accent-color-checked: #262626;
+	--background-color-default: light-dark(
+		var(--color-neutral-50),
+		var(--color-neutral-900)
+	);
+	--background-color-emphasis: light-dark(
+		var(--color-neutral-850),
+		var(--color-neutral-200)
+	);
+	/* コードブロックの背景。ハイライトの色に合わせ、どちらのテーマでも暗くする。 */
+	--background-color-code: var(--color-neutral-850);
+	--background-color-neutral-muted: light-dark(#2626260d, #ffffff14);
+	--background-color-overlay-backdrop: light-dark(#0000004d, #00000099);
+
+	--border-color-default: light-dark(
+		var(--color-neutral-300),
+		var(--color-neutral-800)
+	);
+	--border-color-emphasis: light-dark(
+		var(--color-neutral-500),
+		var(--color-neutral-550)
+	);
+	--border-color-on-emphasis: light-dark(
+		var(--color-neutral-650),
+		var(--color-neutral-550)
+	);
+	--border-color-on-code: var(--color-neutral-650);
+	--border-color-danger-emphasis: light-dark(
+		var(--color-red-700),
+		var(--color-red-400)
+	);
+
+	--outline-color-focus: light-dark(
+		var(--color-blue-600),
+		var(--color-blue-400)
+	);
+
+	--accent-color-checked: light-dark(
+		var(--color-neutral-850),
+		var(--color-neutral-200)
+	);
 }

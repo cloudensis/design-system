@@ -11,9 +11,18 @@ export default defineConfig({
 		launchOptions: { executablePath: process.env.CHROMIUM_PATH },
 	},
 	/* サイドメニューの表示が変わるため、PC とスマホの幅で検査する。 */
+	/* ドキュメントサイトは OS のテーマに従うため、ダークでもコントラストなどを検査する。 */
 	projects: [
 		{ name: "desktop", use: { viewport: { width: 1280, height: 800 } } },
 		{ name: "mobile", use: { viewport: { width: 390, height: 844 } } },
+		{
+			name: "desktop-dark",
+			use: { viewport: { width: 1280, height: 800 }, colorScheme: "dark" },
+		},
+		{
+			name: "mobile-dark",
+			use: { viewport: { width: 390, height: 844 }, colorScheme: "dark" },
+		},
 	],
 	webServer: {
 		/* cf dev は vite に委譲する。cf dev を止めても vite が残り終了しないため、vite を直接起動する。 */
