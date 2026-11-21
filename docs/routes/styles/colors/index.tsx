@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { cn } from "../../../../src/lib/utils.ts";
 import colorsCss from "../../../../src/styles/colors.css?raw";
 import shared from "../../shared.module.css";
@@ -49,7 +50,7 @@ function Swatch({ name, value }: { name: string; value: string }) {
 	return <span class={styles.swatch} style={`background-color: ${value}`} />;
 }
 
-export function Template() {
+function Page() {
 	return (
 		<table class={shared.table}>
 			<thead>
@@ -73,3 +74,13 @@ export function Template() {
 		</table>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Colors",
+		description: "色のトークン",
+	});
+
+export { GET, ssg };

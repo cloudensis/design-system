@@ -1,10 +1,12 @@
+import type { Handler } from "hono";
 import { CodeBlock } from "../../src/components/code-block.tsx";
+import { siteName } from "../renderer";
 
 const installCss = `@import "@cloudensis/design-system/index.css";`;
 
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";`;
 
-export function Template() {
+function Page() {
 	return (
 		<div class="prose">
 			<p>
@@ -31,3 +33,14 @@ export function Template() {
 		</div>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: siteName,
+		description:
+			"cloudensis の CSS トークン・記事用スタイル・Hono JSX コンポーネント",
+	});
+
+export { GET, ssg };

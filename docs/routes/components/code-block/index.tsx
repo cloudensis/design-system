@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { codeLanguages } from "../../../../src/lib/highlight.ts";
 import shared from "../../shared.module.css";
@@ -30,7 +31,7 @@ async function CopyHandlerHash() {
 	);
 }
 
-export function Template() {
+function Page() {
 	return (
 		<div class={shared.stack}>
 			<CodeBlock lang="tsx">{sampleTsx}</CodeBlock>
@@ -77,3 +78,13 @@ export function Template() {
 		</div>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "CodeBlock",
+		description: "CodeBlock コンポーネント",
+	});
+
+export { GET, ssg };

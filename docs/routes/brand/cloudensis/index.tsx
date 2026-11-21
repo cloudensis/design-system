@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { LogoLockup } from "../../../../src/brand/cloudensis/logo-lockup.tsx";
 import { LogoMark } from "../../../../src/brand/cloudensis/logo-mark.tsx";
 import { LogoType } from "../../../../src/brand/cloudensis/logo-type.tsx";
@@ -32,7 +33,7 @@ const logos = [
 	},
 ];
 
-export function Template() {
+function Page() {
 	return (
 		<div class={shared.sections}>
 			{logos.map((logo) => (
@@ -47,3 +48,13 @@ export function Template() {
 		</div>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "cloudensis",
+		description: "cloudensis のロゴ",
+	});
+
+export { GET, ssg };

@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { CodeBlock } from "../../../src/components/code-block.tsx";
 import { CheckIcon } from "../../../src/icons/check.tsx";
 import { CopyIcon } from "../../../src/icons/copy.tsx";
@@ -20,7 +21,7 @@ const importTsx = `import { CheckIcon } from "@cloudensis/design-system/icons/ch
 <CheckIcon class={styles.largeIcon} />
 <CheckIcon label="完了" />`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<p>
@@ -45,3 +46,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Icons",
+		description: "アイコンコンポーネント",
+	});
+
+export { GET, ssg };

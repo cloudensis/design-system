@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import typographyCss from "../../../../src/styles/typography.css?raw";
 import shared from "../../shared.module.css";
 import styles from "./typography.module.css";
@@ -17,7 +18,7 @@ const fonts = [
 	value: value.trim().replace(/\s+/g, " "),
 }));
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<table class={shared.table}>
@@ -73,3 +74,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Typography",
+		description: "タイポグラフィのトークン",
+	});
+
+export { GET, ssg };

@@ -1,3 +1,4 @@
+import type { Handler } from "hono";
 import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Textarea } from "../../../../src/components/textarea.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
@@ -8,7 +9,7 @@ const importTsx = `import { Textarea } from "@cloudensis/design-system/component
 <label for="message">お問い合わせ内容</label>
 <Textarea id="message" rows={4} />`;
 
-export function Template() {
+function Page() {
 	return (
 		<>
 			<div class={cn(shared.preview, shared.fields)}>
@@ -52,3 +53,13 @@ export function Template() {
 		</>
 	);
 }
+
+const ssg = true;
+
+const GET: Handler = (c) =>
+	c.render(<Page />, {
+		title: "Textarea",
+		description: "Textarea コンポーネント",
+	});
+
+export { GET, ssg };
