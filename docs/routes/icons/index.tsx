@@ -1,10 +1,10 @@
 import type { Handler } from "hono";
-import { CodeBlock } from "../../../src/components/code-block.tsx";
 import { CheckIcon } from "../../../src/icons/check.tsx";
 import { CopyIcon } from "../../../src/icons/copy.tsx";
 import { MenuIcon } from "../../../src/icons/menu.tsx";
 import { XIcon } from "../../../src/icons/x.tsx";
 import { cn } from "../../../src/lib/utils.ts";
+import { CodeBlock } from "../../code-block.tsx";
 import shared from "../shared.module.css";
 import styles from "./icons.module.css";
 

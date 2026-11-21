@@ -1,5 +1,5 @@
 import type { Handler } from "hono";
-import { CodeBlock } from "../../src/components/code-block.tsx";
+import { CodeBlock } from "../code-block.tsx";
 import { siteName } from "../renderer";
 
 const installCss = `@import "@cloudensis/design-system/index.css";`;

@@ -1,7 +1,7 @@
 import type { Handler } from "hono";
 import { Button } from "../../../../src/components/button.tsx";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
+import { CodeBlock } from "../../../code-block.tsx";
 import shared from "../../shared.module.css";
 import styles from "./prose.module.css";
 

@@ -1,13 +1,30 @@
 import type { Handler } from "hono";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
-import { codeLanguages } from "../../../../src/lib/highlight.ts";
+import { codeLanguages } from "../../../../src/lib/bundled-highlight.ts";
+import { CodeBlock } from "../../../code-block.tsx";
 import shared from "../../shared.module.css";
 
 const sampleTsx = `import { CodeBlock } from "@cloudensis/design-system/components/code-block";
 
-export function Example() {
-	return <CodeBlock lang="tsx">{code}</CodeBlock>;
-}`;
+// ハイライトしない。Shiki を同梱しないので軽い。
+<CodeBlock>{code}</CodeBlock>`;
+
+const createTsx = `// app/components/code-block.tsx（アプリで 1 回だけ作る）
+import { createCodeBlock } from "@cloudensis/design-system/components/code-block";
+import { createHighlight } from "@cloudensis/design-system/lib/highlight";
+import css from "@shikijs/langs/css";
+import tsx from "@shikijs/langs/tsx";
+
+export const CodeBlock = createCodeBlock(
+	createHighlight<"tsx" | "ts" | "css">({ langs: [tsx, css], langAlias: { ts: "tsx" } }),
+);
+
+// 使う側
+<CodeBlock lang="tsx">{code}</CodeBlock>`;
+
+const allTsx = `import { createCodeBlock } from "@cloudensis/design-system/components/code-block";
+import { highlight } from "@cloudensis/design-system/lib/bundled-highlight";
+
+export const CodeBlock = createCodeBlock(highlight);`;
 
 const sampleCss = `@import "@cloudensis/design-system/index.css";`;
 
@@ -40,15 +57,35 @@ function Page() {
 
 			<div class="prose">
 				<p>
-					lang を渡すと Shiki
-					でハイライトします。同期的に動くので、サーバー側でもブラウザ側でも使えます。
+					CodeBlock はそのままではハイライトしません。Shiki
+					の文法は大きく、同梱するとバンドルが数百 KB
+					増えるため、ハイライトは使う言語を選んで組み込みます。
 				</p>
+				<h2>ハイライト</h2>
+				<p>
+					createHighlight に @shikijs/langs
+					の文法を渡してハイライト関数を作り、createCodeBlock で CodeBlock
+					に束ねます。lang
+					を渡すとハイライトします。同期的に動くので、サーバー側でもブラウザ側でも使えます。
+				</p>
+			</div>
+			<CodeBlock lang="tsx">{createTsx}</CodeBlock>
+			<div class="prose">
+				<p>
+					手軽に始めるときは、よく使う言語をまとめた lib/bundled-highlight の
+					highlight を使えます。ただし import するだけで約 700KB（minify
+					後）増えます。このサイトはこれを使っています。
+				</p>
+			</div>
+			<CodeBlock lang="tsx">{allTsx}</CodeBlock>
+			<div class="prose">
+				<h2>コピー</h2>
 				<p>
 					右上のボタンでコードをコピーできます。コピーするとアイコンが 2
 					秒間チェックマークになります。クリップボード API
 					が使えない場合は、コード全体を選択します。
 				</p>
-				<h2>lang に渡せる値</h2>
+				<h2>highlight の lang に渡せる値</h2>
 				<table>
 					<thead>
 						<tr>

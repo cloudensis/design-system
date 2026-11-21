@@ -38,6 +38,10 @@
 			"types": "./dist/lib/highlight.d.ts",
 			"default": "./dist/lib/highlight.js"
 		},
+		"./lib/bundled-highlight": {
+			"types": "./dist/lib/bundled-highlight.d.ts",
+			"default": "./dist/lib/bundled-highlight.js"
+		},
 		"./lib/utils": {
 			"types": "./dist/lib/utils.d.ts",
 			"default": "./dist/lib/utils.js"
@@ -49,6 +53,7 @@
 		"typecheck": "cf workers types && tsc && tsc -p tests",
 		"dev": "cf dev",
 		"build:docs": "cf build && node scripts/ssg.mjs",
+		"check:size": "node scripts/check-size.mjs",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe",
 		"test": "vitest",

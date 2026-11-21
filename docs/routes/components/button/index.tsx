@@ -1,8 +1,8 @@
 import type { Handler } from "hono";
 import { Button, LinkButton } from "../../../../src/components/button.tsx";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { MenuIcon } from "../../../../src/icons/menu.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
+import { CodeBlock } from "../../../code-block.tsx";
 import shared from "../../shared.module.css";
 
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";
