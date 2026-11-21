@@ -2,9 +2,16 @@ import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
 import { type RouteModule, registerRoutes } from "./lib/router";
 import { renderer } from "./renderer";
+import { securityHeaders } from "./security-headers.ts";
 
 const app = new Hono();
 
+app.use(async (c, next) => {
+	await next();
+	for (const [name, value] of Object.entries(securityHeaders)) {
+		c.res.headers.set(name, value);
+	}
+});
 app.use(trimTrailingSlash({ alwaysRedirect: true }));
 app.use(renderer);
 

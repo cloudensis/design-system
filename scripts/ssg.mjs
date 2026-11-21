@@ -3,6 +3,7 @@
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { defaultPlugin, redirectPlugin, toSSG } from "hono/ssg";
+import { securityHeaders } from "../docs/security-headers.ts";
 
 const output = new URL(
 	"../.cloudflare/output/v1/workers/default/",
@@ -16,3 +17,10 @@ const result = await toSSG(app, fs, {
 });
 if (!result.success) throw result.error;
 for (const file of result.files) console.log("ssg:", file);
+
+// 静的ファイルは Worker を通らないため、Workers Static Assets の _headers でヘッダーを付ける。
+const headers = Object.entries(securityHeaders)
+	.map(([name, value]) => `  ${name}: ${value}`)
+	.join("\n");
+await fs.writeFile(new URL("assets/_headers", output), `/*\n${headers}\n`);
+console.log("headers: _headers");
