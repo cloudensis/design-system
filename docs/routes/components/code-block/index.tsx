@@ -11,6 +11,10 @@ export function Example() {
 
 const sampleCss = `@import "@cloudensis/design-system/index.css";`;
 
+const labelsTsx = `<CodeBlock lang="ts" labels={{ copy: "Copy code", copied: "Copied" }}>
+	{code}
+</CodeBlock>`;
+
 const scriptTs = `// ブラウザで動くスクリプト（クライアントのエントリーなど）で 1 回読み込む。
 import "@cloudensis/design-system/scripts/code-block";`;
 
@@ -55,6 +59,17 @@ function Page() {
 						))}
 					</tbody>
 				</table>
+				<h2>文言</h2>
+				<p>
+					コピーボタンの名前と、コピーしたときに読み上げる文言は日本語です。ほかの言語のページでは
+					labels で上書きします。省略した項目は日本語のままです。
+				</p>
+			</div>
+			<CodeBlock lang="tsx">{labelsTsx}</CodeBlock>
+			<CodeBlock lang="ts" labels={{ copy: "Copy code", copied: "Copied" }}>
+				{"// This block uses English labels."}
+			</CodeBlock>
+			<div class="prose">
 				<h2>コピーボタンのスクリプト</h2>
 				<p>
 					コピーボタンは、ブラウザで次のスクリプトを読み込むと動きます。読み込むまでボタンは表示されません。

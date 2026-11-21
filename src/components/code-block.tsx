@@ -5,16 +5,32 @@ import { type CodeLanguage, highlight } from "../lib/highlight.ts";
 import { cn } from "../lib/utils.ts";
 import styles from "./code-block.module.css";
 
+/** スクリーンリーダー向けの文言。ページの言語にあわせて上書きする。 */
+export type CodeBlockLabels = {
+	/** コピーボタンの名前。 */
+	copy: string;
+	/** コピーした後のボタンの名前と、読み上げる文言。 */
+	copied: string;
+};
+
+const defaultLabels: CodeBlockLabels = {
+	copy: "コードをコピー",
+	copied: "コピーしました",
+};
+
 type CodeBlockProps = Omit<JSX.IntrinsicElements["pre"], "children"> & {
 	class?: string;
 	/** 省略するとハイライトしない。 */
 	lang?: CodeLanguage;
+	/** 省略した文言は日本語になる。 */
+	labels?: Partial<CodeBlockLabels>;
 	children: string;
 };
 
 export function CodeBlock({
 	lang,
 	class: className,
+	labels,
 	children,
 	...props
 }: CodeBlockProps) {
@@ -27,7 +43,7 @@ export function CodeBlock({
 			<code tabindex={0} class={styles.code}>
 				{renderCode(code, lang)}
 			</code>
-			<CopyButton />
+			<CopyButton labels={{ ...defaultLabels, ...labels }} />
 		</pre>
 	);
 }
@@ -47,7 +63,7 @@ function renderCode(code: string, lang?: CodeLanguage) {
 	));
 }
 
-function CopyButton() {
+function CopyButton({ labels }: { labels: CodeBlockLabels }) {
 	return (
 		<>
 			{/* @cloudensis/design-system/scripts/code-block が動くまで隠しておく。 */}
@@ -57,12 +73,12 @@ function CopyButton() {
 				data-code-block-copy
 				hidden
 			>
-				<CopyIcon label="コードをコピー" class={styles.copyIcon} />
-				<CheckIcon label="コピーしました" class={styles.copiedIcon} />
+				<CopyIcon label={labels.copy} class={styles.copyIcon} />
+				<CheckIcon label={labels.copied} class={styles.copiedIcon} />
 			</button>
 			{/* ボタンの中のライブ領域は読み上げられないため、隣に置く。 */}
 			<span role="status" class={styles.status}>
-				<span class={styles.statusText}>コピーしました</span>
+				<span class={styles.statusText}>{labels.copied}</span>
 			</span>
 		</>
 	);

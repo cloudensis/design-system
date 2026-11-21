@@ -25,4 +25,13 @@ test.describe("CodeBlock のコピーボタン", () => {
 
 		await expect(button).not.toHaveAttribute("data-copied", { timeout: 3000 });
 	});
+
+	test("labels で文言を上書きできる", async ({ page }) => {
+		const block = page.locator("pre", { hasText: "English labels" });
+		const button = block.locator("[data-code-block-copy]");
+		await expect(button).toHaveAccessibleName("Copy code");
+		await button.click();
+		await expect(button).toHaveAccessibleName("Copied");
+		await expect(block.getByRole("status")).toHaveText("Copied");
+	});
 });
