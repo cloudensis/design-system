@@ -30,6 +30,7 @@ import { Button } from "@cloudensis/design-system/components/button";
 | `npm test`                                              | ドキュメントサイトのルーターのテスト                                         |
 | `npm run lint` / `npm run format` / `npm run typecheck` | 静的チェック                                                                 |
 | `npm run test:a11y`                                     | ドキュメントサイトを axe で検査                                              |
+| `npm run check:size`                                    | 配布物をバンドルし、サイズが上限を超えていないか確認                         |
 
 ## リリース
 

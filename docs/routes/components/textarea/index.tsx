@@ -1,7 +1,7 @@
 import type { Handler } from "hono";
-import { CodeBlock } from "../../../../src/components/code-block.tsx";
 import { Textarea } from "../../../../src/components/textarea.tsx";
 import { cn } from "../../../../src/lib/utils.ts";
+import { CodeBlock } from "../../../code-block.tsx";
 import shared from "../../shared.module.css";
 
 const importTsx = `import { Textarea } from "@cloudensis/design-system/components/textarea";
