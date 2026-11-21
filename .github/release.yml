@@ -1,0 +1,24 @@
+# Release の「Generate release notes」で、PR のラベルごとに変更を分類する。
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: 破壊的変更
+      labels:
+        - breaking-change
+    - title: 新機能・改善
+      labels:
+        - enhancement
+    - title: 不具合の修正
+      labels:
+        - bug
+    - title: ドキュメント
+      labels:
+        - documentation
+    - title: 依存パッケージ
+      labels:
+        - dependencies
+    - title: その他
+      labels:
+        - "*"
