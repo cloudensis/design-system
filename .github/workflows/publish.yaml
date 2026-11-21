@@ -20,6 +20,12 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
+        with:
+          # main に含まれるかを確かめるため、履歴をすべて取得する。
+          fetch-depth: 0
+
+      # main にマージされていないコミットからは publish しない。
+      - run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
 
       - uses: actions/setup-node@v7
         with:
@@ -34,11 +40,21 @@ jobs:
           TAG: ${{ github.event.release.tag_name }}
       # .npmrc の ignore-scripts で prepack などが動かないため、明示的にビルドする。
       - run: npm run build
-      - run: npm publish
+      # プレリリースは latest ではなく next として公開し、npm install で入らないようにする。
+      - run: |
+          if [ "$PRERELEASE" = "true" ] || [[ "$TAG" == *-* ]]; then
+            npm publish --tag next
+          else
+            npm publish
+          fi
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
 
-  # publish の成功後にデプロイする。
+  # publish の成功後にデプロイする。プレリリースではデプロイしない。
   deploy-docs:
     needs: [publish]
+    if: ${{ !github.event.release.prerelease && !contains(github.event.release.tag_name, '-') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
