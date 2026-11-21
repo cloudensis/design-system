@@ -60,6 +60,11 @@
 		}
 	}
 
+	/* 文字のないアイコンボタンは、枠線で範囲がわかるよう濃くする（背景とのコントラスト比 3:1 以上）。 */
+	.variantOutline.sizeIcon {
+		border-color: var(--border-color-emphasis);
+	}
+
 	.sizeDefault {
 		height: 2.5rem;
 		padding-inline: 1rem;

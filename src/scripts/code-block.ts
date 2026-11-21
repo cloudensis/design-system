@@ -6,6 +6,7 @@
 
 const buttonSelector = "[data-code-block-copy]";
 const copiedDuration = 2000;
+const reannounceDelay = 100;
 const timers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
 
 /** スクリプトが動くまでボタンは隠してあるので、表示する。後から追加したボタンにも呼べる。 */
@@ -25,8 +26,16 @@ async function copy(button: HTMLElement): Promise<void> {
 	} catch {
 		return selectAll();
 	}
-	button.dataset.copied = "";
 	clearTimeout(timers.get(button));
+	/*
+	 * 続けて押したときも読み上げるよう、いったん外してから付け直す。
+	 * 付け直すまで間を空けないと、ライブ領域の変化として扱われない。
+	 */
+	if ("copied" in button.dataset) {
+		delete button.dataset.copied;
+		await new Promise((resolve) => setTimeout(resolve, reannounceDelay));
+	}
+	button.dataset.copied = "";
 	timers.set(
 		button,
 		setTimeout(() => delete button.dataset.copied, copiedDuration),

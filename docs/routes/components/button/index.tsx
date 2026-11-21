@@ -18,7 +18,7 @@ import { MenuIcon } from "@cloudensis/design-system/icons/menu";
 const linkTsx = `import { LinkButton } from "@cloudensis/design-system/components/button";
 
 <LinkButton href="/contact">お問い合わせ</LinkButton>
-<LinkButton aria-disabled="true">無効なリンク</LinkButton>`;
+<LinkButton href="/contact" disabled>無効なリンク</LinkButton>`;
 
 function Page() {
 	return (
@@ -74,11 +74,13 @@ function Page() {
 			</p>
 			<div class={cn(shared.preview, shared.row)}>
 				<LinkButton href="/">default</LinkButton>
-				<LinkButton aria-disabled="true">default disabled</LinkButton>
+				<LinkButton href="/" disabled>
+					default disabled
+				</LinkButton>
 				<LinkButton href="/" variant="outline">
 					outline
 				</LinkButton>
-				<LinkButton variant="outline" aria-disabled="true">
+				<LinkButton href="/" variant="outline" disabled>
 					outline disabled
 				</LinkButton>
 			</div>
@@ -86,17 +88,20 @@ function Page() {
 				<LinkButton href="/" size="sm">
 					sm
 				</LinkButton>
-				<LinkButton size="sm" aria-disabled="true">
+				<LinkButton href="/" size="sm" disabled>
 					sm disabled
 				</LinkButton>
 				<LinkButton href="/" variant="outline" size="sm">
 					outline sm
 				</LinkButton>
-				<LinkButton variant="outline" size="sm" aria-disabled="true">
+				<LinkButton href="/" variant="outline" size="sm" disabled>
 					outline sm disabled
 				</LinkButton>
 			</div>
-			<p>無効にするときは href を外し、aria-disabled="true" を付けます。</p>
+			<p>
+				disabled を付けると href を外して aria-disabled="true"
+				を付けるため、クリックでもキーボードでも遷移しません。
+			</p>
 			<CodeBlock lang="tsx">{linkTsx}</CodeBlock>
 		</>
 	);
