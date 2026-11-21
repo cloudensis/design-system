@@ -8,7 +8,7 @@ import shared from "../../shared.module.css";
 const importTsx = `import { Button } from "@cloudensis/design-system/components/button";
 import { MenuIcon } from "@cloudensis/design-system/icons/menu";
 
-<Button>保存する</Button>
+<Button type="submit">保存する</Button>
 <Button variant="outline">キャンセル</Button>
 <Button size="sm">小さいボタン</Button>
 <Button variant="outline" size="icon" aria-label="メニュー">
@@ -62,6 +62,11 @@ function Page() {
 					<MenuIcon />
 				</Button>
 			</div>
+			<p>
+				type を省略すると "button" になり、form
+				の中に置いても送信しません。フォームを送信するボタンには type="submit"
+				を指定します。
+			</p>
 			<p>
 				size="icon" はアイコンだけのボタンです。文字がないため、aria-label
 				で名前を付けます。

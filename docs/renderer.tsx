@@ -55,7 +55,6 @@ export const renderer = jsxRenderer(
 				<body>
 					<header class={styles.header}>
 						<Button
-							type="button"
 							variant="outline"
 							size="icon"
 							popovertarget="mobile-nav"
@@ -73,7 +72,6 @@ export const renderer = jsxRenderer(
 					<div id="mobile-nav" popover="auto" class={styles.mobileNav}>
 						<header class={styles.mobileNavHeader}>
 							<Button
-								type="button"
 								variant="outline"
 								size="icon"
 								popovertarget="mobile-nav"
