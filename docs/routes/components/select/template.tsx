@@ -12,7 +12,7 @@ const importTsx = `import { Select } from "@cloudensis/design-system/components/
 export function Template() {
 	return (
 		<>
-			<div class="space-y-4 rounded-sm border border-default p-6">
+			<div class="border-default space-y-4 rounded-sm border p-6">
 				<div class="space-y-1">
 					<label for="sample-select" class="block text-sm">
 						選択肢

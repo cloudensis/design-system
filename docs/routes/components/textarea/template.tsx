@@ -9,7 +9,7 @@ const importTsx = `import { Textarea } from "@cloudensis/design-system/component
 export function Template() {
 	return (
 		<>
-			<div class="space-y-4 rounded-sm border border-default p-6">
+			<div class="border-default space-y-4 rounded-sm border p-6">
 				<div class="space-y-1">
 					<label for="sample-textarea" class="block text-sm">
 						お問い合わせ内容

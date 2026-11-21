@@ -29,7 +29,7 @@ export function Template() {
 				<tbody>
 					{fonts.map(({ name, value }) => (
 						<tr key={name}>
-							<td class="whitespace-nowrap py-2 pr-4 font-mono">font-{name}</td>
+							<td class="py-2 pr-4 font-mono whitespace-nowrap">font-{name}</td>
 							<td class="py-2 font-mono">{value}</td>
 							<td class="py-2 text-lg" style={`font-family: ${value}`}>
 								Aa あア亜 0123

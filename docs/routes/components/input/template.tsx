@@ -32,7 +32,7 @@ const choiceLabel = "flex items-center gap-2 has-disabled:text-disabled";
 export function Template() {
 	return (
 		<>
-			<div class="space-y-4 rounded-sm border border-default p-6">
+			<div class="border-default space-y-4 rounded-sm border p-6">
 				<div class="space-y-1">
 					<label for="sample-text" class="block text-sm">
 						テキスト

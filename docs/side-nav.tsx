@@ -22,7 +22,7 @@ export function SideNav({ current }: SideNavProps) {
 									<a
 										href={item.href}
 										aria-current={item.href === current ? "page" : undefined}
-										class="block rounded-sm px-2 py-1.5 hover:underline aria-[current=page]:bg-emphasis aria-[current=page]:font-semibold aria-[current=page]:text-on-emphasis aria-[current=page]:no-underline"
+										class="aria-[current=page]:bg-emphasis aria-[current=page]:text-on-emphasis block rounded-sm px-2 py-1.5 hover:underline aria-[current=page]:font-semibold aria-[current=page]:no-underline"
 									>
 										{item.label}
 									</a>

@@ -31,10 +31,10 @@ export function Template() {
 			{logos.map((logo) => (
 				<section key={logo.name} class="space-y-3">
 					<h2 class="text-heading-3">{logo.name}</h2>
-					<p class="break-all font-mono text-xs">
+					<p class="font-mono text-xs break-all">
 						@cloudensis/design-system/brand/cloudensis/{logo.file}
 					</p>
-					<div class="overflow-x-auto rounded-sm border border-default p-6">
+					<div class="border-default overflow-x-auto rounded-sm border p-6">
 						{logo.sample}
 					</div>
 				</section>

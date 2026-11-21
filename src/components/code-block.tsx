@@ -23,7 +23,7 @@ export function CodeBlock({
 	return (
 		<pre
 			class={cn(
-				"not-prose relative rounded-sm bg-emphasis text-on-emphasis text-sm leading-[1.7]",
+				"not-prose bg-emphasis text-on-emphasis relative rounded-sm text-sm leading-[1.7]",
 				className,
 			)}
 			{...props}
@@ -73,7 +73,7 @@ function CopyButton() {
 		<>
 			<button
 				type="button"
-				class="peer/copy group/copy absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border border-on-emphasis bg-emphasis p-1.5 text-on-emphasis opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+				class="peer/copy group/copy border-on-emphasis bg-emphasis text-on-emphasis absolute top-2 right-2 inline-flex cursor-pointer items-center justify-center rounded-sm border p-1.5 opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
 				onclick={copyScript}
 			>
 				<CopyIcon
