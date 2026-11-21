@@ -33,8 +33,8 @@ import { Button } from "@cloudensis/design-system/components/button";
 
 ## リリース
 
-1. `package.json` の `version` を上げて main にマージする
-2. `version` と同じタグ（例: `0.12.0`）で GitHub の Release を作成する
+1. 変更を main にマージする（`package.json` の `version` は `0.0.0` のまま変えない）
+2. 公開するバージョンのタグ（例: `0.12.0`）で GitHub の Release を作成する
 3. npm への publish とドキュメントサイトのデプロイが自動で行われる
 
 デプロイは [cf CLI](https://www.npmjs.com/package/cf) で Cloudflare Workers に行います（設定は `cloudflare.config.ts`）。Secrets の `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` が必要です。
