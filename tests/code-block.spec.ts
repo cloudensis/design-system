@@ -25,4 +25,20 @@ test.describe("CodeBlock のコピーボタン", () => {
 
 		await expect(button).not.toHaveAttribute("data-copied", { timeout: 3000 });
 	});
+
+	test("続けて押しても、読み上げの文言を出し直す", async ({ page }) => {
+		const block = page.locator("pre").first();
+		const button = block.locator("[data-code-block-copy]");
+		await button.click();
+		await expect(button).toHaveAttribute("data-copied", "");
+
+		/* 2 回目は、いったん外れてから付く。 */
+		const removed = page.waitForFunction(
+			(el) => !el?.hasAttribute("data-copied"),
+			await button.elementHandle(),
+		);
+		await button.click();
+		await removed;
+		await expect(button).toHaveAttribute("data-copied", "");
+	});
 });

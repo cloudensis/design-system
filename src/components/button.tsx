@@ -49,16 +49,28 @@ export function Button({
 type LinkButtonProps = JSX.IntrinsicElements["a"] &
 	Variants & {
 		class?: string;
+		/** true にすると href を外し、クリックでもキーボードでも遷移しないようにする。 */
+		disabled?: boolean;
 	};
 
-/** 無効にするときは href を外し、aria-disabled="true" を付ける。 */
 export function LinkButton({
 	variant = "default",
 	size = "default",
 	class: className,
+	disabled = false,
+	href,
+	"aria-disabled": ariaDisabled,
 	children,
 	...props
 }: LinkButtonProps) {
+	/* 従来の aria-disabled="true" だけの指定も、無効として扱う。 */
+	const isDisabled =
+		disabled || ariaDisabled === true || ariaDisabled === "true";
+	/* href のない a は link の role を失うため、role を付け直す。 */
+	const stateProps = isDisabled
+		? { role: "link", "aria-disabled": "true" as const }
+		: { href, "aria-disabled": ariaDisabled };
+
 	return (
 		<a
 			class={cn(
@@ -70,6 +82,7 @@ export function LinkButton({
 				className,
 			)}
 			{...props}
+			{...stateProps}
 		>
 			{children}
 		</a>
